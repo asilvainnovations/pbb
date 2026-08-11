@@ -24,6 +24,12 @@ export function SeverityTimeline({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">INFORM Severity Index Timeline</h3>
+      <p className="chart-desc">
+        Tracks the ACAPS/INFORM Severity Index for BARMM's tracked crisis (PHL003) over time,
+        on a 0–10 scale. The overall Severity line combines three sub-scores — People Affected
+        (Impact), living Conditions, and Complexity of the response — so a rising line means the
+        situation is getting worse on more than one dimension at once, not just one indicator spiking.
+      </p>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 5, right: 20, left: 0, bottom: 5 }}>
