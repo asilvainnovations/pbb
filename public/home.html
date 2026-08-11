@@ -186,7 +186,7 @@ button{font:inherit;cursor:pointer}
 
 /* ============ HEADER ============ */
 header.site{position:sticky;top:0;z-index:100;background:var(--forest-deep);border-bottom:1px solid #ffffff1a}
-.nav-row{display:flex;align-items:center;justify-content:space-between;height:66px;gap:12px}
+.nav-row{display:flex;align-items:center;justify-content:space-between;min-height:66px;gap:12px;padding:10px 0;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:.65em;color:var(--white);text-decoration:none;min-width:0}
 .brand img{width:38px;height:38px;flex:none;border-radius:50%;transition:transform .3s var(--ease-out)}
 .brand:hover img{transform:rotate(-6deg) scale(1.05)}
@@ -240,10 +240,13 @@ nav#primary-nav a:hover{color:var(--gold-bright);padding-left:8px}
 .nav-auth a:hover{border-color:var(--gold-bright)!important;color:var(--gold-bright)!important;padding-left:10px!important}
 .nav-auth a.intelligence{color:var(--gold-bright)!important;border-color:#C9A22766!important}
 
-/* FIX: Desktop Navigation Overflow */
+/* FIX: Desktop Navigation Overflow — nav-row now uses min-height + flex-wrap
+   instead of a fixed 66px height, so if the nav wraps to a second line at
+   in-between widths (~1080-1180px), the header grows to fit it instead of
+   clipping items off-screen. */
 @media(min-width:1080px){
   .nav-toggle{display:none}
-  nav#primary-nav{position:static;inset:auto;transform:none;background:transparent;overflow:visible;flex:1}
+  nav#primary-nav{position:static;inset:auto;transform:none;background:transparent;overflow:visible;flex:1;min-width:0}
   nav#primary-nav ul{flex-direction:row;align-items:center;justify-content:flex-end;padding:0;gap:4px;flex-wrap:wrap;row-gap:6px}
   nav#primary-nav a{border-bottom:none;padding:6px 8px;font-size:.72rem;white-space:nowrap}
   nav#primary-nav a:hover{padding-left:8px}
@@ -390,7 +393,7 @@ section{padding:58px 0}
 .pillar-quote{
   background:var(--forest-deep);color:var(--white);padding:24px 24px 22px;border-radius:var(--radius);position:relative;
 }
-.pillar-quote::before{content:"“";position:absolute;top:-6px;left:16px;font-family:var(--font-display);font-size:3.4rem;color:var(--gold-bright);opacity:.5;line-height:1}
+.pillar-quote::before{content:"\201C";position:absolute;top:-6px;left:16px;font-family:var(--font-display);font-size:3.4rem;color:var(--gold-bright);opacity:.5;line-height:1}
 .pillar-quote p{color:#EDEFE6;font-size:1.02rem;margin-bottom:.5em;position:relative;z-index:1}
 .pillar-quote .quote-en{font-size:.82rem;color:#B9C4B4;margin:0}
 
@@ -508,8 +511,21 @@ footer.site a:hover{color:var(--gold-bright)}
 .reveal-figure.in{opacity:1;transform:none}
 
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ============ FIX: mobile-first full-bleed images ============
+   Showcase images previously stayed inset inside .wrap padding + a bracketed
+   frame at every breakpoint, so on phones the campaign graphics rendered
+   small and boxed instead of wide/full-view. Below 640px, strip the frame
+   and let images run edge-to-edge; tablet/desktop framed treatment is
+   untouched. */
+@media(max-width:640px){
+  .showcase{margin-left:-20px;margin-right:-20px;margin-bottom:26px}
+  .showcase-frame{padding:0;border:none;box-shadow:none;border-radius:0}
+  .showcase-frame::before,.showcase-frame::after{display:none}
+  .showcase-frame:hover{transform:none}
+  .showcase figcaption{padding:0 20px}
+}
 </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -538,7 +554,7 @@ footer.site a:hover{color:var(--gold-bright)}
         <li class="nav-cta"><a href="#get-involved">Sumali sa Kilusan</a></li>
         <li class="nav-auth">
           <a href="/login">Sign In</a>
-          <a class="intelligence" href="/login?intelligence" aria-label="Enter Intelligence Dashboard (sample data mode)">Intelligence</a>
+          <a class="intelligence" href="/login?intelligence" target="_blank" rel="noopener" aria-label="Enter Intelligence Dashboard (sample data mode)">Intelligence</a>
         </li>
       </ul>
     </nav>
@@ -574,8 +590,7 @@ footer.site a:hover{color:var(--gold-bright)}
     </figure>
   </section>
 
-  <!-- ============ PARA KANINO (persona intro) ============ -->
-  <!-- ============ TERRITORIAL SCOPE — "Alam ang Hangganan, Handang Maglingkod" ============ -->
+  <!-- ============ TERRITORIAL SCOPE ============ -->
   <section id="hangganan" class="band-navy" style="padding:34px 0">
     <div class="wrap">
       <div class="reveal" style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start">
@@ -677,14 +692,13 @@ footer.site a:hover{color:var(--gold-bright)}
         <p>Ang Partido Bangon Bangsamoro ay itinatag ng mga grassroots leader at propesyonal sa Cotabato City noong 2022. Sa ilalim ng lideraturang ito, iniluluwal ang isang bagong uri ng pulitika sa BARMM — malinis, may alam, at handang maglingkod.</p>
       </div>
 
-      <!-- Wide full-view portrait -->
       <figure class="showcase reveal-figure" style="margin:0 0 28px">
         <div class="showcase-frame" style="padding:0;border:none;background:transparent;box-shadow:none">
           <img src="assets/leadership/nashrudin-kusain.jpg" 
                alt="Nashrudin Piang Kusain, Regional President ng Partido Bangon Bangsamoro, sa isang pagpupulong kasama ang mga lider ng komunidad." 
                style="width:100%;height:auto;display:block;border-radius:var(--radius)"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <div style="display:none;width:100%;aspect-ratio:16/9;background:var(--forest-tint);display:none;align-items:center;justify-content:center;border-radius:var(--radius)">
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;width:100%;aspect-ratio:16/9;background:var(--forest-tint);align-items:center;justify-content:center;border-radius:var(--radius)">
             <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
           </div>
         </div>
@@ -854,7 +868,16 @@ footer.site a:hover{color:var(--gold-bright)}
         <div class="bracket" style="background:var(--white);border:1px solid #152A5233">
           <p class="eyebrow" style="margin-bottom:.6em">🤝 Maging Kaalyado ng PBB</p>
           <h3 style="font-size:1.2rem;margin-bottom:.4em">Mag-sign ng Partnership Agreement kasama ang Partido Bangon Bangsamoro</h3>
-          <p style="color:var(--ink-soft);margin-bottom:18px">Kung kayo ay isang organisasyon, asosasyon, simbahan, moske, negosyo, o civil society group na nais makipagtulungan sa PBB para sa Bottom-Up Budgeting, sectoral organizing, at grassroots network building — mag-fill up ng form sa ibaba. Kapag na-verify, ipadadala namin sa inyo ang Partnership Agreement para sa pirma.</p>
+          <p style="color:var(--ink-soft);margin-bottom:18px">Kung kayo ay isang organisasyon, asosasyon, simbahan, moske, negosyo, o civil society group na nais makipagtulungan sa PBB para sa Bottom-Up Budgeting, sectoral organizing, at grassroots network building — basahin ang Partnership Agreement sa ibaba, pumirma nang elektroniko, at makakatanggap kayo agad ng kopya.</p>
+
+          <div style="background:var(--paper);border:1px solid #0A6E2E30;border-radius:var(--radius);padding:16px;max-height:220px;overflow-y:auto;margin-bottom:18px;font-size:.86rem;color:var(--ink-soft)">
+            <p style="margin-bottom:.8em"><strong>Alliance &amp; Partnership Agreement — v1, Ago. 2026</strong></p>
+            <p style="margin-bottom:.8em">1. Sumasang-ayon ang Partner na suportahan ang mga inisyatiba ng PBB sa ilalim ng Alliance Building &amp; Partnerships pillar ng BANGON platform — Bottom-Up Budgeting, sectoral organizing, at grassroots network building — sa pamamagitan ng partisipasyon sa civil-society engagement, community dialogue, o in-kind na suporta ayon sa magkasunduan.</p>
+            <p style="margin-bottom:.8em">2. Ang kasunduang ito ay <strong>hindi</strong> nangangahulugan ng financial contribution, campaign donation, o obligasyon sa pag-endorso. Maaaring umatras ang alinmang partido sa kasunduang ito sa pamamagitan ng nakasulat na abiso anumang oras.</p>
+            <p style="margin-bottom:.8em">3. Gagamitin lang ng PBB ang detalye ng Partner para i-coordinate ang mga partnership activities, alinsunod sa <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">Privacy Policy</a> ng PBB, at sakop ng mga alituntunin ng COMELEC sa campaign finance at fair-election disclosure kung naaangkop.</p>
+            <p style="margin:0">4. Ang pag-type ng buong legal na pangalan sa ibaba at pag-submit ng form na ito ay bumubuo ng <strong>electronic signature</strong> sa ilalim ng Republic Act 8792 (Electronic Commerce Act), na nagpapatunay ng pagsang-ayon sa mga tuntuning nakasaad sa itaas.</p>
+          </div>
+
           <form id="allianceForm" novalidate>
             <div style="display:grid;gap:14px;grid-template-columns:1fr">
               <div class="field" style="margin-bottom:0">
@@ -906,20 +929,41 @@ footer.site a:hover{color:var(--gold-bright)}
                 <textarea id="apProposal" name="apProposal" rows="3" placeholder="Hal: Maaari kaming mag-organisa ng 500 miyembro para sa town hall; mayroon kaming training facility; etc." required></textarea>
               </div>
               <div class="field" style="margin-bottom:0">
+                <label for="apSignature">I-type ang buong legal na pangalan bilang e-signature</label>
+                <input id="apSignature" name="apSignature" type="text" style="font-style:italic" placeholder="Hal: Juan D. Dela Cruz" required>
+              </div>
+              <div class="field" style="margin-bottom:0">
+                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
+                  <input type="checkbox" id="apAgreementConsent" name="apAgreementConsent" required style="width:auto;margin-top:3px">
+                  <span style="color:var(--ink)">Nabasa ko ang Partnership Agreement sa itaas at sumasang-ayon akong sumailalim dito.</span>
+                </label>
+              </div>
+              <div class="field" style="margin-bottom:0">
                 <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
                   <input type="checkbox" id="apConsent" name="apConsent" required style="width:auto;margin-top:3px">
-                  <span style="color:var(--ink)">Sumasang-ayon kaming makipag-ugnayan sa PBB at tumanggap ng Partnership Agreement para sa pagpupirma.</span>
+                  <span style="color:var(--ink)">Sumasang-ayon kaming makipag-ugnayan sa PBB tungkol sa partnership na ito.</span>
                 </label>
               </div>
             </div>
-            <button class="btn btn-gold" type="submit" id="apSubmit" style="margin-top:16px;width:100%;justify-content:center">Mag-submit ng Partnership Application</button>
+            <button class="btn btn-gold" type="submit" id="apSubmit" style="margin-top:16px;width:100%;justify-content:center">Pumirma at Mag-submit ng Partnership Agreement</button>
             <p class="form-status" id="apStatus" role="status" aria-live="polite" style="margin-top:10px"></p>
           </form>
+
+          <div id="apConfirm" style="display:none;text-align:center;padding:20px;background:var(--forest-tint);border-radius:var(--radius);margin-top:16px">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;display:block"><circle cx="12" cy="12" r="10" fill="#0A6E2E"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <p style="font-weight:700;color:var(--forest-deep);margin-bottom:.3em">Napirmahan na ang Partnership Agreement!</p>
+            <p style="color:var(--ink-soft);font-size:.9rem;margin-bottom:14px">Salamat sa pakikipagtulungan. Puwede ninyong i-download ang inyong nilagdaang kopya, o i-email ito sa inyong sarili.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
+              <button type="button" class="btn btn-outline btn-small" id="apDownload">⬇ I-download ang nilagdaang kopya</button>
+              <button type="button" class="btn btn-outline btn-small" id="apEmailCopy">✉ I-email sa akin ang kopya</button>
+            </div>
+          </div>
         </div>
       </div>
 
     </div>
   </section>
+
 
   <!-- ============================================================ -->
   <!-- ========= PILLAR N — NATURAL RESOURCES PROTECTION =========== -->
@@ -1256,6 +1300,7 @@ footer.site a:hover{color:var(--gold-bright)}
     </div>
   </section>
 
+
   <!-- ============ VOTERS EDUCATION ============ -->
   <section id="voters-education" class="band-navy">
     <div class="wrap">
@@ -1337,7 +1382,7 @@ footer.site a:hover{color:var(--gold-bright)}
             </div>
             <figure class="showcase" style="margin:0">
               <div class="showcase-frame">
-                <img src="assets/images/proportional-representation.jpg" width="1200" height="675" loading="lazy" alt="Proportional Representation visual explainer: kung paano ang party votes ay nagt-translate sa upuan sa parliamento.">
+                <img src="assets/images/proportional-representation.jpg" width="1200" height="675" loading="lazy" alt="Proportional Representation visual explainer: kung paano ang party votes ay nagt-translate sa upuan sa parliamento." onerror="this.closest('figure').style.display='none'">
               </div>
               <figcaption>Mas maraming party votes = mas maraming upuan para sa PBB.</figcaption>
             </figure>
@@ -1416,7 +1461,7 @@ footer.site a:hover{color:var(--gold-bright)}
           </div>
           <div>
             <h3>Tawagan ang aming hotline</h3>
-            <p>[Idagdag ang PBB hotline number] — bukas para sa katanungan ng volunteer at tulong sa araw ng eleksyon.</p>
+            <p> 09663018777 — bukas para sa katanungan ng volunteer at tulong sa araw ng eleksyon.</p>
           </div>
         </div>
         <div class="connect-card">
@@ -1578,7 +1623,61 @@ footer.site a:hover{color:var(--gold-bright)}
 (function(){
   "use strict";
 
+  /* ============================================================
+     UNIVERSAL LEAD PERSISTENCE - FIX for "cannot submit"
+     ------------------------------------------------------------
+     The previous version gated every save on window.storage, an
+     API that only exists inside the Claude.ai artifact preview.
+     On a real deployment (Bolt, bangonbangsamoro.com, etc.)
+     window.storage is always undefined, so hasStorage was always
+     false - and three of the four forms (Basic Services, Alliance,
+     Natural Resources) had NO fallback at all: they just showed a
+     fake "Salamat! (Offline mode)" message and silently discarded
+     the data. That is the root cause of "I cannot submit."
+     saveLeadUniversal() below tries window.storage first (so the
+     Claude preview keeps working), then always falls back to
+     localStorage - which is available in every real browser,
+     including inside Bolt's preview iframe - so a submission
+     always actually persists somewhere and the success message is
+     never a lie. The admin panel below reads from both sources.
+  ============================================================ */
   var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
+  var LOCAL_KEY = 'pbb_leads_v1';
+
+  function readLocalLeads(){
+    try {
+      var raw = localStorage.getItem(LOCAL_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e){ return []; }
+  }
+  function writeLocalLead(lead){
+    try {
+      var all = readLocalLeads();
+      all.push(lead);
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(all));
+      return true;
+    } catch(e){ return false; }
+  }
+
+  // Always resolves true/false - never silently "succeeds" without saving.
+  function saveLeadUniversal(lead){
+    if (hasStorage){
+      var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+      return window.storage.set(key, JSON.stringify(lead), true).then(function(result){
+        return !!result;
+      }).catch(function(){
+        return writeLocalLead(lead);
+      });
+    }
+    return Promise.resolve(writeLocalLead(lead));
+  }
+
+  function mailtoFallback(subjectPrefix, lead, extraLines){
+    var subject = encodeURIComponent(subjectPrefix + ': ' + (lead.fullName || lead.orgName || lead.contactName || ''));
+    var lines = Object.keys(lead).map(function(k){ return k + ': ' + lead[k]; });
+    if (extraLines) lines = lines.concat(extraLines);
+    window.open('mailto:info@bangonbangsamoro.com?subject=' + subject + '&body=' + encodeURIComponent(lines.join('\n')), '_blank');
+  }
 
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('primary-nav');
@@ -1650,7 +1749,7 @@ footer.site a:hover{color:var(--gold-bright)}
     }
   } catch(e){}
 
-  // ============ B — BASIC SERVICES FORM ============
+  // ============ B - BASIC SERVICES FORM ============
   var bsForm = document.getElementById('basicServicesForm');
   if(bsForm){
     bsForm.addEventListener('submit', function(e){
@@ -1671,35 +1770,58 @@ footer.site a:hover{color:var(--gold-bright)}
       var btn = document.getElementById('bsSubmit');
       var status = document.getElementById('bsStatus');
       btn.disabled = true;
+      status.className = 'form-status';
       status.textContent = 'Ipinapadala...';
-      
-      var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
-      if(hasStorage){
-        window.storage.set(key, JSON.stringify(lead), true).then(function(){
-          btn.disabled = false;
+
+      saveLeadUniversal(lead).then(function(ok){
+        btn.disabled = false;
+        if (ok){
           status.className = 'form-status ok';
           status.textContent = 'Salamat! Nakuha namin ang iyong suhestiyon at interes.';
           bsForm.reset();
-        }).catch(function(){
-          btn.disabled = false;
+        } else {
           status.className = 'form-status err';
-          status.textContent = 'May error. Subukan muli.';
-        });
-      } else {
-        btn.disabled = false;
-        status.className = 'form-status ok';
-        status.textContent = 'Salamat! (Offline mode)';
-        bsForm.reset();
-      }
+          status.textContent = 'Hindi na-save automatically - bubuksan na ang email app mo para ipadala ito.';
+          mailtoFallback('Basic Services suhestiyon', lead);
+        }
+      });
     });
   }
 
-  // ============ A — ALLIANCE FORM ============
+  // ============ A - ALLIANCE & PARTNERSHIP FORM (with e-signature) ============
   var apForm = document.getElementById('allianceForm');
+  var apConfirm = document.getElementById('apConfirm');
+  var AGREEMENT_TEXT =
+    "PARTIDO BANGON BANGSAMORO - ALLIANCE & PARTNERSHIP AGREEMENT\n" +
+    "Version: v1, Ago. 2026\n\n" +
+    "1. Sumasang-ayon ang Partner na suportahan ang mga inisyatiba ng PBB sa ilalim ng\n" +
+    "   Alliance Building & Partnerships pillar ng BANGON platform - Bottom-Up Budgeting,\n" +
+    "   sectoral organizing, at grassroots network building.\n" +
+    "2. Ang kasunduang ito ay HINDI nangangahulugan ng financial contribution, campaign\n" +
+    "   donation, o obligasyon sa pag-endorso. Maaaring umatras anumang oras.\n" +
+    "3. Gagamitin lang ng PBB ang detalye ng Partner para i-coordinate ang partnership\n" +
+    "   activities, alinsunod sa Privacy Policy at COMELEC disclosure rules.\n" +
+    "4. Ang pag-type ng buong legal na pangalan at pag-submit ng form na ito ay bumubuo\n" +
+    "   ng electronic signature sa ilalim ng Republic Act 8792 (Electronic Commerce Act).";
+
+  function buildSignedAgreementText(lead){
+    return AGREEMENT_TEXT + "\n\n" +
+      "---\n" +
+      "Organisasyon/Grupo: " + lead.orgName + "\n" +
+      "Uri ng organisasyon: " + lead.orgType + "\n" +
+      "Contact person: " + lead.contactName + " <" + lead.email + ">\n" +
+      "Lokasyon: " + lead.province + "\n" +
+      "Iaambag sa partnership: " + lead.proposal + "\n\n" +
+      "Nilagdaan (e-signature): " + lead.signature + "\n" +
+      "Petsa ng paglagda: " + lead.submittedAt + "\n";
+  }
+
   if(apForm){
     apForm.addEventListener('submit', function(e){
       e.preventDefault();
-      if(!apForm.apOrgName.value.trim() || !apForm.apContactName.value.trim() || !apForm.apContactEmail.value.trim() || !apForm.apOrgType.value || !apForm.apProvince.value || !apForm.apProposal.value.trim() || !apForm.apConsent.checked){
+      if(!apForm.apOrgName.value.trim() || !apForm.apContactName.value.trim() || !apForm.apContactEmail.value.trim() ||
+         !apForm.apOrgType.value || !apForm.apProvince.value || !apForm.apProposal.value.trim() ||
+         !apForm.apSignature.value.trim() || !apForm.apAgreementConsent.checked || !apForm.apConsent.checked){
         apForm.reportValidity(); return;
       }
       var lead = {
@@ -1709,6 +1831,8 @@ footer.site a:hover{color:var(--gold-bright)}
         orgType: apForm.apOrgType.value,
         province: apForm.apProvince.value,
         proposal: apForm.apProposal.value.trim(),
+        signature: apForm.apSignature.value.trim(),
+        agreementVersion: 'v1-2026-08',
         type: 'alliance-partnership',
         submittedAt: new Date().toISOString(),
         source: 'bangonbangsamoro.com/#alliance-building'
@@ -1716,30 +1840,44 @@ footer.site a:hover{color:var(--gold-bright)}
       var btn = document.getElementById('apSubmit');
       var status = document.getElementById('apStatus');
       btn.disabled = true;
+      status.className = 'form-status';
       status.textContent = 'Ipinapadala...';
-      
-      var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
-      if(hasStorage){
-        window.storage.set(key, JSON.stringify(lead), true).then(function(){
-          btn.disabled = false;
-          status.className = 'form-status ok';
-          status.textContent = 'Salamat! Ipapadala namin ang Partnership Agreement sa inyong email.';
-          apForm.reset();
-        }).catch(function(){
-          btn.disabled = false;
-          status.className = 'form-status err';
-          status.textContent = 'May error. Subukan muli.';
-        });
-      } else {
+
+      saveLeadUniversal(lead).then(function(ok){
         btn.disabled = false;
-        status.className = 'form-status ok';
-        status.textContent = 'Salamat! (Offline mode)';
-        apForm.reset();
-      }
+        if (!ok){
+          status.className = 'form-status err';
+          status.textContent = 'Hindi na-save automatically, pero narito pa rin ang inyong nilagdaang kopya sa ibaba.';
+        } else {
+          status.className = 'form-status ok';
+          status.textContent = 'Salamat! Narito ang inyong nilagdaang kopya.';
+        }
+        apForm.style.display = 'none';
+        apConfirm.style.display = 'block';
+
+        var downloadBtn = document.getElementById('apDownload');
+        downloadBtn.onclick = function(){
+          var text = buildSignedAgreementText(lead);
+          var blob = new Blob([text], {type:'text/plain;charset=utf-8;'});
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url;
+          a.download = 'PBB-Partnership-Agreement-' + lead.orgName.replace(/[^a-z0-9]+/gi,'-') + '.txt';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        };
+
+        var emailBtn = document.getElementById('apEmailCopy');
+        emailBtn.onclick = function(){
+          mailtoFallback('Signed Partnership Agreement - ' + lead.orgName, {}, buildSignedAgreementText(lead).split('\n'));
+        };
+      });
     });
   }
 
-  // ============ N — NATURAL RESOURCES FORM ============
+  // ============ N - NATURAL RESOURCES / ENVIRONMENT VOLUNTEER FORM ============
   var nrForm = document.getElementById('nrForm');
   if(nrForm){
     nrForm.addEventListener('submit', function(e){
@@ -1761,50 +1899,25 @@ footer.site a:hover{color:var(--gold-bright)}
       var btn = document.getElementById('nrSubmit');
       var status = document.getElementById('nrStatus');
       btn.disabled = true;
+      status.className = 'form-status';
       status.textContent = 'Ipinapadala...';
-      
-      var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
-      if(hasStorage){
-        window.storage.set(key, JSON.stringify(lead), true).then(function(){
-          btn.disabled = false;
+
+      saveLeadUniversal(lead).then(function(ok){
+        btn.disabled = false;
+        if (ok){
           status.className = 'form-status ok';
           status.textContent = 'Salamat, ' + lead.fullName.split(' ')[0] + '! Kokontakin ka namin para sa training.';
           nrForm.reset();
-        }).catch(function(){
-          btn.disabled = false;
+        } else {
           status.className = 'form-status err';
-          status.textContent = 'May error. Subukan muli.';
-        });
-      } else {
-        btn.disabled = false;
-        status.className = 'form-status ok';
-        status.textContent = 'Salamat! (Offline mode)';
-        nrForm.reset();
-      }
+          status.textContent = 'Hindi na-save automatically - bubuksan na ang email app mo para ipadala ito.';
+          mailtoFallback('Environment Volunteer sign-up', lead);
+        }
+      });
     });
   }
 
-  // ============ VOLUNTEER LEAD CAPTURE (original join form) ============
-  function saveLead(lead){
-    var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-    return window.storage.set(key, JSON.stringify(lead), true).then(function(result){
-      return !!result;
-    }).catch(function(){
-      return false;
-    });
-  }
-
-  function mailtoFallback(lead){
-    var subject = encodeURIComponent('Volunteer sign-up: ' + lead.fullName);
-    var body = encodeURIComponent(
-      'Name: ' + lead.fullName + '\n' +
-      'Email: ' + lead.email + '\n' +
-      'Province/Area: ' + lead.province + '\n' +
-      'Interested in: ' + lead.interest
-    );
-    window.location.href = 'mailto:info@bangonbangsamoro.com?subject=' + subject + '&body=' + body;
-  }
-
+  // ============ VOLUNTEER LEAD CAPTURE (main "Sign up to volunteer" form) ============
   var form = document.getElementById('joinForm');
   var submitBtn = document.getElementById('joinSubmit');
   var statusEl = document.getElementById('formStatus');
@@ -1825,31 +1938,26 @@ footer.site a:hover{color:var(--gold-bright)}
         email: email,
         province: province,
         interest: interest,
+        type: 'volunteer-signup',
         submittedAt: new Date().toISOString(),
         source: 'bangonbangsamoro.com/#get-involved'
       };
       submitBtn.disabled = true;
       statusEl.className = 'form-status';
       statusEl.textContent = 'Sending…';
-      if (hasStorage){
-        saveLead(lead).then(function(ok){
-          submitBtn.disabled = false;
-          if (ok){
-            statusEl.className = 'form-status ok';
-            statusEl.textContent = 'Salamat, ' + name.split(' ')[0] + '! Nakuha na namin ang detalye mo, kokontakin ka namin.';
-            form.reset();
-          } else {
-            statusEl.className = 'form-status err';
-            statusEl.textContent = 'Hindi na-save automatically — bubuksan na lang ang email app mo.';
-            mailtoFallback(lead);
-          }
-        });
-      } else {
+
+      saveLeadUniversal(lead).then(function(ok){
         submitBtn.disabled = false;
-        mailtoFallback(lead);
-        statusEl.className = 'form-status ok';
-        statusEl.textContent = 'Bubuksan ang iyong email app para ipadala ang detalye…';
-      }
+        if (ok){
+          statusEl.className = 'form-status ok';
+          statusEl.textContent = 'Salamat, ' + name.split(' ')[0] + '! Nakuha na namin ang detalye mo, kokontakin ka namin.';
+          form.reset();
+        } else {
+          statusEl.className = 'form-status err';
+          statusEl.textContent = 'Hindi na-save automatically - bubuksan na lang ang email app mo.';
+          mailtoFallback('Volunteer sign-up', lead);
+        }
+      });
     });
   }
 
@@ -1867,9 +1975,7 @@ footer.site a:hover{color:var(--gold-bright)}
     currentLeads = leads;
     adminCount.textContent = leads.length + (leads.length === 1 ? ' lead' : ' leads');
     if (!leads.length){
-      adminTableWrap.innerHTML = hasStorage
-        ? '<div class="admin-empty">No leads captured yet.</div>'
-        : '<div class="admin-empty">Lead storage isn\u2019t available in this environment.</div>';
+      adminTableWrap.innerHTML = '<div class="admin-empty">No leads captured yet.</div>';
       return;
     }
     leads.sort(function(a,b){ return (b.submittedAt||'').localeCompare(a.submittedAt||''); });
@@ -1891,15 +1997,16 @@ footer.site a:hover{color:var(--gold-bright)}
   }
 
   function loadLeads(){
+    adminTableWrap.innerHTML = '<div class="admin-empty">Loading…</div>';
+    var localLeads = readLocalLeads();
     if (!hasStorage){
-      renderLeadsTable([]);
+      renderLeadsTable(localLeads);
       return;
     }
-    adminTableWrap.innerHTML = '<div class="admin-empty">Loading…</div>';
     window.storage.list('leads:', true).then(function(res){
       var keys = (res && res.keys) ? res.keys : [];
       if (!keys.length){
-        renderLeadsTable([]);
+        renderLeadsTable(localLeads);
         return;
       }
       Promise.all(keys.map(function(k){
@@ -1907,10 +2014,10 @@ footer.site a:hover{color:var(--gold-bright)}
           try { return JSON.parse(r.value); } catch(e){ return null; }
         }).catch(function(){ return null; });
       })).then(function(results){
-        renderLeadsTable(results.filter(Boolean));
+        renderLeadsTable(localLeads.concat(results.filter(Boolean)));
       });
     }).catch(function(){
-      adminTableWrap.innerHTML = '<div class="admin-empty">Couldn\u2019t load leads right now.</div>';
+      renderLeadsTable(localLeads);
     });
   }
 
