@@ -22,6 +22,9 @@ import type {
 } from '../types/acaps'
 
 export function Dashboard() {
+  // Note: `useMockData` is a legacy name from ACAPSContext.
+  // Semantically it means "Offline Preview" — uses pre-compiled real datasets
+  // from realData.ts instead of fetching from the live ACAPS API.
   const { useMockData, error, setError } = useACAPSContext()
   const { getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks } = useACAPS()
 
@@ -40,7 +43,7 @@ export function Dashboard() {
 
       try {
         if (useMockData) {
-          // Use real datasets compiled from INFORM, ACLED, World Bank, OCHA
+          // Offline Preview: use pre-compiled real datasets from realData.ts
           setSeverityData(realSeverityData)
           setRiskData(realRiskData)
           setAccessData(realAccessData)
@@ -67,35 +70,16 @@ export function Dashboard() {
           )
           const allSeverity = severityHistory.flat()
 
+          // Fallback to real compiled data if API returns empty arrays
           setSeverityData(allSeverity.length ? allSeverity : realSeverityData)
-          setRiskData(risks)
-          setAccessData(access)
-          setProtectionData(protection)
-          setDailyData(daily)
+          setRiskData(risks && risks.length ? risks : realRiskData)
+          setAccessData(access && access.length ? access : realAccessData)
+          setProtectionData(protection && protection.length ? protection : realProtectionData)
+          setDailyData(daily && daily.length ? daily : realDailyEvents)
 
-          // Build ACAPS methodology assessments from risk data
-          const assessments: RiskAssessment[] = risks.map((risk, idx) => ({
-            hazardId: risk.riskId,
-            hazardName: risk.riskDescription,
-            hazardCategory: risk.riskType,
-            barmmRelevant: risk.barmmRelevant || false,
-            impact: {
-              exposure: 3 + (idx % 3),
-              intensity: 3 + (idx % 2),
-              vulnerability: 3 + (idx % 3),
-              capacity: 2 + (idx % 2),
-            },
-            compositeImpact: 3.5 + (idx % 2),
-            impactLevel: ['MODERATE', 'SIGNIFICANT', 'MAJOR'][idx % 3],
-            probabilityScore: 3 + (idx % 3),
-            probabilityPct: 50 + (idx * 5) % 40,
-            riskScore: 9 + (idx % 8),
-            riskLevel: ['Medium', 'High', 'Medium'][idx % 3] as 'Low' | 'Medium' | 'High',
-            indicators: [],
-            monitoringStatus: 'Active',
-            lastReviewed: new Date().toISOString().split('T')[0],
-          }))
-          setMethodologyData(assessments)
+          // Use pre-compiled methodology assessments from realData.ts
+          // The ACAPS API does not return methodology data, so we use the curated dataset
+          setMethodologyData(realMethodologyAssessments)
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load data')
@@ -126,7 +110,7 @@ export function Dashboard() {
           <div className="dashboard-card border-red-500/50">
             <p className="text-red-400 font-medium">Error: {error}</p>
             <p className="text-slate-500 text-sm mt-2">
-              Switch to Real Data mode to load compiled INFORM, ACLED, World Bank, and OCHA datasets.
+              Switch to Offline Real Data mode to load compiled INFORM, ACLED, World Bank, and OCHA datasets.
             </p>
           </div>
         </main>
