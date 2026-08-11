@@ -1,49 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Roboto+Condensed:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   PBB BRAND TOKENS
+   Green / Metallic Gold / White
+   Fonts: Poppins Bold (display), Montserrat (labels/UI), Roboto Condensed (body)
+   ======================================== */
 @layer base {
-  html {
-    font-family: 'Inter', system-ui, sans-serif;
+  :root {
+    --pbb-ink: #EAF1EC;
+    --pbb-ink-soft: #B9C6BD;
+
+    --pbb-forest: #0A6E2E;
+    --pbb-forest-mid: #0E5C27;
+    --pbb-forest-deep: #063D1B;
+    --pbb-forest-tint: #E8F3EA;
+
+    --pbb-gold: #C9A227;
+    --pbb-gold-bright: #F2C94C;
+    --pbb-gold-deep: #8B6914;
+    --pbb-gold-metal: linear-gradient(135deg, #F7DE8E 0%, #D9AF33 45%, #8B6914 100%);
+
+    --pbb-white: #FFFFFF;
+
+    --font-display: 'Poppins', sans-serif;
+    --font-label: 'Montserrat', sans-serif;
+    --font-body: 'Roboto Condensed', system-ui, sans-serif;
   }
-  
+
+  html {
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
   body {
-    @apply bg-slate-900 text-slate-100;
+    color: var(--pbb-ink);
+    background-color: var(--pbb-forest-deep);
+    background-image:
+      radial-gradient(1100px 480px at 50% -10%, rgba(201, 162, 39, 0.10), transparent),
+      linear-gradient(180deg, #063D1B 0%, #041F0F 100%);
+    background-attachment: fixed;
   }
 
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-
   ::-webkit-scrollbar-track {
-    @apply bg-slate-800;
+    background-color: rgba(255, 255, 255, 0.04);
   }
-
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-600 rounded-full;
+    background-color: var(--pbb-gold-deep);
+    border-radius: 9999px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-slate-500;
+    background-color: var(--pbb-gold);
   }
 }
 
 @layer components {
   .dashboard-card {
-    @apply bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-xl p-5 
-           shadow-lg shadow-black/20 hover:border-slate-600/50 transition-all duration-300;
+    background-color: rgba(255, 255, 255, 0.045);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(201, 162, 39, 0.18);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    box-shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.55);
+    transition: border-color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+  }
+  .dashboard-card:hover {
+    border-color: rgba(201, 162, 39, 0.42);
+    box-shadow: 0 16px 36px -14px rgba(0, 0, 0, 0.6);
   }
 
   .chart-title {
-    @apply text-sm font-semibold text-slate-200 mb-4 tracking-wide uppercase;
+    font-family: var(--font-label);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pbb-gold-bright);
+    margin-bottom: 1rem;
   }
+}
+
+/* ========================================
+   PBB BRAND UTILITIES
+   Reusable helpers so any component can pick up brand colors/fonts
+   without waiting on a tailwind.config.js update.
+   ======================================== */
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-label   { font-family: var(--font-label); }
+  .font-body    { font-family: var(--font-body); }
+
+  .bg-forest       { background-color: var(--pbb-forest); }
+  .bg-forest-mid   { background-color: var(--pbb-forest-mid); }
+  .bg-forest-deep  { background-color: var(--pbb-forest-deep); }
+  .bg-forest-tint  { background-color: var(--pbb-forest-tint); }
+  .bg-gold-metal   { background-image: var(--pbb-gold-metal); }
+
+  .text-gold        { color: var(--pbb-gold); }
+  .text-gold-bright { color: var(--pbb-gold-bright); }
+  .text-gold-deep   { color: var(--pbb-gold-deep); }
+  .text-forest      { color: var(--pbb-forest); }
+  .text-ink-soft     { color: var(--pbb-ink-soft); }
+
+  .border-gold       { border-color: var(--pbb-gold); }
+  .border-gold-soft   { border-color: rgba(201, 162, 39, 0.25); }
 }
 
 /* ========================================
    ENHANCED PLATFORM BADGES
    ======================================== */
-
 /* Primary Bolt Badge Selectors */
 #bolt-badge, 
 .bolt-badge,
@@ -64,7 +141,6 @@
   clip-path: inset(50%) !important;
   white-space: nowrap !important;
 }
-
 /* Iframe-based badges */
 iframe[src*="bolt"],
 iframe[src*="badge"],
@@ -79,7 +155,6 @@ iframe.badge {
   height: 0 !important;
   width: 0 !important;
 }
-
 /* Fixed position badges (common placement) */
 [style*="position: fixed"][style*="bottom"],
 [style*="position:fixed"][style*="bottom"],
@@ -92,7 +167,6 @@ a[href*="bolt.diy"] {
   visibility: hidden !important;
   opacity: 0 !important;
 }
-
 /* Additional common badge patterns */
 [data-badge="bolt"],
 [data-platform="bolt"],
@@ -108,7 +182,6 @@ a[href*="bolt.diy"] {
   opacity: 0 !important;
   pointer-events: none !important;
 }
-
 /* Bottom-right corner elements (typical badge placement) */
 body > div:last-child[style*="position: fixed"],
 body > div:last-child[style*="position:fixed"],
@@ -116,7 +189,6 @@ body > a:last-child[style*="position: fixed"],
 body > a:last-child[style*="position:fixed"] {
   display: none !important;
 }
-
 /* SVG-based badges */
 svg[data-badge],
 svg[class*="badge"],
@@ -124,7 +196,6 @@ svg[id*="badge"] {
   display: none !important;
   visibility: hidden !important;
 }
-
 /* Watermark and attribution elements */
 [data-watermark],
 [data-attribution],
