@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { ACAPSProvider } from './context/ACAPSContext'
-import { useACAPSContext } from './context/ACAPSContext'
+import { ACAPSProvider } from './contexts/ACAPSContext'
+import { useACAPSContext } from './contexts/ACAPSContext'
 import { AuthProvider } from './contexts/Auth'
 import { LoginForm } from './components/LoginForm'
 import { Dashboard } from './components/Dashboard'
