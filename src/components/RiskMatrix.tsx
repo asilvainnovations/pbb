@@ -39,7 +39,7 @@ export function RiskMatrix({ data }: Props) {
         <div className="flex gap-1">
           {/* Impact Labels */}
           <div className="flex flex-col gap-1 justify-around pr-2">
-            {['Major', 'Significant', 'Moderate', 'Low', 'Very Low'].map((label, i) => (
+            {['Major', 'Significant', 'Moderate', 'Low', 'Very Low'].map((label) => (
               <div key={label} className="text-[10px] text-slate-500 font-medium w-16 text-right leading-tight">
                 {label}
               </div>

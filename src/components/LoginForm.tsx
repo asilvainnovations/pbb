@@ -1,10 +1,10 @@
 import { useState, type FormEvent } from 'react'
-import { useACAPSContext } from '../context/ACAPSContext'
+import { useACAPSContext } from '../contexts/ACAPSContext'
 import { useAuth } from '../hooks/useAuth'
 import { Eye, EyeOff, ArrowLeft, LogIn } from 'lucide-react'
 
 export function LoginForm() {
-  const { setConfig, setUserealData, userealData } = useACAPSContext()
+  const { setConfig, setUseMockData, useMockData } = useACAPSContext()
   const { login, isLoading, error, clearError } = useAuth()
 
   const [username, setUsername] = useState('')
@@ -64,10 +64,10 @@ export function LoginForm() {
             <h2 className="font-display text-lg font-bold text-white">Sign In</h2>
             <button
               type="button"
-              onClick={() => setUserealData(!userealData)}
-              className={`badge-pbb text-xs px-3 py-1 ${userealData ? 'badge-pbb-on' : 'badge-pbb-off'}`}
+              onClick={() => setUseMockData(!useMockData)}
+              className={`badge-pbb text-xs px-3 py-1 ${useMockData ? 'badge-pbb-on' : 'badge-pbb-off'}`}
             >
-              {userealData ? 'Sample Data Active' : 'Use Sample Data'}
+              {useMockData ? 'Sample Data Active' : 'Use Sample Data'}
             </button>
           </div>
 

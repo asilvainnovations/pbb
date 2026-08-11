@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Activity } from 'lucide-react'
-import { useACAPSContext } from '../context/ACAPSContext'
+import { useACAPSContext } from '../contexts/ACAPSContext'
 import { useACAPS } from '../hooks/useACAPS'
 import { Header } from './Header'
 import { SeverityTimeline } from './SeverityTimeline'
@@ -49,7 +49,7 @@ export function Dashboard() {
           setMethodologyData(realMethodologyAssessments)
         } else {
           // Live ACAPS API fetch (requires authentication)
-          const [severity, access, risks, daily, protection] = await Promise.all([
+          const [, access, risks, daily, protection] = await Promise.all([
             getSeverityIndex(),
             getHumanitarianAccess(),
             getRiskList(),
@@ -143,7 +143,7 @@ export function Dashboard() {
         <div className="mb-8 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
             <span className="font-semibold text-slate-200 flex items-center gap-2">
-              <Activity className="w-4 h-4 text-acaps-severity" />
+              <Activity className="w-4 h-4 text-gold-bright" />
               INFORM
             </span>
             <span className="text-slate-600">|</span>
@@ -195,12 +195,12 @@ export function Dashboard() {
         {/* Footer */}
         <footer className="mt-12 pt-8 border-t border-slate-800 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-lg">🌿</span>
+            <img src="/assets/pbb-logo-128.png" alt="" className="w-5 h-5 rounded-full" />
             <span className="text-slate-500">|</span>
-            <span className="text-sm font-bold text-slate-300">INFORM</span>
+            <span className="text-sm font-bold text-slate-300 font-display">INFORM</span>
           </div>
           <p className="text-xs text-slate-600">
-            INFORM — BARMM Conflict Intelligence Dashboard • Partido Bangon Bangsamoro (PBB)
+            INFORM — BARMM Data &amp; Intelligence Dashboard • Partido Bangon Bangsamoro (PBB)
           </p>
           <p className="text-xs text-slate-700 mt-1">
             Data: INFORM Severity July 2026 (ACAPS/JRC) • INFORM Risk Index 2026 (HDX) • 

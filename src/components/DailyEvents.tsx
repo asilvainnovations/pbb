@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import type { DailyEvent } from '../types/acaps'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts'
-import { format, startOfWeek, addWeeks } from 'date-fns'
+import { format, startOfWeek } from 'date-fns'
 
 interface Props {
   data: DailyEvent[]
