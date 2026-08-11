@@ -13,9 +13,9 @@ import { ProbabilityScale } from './ProbabilityScale'
 import { DailyEvents } from './DailyEvents'
 import { LoadingSpinner } from './LoadingSpinner'
 import { 
-  mockSeverityData, mockRiskData, mockAccessData, 
-  mockProtectionData, mockDailyEvents, mockMethodologyAssessments 
-} from '../data/mockData'
+  realSeverityData, realRiskData, realAccessData, 
+  realProtectionData, realDailyEvents, realMethodologyAssessments 
+} from '../data/realData'
 import type { 
   SeverityRecord, RiskRecord, AccessConstraint, 
   ProtectionRisk, DailyEvent, RiskAssessment 
@@ -24,7 +24,7 @@ import type {
 export function Dashboard() {
   const { useMockData, error, setError } = useACAPSContext()
   const { getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks } = useACAPS()
-  
+
   const [loading, setLoading] = useState(true)
   const [severityData, setSeverityData] = useState<SeverityRecord[]>([])
   const [riskData, setRiskData] = useState<RiskRecord[]>([])
@@ -37,16 +37,18 @@ export function Dashboard() {
     async function loadData() {
       setLoading(true)
       setError(null)
-      
+
       try {
         if (useMockData) {
-          setSeverityData(mockSeverityData)
-          setRiskData(mockRiskData)
-          setAccessData(mockAccessData)
-          setProtectionData(mockProtectionData)
-          setDailyData(mockDailyEvents)
-          setMethodologyData(mockMethodologyAssessments)
+          // Use real datasets compiled from INFORM, ACLED, World Bank, OCHA
+          setSeverityData(realSeverityData)
+          setRiskData(realRiskData)
+          setAccessData(realAccessData)
+          setProtectionData(realProtectionData)
+          setDailyData(realDailyEvents)
+          setMethodologyData(realMethodologyAssessments)
         } else {
+          // Live ACAPS API fetch (requires authentication)
           const [severity, access, risks, daily, protection] = await Promise.all([
             getSeverityIndex(),
             getHumanitarianAccess(),
@@ -54,21 +56,24 @@ export function Dashboard() {
             getDailyMonitoring(),
             getProtectionRisks(),
           ])
-          
-          // For severity, we need historical data — fetch multiple months
-          const months = ['2026-01-01', '2026-02-01', '2026-03-01', '2026-04-01', '2026-05-01', '2026-06-01', '2026-07-01', '2026-08-01']
+
+          // Fetch historical severity data for timeline
+          const months = [
+            '2026-01-01', '2026-02-01', '2026-03-01', '2026-04-01',
+            '2026-05-01', '2026-06-01', '2026-07-01', '2026-08-01'
+          ]
           const severityHistory = await Promise.all(
             months.map(m => getSeverityIndex(m).catch(() => [] as SeverityRecord[]))
           )
           const allSeverity = severityHistory.flat()
-          
-          setSeverityData(allSeverity.length ? allSeverity : mockSeverityData)
+
+          setSeverityData(allSeverity.length ? allSeverity : realSeverityData)
           setRiskData(risks)
           setAccessData(access)
           setProtectionData(protection)
           setDailyData(daily)
-          
-          // Build methodology assessments from risk data
+
+          // Build ACAPS methodology assessments from risk data
           const assessments: RiskAssessment[] = risks.map((risk, idx) => ({
             hazardId: risk.riskId,
             hazardName: risk.riskDescription,
@@ -98,35 +103,41 @@ export function Dashboard() {
         setLoading(false)
       }
     }
-    
+
     loadData()
   }, [useMockData, getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks, setError])
 
-  if (loading) return (
-    <div className="min-h-screen bg-slate-900">
-      <Header />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <LoadingSpinner />
-      </main>
-    </div>
-  )
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-900">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <LoadingSpinner />
+        </main>
+      </div>
+    )
+  }
 
-  if (error) return (
-    <div className="min-h-screen bg-slate-900">
-      <Header />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="dashboard-card border-red-500/50">
-          <p className="text-red-400 font-medium">Error: {error}</p>
-          <p className="text-slate-500 text-sm mt-2">Switch to Mock Data mode to preview the dashboard.</p>
-        </div>
-      </main>
-    </div>
-  )
+  if (error) {
+    return (
+      <div className="min-h-screen bg-slate-900">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="dashboard-card border-red-500/50">
+            <p className="text-red-400 font-medium">Error: {error}</p>
+            <p className="text-slate-500 text-sm mt-2">
+              Switch to Real Data mode to load compiled INFORM, ACLED, World Bank, and OCHA datasets.
+            </p>
+          </div>
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-slate-900">
       <Header />
-      
+
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* INFORM Methodology Banner */}
         <div className="mb-8 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
@@ -192,7 +203,9 @@ export function Dashboard() {
             INFORM — BARMM Conflict Intelligence Dashboard • Partido Bangon Bangsamoro (PBB)
           </p>
           <p className="text-xs text-slate-700 mt-1">
-            Data: ACAPS API (api.acaps.org) • Methodology: INFORM Risk Index • Partido Bangon Bangsamoro • 2026
+            Data: INFORM Severity July 2026 (ACAPS/JRC) • INFORM Risk Index 2026 (HDX) • 
+            ACLED Conflict Exposure • World Bank Poverty 2018–2023 • OCHA HRP 2024–2025 • 
+            ACAPS Methodology (May 2019) • 2026
           </p>
         </footer>
       </main>
