@@ -127,18 +127,23 @@ export function Dashboard() {
     <div className="min-h-screen bg-slate-900">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Methodology Banner */}
-        <div className="mb-8 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
-          <div className="flex flex-wrap items-center gap-4 text-sm text-slate-400">
-            <span className="font-semibold text-slate-200">ACAPS Methodology (May 2019):</span>
-            <span>Risk = Impact × Probability</span>
-            <span className="text-slate-600">|</span>
-            <span>Impact = Exposure × Intensity × Vulnerability − Capacity</span>
-            <span className="text-slate-600">|</span>
-            <span>PHL003 • Mindanao • BARMM</span>
-          </div>
-        </div>
+      {/* INFORM Methodology Banner */}
+<div className="mb-8 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
+  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
+    <span className="font-semibold text-slate-200 flex items-center gap-2">
+      <Activity className="w-4 h-4 text-acaps-severity" />
+      INFORM
+    </span>
+    <span className="text-slate-600">|</span>
+    <span>ACAPS Methodology (May 2019)</span>
+    <span className="text-slate-600">|</span>
+    <span>Risk = Impact × Probability</span>
+    <span className="text-slate-600">|</span>
+    <span>PHL003 • Mindanao • BARMM</span>
+    <span className="text-slate-600">|</span>
+    <span className="text-xs text-slate-500">PBB Intelligence Unit</span>
+  </div>
+</div>
 
         {/* Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -176,10 +181,19 @@ export function Dashboard() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-600">
-          <p>ACAPS BARMM Conflict Dashboard • Alvin Silva | ASilva Innovations • 2026</p>
-          <p className="mt-1">Data sources: ACAPS API (api.acaps.org) • Methodology: ACAPS Risk Analysis (May 2019)</p>
-        </footer>
+<footer className="mt-12 pt-8 border-t border-slate-800 text-center">
+  <div className="flex items-center justify-center gap-2 mb-2">
+    <span className="text-lg">🌿</span>
+    <span className="text-slate-500">|</span>
+    <span className="text-sm font-bold text-slate-300">INFORM</span>
+  </div>
+  <p className="text-xs text-slate-600">
+    INFORM — BARMM Conflict Intelligence Dashboard • Partido Bangon Bangsamoro (PBB)
+  </p>
+  <p className="text-xs text-slate-700 mt-1">
+    Data: ACAPS API (api.acaps.org) • Methodology: ACAPS Risk Analysis (May 2019) • Partido Bangon Bangsamoro • 2026
+  </p>
+</footer>
       </main>
     </div>
   )
