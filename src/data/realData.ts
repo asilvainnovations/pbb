@@ -1,6 +1,6 @@
 import type { 
   SeverityRecord, RiskRecord, AccessConstraint, 
-  ProtectionRisk, DailyEvent, RiskAssessment, ImpactComponents 
+  ProtectionRisk, DailyEvent, RiskAssessment 
 } from '../types/acaps'
 import { buildRiskAssessment } from '../utils/methodology'
 
