@@ -4,7 +4,7 @@ import { useAuth } from '../hooks/useAuth'
 import { Eye, EyeOff, ArrowLeft, LogIn, UserPlus } from 'lucide-react'
 
 export function LoginForm() {
-  const { setConfig, setUseStaticData, useStaticData } = useACAPSContext()
+  const { setConfig, setUseMockData, useMockData } = useACAPSContext()
   const { login, isLoading, error, clearError } = useAuth()
 
   const [mode, setMode] = useState<'login' | 'signup'>('login')
@@ -36,7 +36,7 @@ export function LoginForm() {
         return
       }
 
-      /* Store pending signup for admin review */
+      /* Store pending signup for admin review (no backend yet) */
       const signups = JSON.parse(localStorage.getItem('pbb_signup_requests') || '[]')
       signups.push({
         fullName,
@@ -57,7 +57,6 @@ export function LoginForm() {
     if (!username || !password) return
     const success = await login(username, password)
     if (success) {
-      setUseStaticData(false) // Switch to Live API on successful login
       setConfig({
         username,
         password,
@@ -101,30 +100,28 @@ export function LoginForm() {
             </h2>
             <button
               type="button"
-              onClick={() => setUseStaticData(!useStaticData)}
-              className={`badge-pbb text-xs px-3 py-1 ${useStaticData ? 'badge-pbb-on' : 'badge-pbb-off'}`}
+              onClick={() => setUseMockData(!useMockData)}
+              className={`badge-pbb text-xs px-3 py-1 ${useMockData ? 'badge-pbb-on' : 'badge-pbb-off'}`}
             >
-              {useStaticData ? 'Static Data Active' : 'Use Static Data'}
+              {useMockData ? 'Compiled Dataset Active' : 'Use Compiled Dataset'}
             </button>
           </div>
 
-          {useStaticData ? (
+          {useMockData ? (
             <div className="space-y-4">
               <div className="panel-pbb-tint p-4">
-                <p className="font-label text-gold-bright text-sm font-semibold mb-1">Static Compiled Data</p>
+                <p className="font-label text-gold-bright text-sm font-semibold mb-1">Preview Mode</p>
                 <p className="font-body text-slate-400 text-xs">
-                  Viewing pre-compiled real datasets (INFORM, ACLED, World Bank, OCHA) from <code className="text-gold-deep">src/data/realData.ts</code>.
+                  Explore INFORM with the compiled BARMM dataset (INFORM, ACLED, World Bank &amp; OCHA) —
+                  no account required.
                 </p>
               </div>
               <button
                 type="button"
-                onClick={() => {
-                  // Bypass auth for static view
-                  setConfig({ username: 'static', password: 'static', baseUrl: '/api/acaps' })
-                }}
+                onClick={() => setUseMockData(true)}
                 className="btn-pbb-gold w-full py-3"
               >
-                Continue with Static Data
+                Continue with Compiled Dataset
               </button>
             </div>
           ) : (
@@ -152,7 +149,9 @@ export function LoginForm() {
               {mode === 'signup' && (
                 <>
                   <div>
-                    <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">Full Name</label>
+                    <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                      Full Name
+                    </label>
                     <input
                       type="text"
                       value={fullName}
@@ -164,7 +163,9 @@ export function LoginForm() {
                     />
                   </div>
                   <div>
-                    <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">Email</label>
+                    <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                      Email
+                    </label>
                     <input
                       type="email"
                       value={email}
@@ -180,7 +181,9 @@ export function LoginForm() {
 
               {mode === 'login' && (
                 <div>
-                  <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">Email</label>
+                  <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                    Email
+                  </label>
                   <input
                     type="email"
                     value={username}
@@ -194,7 +197,9 @@ export function LoginForm() {
               )}
 
               <div>
-                <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">Password</label>
+                <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                  Password
+                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -218,7 +223,9 @@ export function LoginForm() {
 
               {mode === 'signup' && (
                 <div>
-                  <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">Confirm Password</label>
+                  <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                    Confirm Password
+                  </label>
                   <div className="relative">
                     <input
                       type={showConfirmPassword ? 'text' : 'password'}
@@ -247,12 +254,12 @@ export function LoginForm() {
                 className="btn-pbb-primary w-full py-3 flex items-center justify-center gap-2"
               >
                 {mode === 'login' ? <LogIn className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
-                {isLoading ? 'Processing…' : (mode === 'login' ? 'Sign In & Load Live API' : 'Create Account')}
+                {isLoading ? 'Processing…' : (mode === 'login' ? 'Sign In' : 'Create Account')}
               </button>
             </form>
           )}
 
-          {!useStaticData && (
+          {!useMockData && (
             <div className="mt-4 text-center">
               <p className="font-body text-sm text-slate-500">
                 {mode === 'login' ? (
