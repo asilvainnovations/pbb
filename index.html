@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="bg-slate-900 text-slate-100 antialiased">
-    <div id="root"></div>
+    <!-- Back to Portal nav -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(51, 65, 85, 0.5); padding: 0.75rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+      <a href="home.html" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: #f8fafc; font-weight: 600; font-size: 0.9rem;">
+        <span style="font-size: 1.2rem;">🛡️</span> PBB
+      </a>
+      <a href="home.html" style="color: #94a3b8; text-decoration: none; font-size: 0.8rem; font-weight: 500; padding: 0.4rem 1rem; border: 1px solid rgba(51, 65, 85, 0.5); border-radius: 6px; transition: all 0.2s;">
+        ← Back to Portal
+      </a>
+    </div>
+    <div id="root" style="padding-top: 3rem;"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
