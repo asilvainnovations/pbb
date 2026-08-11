@@ -1,52 +1,63 @@
 import { useACAPSContext } from '../contexts/ACAPSContext'
-import { LogOut, Database, Wifi } from 'lucide-react'
+import { LogOut, Database, Globe, ArrowLeft, Activity } from 'lucide-react'
 
 export function Header() {
-  const { useStaticData, logout, setUseStaticData } = useACAPSContext()
+  const { useMockData, logout, setUseMockData } = useACAPSContext()
 
   return (
-    <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-40">
+    <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           <div className="flex items-center gap-3">
-            <img src="/assets/pbb-logo-128.png" alt="PBB" className="w-8 h-8 rounded-full" />
-            <div>
-              <h1 className="font-display text-lg font-bold text-white leading-tight">INFORM</h1>
-              <p className="font-label text-[10px] text-gold-bright uppercase tracking-wider">BARMM Intelligence</p>
+            <a href="/home.html" className="flex items-center gap-2 text-decoration-none hover:opacity-80 transition-opacity">
+              <img src="/assets/pbb-logo-128.png" alt="" className="w-5 h-5 rounded-full" />
+              <span className="text-sm font-bold text-white tracking-tight font-display">PBB</span>
+            </a>
+            <span className="text-slate-600 text-xs">|</span>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-forest/20">
+                <Activity className="w-4 h-4 text-gold-bright" />
+              </div>
+              <div>
+                <h1 className="text-sm font-bold text-white leading-tight tracking-wide font-display">INFORM</h1>
+                <p className="text-[10px] text-slate-400 uppercase tracking-wider font-label">BARMM Data &amp; Intelligence</p>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
-            {/* Data Source Toggle */}
-            <button
-              onClick={() => setUseStaticData(!useStaticData)}
-              className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-                useStaticData 
-                  ? 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700' 
-                  : 'bg-green-900/40 text-green-400 hover:bg-green-900/60 border border-green-800/50'
-              }`}
-              title={useStaticData ? 'Switch to Live API Data' : 'Switch to Static Compiled Data'}
+          <div className="flex items-center gap-3">
+            <a 
+              href="/home.html" 
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs text-slate-400 hover:text-slate-200 transition-colors border border-slate-700 rounded-lg hover:border-slate-600"
             >
-              {useStaticData ? (
-                <>
-                  <Database className="w-3.5 h-3.5" />
-                  Static Data
-                </>
-              ) : (
-                <>
-                  <Wifi className="w-3.5 h-3.5" />
-                  Live API
-                </>
-              )}
+              <ArrowLeft className="w-3.5 h-3.5" />
+              PBB Portal
+            </a>
+
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 rounded-lg border border-slate-700">
+              <Globe className="w-3.5 h-3.5 text-slate-400" />
+              <span className="text-xs text-slate-300 font-medium">PHL • Mindanao</span>
+            </div>
+            
+            <button
+              onClick={() => setUseMockData(!useMockData)}
+              className={`badge-pbb flex items-center gap-2 px-3 py-1.5 border text-xs font-medium ${
+                useMockData
+                  ? 'badge-pbb-on border-transparent'
+                  : 'badge-pbb-off border-slate-700 hover:text-slate-300'
+              }`}
+              title={useMockData ? 'Compiled from INFORM, ACLED, World Bank & OCHA datasets' : 'Fetching live from the ACAPS API'}
+            >
+              <Database className="w-3.5 h-3.5" />
+              {useMockData ? 'Compiled Dataset' : 'Live API'}
             </button>
 
-            {/* Logout Button */}
             <button
               onClick={logout}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-red-900/20 text-red-400 hover:bg-red-900/40 border border-red-900/50 transition-colors"
+              className="flex items-center gap-2 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs text-slate-400 hover:text-slate-300 transition-colors"
             >
               <LogOut className="w-3.5 h-3.5" />
-              Sign Out
+              Exit
             </button>
           </div>
         </div>
