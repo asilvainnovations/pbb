@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { useACAPSContext } from '../context/ACAPSContext'
+import { useACAPSContext } from '../contexts/ACAPSContext'
 import type { AuthResponse, PaginatedResponse, Crisis, SeverityRecord, RiskRecord, AccessConstraint, DailyEvent, ProtectionRisk } from '../types/acaps'
 import { isBarmmRelevant } from '../utils/methodology'
 
@@ -43,7 +43,7 @@ export function useACAPS() {
   const fetchAllPages = useCallback(async <T>(endpoint: string, params?: Record<string, string>): Promise<T[]> => {
     const authToken = await authenticate()
     const allResults: T[] = []
-    let url = `${BASE_URL}${endpoint}`
+    let url: string | null = `${BASE_URL}${endpoint}`
     let page = 1
 
     while (url) {
