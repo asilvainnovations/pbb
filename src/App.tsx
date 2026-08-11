@@ -4,7 +4,6 @@ import { AuthProvider } from './contexts/Auth'
 import { LoginForm } from './components/LoginForm'
 import { Dashboard } from './components/Dashboard'
 
-const HOME_PAGE_PATH = '/home.html'
 const LOGIN_ROUTE = '/login'
 
 function wantsLoginScreen(): boolean {
