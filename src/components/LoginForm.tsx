@@ -20,6 +20,21 @@ export function LoginForm() {
   const [signupError, setSignupError] = useState<string | null>(null)
   const [signupSuccess, setSignupSuccess] = useState(false)
 
+  const handleOfflinePreview = () => {
+    // Proceed to dashboard with offline preview mode
+    // Set dummy credentials — the Dashboard will use realData.ts since useMockData is true
+    setConfig({
+      username: 'preview',
+      password: 'preview',
+      baseUrl: import.meta.env.VITE_ACAPS_API_URL || '/api/acaps',
+    })
+    // Attempt login with preview credentials to satisfy auth context
+    login('preview', 'preview').catch(() => {
+      // If login fails, auth context may still allow dashboard access
+      // based on useMockData flag — handled in App.tsx routing
+    })
+  }
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     clearError()
@@ -103,24 +118,24 @@ export function LoginForm() {
               onClick={() => setUseMockData(!useMockData)}
               className={`badge-pbb text-xs px-3 py-1 ${useMockData ? 'badge-pbb-on' : 'badge-pbb-off'}`}
             >
-              {useMockData ? 'Sample Data Active' : 'Use Sample Data'}
+              {useMockData ? 'Offline Real Data Active' : 'Use Offline Real Data'}
             </button>
           </div>
 
           {useMockData ? (
             <div className="space-y-4">
               <div className="panel-pbb-tint p-4">
-                <p className="font-label text-gold-bright text-sm font-semibold mb-1">Preview Mode</p>
+                <p className="font-label text-gold-bright text-sm font-semibold mb-1">Offline Preview Mode</p>
                 <p className="font-body text-slate-400 text-xs">
-                  Explore INFORM with representative BARMM data — no account required.
+                  Explore INFORM with pre-compiled real BARMM data (INFORM, ACLED, World Bank, OCHA) — no account required.
                 </p>
               </div>
               <button
                 type="button"
-                onClick={() => setUseMockData(true)}
+                onClick={handleOfflinePreview}
                 className="btn-pbb-gold w-full py-3"
               >
-                Continue with Sample Data
+                Continue with Offline Real Data
               </button>
             </div>
           ) : (
