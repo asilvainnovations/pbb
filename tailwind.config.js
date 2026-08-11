@@ -24,7 +24,9 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Roboto Condensed', 'system-ui', 'sans-serif'],
+        display: ['Poppins', 'sans-serif'],
+        label: ['Montserrat', 'sans-serif'],
       }
     },
   },
