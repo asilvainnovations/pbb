@@ -24,7 +24,12 @@ export function RiskMatrix({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">ACAPS Risk Matrix</h3>
-      <p className="text-xs text-slate-500 mb-4">Risk = Impact × Probability</p>
+      <p className="chart-desc">
+        Plots every BARMM-relevant risk on a 5×5 grid of Probability (how likely, left to right)
+        against Impact (how severe, bottom to top). <span className="text-slate-400">Risk = Impact
+        × Probability.</span> Risks landing in the upper-right (red) combine high likelihood and
+        high impact and warrant the closest monitoring; lower-left (yellow) risks are lower priority.
+      </p>
       
       <div className="relative">
         {/* Matrix Grid */}
