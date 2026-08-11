@@ -11,9 +11,9 @@ interface ACAPSState {
   isAuthenticated: boolean
   isLoading: boolean
   error: string | null
-  useMockData: boolean
+  useStaticData: boolean // Renamed from useMockData
   setConfig: (config: ACAPSConfig) => void
-  setUseMockData: (useMock: boolean) => void
+  setUseStaticData: (useStatic: boolean) => void // Renamed
   setError: (error: string | null) => void
   setIsLoading: (loading: boolean) => void
   logout: () => void
@@ -26,9 +26,9 @@ export function ACAPSProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [useMockData, setUseMockData] = useState(() => {
-    return import.meta.env.VITE_USE_MOCK_DATA === 'true'
-  })
+  
+  // Architecture: Default to Static Compiled Data (realData.ts)
+  const [useStaticData, setUseStaticData] = useState<boolean>(true)
 
   const setConfig = useCallback((newConfig: ACAPSConfig) => {
     setConfigState(newConfig)
@@ -40,6 +40,7 @@ export function ACAPSProvider({ children }: { children: ReactNode }) {
     setConfigState(null)
     setIsAuthenticated(false)
     setError(null)
+    setUseStaticData(true) // Revert to static data on logout
   }, [])
 
   return (
@@ -48,9 +49,9 @@ export function ACAPSProvider({ children }: { children: ReactNode }) {
       isAuthenticated,
       isLoading,
       error,
-      useMockData,
+      useStaticData,
       setConfig,
-      setUseMockData,
+      setUseStaticData,
       setError,
       setIsLoading,
       logout,
