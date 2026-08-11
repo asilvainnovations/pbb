@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/server": "^1.4.1",
     "@supabase/supabase-js": "^2.112.3",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
