@@ -1,0 +1,257 @@
+/* ============ ACCESSIBILITY TOOLBAR ============ */
+.a11y-toolbar {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.a11y-toolbar-toggle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #063D1B;
+  color: #F2C94C;
+  border: 2px solid #C9A227;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.a11y-toolbar-toggle:hover { transform: scale(1.08); box-shadow: 0 6px 16px rgba(0,0,0,0.4); }
+.a11y-toolbar-panel {
+  position: absolute;
+  bottom: 56px;
+  right: 0;
+  width: 260px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 14px 32px -16px rgba(6,61,27,.4);
+  padding: 18px;
+  display: none;
+  border: 1px solid #C9A227;
+}
+.a11y-toolbar-panel.open { display: block; }
+.a11y-toolbar-panel h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: .85rem;
+  margin: 0 0 14px;
+  color: #063D1B;
+  letter-spacing: .04em;
+}
+.a11y-btn {
+  width: 100%;
+  padding: 9px 12px;
+  margin-bottom: 7px;
+  border: 1px solid #0A6E2E33;
+  background: #FBFBF8;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  font-size: .8rem;
+  font-weight: 600;
+  text-align: left;
+  transition: all .2s ease;
+  color: #15241A;
+}
+.a11y-btn:hover, .a11y-btn.active {
+  background: #E8F3EA;
+  border-color: #0A6E2E;
+  color: #063D1B;
+}
+.a11y-btn:focus-visible {
+  outline: 2px solid #C9A227;
+  outline-offset: 2px;
+}
+
+/* ============ COOKIE BANNER ============ */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #063D1B;
+  color: #fff;
+  padding: 16px 20px;
+  z-index: 999;
+  font-family: "Roboto Condensed", sans-serif;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+  transform: translateY(0);
+  transition: transform .35s cubic-bezier(.16,1,.3,1);
+}
+.cookie-banner.hidden { transform: translateY(100%); }
+.cookie-banner-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+.cookie-banner p { margin: 0; font-size: .95rem; line-height: 1.4; }
+.cookie-banner a { color: #F2C94C; text-decoration: underline; }
+.cookie-banner a:hover { color: #fff; }
+.cookie-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.cookie-btn {
+  padding: 9px 18px;
+  border-radius: 2px;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: .78rem;
+  cursor: pointer;
+  transition: filter .2s ease, transform .2s ease;
+  min-height: 36px;
+}
+.cookie-btn:hover { transform: translateY(-1px); }
+.cookie-btn-primary {
+  background: linear-gradient(135deg,#F7DE8E 0%,#D9AF33 45%,#8B6914 100%);
+  color: #063D1B;
+}
+.cookie-btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.cookie-btn-text {
+  background: none;
+  color: #F2C94C;
+  text-decoration: underline;
+  padding: 9px 8px;
+}
+
+/* ============ COOKIE PREFERENCES MODAL ============ */
+.cookie-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6,61,27,.65);
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.cookie-modal-overlay.open { display: flex; }
+.cookie-modal {
+  background: #fff;
+  border-radius: 2px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-top: 4px solid #C9A227;
+  box-shadow: 0 20px 40px -16px rgba(6,61,27,.5);
+  animation: cookie-pop .25s cubic-bezier(.16,1,.3,1);
+}
+@keyframes cookie-pop {
+  from { opacity: 0; transform: translateY(10px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+.cookie-modal-head {
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+}
+.cookie-modal-head h3 {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  color: #063D1B;
+  font-size: 1.1rem;
+}
+.cookie-modal-body { padding: 16px 24px; }
+.cookie-pref-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 16px;
+}
+.cookie-pref-row:last-child { border-bottom: none; }
+.cookie-pref-row label {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: .88rem;
+  color: #15241A;
+  display: block;
+  margin-bottom: 4px;
+}
+.cookie-pref-row p {
+  margin: 0;
+  font-size: .85rem;
+  color: #43584B;
+  line-height: 1.4;
+}
+.cookie-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s ease;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: none;
+  padding: 0;
+}
+.cookie-toggle.on { background: #0A6E2E; }
+.cookie-toggle::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: transform .2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.cookie-toggle.on::after { transform: translateX(20px); }
+.cookie-toggle:focus-visible { outline: 2px solid #C9A227; outline-offset: 2px; }
+.cookie-modal-foot {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ============ ACCESSIBILITY MODES ============ */
+html.pbb-high-contrast { filter: contrast(1.35); }
+html.pbb-high-contrast img, html.pbb-high-contrast video { filter: contrast(0.95); }
+html.pbb-grayscale { filter: grayscale(1); }
+html.pbb-dyslexia, html.pbb-dyslexia body, html.pbb-dyslexia button,
+html.pbb-dyslexia input, html.pbb-dyslexia select, html.pbb-dyslexia textarea {
+  font-family: "Segoe UI", "Trebuchet MS", "Verdana", sans-serif !important;
+  letter-spacing: 0.04em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.75 !important;
+}
+html.pbb-reduce-motion, html.pbb-reduce-motion *,
+html.pbb-reduce-motion *::before, html.pbb-reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ============ SCREEN-READER UTILITY ============ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
