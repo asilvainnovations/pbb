@@ -30,7 +30,13 @@ export function ImpactDecomposition({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">Impact Decomposition</h3>
-      <p className="text-xs text-slate-500 mb-2">Impact = Exposure × Intensity × Vulnerability − Capacity</p>
+      <p className="chart-desc">
+        Breaks the top 12 BARMM-relevant risks' Impact score into its four ACAPS components —
+        how many people are Exposed, how Intense the hazard is, how Vulnerable the affected
+        population is, and how much existing Coping Capacity offsets it (shown as a negative bar).
+        <span className="text-slate-400"> Impact = Exposure × Intensity × Vulnerability − Capacity.</span>
+        {' '}This shows what's driving each risk's impact, not just the final composite number.
+      </p>
       <div className="h-96">
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
