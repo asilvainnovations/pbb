@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Partido Bangon Bangsamoro (PBB) | The BANGON Platform for BARMM 2026</title>
+<meta name="description" content="Partido Bangon Bangsamoro (PBB) is fielding a new generation of merit-based, transparent leaders for the 2026 BARMM Parliamentary Elections. Explore the BANGON platform of government.">
+<meta name="keywords" content="Partido Bangon Bangsamoro, PBB, BANGON, BARMM, Bangsamoro, 2026 Parliamentary Elections, Bangsamoro parliament, Mindanao politics, Bangsamoro platform of government">
+<meta name="author" content="Partido Bangon Bangsamoro">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0E4B36">
+<link rel="canonical" href="https://www.bangonbangsamoro.ph/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Partido Bangon Bangsamoro">
+<meta property="og:title" content="Partido Bangon Bangsamoro | The BANGON Platform for BARMM 2026">
+<meta property="og:description" content="Babangon tayo. A new generation of Bangsamoro leaders — merit-based, transparent, ready to turn peace into progress. See the six-point BANGON platform of government.">
+<meta property="og:url" content="https://www.bangonbangsamoro.ph/">
+<meta property="og:image" content="https://www.bangonbangsamoro.ph/assets/og-banner.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_PH">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Partido Bangon Bangsamoro | The BANGON Platform for BARMM 2026">
+<meta name="twitter:description" content="A new generation of Bangsamoro leaders — merit-based, transparent, ready to turn peace into progress.">
+<meta name="twitter:image" content="https://www.bangonbangsamoro.ph/assets/og-banner.jpg">
+
+<!-- Favicon (inline, no external request) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230E4B36'/%3E%3Cpath d='M32 12l4.5 13.9h14.6l-11.8 8.6 4.5 13.9L32 39.8l-11.8 8.6 4.5-13.9-11.8-8.6h14.6z' fill='%23C99A2E'/%3E%3C/svg%3E">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Partido Bangon Bangsamoro",
+  "alternateName": "PBB",
+  "url": "https://www.bangonbangsamoro.ph/",
+  "slogan": "Babangon tungo sa Kaunlaran",
+  "description": "A regional political party in the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) contesting the 2026 Bangsamoro Parliamentary Elections on the BANGON platform of government.",
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Bangsamoro Autonomous Region in Muslim Mindanao"
+  },
+  "sameAs": []
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does BANGON stand for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BANGON is Partido Bangon Bangsamoro's platform of government: Basic Services Enhancement, Accelerate Sustainable Livelihood, Non-violent Peace, Green Economic Competitiveness, Open & Inclusive Governance, and Nurturing Women & Gender Empowerment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When are the BARMM Parliamentary Elections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Bangsamoro Parliamentary Elections are scheduled for September 14, 2026."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --ink:#132A20;
+  --ink-soft:#3C4F45;
+  --forest:#0E4B36;
+  --forest-deep:#0A3327;
+  --forest-tint:#E4EEE7;
+  --gold:#C99A2E;
+  --gold-light:#E8C766;
+  --gold-tint:#FBF1D9;
+  --red:#9E2B25;
+  --paper:#F4F2E6;
+  --paper-line:#0E4B3614;
+  --white:#FFFFFF;
+  --shadow:0 12px 30px -14px rgba(10,51,39,.35);
+  --radius:2px;
+  --maxw:1180px;
+  --font-display:"Fraunces", ui-serif, Georgia, serif;
+  --font-body:"Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
+
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:
+    linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/38px 38px,
+    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px) 0 0/38px 38px,
+    var(--paper);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--font-display);color:var(--forest-deep);line-height:1.12;margin:0 0 .5em}
+p{margin:0 0 1em}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;cursor:pointer}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:600;
+  display:inline-flex;align-items:center;gap:.5em;
+  margin-bottom:.9em;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--gold)}
+
+.skip-link{
+  position:absolute;left:-999px;top:0;background:var(--forest-deep);color:var(--white);
+  padding:.8em 1.2em;z-index:200;
+}
+.skip-link:focus{left:12px;top:12px}
+
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+/* ============ HEADER ============ */
+header.site{
+  position:sticky;top:0;z-index:100;
+  background:var(--forest-deep);
+  border-bottom:1px solid #ffffff1a;
+}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:.6em;color:var(--white);text-decoration:none}
+.brand svg{width:34px;height:34px;flex:none}
+.brand-text{font-family:var(--font-display);font-weight:700;font-size:1.05rem;line-height:1.05}
+.brand-text small{display:block;font-family:var(--font-mono);font-weight:500;font-size:.6rem;letter-spacing:.08em;color:var(--gold-light);text-transform:uppercase}
+
+.nav-toggle{
+  display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
+  width:42px;height:42px;background:transparent;border:1px solid #ffffff33;border-radius:var(--radius);
+}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--white);margin:0 auto;transition:transform .25s, opacity .25s}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+nav#primary-nav{
+  position:fixed;inset:64px 0 0 0;background:var(--forest-deep);
+  transform:translateX(100%);transition:transform .3s ease;
+  overflow-y:auto;
+}
+nav#primary-nav.open{transform:translateX(0)}
+nav#primary-nav ul{padding:8px 20px 28px;display:flex;flex-direction:column}
+nav#primary-nav a{
+  display:block;padding:16px 4px;color:var(--white);text-decoration:none;
+  font-weight:600;border-bottom:1px solid #ffffff14;font-size:1.02rem;
+}
+nav#primary-nav a:hover{color:var(--gold-light)}
+.nav-cta{margin-top:18px}
+.nav-cta a{
+  display:block;text-align:center;background:var(--gold);color:var(--forest-deep)!important;
+  border-radius:var(--radius);padding:14px;font-weight:800!important;border:none!important;
+}
+
+@media(min-width:960px){
+  .nav-toggle{display:none}
+  nav#primary-nav{
+    position:static;inset:auto;transform:none;background:transparent;overflow:visible;flex:1;
+  }
+  nav#primary-nav ul{flex-direction:row;align-items:center;justify-content:flex-end;padding:0;gap:6px}
+  nav#primary-nav a{border-bottom:none;padding:10px 14px;font-size:.92rem}
+  .nav-cta{margin:0 0 0 8px}
+  .nav-cta a{padding:10px 20px}
+}
+
+/* ============ HERO ============ */
+.hero{
+  background:
+    radial-gradient(1200px 500px at 85% -10%, #ffffff12, transparent),
+    linear-gradient(160deg, var(--forest-deep), var(--forest) 72%);
+  color:var(--white);
+  padding:56px 0 64px;
+  position:relative;
+  overflow:hidden;
+  border-bottom:6px solid var(--gold);
+}
+.hero::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(#ffffff10 1px,transparent 1px),linear-gradient(90deg,#ffffff10 1px,transparent 1px);
+  background-size:44px 44px;
+  mask-image:linear-gradient(180deg,transparent, #000 30%, #000 70%, transparent);
+}
+.hero-inner{position:relative;z-index:1}
+.hero .eyebrow{color:var(--gold-light)}
+.hero .eyebrow::before{background:var(--gold-light)}
+.hero h1{color:var(--white);font-size:clamp(2rem,7vw,3.4rem);letter-spacing:-.01em;max-width:14ch}
+.hero .lede{font-size:1.08rem;max-width:52ch;color:#EDEFE6}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;gap:.5em;
+  padding:14px 22px;border-radius:var(--radius);font-weight:700;text-decoration:none;
+  border:1px solid transparent;font-size:.95rem;
+}
+.btn-gold{background:var(--gold);color:var(--forest-deep)}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-ghost{border-color:#ffffff55;color:var(--white)}
+.btn-ghost:hover{border-color:var(--white);background:#ffffff12}
+
+.hero-stats{
+  margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:#ffffff22;border:1px solid #ffffff22;border-radius:var(--radius);overflow:hidden;
+}
+.hero-stats div{background:var(--forest-deep);padding:16px 18px}
+.hero-stats strong{display:block;font-family:var(--font-display);font-size:1.5rem;color:var(--gold-light)}
+.hero-stats span{font-size:.78rem;color:#D9DED2}
+@media(min-width:720px){.hero-stats{grid-template-columns:repeat(4,1fr)}}
+
+/* ============ SECTION GENERICS ============ */
+section{padding:60px 0}
+.section-head{max-width:64ch;margin-bottom:34px}
+.section-head h2{font-size:clamp(1.6rem,4.2vw,2.35rem)}
+.section-head p{color:var(--ink-soft);font-size:1.02rem}
+.band-forest{background:var(--forest-tint)}
+.band-dark{background:var(--forest-deep);color:var(--white)}
+.band-dark h2,.band-dark h3,.band-dark h4{color:var(--white)}
+.band-dark .section-head p{color:#D9DED2}
+
+/* card with bracket corners – echoes the party's own briefing-deck visual system */
+.bracket{position:relative;padding:22px;background:var(--white);border-radius:var(--radius)}
+.bracket::before,.bracket::after{
+  content:"";position:absolute;width:16px;height:16px;border:2px solid var(--gold);opacity:.9;
+}
+.bracket::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
+.bracket::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
+
+/* ============ ABOUT / ENGINE OF REFORM ============ */
+.about-grid{display:grid;gap:22px}
+.pledge-card{border-left:3px solid var(--gold);padding:16px 18px;background:var(--white)}
+.pledge-card h3{font-size:1.05rem;margin-bottom:.35em}
+.pledge-card p{color:var(--ink-soft);font-size:.94rem;margin:0}
+@media(min-width:720px){.about-grid{grid-template-columns:1.1fr .9fr}}
+.about-media{background:var(--forest);color:var(--white);padding:26px;border-radius:var(--radius);position:relative}
+.about-media h3{color:var(--gold-light);font-size:1.1rem}
+.about-media p{color:#E6E9DE;font-size:.95rem}
+
+/* ============ BANGON PLATFORM ============ */
+.bangon-word{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.bangon-letter-chip{
+  font-family:var(--font-mono);font-weight:600;font-size:.85rem;
+  background:var(--forest-deep);color:var(--gold-light);
+  width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius);
+}
+.platform-list{display:flex;flex-direction:column;gap:14px}
+.platform-item{
+  background:var(--white);border-radius:var(--radius);overflow:hidden;border:1px solid #0E4B361f;
+}
+.platform-item summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 18px;
+}
+.platform-item summary::-webkit-details-marker{display:none}
+.p-letter{
+  flex:none;width:52px;height:52px;border-radius:var(--radius);
+  background:var(--gold-tint);color:var(--forest-deep);
+  font-family:var(--font-mono);font-weight:700;font-size:1.5rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.p-titles{flex:1;min-width:0}
+.p-titles .p-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.1em;color:var(--gold);text-transform:uppercase;font-weight:600}
+.p-titles h3{margin:.15em 0 0;font-size:1.12rem;color:var(--forest-deep)}
+.p-chev{flex:none;width:22px;height:22px;transition:transform .25s;color:var(--forest)}
+.platform-item[open] .p-chev{transform:rotate(180deg)}
+.p-body{padding:0 18px 22px 86px}
+.p-body ul{display:flex;flex-direction:column;gap:9px}
+.p-body li{position:relative;padding-left:20px;color:var(--ink-soft);font-size:.95rem}
+.p-body li::before{content:"";position:absolute;left:0;top:.55em;width:8px;height:8px;background:var(--gold);border-radius:1px}
+@media(max-width:520px){.p-body{padding-left:18px}}
+
+/* ============ LEGISLATIVE WINGS ============ */
+.wings{display:grid;gap:18px}
+@media(min-width:860px){.wings{grid-template-columns:repeat(3,1fr)}}
+.wing{background:var(--white);border-top:4px solid var(--forest);padding:22px}
+.wing.wing-b{border-top-color:var(--gold)}
+.wing.wing-c{border-top-color:var(--red)}
+.wing h3{font-size:1.05rem}
+.wing .wing-tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.wing ul{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.wing li{font-size:.92rem;color:var(--ink-soft);padding-left:16px;position:relative}
+.wing li::before{content:"—";position:absolute;left:0;color:var(--gold)}
+
+/* ============ ROADMAP / HORIZONS ============ */
+.horizons{display:grid;gap:16px;position:relative}
+@media(min-width:860px){.horizons{grid-template-columns:repeat(3,1fr)}}
+.horizon{background:var(--white);padding:24px;border-radius:var(--radius);border:1px solid #0E4B361f;position:relative}
+.horizon .h-num{font-family:var(--font-mono);color:var(--gold);font-weight:700;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+.horizon h3{font-size:1.15rem;margin-top:.3em}
+.horizon p{color:var(--ink-soft);font-size:.92rem;margin:0}
+.horizon.is-current{outline:2px solid var(--gold);outline-offset:-2px}
+.horizon.is-win{background:var(--forest-deep);color:#fff}
+.horizon.is-win h3,.horizon.is-win .h-num{color:var(--gold-light)}
+.horizon.is-win p{color:#DCE2D4}
+
+/* ============ APPROACH: participatory democracy ============ */
+.approach-grid{display:grid;gap:18px}
+@media(min-width:780px){.approach-grid{grid-template-columns:1fr 1fr}}
+.approach-card{padding:24px;border-radius:var(--radius)}
+.approach-card.no{background:#FBEAE8;border:1px dashed #C24A41}
+.approach-card.yes{background:var(--forest-tint);border:1px solid #0E4B3633}
+.approach-tag{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
+.approach-card.no .approach-tag{color:var(--red)}
+.approach-card.yes .approach-tag{color:var(--forest)}
+.approach-card h3{font-size:1.2rem;margin-top:.3em}
+.approach-card ul{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.approach-card li{font-size:.92rem;color:var(--ink-soft)}
+
+/* ============ SIGNATURE INITIATIVES ============ */
+.init-grid{display:grid;gap:16px}
+@media(min-width:720px){.init-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1080px){.init-grid{grid-template-columns:repeat(3,1fr)}}
+.init-card{background:var(--white);padding:22px;border-radius:var(--radius)}
+.init-icon{width:42px;height:42px;border-radius:var(--radius);background:var(--gold-tint);display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--forest-deep)}
+.init-card h3{font-size:1.02rem}
+.init-card p{color:var(--ink-soft);font-size:.9rem;margin:0}
+
+/* ============ GET INVOLVED ============ */
+.involve-grid{display:grid;gap:24px}
+@media(min-width:920px){.involve-grid{grid-template-columns:1fr 1fr}}
+.involve-form{background:var(--white);padding:26px;border-radius:var(--radius);box-shadow:var(--shadow)}
+.involve-form h3{font-size:1.15rem}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.field input,.field select,.field textarea{
+  width:100%;padding:12px 13px;border:1px solid #0E4B3640;border-radius:var(--radius);
+  font:inherit;font-size:.95rem;background:var(--paper);
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--forest)}
+.form-note{font-size:.78rem;color:var(--ink-soft);margin-top:10px}
+.involve-ways{display:flex;flex-direction:column;gap:14px}
+.way{display:flex;gap:14px;background:var(--white);padding:18px;border-radius:var(--radius)}
+.way .init-icon{margin-bottom:0}
+.way h4{margin:0 0 .3em;font-size:1rem;color:var(--forest-deep);font-family:var(--font-body);font-weight:700}
+.way p{margin:0;font-size:.88rem;color:var(--ink-soft)}
+
+/* ============ FOOTER ============ */
+footer.site{background:var(--forest-deep);color:#D9DED2;padding:48px 0 22px}
+.footer-grid{display:grid;gap:28px}
+@media(min-width:780px){.footer-grid{grid-template-columns:2fr 1fr 1fr}}
+.footer-brand{display:flex;align-items:center;gap:.6em;margin-bottom:12px}
+.footer-brand svg{width:30px;height:30px}
+.footer-brand span{font-family:var(--font-display);font-weight:700;color:#fff;font-size:1.05rem}
+footer.site h5{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin:0 0 14px}
+footer.site ul{display:flex;flex-direction:column;gap:9px}
+footer.site a{color:#D9DED2;text-decoration:none;font-size:.92rem}
+footer.site a:hover{color:var(--gold-light)}
+.footer-bottom{
+  margin-top:38px;padding-top:20px;border-top:1px solid #ffffff1f;
+  display:flex;flex-direction:column;gap:8px;font-size:.78rem;color:#AEB6A6;
+}
+@media(min-width:780px){.footer-bottom{flex-direction:row;justify-content:space-between}}
+
+.back-to-top{
+  position:fixed;right:16px;bottom:16px;z-index:90;width:46px;height:46px;border-radius:var(--radius);
+  background:var(--gold);color:var(--forest-deep);border:none;display:none;align-items:center;justify-content:center;
+  box-shadow:var(--shadow);
+}
+.back-to-top.show{display:flex}
+
+/* reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease, transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="#top" aria-label="Partido Bangon Bangsamoro — home">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#0E4B36" stroke="#C99A2E" stroke-width="2"/><path d="M32 12l4.5 13.9h14.6l-11.8 8.6 4.5 13.9L32 39.8l-11.8 8.6 4.5-13.9-11.8-8.6h14.6z" fill="#C99A2E"/></svg>
+      <span class="brand-text">Partido Bangon Bangsamoro<small>Babangon tungo sa Kaunlaran</small></span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#about">About PBB</a></li>
+        <li><a href="#platform">BANGON Platform</a></li>
+        <li><a href="#legislative">Legislative Plan</a></li>
+        <li><a href="#roadmap">2026 Roadmap</a></li>
+        <li><a href="#initiatives">Signature Programs</a></li>
+        <li class="nav-cta"><a href="#get-involved">Join the Movement</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">2026 BARMM Parliamentary Elections · September 14, 2026</p>
+      <h1>Babangon Tayo.<br>Together, We Rise.</h1>
+      <p class="lede">Partido Bangon Bangsamoro is fielding a new generation of merit-based, transparent leaders — ready to turn two decades of peace into a lifetime of progress for every Bangsamoro community.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#platform">See the BANGON Platform</a>
+        <a class="btn btn-ghost" href="#get-involved">Join the Movement</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>6</strong><span>Pillars of the BANGON platform</span></div>
+        <div><strong>11</strong><span>Priority bills in Wings A–C</span></div>
+        <div><strong>3</strong><span>Horizons to victory in 2026</span></div>
+        <div><strong>₱8K</strong><span>Household subsidy pledge</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Who we are</p>
+        <h2>Powered by youth and professionals.</h2>
+        <p>We are mobilizing the young doctors, lawyers, engineers, and educators of the BARMM — the generation that grew up inside the peace process and is ready to build what comes after it.</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-media reveal">
+          <p class="eyebrow" style="color:var(--gold-light)">Our theory of change</p>
+          <h3>Educated youth and civil society are our electoral power.</h3>
+          <p>Every volunteer, every barangay conversation, every young professional who signs up feeds a single current: a Bangsamoro parliament that answers to its people, not to patronage.</p>
+        </div>
+        <div class="about-grid" style="gap:16px">
+          <div class="pledge-card reveal">
+            <h3>Demand for meritocracy</h3>
+            <p>Rejecting jobs secured by clan connections in favor of skill-based opportunity — in government and in our own candidate list.</p>
+          </div>
+          <div class="pledge-card reveal">
+            <h3>Demand for transparency</h3>
+            <p>Prioritizing anti-corruption safeguards and participatory governance in the new parliamentary system, from budgeting to hiring.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BANGON PLATFORM ============ -->
+  <section id="platform" class="band-forest">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Our platform of government</p>
+        <h2>The BANGON Platform</h2>
+        <p>Six letters. Six commitments. This is what a BANGON-led Bangsamoro government delivers, in plain terms — no jargon, no fine print.</p>
+      </div>
+
+      <div class="bangon-word reveal" aria-hidden="true">
+        <span class="bangon-letter-chip">B</span><span class="bangon-letter-chip">A</span><span class="bangon-letter-chip">N</span><span class="bangon-letter-chip">G</span><span class="bangon-letter-chip">O</span><span class="bangon-letter-chip">N</span>
+      </div>
+
+      <div class="platform-list" id="platformList">
+
+        <details class="platform-item reveal" open>
+          <summary>
+            <span class="p-letter">B</span>
+            <span class="p-titles"><span class="p-eyebrow">Basic Services Enhancement</span><h3>Services that reach every household</h3></span>
+            <svg class="p-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="p-body">
+            <ul>
+              <li>Free internet access in schools</li>
+              <li>Super Health Stations with free lab work and medicine</li>
+              <li>₱8,000 subsidy for Bangsamoro households</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="platform-item reveal">
+          <summary>
+            <span class="p-letter">A</span>
+            <span class="p-titles"><span class="p-eyebrow">Accelerate Sustainable Livelihood</span><h3>Jobs and income, close to home</h3></span>
+            <svg class="p-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="p-body">
+            <ul>
+              <li>Negosyo centers in every municipality</li>
+              <li>Socio-economic reintegration packages for former combatants</li>
+              <li>Direct support for coastal communities</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="platform-item reveal">
+          <summary>
+            <span class="p-letter">N</span>
+            <span class="p-titles"><span class="p-eyebrow">Non-violent Peace</span><h3>Peace built by dialogue, not force</h3></span>
+            <svg class="p-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="p-body">
+            <ul>
+              <li>Community-based dialogues to prevent and resolve conflict</li>
+              <li>Formal mediation mechanisms for rido and clan disputes</li>
+              <li>Interfaith unity programs across Bangsamoro, IP, and settler communities</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="platform-item reveal">
+          <summary>
+            <span class="p-letter">G</span>
+            <span class="p-titles"><span class="p-eyebrow">Green Economic Competitiveness</span><h3>Growth that protects the land and sea</h3></span>
+            <svg class="p-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="p-body">
+            <ul>
+              <li>Direct subsidies for farmers and fisherfolk</li>
+              <li>Eco-farming initiatives and climate-smart agriculture</li>
+              <li>Incentives to attract clean, sustainable investment</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="platform-item reveal">
+          <summary>
+            <span class="p-letter">O</span>
+            <span class="p-titles"><span class="p-eyebrow">Open &amp; Inclusive Governance</span><h3>A government you can see into</h3></span>
+            <svg class="p-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="p-body">
+            <ul>
+              <li>Merit-based, decentralized hiring — no more padrino system</li>
+              <li>Open budgeting the public can review line by line</li>
+              <li>Digitalization of government services and permits</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="platform-item reveal">
+          <summary>
+            <span class="p-letter">N</span>
+            <span class="p-titles"><span class="p-eyebrow">Nurturing Women &amp; Gender Empowerment</span><h3>Women lead, protected and equipped</h3></span>
+            <svg class="p-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </summary>
+          <div class="p-body">
+            <ul>
+              <li>Stronger protection against gender-based violence</li>
+              <li>Dedicated women's entrepreneurship programs</li>
+              <li>Expanded maternal health services</li>
+            </ul>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEGISLATIVE WINGS ============ -->
+  <section id="legislative">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">How BANGON becomes law</p>
+        <h2>The 5-Year Legislative Architecture</h2>
+        <p>A sequenced, executable plan rooted in the Bangsamoro Organic Law — feasible through public policy, public-private partnerships, and technical know-how. Three wings turn the BANGON platform into filed bills.</p>
+      </div>
+      <div class="wings">
+        <article class="wing wing-a reveal">
+          <p class="wing-tag">Wing A</p>
+          <h3>Foundational Services &amp; Livelihood</h3>
+          <ul>
+            <li>Establishing the BARMM ECCD Inter-Agency Council</li>
+            <li>Super Health Stations Act</li>
+            <li>Magna Carta for the Poor</li>
+            <li>Zakat System Regulation Act</li>
+          </ul>
+        </article>
+        <article class="wing wing-b reveal">
+          <p class="wing-tag">Wing B — Ecological Green</p>
+          <h3>Green Governance &amp; Economic Competitiveness</h3>
+          <ul>
+            <li>Bangsamoro Investments and Incentives Code</li>
+            <li>Environment &amp; Natural Resources Code</li>
+            <li>Climate Change Commission Act</li>
+            <li>Ligawasan Development Authority Act</li>
+          </ul>
+        </article>
+        <article class="wing wing-c reveal">
+          <p class="wing-tag">Wing C — PBB Gold</p>
+          <h3>Peace, Inclusion &amp; Open Governance</h3>
+          <ul>
+            <li>Marawi Siege Victims Compensation Act</li>
+            <li>Bottom-Up Budgeting Institutionalization</li>
+            <li>Bangsamoro Gender and Development Code</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section id="roadmap" class="band-forest">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">The 2026 roadmap</p>
+        <h2>Spanning the transition, one horizon at a time</h2>
+        <p>From grassroots organizing today, to a legislative blueprint before election day, to seats in parliament this September.</p>
+      </div>
+      <div class="horizons">
+        <article class="horizon is-current reveal">
+          <p class="h-num">Horizon 1 · Current</p>
+          <h3>The Foundation</h3>
+          <p>Grassroots and sectoral organizing. Activating our youth and professional base, and standing up headquarters and strategic partnerships across BARMM.</p>
+        </article>
+        <article class="horizon reveal">
+          <p class="h-num">Horizon 2 · Pre-Election</p>
+          <h3>The Blueprint</h3>
+          <p>Framing legislative action through the Bangsamoro Organic Law — executing mandates for skills training, science &amp; technology, and Halal standardization in public discourse.</p>
+        </article>
+        <article class="horizon is-win reveal">
+          <p class="h-num">Horizon 3 · September 2026</p>
+          <h3>The Victory</h3>
+          <p>Securing parliamentary seats — District and Party representatives — to enact the reformist BANGON agenda from inside the Bangsamoro Parliament.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APPROACH ============ -->
+  <section id="approach">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Campaign tactics</p>
+        <h2>Participatory democracy, not patronage</h2>
+        <p>PBB's strategy for 2026 breaks from top-down political mobilization. We are transferring actual decision-making power to the next generation.</p>
+      </div>
+      <div class="approach-grid">
+        <div class="approach-card no reveal">
+          <p class="approach-tag">What we're replacing</p>
+          <h3>Top-down machinery</h3>
+          <ul>
+            <li>A single patron directing votes downward through loyal intermediaries</li>
+            <li>Rallies built on obligation, not conviction</li>
+            <li>Decisions made for communities, not with them</li>
+          </ul>
+        </div>
+        <div class="approach-card yes reveal">
+          <p class="approach-tag">What we're building</p>
+          <h3>A grassroots network</h3>
+          <ul>
+            <li>Sectoral organizing — professional forums, town halls, and feedback loops replacing patron-client rallies</li>
+            <li>Youth in power — young professionals fielded for contested District and Party seats</li>
+            <li>Decision-making power transferred, not just promised</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SIGNATURE INITIATIVES ============ -->
+  <section id="initiatives" class="band-dark">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Signature programs</p>
+        <h2>Where the BANGON platform gets its edge</h2>
+        <p>Three flagship programs that turn our six pillars into technical, deliverable engineering — not slogans.</p>
+      </div>
+      <div class="init-grid">
+        <div class="init-card reveal">
+          <div class="init-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 20V10l8-6 8 6v10" stroke="#0E4B36" stroke-width="2" stroke-linejoin="round"/><path d="M9 20v-6h6v6" stroke="#0E4B36" stroke-width="2"/></svg>
+          </div>
+          <h3>The Modernity Bridge</h3>
+          <p>Overhauling TESDA-BARMM to align vocational training with emerging industries, and fostering advanced innovation through regional scholarships and research councils.</p>
+        </div>
+        <div class="init-card reveal">
+          <div class="init-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#0E4B36" stroke-width="2"/><path d="M12 3v18M3 12h18" stroke="#0E4B36" stroke-width="2"/></svg>
+          </div>
+          <h3>The Halal Economy Ecosystem</h3>
+          <p>Global tourism, Shari'ah-compliant Islamic finance, a specialized certified workforce, and scientific testing integrity — Halal treated as a multi-billion-dollar global market, not just a local baseline.</p>
+        </div>
+        <div class="init-card reveal">
+          <div class="init-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 14c4-10 12-10 16-8-2 4-6 8-12 9" stroke="#0E4B36" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20c2-3 5-4 8-4" stroke="#0E4B36" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Ecological Justice &amp; Green Skills</h3>
+          <p>Renewable energy engineering, sustainable agriculture, and climate-resilient infrastructure — the only regional platform that treats climate action as a prerequisite for economic growth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GET INVOLVED ============ -->
+  <section id="get-involved">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Join us</p>
+        <h2>Babangon tayo — but not without you</h2>
+        <p>Whether you can knock on doors, organize your sector, or simply spread the word: there is a place for you in this movement.</p>
+      </div>
+      <div class="involve-grid">
+        <form class="involve-form reveal" id="joinForm" novalidate>
+          <h3>Sign up to volunteer</h3>
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input id="fullName" name="fullName" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="province">Province / area</label>
+            <select id="province" name="province" required>
+              <option value="" disabled selected>Select your province</option>
+              <option>Maguindanao del Norte</option>
+              <option>Maguindanao del Sur</option>
+              <option>Lanao del Sur</option>
+              <option>Basilan</option>
+              <option>Tawi-Tawi</option>
+              <option>Special Geographic Area (North Cotabato)</option>
+              <option>Outside BARMM</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="interest">How do you want to help?</label>
+            <select id="interest" name="interest">
+              <option value="Ground volunteer">Ground / precinct volunteer</option>
+              <option value="Sectoral organizing">Sectoral organizing (youth, professionals)</option>
+              <option value="Digital & comms">Digital and communications</option>
+              <option value="Donate resources">Donate resources</option>
+            </select>
+          </div>
+          <button class="btn btn-gold" type="submit" style="width:100%;justify-content:center">Send my details</button>
+          <p class="form-note">This form opens your email client with your details pre-filled to our volunteer desk. No data is stored on this page.</p>
+        </form>
+        <div class="involve-ways">
+          <div class="way reveal">
+            <div class="init-icon" aria-hidden="true" style="background:var(--forest-tint)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="#0E4B36" stroke-width="2"/><path d="M4 6l8 7 8-7" stroke="#0E4B36" stroke-width="2"/></svg>
+            </div>
+            <div><h4>Email</h4><p><a href="mailto:info@bangonbangsamoro.ph">info@bangonbangsamoro.ph</a></p></div>
+          </div>
+          <div class="way reveal">
+            <div class="init-icon" aria-hidden="true" style="background:var(--forest-tint)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .6a2 2 0 0 1 1.7 2z" stroke="#0E4B36" stroke-width="2"/></svg>
+            </div>
+            <div><h4>Party headquarters</h4><p>Cotabato City, BARMM — visiting hours by appointment.</p></div>
+          </div>
+          <div class="way reveal">
+            <div class="init-icon" aria-hidden="true" style="background:var(--forest-tint)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 8a5 5 0 1 0-10 0c0 6-3 7-3 7h16s-3-1-3-7" stroke="#0E4B36" stroke-width="2" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 0 1-3.4 0" stroke="#0E4B36" stroke-width="2"/></svg>
+            </div>
+            <div><h4>Stay updated</h4><p>Follow official PBB channels for verified announcements and event schedules.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand">
+        <svg viewBox="0 0 64 64" role="img" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#0A3327" stroke="#C99A2E" stroke-width="2"/><path d="M32 12l4.5 13.9h14.6l-11.8 8.6 4.5 13.9L32 39.8l-11.8 8.6 4.5-13.9-11.8-8.6h14.6z" fill="#C99A2E"/></svg>
+        <span>Partido Bangon Bangsamoro</span>
+      </div>
+      <p style="max-width:38ch;font-size:.9rem">A regional party of the BARMM, contesting the 2026 Parliamentary Elections on a platform of merit, transparency, and inclusive growth. Babangon tungo sa kaunlaran.</p>
+    </div>
+    <div>
+      <h5>Explore</h5>
+      <ul>
+        <li><a href="#platform">BANGON Platform</a></li>
+        <li><a href="#legislative">Legislative Plan</a></li>
+        <li><a href="#roadmap">2026 Roadmap</a></li>
+        <li><a href="#get-involved">Volunteer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Party</h5>
+      <ul>
+        <li><a href="#about">About PBB</a></li>
+        <li><a href="mailto:info@bangonbangsamoro.ph">Contact</a></li>
+        <li><a href="#top">Media &amp; press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="year"></span> Partido Bangon Bangsamoro. All rights reserved.</p>
+    <p>Paid for by Partido Bangon Bangsamoro · Subject to COMELEC campaign finance and fair-election disclosure rules.</p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+(function(){
+  "use strict";
+
+  // Mobile nav toggle
+  var toggle = document.getElementById('navToggle');
+  var nav = document.getElementById('primary-nav');
+  toggle.addEventListener('click', function(){
+    var open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    nav.classList.toggle('open', !open);
+    document.body.style.overflow = !open ? 'hidden' : '';
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      if (window.innerWidth < 960){
+        toggle.setAttribute('aria-expanded','false');
+        nav.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Only one platform accordion item open at a time (mobile-friendly focus)
+  var items = document.querySelectorAll('#platformList details');
+  items.forEach(function(item){
+    item.addEventListener('toggle', function(){
+      if (item.open){
+        items.forEach(function(other){ if (other !== item) other.open = false; });
+      }
+    });
+  });
+
+  // Reveal on scroll
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  // Back to top
+  var backBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function(){
+    backBtn.classList.toggle('show', window.scrollY > 600);
+  }, {passive:true});
+  backBtn.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Volunteer form -> mailto (no backend on this static page)
+  var form = document.getElementById('joinForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = form.fullName.value.trim();
+    var email = form.email.value.trim();
+    var province = form.province.value;
+    var interest = form.interest.value;
+    if (!name || !email || !province){
+      form.reportValidity();
+      return;
+    }
+    var subject = encodeURIComponent('Volunteer sign-up: ' + name);
+    var body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n' +
+      'Province/Area: ' + province + '\n' +
+      'Interested in: ' + interest
+    );
+    window.location.href = 'mailto:info@bangonbangsamoro.ph?subject=' + subject + '&body=' + body;
+  });
+})();
+</script>
+</body>
+</html>
