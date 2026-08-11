@@ -27,7 +27,12 @@ export function ProbabilityScale({ data }: { data: RiskAssessment[] }) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">Probability Scale (Unequal Ranges)</h3>
-      <p className="text-xs text-slate-500 mb-4">Meadow & Lucey method — ACAPS 2019</p>
+      <p className="chart-desc">
+        Places each BARMM-relevant risk on ACAPS' five-band likelihood scale, from Negligible
+        (under 10% chance) to Very High (over 90%). <span className="text-slate-400">Meadow &amp;
+        Lucey method — ACAPS 2019.</span> The bands are deliberately uneven widths, since research
+        shows people judge likelihood less precisely at the extremes than in the middle of the range.
+      </p>
       
       {/* Scale background */}
       <div className="relative h-8 rounded-lg overflow-hidden flex mb-6">
@@ -35,6 +40,45 @@ export function ProbabilityScale({ data }: { data: RiskAssessment[] }) {
           <div
             key={i}
             className={`${zone.color} ${zone.border} border-r flex items-center justify-center text-[10px] font-bold text-slate-300`}
+            style={{ width: `${zone.max - zone.min}%` }}
+          >
+            {zone.label}
+          </div>
+        ))}
+      </div>
+
+      {/* Risks */}
+      <div className="space-y-2">
+        {barmmRisks.map((risk, idx) => {
+          const left = risk.probabilityPct
+          return (
+            <div key={idx} className="relative">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs text-slate-300 truncate max-w-[200px]">{risk.hazardName}</span>
+                <div className="flex items-center gap-2">
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full text-white font-medium ${getRiskColor(risk.riskLevel)}`}>
+                    {risk.riskLevel}
+                  </span>
+                  <span className="text-xs text-slate-400 w-10 text-right">{risk.probabilityPct}%</span>
+                </div>
+              </div>
+              <div className="relative h-2 bg-slate-700 rounded-full">
+                <div 
+                  className={`absolute top-0 h-full rounded-full ${getRiskColor(risk.riskLevel)} opacity-80`}
+                  style={{ left: 0, width: `${left}%` }}
+                />
+                <div 
+                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-white border-2 border-slate-300 shadow"
+                  style={{ left: `${left}%`, transform: `translate(-50%, -50%)` }}
+                />
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}            className={`${zone.color} ${zone.border} border-r flex items-center justify-center text-[10px] font-bold text-slate-300`}
             style={{ width: `${zone.max - zone.min}%` }}
           >
             {zone.label}
