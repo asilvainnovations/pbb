@@ -38,8 +38,10 @@
   .chart-title {
     @apply text-sm font-semibold text-slate-200 mb-4 tracking-wide uppercase;
   }
+}
+
 /* ========================================
-    ENHANCED PLATFORM BADGES
+   ENHANCED PLATFORM BADGES
    ======================================== */
 
 /* Primary Bolt Badge Selectors */
@@ -132,4 +134,3 @@ svg[id*="badge"] {
   visibility: hidden !important;
   opacity: 0 !important;
 }
-
