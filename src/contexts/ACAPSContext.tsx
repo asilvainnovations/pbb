@@ -1,15 +1,18 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react'
-import type { ACAPSConfig, DatasetType } from '../types/acaps'
+
+export interface ACAPSConfig {
+  username: string
+  password: string
+  baseUrl: string
+}
 
 interface ACAPSState {
   config: ACAPSConfig | null
   isAuthenticated: boolean
   isLoading: boolean
   error: string | null
-  activeDataset: DatasetType
   useMockData: boolean
   setConfig: (config: ACAPSConfig) => void
-  setActiveDataset: (dataset: DatasetType) => void
   setUseMockData: (useMock: boolean) => void
   setError: (error: string | null) => void
   setIsLoading: (loading: boolean) => void
@@ -23,8 +26,9 @@ export function ACAPSProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [activeDataset, setActiveDataset] = useState<DatasetType>('crises')
-  const [useMockData, setUseMockData] = useState(import.meta.env.VITE_USE_MOCK_DATA === 'true')
+  const [useMockData, setUseMockData] = useState(() => {
+    return import.meta.env.VITE_USE_MOCK_DATA === 'true'
+  })
 
   const setConfig = useCallback((newConfig: ACAPSConfig) => {
     setConfigState(newConfig)
@@ -44,10 +48,8 @@ export function ACAPSProvider({ children }: { children: ReactNode }) {
       isAuthenticated,
       isLoading,
       error,
-      activeDataset,
       useMockData,
       setConfig,
-      setActiveDataset,
       setUseMockData,
       setError,
       setIsLoading,
