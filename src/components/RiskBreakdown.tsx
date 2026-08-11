@@ -25,6 +25,12 @@ export function RiskBreakdown({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">Risk Category Breakdown</h3>
+      <p className="chart-desc">
+        Counts how many tracked INFORM Risk Index indicators fall into each risk category —
+        Conflict, Hazard (natural disasters), and Vulnerability (underlying socioeconomic factors) —
+        for the Philippines. A longer bar means more distinct indicators are being monitored in that
+        category, not necessarily a higher severity.
+      </p>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} layout="vertical" margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
