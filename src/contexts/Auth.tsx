@@ -30,7 +30,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = useCallback(async (username: string, password: string): Promise<boolean> => {
     setIsLoading(true)
     setError(null)
-
     try {
       const baseUrl = import.meta.env.VITE_ACAPS_API_URL || '/api/acaps'
       const response = await fetch(`${baseUrl}/token-auth/`, {
@@ -38,19 +37,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
       })
-
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}))
         throw new Error(errData.detail || errData.message || `Authentication failed (${response.status})`)
       }
-
       const data = await response.json()
       const newToken = data.token
-
       if (!newToken) {
         throw new Error('No token received from ACAPS API')
       }
-
       localStorage.setItem('acaps_token', newToken)
       setToken(newToken)
       return true
@@ -79,3 +74,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     </AuthContext.Provider>
   )
 }
+
+// FIX: Export AuthContext so useAuth.ts can import it
+export { AuthContext }
