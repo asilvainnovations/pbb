@@ -1,28 +1,62 @@
 import { useState, type FormEvent } from 'react'
 import { useACAPSContext } from '../contexts/ACAPSContext'
 import { useAuth } from '../hooks/useAuth'
-import { Eye, EyeOff, ArrowLeft, LogIn } from 'lucide-react'
+import { Eye, EyeOff, ArrowLeft, LogIn, UserPlus } from 'lucide-react'
 
 export function LoginForm() {
   const { setConfig, setUseMockData, useMockData } = useACAPSContext()
   const { login, isLoading, error, clearError } = useAuth()
 
+  const [mode, setMode] = useState<'login' | 'signup'>('login')
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
+  /* Sign-up state */
+  const [fullName, setFullName] = useState('')
+  const [email, setEmail] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [signupError, setSignupError] = useState<string | null>(null)
+  const [signupSuccess, setSignupSuccess] = useState(false)
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (!username || !password) return
-
     clearError()
-    const success = await login(username, password)
+    setSignupError(null)
 
+    if (mode === 'signup') {
+      if (!fullName || !email || !password || !confirmPassword) return
+      if (password !== confirmPassword) {
+        setSignupError('Passwords do not match.')
+        return
+      }
+      if (password.length < 6) {
+        setSignupError('Password must be at least 6 characters.')
+        return
+      }
+
+      /* Store pending signup for admin review (no backend yet) */
+      const signups = JSON.parse(localStorage.getItem('pbb_signup_requests') || '[]')
+      signups.push({
+        fullName,
+        email,
+        submittedAt: new Date().toISOString(),
+        status: 'pending'
+      })
+      localStorage.setItem('pbb_signup_requests', JSON.stringify(signups))
+
+      setSignupSuccess(true)
+      setMode('login')
+      setUsername(email)
+      setPassword('')
+      setConfirmPassword('')
+      return
+    }
+
+    if (!username || !password) return
+    const success = await login(username, password)
     if (success) {
-      // Keep the ACAPS data client configured with the same credentials so
-      // the dashboard's live data requests keep working exactly as before.
-      // Auth (who's allowed in) and this config (which data source to query)
-      // are handled separately now, but both still start from this form.
       setConfig({
         username,
         password,
@@ -61,7 +95,9 @@ export function LoginForm() {
 
         <div className="dashboard-card">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display text-lg font-bold text-white">Sign In</h2>
+            <h2 className="font-display text-lg font-bold text-white">
+              {mode === 'login' ? 'Sign In' : 'Sign Up'}
+            </h2>
             <button
               type="button"
               onClick={() => setUseMockData(!useMockData)}
@@ -95,20 +131,69 @@ export function LoginForm() {
                 </div>
               )}
 
-              <div>
-                <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="your@email.com"
-                  autoComplete="username"
-                  className="input-pbb px-4 py-2.5 placeholder-slate-500"
-                  required
-                />
-              </div>
+              {signupError && (
+                <div className="panel-pbb-error p-3">
+                  <p className="font-body text-sm text-red-300">{signupError}</p>
+                </div>
+              )}
+
+              {signupSuccess && (
+                <div className="panel-pbb-tint p-3">
+                  <p className="font-body text-sm text-green-300">
+                    Account request submitted! You can now sign in with your email.
+                  </p>
+                </div>
+              )}
+
+              {mode === 'signup' && (
+                <>
+                  <div>
+                    <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      placeholder="Juan Dela Cruz"
+                      autoComplete="name"
+                      className="input-pbb px-4 py-2.5 placeholder-slate-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="your@email.com"
+                      autoComplete="email"
+                      className="input-pbb px-4 py-2.5 placeholder-slate-500"
+                      required
+                    />
+                  </div>
+                </>
+              )}
+
+              {mode === 'login' && (
+                <div>
+                  <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="your@email.com"
+                    autoComplete="username"
+                    className="input-pbb px-4 py-2.5 placeholder-slate-500"
+                    required
+                  />
+                </div>
+              )}
 
               <div>
                 <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
@@ -120,7 +205,7 @@ export function LoginForm() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    autoComplete="current-password"
+                    autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                     className="input-pbb px-4 py-2.5 pr-10 placeholder-slate-500"
                     required
                   />
@@ -135,15 +220,72 @@ export function LoginForm() {
                 </div>
               </div>
 
+              {mode === 'signup' && (
+                <div>
+                  <label className="font-label block text-sm font-medium text-slate-300 mb-1.5">
+                    Confirm Password
+                  </label>
+                  <div className="relative">
+                    <input
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="••••••••"
+                      autoComplete="new-password"
+                      className="input-pbb px-4 py-2.5 pr-10 placeholder-slate-500"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
+                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <button
                 type="submit"
                 disabled={isLoading}
                 className="btn-pbb-primary w-full py-3 flex items-center justify-center gap-2"
               >
-                <LogIn className="w-4 h-4" />
-                {isLoading ? 'Signing in…' : 'Sign In'}
+                {mode === 'login' ? <LogIn className="w-4 h-4" /> : <UserPlus className="w-4 h-4" />}
+                {isLoading ? 'Processing…' : (mode === 'login' ? 'Sign In' : 'Create Account')}
               </button>
             </form>
+          )}
+
+          {!useMockData && (
+            <div className="mt-4 text-center">
+              <p className="font-body text-sm text-slate-500">
+                {mode === 'login' ? (
+                  <>
+                    Don't have an account?{' '}
+                    <button
+                      type="button"
+                      onClick={() => { setMode('signup'); clearError(); setSignupError(null); setSignupSuccess(false); }}
+                      className="text-gold-bright hover:underline font-semibold bg-transparent border-none p-0 cursor-pointer"
+                    >
+                      Sign Up
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    Already have an account?{' '}
+                    <button
+                      type="button"
+                      onClick={() => { setMode('login'); clearError(); setSignupError(null); setSignupSuccess(false); }}
+                      className="text-gold-bright hover:underline font-semibold bg-transparent border-none p-0 cursor-pointer"
+                    >
+                      Sign In
+                    </button>
+                  </>
+                )}
+              </p>
+            </div>
           )}
 
           <p className="mt-4 font-body text-xs text-slate-500 text-center">
