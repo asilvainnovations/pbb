@@ -29,8 +29,8 @@
 <meta name="twitter:image" content="https://www.bangonbangsamoro.com/assets/images/professionalizing-patrimony.jpg">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
-<link rel="apple-touch-icon" href="assets/pbb-logo-256.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="apple-touch-icon" href="/assets/pbb-logo-256.png">
 
 <!-- Fonts: Poppins (display/bold), Montserrat (labels/nav/UI), Roboto Condensed (body copy) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -179,6 +179,19 @@ header.site{
 .brand-text{font-family:var(--font-display);font-weight:700;font-size:1rem;line-height:1.08}
 .brand-text small{display:block;font-family:var(--font-label);font-weight:600;font-size:.6rem;letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
 
+/* Compact header auth buttons — always visible, even before the mobile menu opens */
+.header-auth{display:flex;align-items:center;gap:6px;flex:none}
+.header-auth a{
+  display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--font-label);font-weight:700;font-size:.72rem;letter-spacing:.01em;
+  padding:8px 10px;border-radius:var(--radius);text-decoration:none;
+  border:1px solid #ffffff4d;color:var(--white);min-height:36px;white-space:nowrap;
+}
+.header-auth a:hover{border-color:var(--gold-bright);color:var(--gold-bright)}
+.header-auth a.signup{background:var(--gold-metal);border-color:transparent;color:var(--forest-deep)}
+.header-auth a.signup:hover{filter:brightness(1.06);color:var(--forest-deep)}
+@media(max-width:400px){.header-auth a.signin{display:none}}
+
 .nav-toggle{
   display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
   width:42px;height:42px;background:transparent;border:1px solid #ffffff33;border-radius:var(--radius);flex:none;
@@ -200,7 +213,18 @@ nav#primary-nav a{
   font-family:var(--font-label);font-weight:600;border-bottom:1px solid #ffffff14;font-size:1rem;
 }
 nav#primary-nav a:hover{color:var(--gold-bright)}
-.nav-cta{margin-top:18px}
+
+/* Sign In / Sign Up inside the mobile nav panel (mirrors header-auth, larger touch targets) */
+.nav-auth-group{display:flex;gap:10px;margin-top:18px;padding-top:18px;border-top:1px solid #ffffff1f}
+.nav-auth-group a{
+  flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
+  border:1px solid #ffffff4d;border-radius:var(--radius);
+  padding:13px 10px;font-family:var(--font-label);font-weight:700;font-size:.9rem;
+  min-height:48px;
+}
+.nav-auth-group a.signup{background:var(--gold-metal);border-color:transparent;color:var(--forest-deep)!important}
+
+.nav-cta{margin-top:14px}
 .nav-cta a{
   display:block;text-align:center;background:var(--gold-metal);color:var(--forest-deep)!important;
   border-radius:var(--radius);padding:14px;font-weight:800!important;border:none!important;
@@ -208,11 +232,16 @@ nav#primary-nav a:hover{color:var(--gold-bright)}
 
 @media(min-width:960px){
   .nav-toggle{display:none}
+  .header-auth{display:none} /* on desktop, auth lives inside the nav row instead */
   nav#primary-nav{
     position:static;inset:auto;transform:none;background:transparent;overflow:visible;flex:1;
   }
   nav#primary-nav ul{flex-direction:row;align-items:center;justify-content:flex-end;padding:0;gap:4px}
   nav#primary-nav a{border-bottom:none;padding:10px 13px;font-size:.85rem}
+  .nav-auth-group{
+    margin:0 0 0 10px;padding:0 0 0 14px;border-top:none;border-left:1px solid #ffffff22;gap:8px;
+  }
+  .nav-auth-group a{padding:8px 14px;font-size:.78rem;min-height:36px;flex:none}
   .nav-cta{margin:0 0 0 8px}
   .nav-cta a{padding:10px 20px}
 }
@@ -491,9 +520,16 @@ footer.site a:hover{color:var(--gold-bright)}
 <header class="site">
   <div class="wrap nav-row">
     <a class="brand" href="#top" aria-label="Partido Bangon Bangsamoro — home">
-      <img src="assets/pbb-logo-128.png" width="38" height="38" alt="Partido Bangon Bangsamoro seal">
+      <img src="/assets/pbb-logo-128.png" width="38" height="38" alt="Partido Bangon Bangsamoro seal">
       <span class="brand-text">Partido Bangon Bangsamoro<small>Babangon tungo sa Kaunlaran</small></span>
     </a>
+
+    <!-- Always-visible compact auth entry, ahead of the hamburger menu -->
+    <div class="header-auth">
+      <a class="signin" href="/login">Sign In</a>
+      <a class="signup" href="/login?mode=signup">Sign Up</a>
+    </div>
+
     <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
       <span></span><span></span><span></span>
     </button>
@@ -505,9 +541,14 @@ footer.site a:hover{color:var(--gold-bright)}
         <li><a href="#legislative">Legislation</a></li>
         <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#initiatives">Programs</a></li>
-        <li class="nav-cta" style="margin-left: 8px;"><a href="/" style="background: var(--gold-metal); color: var(--forest-deep) !important;">📊 INFORM</a></li>
         <li class="nav-cta"><a href="#get-involved">Join the Movement</a></li>
       </ul>
+      <!-- Duplicated here (not just in the header) so Sign In / Sign Up stay reachable
+           inside the full mobile nav panel too, with larger touch targets. -->
+      <div class="wrap nav-auth-group">
+        <a href="/login">Sign In</a>
+        <a class="signup" href="/login?mode=signup">Sign Up</a>
+      </div>
     </nav>
   </div>
 </header>
@@ -516,7 +557,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="top">
-    <img class="hero-watermark" src="assets/pbb-logo-circle.png" alt="" aria-hidden="true">
+    <img class="hero-watermark" src="/assets/pbb-logo-circle.png" alt="" aria-hidden="true">
     <div class="wrap hero-inner">
       <p class="eyebrow">2026 BARMM Parliamentary Elections · September 14, 2026</p>
       <h1>Babangon Tayo.<br>Together, We Rise.</h1>
@@ -536,7 +577,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
   <!-- ============ MASTHEAD BANNER (wide, full view) ============ -->
   <section class="masthead" aria-label="Campaign banner">
-    <img src="assets/images/Banner.jpg" width="1456" height="840" loading="eager" alt="Partido Bangon Bangsamoro: Bridging the Bangsamoro to Economic Modernity — The Vanguard of Reformist Governance for the 2026 Parliamentary Elections.">
+    <img src="/assets/images/Banner.jpg" width="1456" height="840" loading="eager" alt="Partido Bangon Bangsamoro: Bridging the Bangsamoro to Economic Modernity — The Vanguard of Reformist Governance for the 2026 Parliamentary Elections.">
   </section>
 
   <!-- ============ ABOUT ============ -->
@@ -550,7 +591,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/engine-of-reform.jpg" width="1600" height="893" loading="lazy" alt="The Engine of Reform: Youth and Professionals — PBB mobilizes educated youth and civil society as its core electoral power, demanding meritocracy and transparency.">
+          <img src="/assets/images/engine-of-reform.jpg" width="1600" height="893" loading="lazy" alt="The Engine of Reform: Youth and Professionals — PBB mobilizes educated youth and civil society as its core electoral power, demanding meritocracy and transparency.">
         </div>
         <figcaption>The Engine of Reform — Youth &amp; Professionals as the core driving force of Partido Bangon Bangsamoro.</figcaption>
       </figure>
@@ -587,7 +628,7 @@ footer.site a:hover{color:var(--gold-bright)}
       </div>
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/governance-architecture.jpg" width="1600" height="893" loading="lazy" alt="The Happy Ka Bangsamoro Governance Architecture — a pyramid showing Individual Members, Municipal/City Chapters, Provincial Chapters, and the Regional/Central Committee, with feedback and co-creation flowing upward and policies and capacity development flowing downward.">
+          <img src="/assets/images/governance-architecture.jpg" width="1600" height="893" loading="lazy" alt="The Happy Ka Bangsamoro Governance Architecture — a pyramid showing Individual Members, Municipal/City Chapters, Provincial Chapters, and the Regional/Central Committee, with feedback and co-creation flowing upward and policies and capacity development flowing downward.">
         </div>
         <figcaption>Feedback flows up from individual members; policy and capacity development flow back down.</figcaption>
       </figure>
@@ -605,7 +646,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/bangon-platform.jpg" width="1600" height="893" loading="lazy" alt="The BANGON Platform of Government: Basic Services Enhancement, Accelerate Sustainable Livelihood, Non-violent Peace, Green Economic Competitiveness, Open and Inclusive Governance, and Nurturing Women and Gender Empowerment.">
+          <img src="/assets/images/bangon-platform.jpg" width="1600" height="893" loading="lazy" alt="The BANGON Platform of Government: Basic Services Enhancement, Accelerate Sustainable Livelihood, Non-violent Peace, Green Economic Competitiveness, Open and Inclusive Governance, and Nurturing Women and Gender Empowerment.">
         </div>
         <figcaption>The BANGON Platform of Government, in full.</figcaption>
       </figure>
@@ -721,7 +762,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/legislative-architecture.jpg" width="1600" height="893" loading="lazy" alt="The 5-Year Legislative Architecture: Wing A Foundational Services and Livelihood, Wing B Green Governance and Economic Competitiveness, Wing C Peace, Inclusion and Open Governance.">
+          <img src="/assets/images/legislative-architecture.jpg" width="1600" height="893" loading="lazy" alt="The 5-Year Legislative Architecture: Wing A Foundational Services and Livelihood, Wing B Green Governance and Economic Competitiveness, Wing C Peace, Inclusion and Open Governance.">
         </div>
         <figcaption>Wing A, B, and C — the sequenced bill package behind the BANGON platform.</figcaption>
       </figure>
@@ -771,7 +812,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/roadmap-2026.jpg" width="1600" height="893" loading="lazy" alt="The 2026 Roadmap spanning the transition: Horizon 1 The Foundation (current grassroots and sectoral organizing), Horizon 2 The Blueprint (pre-election legislative framing), Horizon 3 The Victory (September 2026 parliamentary seats).">
+          <img src="/assets/images/roadmap-2026.jpg" width="1600" height="893" loading="lazy" alt="The 2026 Roadmap spanning the transition: Horizon 1 The Foundation (current grassroots and sectoral organizing), Horizon 2 The Blueprint (pre-election legislative framing), Horizon 3 The Victory (September 2026 parliamentary seats).">
         </div>
         <figcaption>Three horizons: Foundation, Blueprint, Victory.</figcaption>
       </figure>
@@ -807,7 +848,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/campaign-tactics.jpg" width="1600" height="893" loading="lazy" alt="Campaign Tactics: Participatory Democracy — top-down patron machinery replaced by a grassroots network, with sectoral organizing and youth in power.">
+          <img src="/assets/images/campaign-tactics.jpg" width="1600" height="893" loading="lazy" alt="Campaign Tactics: Participatory Democracy — top-down patron machinery replaced by a grassroots network, with sectoral organizing and youth in power.">
         </div>
         <figcaption>Trading a single patron's top-down machinery for a grassroots network of equals.</figcaption>
       </figure>
@@ -854,7 +895,7 @@ footer.site a:hover{color:var(--gold-bright)}
         <p class="init-desc">Overhauling TESDA-BARMM to align vocational training with emerging industries, and fostering advanced innovation through regional scholarships and research councils.</p>
         <figure class="showcase">
           <div class="showcase-frame">
-            <img src="assets/images/modernity-bridge.jpg" width="1600" height="893" loading="lazy" alt="The Modernity Bridge: Engineering the Skills Transition, from the current educational system and post-conflict transition to a modern labor market and global competitiveness, via vocational modernization and science and technology mandates.">
+            <img src="/assets/images/modernity-bridge.jpg" width="1600" height="893" loading="lazy" alt="The Modernity Bridge: Engineering the Skills Transition, from the current educational system and post-conflict transition to a modern labor market and global competitiveness, via vocational modernization and science and technology mandates.">
           </div>
           <figcaption>Engineering the skills transition from post-conflict transition to global competitiveness.</figcaption>
         </figure>
@@ -871,13 +912,13 @@ footer.site a:hover{color:var(--gold-bright)}
         <div class="init-imgs two-up">
           <figure class="showcase">
             <div class="showcase-frame">
-              <img src="assets/images/halal-blueprint.jpg" width="1600" height="893" loading="lazy" alt="From traditional view of Halal as a local religious and moral baseline, to PBB's blueprint: Halal as a globally competitive economic pillar — certified, export-ready, financially backed.">
+              <img src="/assets/images/halal-blueprint.jpg" width="1600" height="893" loading="lazy" alt="From traditional view of Halal as a local religious and moral baseline, to PBB's blueprint: Halal as a globally competitive economic pillar — certified, export-ready, financially backed.">
             </div>
             <figcaption>From local baseline to globally competitive, certified economic pillar.</figcaption>
           </figure>
           <figure class="showcase">
             <div class="showcase-frame">
-              <img src="assets/images/halal-flywheel.jpg" width="1600" height="893" loading="lazy" alt="The Halal Economy Ecosystem strategic flywheel: Global Tourism, Specialized Workforce, Scientific Integrity, and Islamic Finance reinforcing one another.">
+              <img src="/assets/images/halal-flywheel.jpg" width="1600" height="893" loading="lazy" alt="The Halal Economy Ecosystem strategic flywheel: Global Tourism, Specialized Workforce, Scientific Integrity, and Islamic Finance reinforcing one another.">
             </div>
             <figcaption>Global Tourism, Specialized Workforce, Scientific Integrity, and Islamic Finance — a strategic flywheel.</figcaption>
           </figure>
@@ -894,7 +935,7 @@ footer.site a:hover{color:var(--gold-bright)}
         <p class="init-desc">Renewable energy engineering, sustainable agriculture, and climate-resilient infrastructure — the only regional platform that treats climate action as a prerequisite for economic growth.</p>
         <figure class="showcase">
           <div class="showcase-frame">
-            <img src="assets/images/green-skills.jpg" width="1600" height="893" loading="lazy" alt="Ecological Justice and Green Skills: renewable energy engineering, sustainable agriculture, and climate-resilient infrastructure as pillars of PBB's patrimony.">
+            <img src="/assets/images/green-skills.jpg" width="1600" height="893" loading="lazy" alt="Ecological Justice and Green Skills: renewable energy engineering, sustainable agriculture, and climate-resilient infrastructure as pillars of PBB's patrimony.">
           </div>
           <figcaption>Renewable Energy Engineering · Sustainable Agriculture · Climate-Resilient Infrastructure.</figcaption>
         </figure>
@@ -907,7 +948,7 @@ footer.site a:hover{color:var(--gold-bright)}
   <section class="vision">
     <figure class="showcase reveal">
       <div class="showcase-frame">
-        <img src="assets/images/professionalizing-patrimony.jpg" width="1600" height="893" loading="lazy" alt="Professionalizing Our Patrimony: Building a Future-Ready Bangsamoro, Professionalizing our Patrimony, From Peace to Productivity, and Ecological Justice for the Next Generation.">
+        <img src="/assets/images/professionalizing-patrimony.jpg" width="1600" height="893" loading="lazy" alt="Professionalizing Our Patrimony: Building a Future-Ready Bangsamoro, Professionalizing our Patrimony, From Peace to Productivity, and Ecological Justice for the Next Generation.">
       </div>
     </figure>
     <div class="vision-caption wrap reveal">
@@ -927,7 +968,7 @@ footer.site a:hover{color:var(--gold-bright)}
 
       <figure class="showcase reveal">
         <div class="showcase-frame">
-          <img src="assets/images/hotline.jpg" width="1600" height="600" loading="lazy" alt="Reach Partido Bangon Bangsamoro by phone hotline or through Facebook Messenger.">
+          <img src="/assets/images/hotline.jpg" width="1600" height="600" loading="lazy" alt="Reach Partido Bangon Bangsamoro by phone hotline or through Facebook Messenger.">
         </div>
       </figure>
 
@@ -1020,7 +1061,7 @@ footer.site a:hover{color:var(--gold-bright)}
   <div class="wrap footer-grid">
     <div>
       <div class="footer-brand">
-        <img src="assets/pbb-logo-128.png" width="32" height="32" alt="Partido Bangon Bangsamoro seal">
+        <img src="/assets/pbb-logo-128.png" width="32" height="32" alt="Partido Bangon Bangsamoro seal">
         <span>Partido Bangon Bangsamoro</span>
       </div>
       <p style="max-width:38ch;font-size:.92rem">A regional party of the BARMM, contesting the 2026 Parliamentary Elections on a platform of merit, transparency, and inclusive growth. Babangon tungo sa kaunlaran.</p>
@@ -1040,6 +1081,7 @@ footer.site a:hover{color:var(--gold-bright)}
         <li><a href="#about">About PBB</a></li>
         <li><a href="mailto:info@bangonbangsamoro.com">Contact</a></li>
         <li><a href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="/login">Staff Sign In</a></li>
         <li><a href="#top">Media &amp; press</a></li>
       </ul>
     </div>
