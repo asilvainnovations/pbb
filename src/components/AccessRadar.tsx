@@ -29,6 +29,13 @@ export function AccessRadar({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">Humanitarian Access Constraints</h3>
+      <p className="chart-desc">
+        Scores five humanitarian-access pillars for BARMM on a 0–5 scale, derived from ACLED
+        conflict-exposure data (population living within 1km, 2km, and 5km of recorded conflict
+        events). The further a point sits from the center, the more constrained that pillar is —
+        useful for spotting which type of access (physical safety, actor reach, bureaucratic
+        clearance) is the binding constraint right now.
+      </p>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <RadarChart data={chartData} cx="50%" cy="50%" outerRadius="70%">
