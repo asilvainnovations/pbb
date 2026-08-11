@@ -33,6 +33,11 @@ export function DailyEvents({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">Weekly Event Aggregation</h3>
+      <p className="chart-desc">
+        Aggregates ACLED-recorded conflict events in BARMM into weekly totals of fatalities and
+        people displaced, for the most recently tracked 12 weeks. Read this as a trend check —
+        whether conflict impact is climbing or easing week over week — rather than a live feed.
+      </p>
       <div className="h-80">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
