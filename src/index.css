@@ -90,6 +90,74 @@
     color: var(--pbb-gold-bright);
     margin-bottom: 1rem;
   }
+
+  /* ============ PBB AUTH UI ============
+     Named component classes (rather than Tailwind arbitrary/opacity utilities
+     on custom color names) so hover/focus states work correctly regardless
+     of what's in tailwind.config.js. */
+  .btn-pbb-gold {
+    background-image: var(--pbb-gold-metal);
+    color: var(--pbb-forest-deep);
+    font-family: var(--font-label);
+    font-weight: 700;
+    border-radius: 0.5rem;
+    border: none;
+    transition: filter 200ms ease, opacity 200ms ease;
+  }
+  .btn-pbb-gold:hover { filter: brightness(1.07); }
+  .btn-pbb-gold:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
+
+  .btn-pbb-primary {
+    background-color: var(--pbb-forest);
+    color: #ffffff;
+    font-family: var(--font-label);
+    font-weight: 700;
+    border-radius: 0.5rem;
+    border: none;
+    transition: background-color 200ms ease, opacity 200ms ease;
+  }
+  .btn-pbb-primary:hover { background-color: var(--pbb-forest-mid); }
+  .btn-pbb-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .badge-pbb {
+    font-family: var(--font-label);
+    border-radius: 9999px;
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+  .badge-pbb-on { background-color: rgba(10, 110, 46, 0.35); color: var(--pbb-forest-tint); }
+  .badge-pbb-off { background-color: rgba(148, 163, 184, 0.15); color: #94A3B8; }
+
+  .panel-pbb-tint {
+    background-color: rgba(10, 110, 46, 0.12);
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    border-radius: 0.75rem;
+  }
+
+  .panel-pbb-error {
+    background-color: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    border-radius: 0.75rem;
+  }
+
+  .input-pbb {
+    width: 100%;
+    background-color: rgba(51, 65, 85, 0.5);
+    border: 1px solid #475569;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    font-family: var(--font-body);
+  }
+  .input-pbb::placeholder { color: #64748B; }
+  .input-pbb:focus {
+    outline: none;
+    border-color: var(--pbb-gold);
+    box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.5);
+  }
+
+  .auth-logo-ring {
+    border: 2px solid rgba(201, 162, 39, 0.6);
+    border-radius: 9999px;
+  }
 }
 
 /* ========================================
