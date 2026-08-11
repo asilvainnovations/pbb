@@ -88,7 +88,15 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--pbb-gold-bright);
+    margin-bottom: 0.35rem;
+  }
+
+  .chart-desc {
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: rgb(148 163 184); /* slate-400, matches existing chart caption tone */
     margin-bottom: 1rem;
+    max-width: 60ch;
   }
 
   /* ============ PBB AUTH UI ============
