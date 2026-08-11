@@ -1,45 +1,44 @@
 import { useEffect, useState } from 'react'
-import { ACAPSProvider } from './contexts/ACAPSContext'
-import { useACAPSContext } from './contexts/ACAPSContext'
+import { ACAPSProvider, useACAPSContext } from './contexts/ACAPSContext'
 import { AuthProvider } from './contexts/Auth'
 import { LoginForm } from './components/LoginForm'
 import { Dashboard } from './components/Dashboard'
 
-// public/home.html is served as a static file at this path by Vite.
 const HOME_PAGE_PATH = '/home.html'
 const LOGIN_ROUTE = '/login'
 
-/**
- * Someone only sees the login form if they deliberately asked for it —
- * either by visiting /login directly, or via a "?login" link (e.g. a
- * "Staff Login" link placed on public/home.html). Everyone else who lands
- * on the app without credentials belongs on the public site, not here.
- */
 function wantsLoginScreen(): boolean {
   if (typeof window === 'undefined') return false
   const { pathname, search } = window.location
   return pathname === LOGIN_ROUTE || new URLSearchParams(search).has('login')
 }
 
+function wantsIntelligence(): boolean {
+  if (typeof window === 'undefined') return false
+  return new URLSearchParams(window.location.search).has('intelligence')
+}
+
 function AppContent() {
-  const { isAuthenticated, useMockData } = useACAPSContext()
+  const { isAuthenticated, useMockData, setUseMockData } = useACAPSContext()
   const [loginRequested] = useState(wantsLoginScreen)
+  const [intelligenceRequested] = useState(wantsIntelligence)
+
+  /* Architecture: intelligence mode bypasses auth and enables sample data */
+  useEffect(() => {
+    if (intelligenceRequested && !useMockData) {
+      setUseMockData(true)
+    }
+  }, [intelligenceRequested, useMockData, setUseMockData])
 
   useEffect(() => {
-    // Already signed in, or intentionally running on mock data — nothing to redirect.
     if (isAuthenticated || useMockData) return
-
-    // No credentials, and the login screen wasn't explicitly requested:
-    // send the visitor to the real point of entry, the public marketing site.
-    if (!loginRequested) {
+    if (!loginRequested && !intelligenceRequested) {
       window.location.replace(HOME_PAGE_PATH)
     }
-  }, [isAuthenticated, useMockData, loginRequested])
+  }, [isAuthenticated, useMockData, loginRequested, intelligenceRequested])
 
   if (!isAuthenticated && !useMockData) {
-    if (!loginRequested) {
-      // Redirect to home.html is in flight — render nothing so the login
-      // form never flashes on screen while the browser navigates away.
+    if (!loginRequested && !intelligenceRequested) {
       return null
     }
     return <LoginForm />
@@ -50,10 +49,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ACAPSProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <ACAPSProvider>
         <AppContent />
-      </AuthProvider>
-    </ACAPSProvider>
+      </ACAPSProvider>
+    </AuthProvider>
   )
 }
