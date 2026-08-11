@@ -240,19 +240,27 @@ nav#primary-nav a:hover{color:var(--gold-bright);padding-left:8px}
 .nav-auth a:hover{border-color:var(--gold-bright)!important;color:var(--gold-bright)!important;padding-left:10px!important}
 .nav-auth a.intelligence{color:var(--gold-bright)!important;border-color:#C9A22766!important}
 
+/* FIX: Desktop Navigation Overflow */
 @media(min-width:1080px){
   .nav-toggle{display:none}
   nav#primary-nav{position:static;inset:auto;transform:none;background:transparent;overflow:visible;flex:1}
-  nav#primary-nav ul{flex-direction:row;align-items:center;justify-content:flex-end;padding:0;gap:2px;flex-wrap:nowrap}
-  nav#primary-nav a{border-bottom:none;padding:8px 9px;font-size:.74rem;white-space:nowrap}
-  nav#primary-nav a:hover{padding-left:9px}
+  nav#primary-nav ul{flex-direction:row;align-items:center;justify-content:flex-end;padding:0;gap:4px;flex-wrap:wrap;row-gap:6px}
+  nav#primary-nav a{border-bottom:none;padding:6px 8px;font-size:.72rem;white-space:nowrap}
+  nav#primary-nav a:hover{padding-left:8px}
   .nav-letter{width:18px;height:18px;font-size:.6rem}
-  .nav-cta{margin:0 0 0 6px}
-  .nav-cta a{padding:9px 16px}
-  .nav-auth{margin:0 0 0 8px;padding-left:8px;border-left:1px solid #ffffff22}
-  .nav-auth a{padding:7px 10px!important;font-size:.7rem!important;min-height:32px}
+  .nav-cta{margin:0}
+  .nav-cta a{padding:8px 14px}
+  .nav-auth{margin:0;padding-left:8px;border-left:1px solid #ffffff22}
+  .nav-auth a{padding:6px 10px!important;font-size:.68rem!important;min-height:30px}
 }
-@media(min-width:1240px){nav#primary-nav a{font-size:.8rem;padding:8px 12px}}
+@media(min-width:1240px){
+  nav#primary-nav ul{flex-wrap:nowrap;gap:2px}
+  nav#primary-nav a{font-size:.78rem;padding:8px 12px}
+  .nav-letter{width:20px;height:20px;font-size:.65rem}
+  .nav-cta a{padding:9px 16px;font-size:.78rem}
+  .nav-auth a{padding:7px 12px!important;font-size:.72rem!important;min-height:32px}
+}
+@media(min-width:1440px){nav#primary-nav a{font-size:.8rem;padding:8px 12px}}
 
 /* ============ HERO ============ */
 .hero{
@@ -1570,6 +1578,8 @@ footer.site a:hover{color:var(--gold-bright)}
 (function(){
   "use strict";
 
+  var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
+
   var toggle = document.getElementById('navToggle');
   var nav = document.getElementById('primary-nav');
   toggle.addEventListener('click', function(){
@@ -1640,129 +1650,58 @@ footer.site a:hover{color:var(--gold-bright)}
     }
   } catch(e){}
 
-  // ============ B — BASIC SERVICES MULTI-STEP ============
+  // ============ B — BASIC SERVICES FORM ============
   var bsForm = document.getElementById('basicServicesForm');
   if(bsForm){
-    var bsStep1 = document.getElementById('bs-step1');
-    var bsStep2 = document.getElementById('bs-step2');
-    var bsStep3 = document.getElementById('bs-step3');
-    var bsSuccess = document.getElementById('bs-success');
-    var bsBar = document.getElementById('bs-bar');
-    var bsBar2 = document.getElementById('bs-bar2');
-
-    function bsSetStep(n){
-      bsStep1.style.display = n===1?'block':'none';
-      bsStep2.style.display = n===2?'block':'none';
-      bsStep3.style.display = n===3?'block':'none';
-      bsSuccess.style.display = n===4?'block':'none';
-      document.querySelectorAll('.bs-dot').forEach(function(d){
-        var s = parseInt(d.dataset.step);
-        d.style.background = s<=n?'var(--forest)':'#0A6E2E22';
-        d.style.color = s<=n?'#fff':'var(--ink-soft)';
-      });
-      if(bsBar) bsBar.style.width = n>=2?'100%':'33%';
-      if(bsBar2) bsBar2.style.width = n>=3?'100%':'0%';
-    }
-
-    document.getElementById('bsNext1').addEventListener('click', function(){
-      var mode = bsForm.querySelector('input[name="bsMode"]:checked').value;
-      document.getElementById('bs-mode-label').textContent = mode==='suggest'?'suhestiyon':'pagre-register';
-      var suggestOnly = document.querySelector('.bs-suggest-only');
-      var registerOnly = document.querySelector('.bs-register-only');
-      if(suggestOnly) suggestOnly.style.display = mode==='suggest'?'block':'none';
-      if(registerOnly) registerOnly.style.display = mode==='register'?'block':'none';
-      var sug = document.getElementById('bsSuggestion');
-      if(sug) sug.required = mode==='suggest';
-      bsSetStep(2);
-    });
-    document.getElementById('bsBack1').addEventListener('click', function(){bsSetStep(1);});
-    document.getElementById('bsNext2').addEventListener('click', function(){
-      if(!bsForm.bsService.value || !bsForm.bsBarangay.value){bsForm.reportValidity();return;}
-      var mode = bsForm.querySelector('input[name="bsMode"]:checked').value;
-      if(mode==='suggest' && !bsForm.bsSuggestion.value.trim()){bsForm.reportValidity();return;}
-      bsSetStep(3);
-    });
-    document.getElementById('bsBack2').addEventListener('click', function(){bsSetStep(2);});
-    document.getElementById('bsReset').addEventListener('click', function(){bsForm.reset();bsSetStep(1);});
-
     bsForm.addEventListener('submit', function(e){
       e.preventDefault();
-      if(!bsForm.bsName.value.trim() || !bsForm.bsEmail.value.trim() || !bsForm.bsConsent.checked){bsForm.reportValidity();return;}
-      var mode = bsForm.querySelector('input[name="bsMode"]:checked').value;
+      if(!bsForm.bsName.value.trim() || !bsForm.bsEmail.value.trim() || !bsForm.bsBarangay.value.trim() || !bsForm.bsService.value || !bsForm.bsSuggestion.value.trim() || !bsForm.bsConsent.checked){
+        bsForm.reportValidity(); return;
+      }
       var lead = {
         fullName: bsForm.bsName.value.trim(),
         email: bsForm.bsEmail.value.trim(),
         barangay: bsForm.bsBarangay.value.trim(),
         service: bsForm.bsService.value,
         suggestion: bsForm.bsSuggestion.value.trim(),
-        householdSize: bsForm.bsHouseholdSize ? bsForm.bsHouseholdSize.value : '',
-        mode: mode,
-        type: 'basic-services-' + mode,
+        type: 'basic-services',
         submittedAt: new Date().toISOString(),
         source: 'bangonbangsamoro.com/#basic-services'
       };
-      document.getElementById('bsSubmit').disabled = true;
+      var btn = document.getElementById('bsSubmit');
+      var status = document.getElementById('bsStatus');
+      btn.disabled = true;
+      status.textContent = 'Ipinapadala...';
+      
       var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
-      var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
       if(hasStorage){
         window.storage.set(key, JSON.stringify(lead), true).then(function(){
-          document.getElementById('bsSubmit').disabled = false;
-          document.getElementById('bs-success-mode').textContent = mode==='suggest'?'suhestiyon':'pagre-register';
-          bsSetStep(4);
+          btn.disabled = false;
+          status.className = 'form-status ok';
+          status.textContent = 'Salamat! Nakuha namin ang iyong suhestiyon at interes.';
+          bsForm.reset();
         }).catch(function(){
-          document.getElementById('bsSubmit').disabled = false;
-          bsSetStep(4);
+          btn.disabled = false;
+          status.className = 'form-status err';
+          status.textContent = 'May error. Subukan muli.';
         });
       } else {
-        document.getElementById('bsSubmit').disabled = false;
-        document.getElementById('bs-success-mode').textContent = mode==='suggest'?'suhestiyon':'pagre-register';
-        bsSetStep(4);
+        btn.disabled = false;
+        status.className = 'form-status ok';
+        status.textContent = 'Salamat! (Offline mode)';
+        bsForm.reset();
       }
     });
   }
 
-  // ============ A — ALLIANCE MULTI-STEP + E-SIGNATURE ============
+  // ============ A — ALLIANCE FORM ============
   var apForm = document.getElementById('allianceForm');
   if(apForm){
-    var apStep1 = document.getElementById('ap-step1');
-    var apStep2 = document.getElementById('ap-step2');
-    var apStep3 = document.getElementById('ap-step3');
-    var apSuccess = document.getElementById('ap-success');
-
-    function apSetStep(n){
-      apStep1.style.display = n===1?'block':'none';
-      apStep2.style.display = n===2?'block':'none';
-      apStep3.style.display = n===3?'block':'none';
-      apSuccess.style.display = n===4?'block':'none';
-      document.querySelectorAll('.ap-dot').forEach(function(d){
-        var s = parseInt(d.dataset.step);
-        d.style.background = s<=n?'var(--forest)':'#0A6E2E22';
-        d.style.color = s<=n?'#fff':'var(--ink-soft)';
-      });
-      var bar = document.getElementById('ap-bar');
-      var bar2 = document.getElementById('ap-bar2');
-      if(bar) bar.style.width = n>=2?'100%':'33%';
-      if(bar2) bar2.style.width = n>=3?'100%':'0%';
-    }
-
-    document.getElementById('apNext1').addEventListener('click', function(){
-      if(!apForm.apOrgName.value||!apForm.apContactName.value||!apForm.apContactEmail.value||!apForm.apOrgType.value||!apForm.apProvince.value||!apForm.apProposal.value){apForm.reportValidity(); return;}
-      apSetStep(2);
-    });
-    document.getElementById('apBack1').addEventListener('click', function(){apSetStep(1);});
-    document.getElementById('apNext2').addEventListener('click', function(){
-      if(!apForm.apTypedName.value.trim()){apForm.reportValidity();return;}
-      document.getElementById('ap-summary-org').textContent = apForm.apOrgName.value;
-      document.getElementById('ap-summary-contact').textContent = apForm.apContactName.value + ' / ' + apForm.apContactEmail.value;
-      document.getElementById('ap-summary-loc').textContent = apForm.apProvince.value;
-      document.getElementById('ap-summary-sign').textContent = apForm.apTypedName.value;
-      apSetStep(3);
-    });
-    document.getElementById('apBack2').addEventListener('click', function(){apSetStep(2);});
-
     apForm.addEventListener('submit', function(e){
       e.preventDefault();
-      if(!apForm.apConsent.checked){apForm.reportValidity();return;}
+      if(!apForm.apOrgName.value.trim() || !apForm.apContactName.value.trim() || !apForm.apContactEmail.value.trim() || !apForm.apOrgType.value || !apForm.apProvince.value || !apForm.apProposal.value.trim() || !apForm.apConsent.checked){
+        apForm.reportValidity(); return;
+      }
       var lead = {
         orgName: apForm.apOrgName.value.trim(),
         contactName: apForm.apContactName.value.trim(),
@@ -1770,104 +1709,82 @@ footer.site a:hover{color:var(--gold-bright)}
         orgType: apForm.apOrgType.value,
         province: apForm.apProvince.value,
         proposal: apForm.apProposal.value.trim(),
-        typedSignature: apForm.apTypedName.value.trim(),
         type: 'alliance-partnership',
         submittedAt: new Date().toISOString(),
         source: 'bangonbangsamoro.com/#alliance-building'
       };
-      document.getElementById('apSubmit').disabled = true;
+      var btn = document.getElementById('apSubmit');
+      var status = document.getElementById('apStatus');
+      btn.disabled = true;
+      status.textContent = 'Ipinapadala...';
+      
       var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
-      var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
       if(hasStorage){
         window.storage.set(key, JSON.stringify(lead), true).then(function(){
-          document.getElementById('apSubmit').disabled = false;
-          apSetStep(4);
+          btn.disabled = false;
+          status.className = 'form-status ok';
+          status.textContent = 'Salamat! Ipapadala namin ang Partnership Agreement sa inyong email.';
+          apForm.reset();
         }).catch(function(){
-          document.getElementById('apSubmit').disabled = false;
-          apSetStep(4);
+          btn.disabled = false;
+          status.className = 'form-status err';
+          status.textContent = 'May error. Subukan muli.';
         });
       } else {
-        document.getElementById('apSubmit').disabled = false;
-        apSetStep(4);
+        btn.disabled = false;
+        status.className = 'form-status ok';
+        status.textContent = 'Salamat! (Offline mode)';
+        apForm.reset();
       }
-    });
-
-    document.getElementById('apDownload').addEventListener('click', function(){
-      var text = 'PARTNERSHIP AGREEMENT — Partido Bangon Bangsamoro (PBB)\n\n' +
-        'Organization: ' + apForm.apOrgName.value + '\n' +
-        'Contact Person: ' + apForm.apContactName.value + '\n' +
-        'Email: ' + apForm.apContactEmail.value + '\n' +
-        'Location: ' + apForm.apProvince.value + '\n' +
-        'Organization Type: ' + apForm.apOrgType.value + '\n' +
-        'Proposal: ' + apForm.apProposal.value + '\n\n' +
-        'E-SIGNATURE\n' +
-        'Signed by: ' + apForm.apTypedName.value + '\n' +
-        'Date: ' + new Date().toLocaleString() + '\n\n' +
-        '1. PURPOSE: This partnership is for grassroots organizing, sectoral forums, and Bottom-Up Budgeting initiatives under the BANGON platform.\n' +
-        '2. PARTNER OBLIGATIONS: Collaborate with PBB initiatives in their area and provide community feedback.\n' +
-        '3. PBB OBLIGATIONS: Provide capacity-building support, materials, and activity coordination.\n' +
-        '4. COMPLIANCE: Both parties agree to follow COMELEC rules and the Bangsamoro Organic Law.\n' +
-        '5. DURATION: Effective from signature date until the end of the 2026 election cycle, or as mutually agreed.';
-      var blob = new Blob([text], {type:'text/plain;charset=utf-8'});
-      var a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'PBB-Partnership-Agreement-' + apForm.apOrgName.value.replace(/\s+/g,'-') + '.txt';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(a.href);
-    });
-
-    document.getElementById('apEmailCopy').addEventListener('click', function(){
-      var subject = encodeURIComponent('PBB Partnership Agreement Copy');
-      var body = encodeURIComponent('Please find your signed Partnership Agreement with Partido Bangon Bangsamoro attached.\n\nYou can also download it from the confirmation page at bangonbangsamoro.com');
-      window.location.href = 'mailto:' + apForm.apContactEmail.value + '?subject=' + subject + '&body=' + body;
     });
   }
 
-  // ============ N — NATURAL RESOURCES VOLUNTEER ============
+  // ============ N — NATURAL RESOURCES FORM ============
   var nrForm = document.getElementById('nrForm');
   if(nrForm){
     nrForm.addEventListener('submit', function(e){
       e.preventDefault();
+      if(!nrForm.nrName.value.trim() || !nrForm.nrAge.value || !nrForm.nrContact.value.trim() || !nrForm.nrMunicipality.value.trim() || !nrForm.nrFocus.value || !nrForm.nrConsent.checked){
+        nrForm.reportValidity(); return;
+      }
       var lead = {
         fullName: nrForm.nrName.value.trim(),
         age: nrForm.nrAge.value,
         contact: nrForm.nrContact.value.trim(),
-        email: nrForm.nrEmail.value.trim(),
         municipality: nrForm.nrMunicipality.value.trim(),
-        province: nrForm.nrProvince.value,
         focus: nrForm.nrFocus.value,
-        availability: nrForm.nrAvailability.value.trim(),
-        skills: nrForm.nrSkills.value.trim(),
+        experience: nrForm.nrExperience.value.trim(),
         type: 'nr-volunteer',
         submittedAt: new Date().toISOString(),
         source: 'bangonbangsamoro.com/#natural-resources'
       };
-      document.getElementById('nrSubmit').disabled = true;
+      var btn = document.getElementById('nrSubmit');
+      var status = document.getElementById('nrStatus');
+      btn.disabled = true;
+      status.textContent = 'Ipinapadala...';
+      
       var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2,8);
-      var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
       if(hasStorage){
         window.storage.set(key, JSON.stringify(lead), true).then(function(){
-          document.getElementById('nrSubmit').disabled = false;
-          document.getElementById('nrStatus').className = 'form-status ok';
-          document.getElementById('nrStatus').textContent = 'Salamat, ' + lead.fullName.split(' ')[0] + '! Kokontakin ka namin para sa training.';
+          btn.disabled = false;
+          status.className = 'form-status ok';
+          status.textContent = 'Salamat, ' + lead.fullName.split(' ')[0] + '! Kokontakin ka namin para sa training.';
           nrForm.reset();
         }).catch(function(){
-          document.getElementById('nrSubmit').disabled = false;
+          btn.disabled = false;
+          status.className = 'form-status err';
+          status.textContent = 'May error. Subukan muli.';
         });
       } else {
-        document.getElementById('nrSubmit').disabled = false;
-        document.getElementById('nrStatus').className = 'form-status ok';
-        document.getElementById('nrStatus').textContent = 'Salamat! Nakuha namin ang application mo.';
+        btn.disabled = false;
+        status.className = 'form-status ok';
+        status.textContent = 'Salamat! (Offline mode)';
         nrForm.reset();
       }
     });
   }
 
   // ============ VOLUNTEER LEAD CAPTURE (original join form) ============
-  var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
-
   function saveLead(lead){
     var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
     return window.storage.set(key, JSON.stringify(lead), true).then(function(result){
