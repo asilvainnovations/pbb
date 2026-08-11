@@ -23,6 +23,12 @@ export function ProtectionHeatmap({ data }: Props) {
   return (
     <div className="dashboard-card">
       <h3 className="chart-title">Protection Risks by Indicator</h3>
+      <p className="chart-desc">
+        Ranks protection-of-civilians concerns in BARMM — displacement, physical violence, child
+        protection, sexual and gender-based violence, and more — by severity (0–5), compiled from
+        OCHA's Humanitarian Needs Overview alongside INFORM and ACLED data. Darker, longer bars mark
+        the more severe indicators.
+      </p>
       <div className="space-y-2 mt-4">
         {sortedData.map((item, idx) => (
           <div key={idx} className="flex items-center gap-3">
