@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Activity } from 'lucide-react'
 import { useACAPSContext } from '../context/ACAPSContext'
 import { useACAPS } from '../hooks/useACAPS'
 import { Header } from './Header'
@@ -22,7 +23,7 @@ import type {
 
 export function Dashboard() {
   const { useMockData, error, setError } = useACAPSContext()
-  const { getCrises, getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks } = useACAPS()
+  const { getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks } = useACAPS()
   
   const [loading, setLoading] = useState(true)
   const [severityData, setSeverityData] = useState<SeverityRecord[]>([])
@@ -46,8 +47,7 @@ export function Dashboard() {
           setDailyData(mockDailyEvents)
           setMethodologyData(mockMethodologyAssessments)
         } else {
-          const [crises, severity, access, risks, daily, protection] = await Promise.all([
-            getCrises(),
+          const [severity, access, risks, daily, protection] = await Promise.all([
             getSeverityIndex(),
             getHumanitarianAccess(),
             getRiskList(),
@@ -58,7 +58,7 @@ export function Dashboard() {
           // For severity, we need historical data — fetch multiple months
           const months = ['2026-01-01', '2026-02-01', '2026-03-01', '2026-04-01', '2026-05-01', '2026-06-01', '2026-07-01', '2026-08-01']
           const severityHistory = await Promise.all(
-            months.map(m => getSeverityIndex(m).catch(() => []))
+            months.map(m => getSeverityIndex(m).catch(() => [] as SeverityRecord[]))
           )
           const allSeverity = severityHistory.flat()
           
@@ -100,7 +100,7 @@ export function Dashboard() {
     }
     
     loadData()
-  }, [useMockData, getCrises, getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks, setError])
+  }, [useMockData, getSeverityIndex, getHumanitarianAccess, getRiskList, getDailyMonitoring, getProtectionRisks, setError])
 
   if (loading) return (
     <div className="min-h-screen bg-slate-900">
@@ -127,23 +127,24 @@ export function Dashboard() {
     <div className="min-h-screen bg-slate-900">
       <Header />
       
-      {/* INFORM Methodology Banner */}
-<div className="mb-8 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
-  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
-    <span className="font-semibold text-slate-200 flex items-center gap-2">
-      <Activity className="w-4 h-4 text-acaps-severity" />
-      INFORM
-    </span>
-    <span className="text-slate-600">|</span>
-    <span>ACAPS Methodology (May 2019)</span>
-    <span className="text-slate-600">|</span>
-    <span>Risk = Impact × Probability</span>
-    <span className="text-slate-600">|</span>
-    <span>PHL003 • Mindanao • BARMM</span>
-    <span className="text-slate-600">|</span>
-    <span className="text-xs text-slate-500">PBB Intelligence Unit</span>
-  </div>
-</div>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* INFORM Methodology Banner */}
+        <div className="mb-8 p-4 bg-slate-800/50 border border-slate-700 rounded-xl">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
+            <span className="font-semibold text-slate-200 flex items-center gap-2">
+              <Activity className="w-4 h-4 text-acaps-severity" />
+              INFORM
+            </span>
+            <span className="text-slate-600">|</span>
+            <span>ACAPS Methodology (May 2019)</span>
+            <span className="text-slate-600">|</span>
+            <span>Risk = Impact × Probability</span>
+            <span className="text-slate-600">|</span>
+            <span>PHL003 • Mindanao • BARMM</span>
+            <span className="text-slate-600">|</span>
+            <span className="text-xs text-slate-500">PBB Intelligence Unit</span>
+          </div>
+        </div>
 
         {/* Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -181,19 +182,19 @@ export function Dashboard() {
         </div>
 
         {/* Footer */}
-<footer className="mt-12 pt-8 border-t border-slate-800 text-center">
-  <div className="flex items-center justify-center gap-2 mb-2">
-    <span className="text-lg">🌿</span>
-    <span className="text-slate-500">|</span>
-    <span className="text-sm font-bold text-slate-300">INFORM</span>
-  </div>
-  <p className="text-xs text-slate-600">
-    INFORM — BARMM Conflict Intelligence Dashboard • Partido Bangon Bangsamoro (PBB)
-  </p>
-  <p className="text-xs text-slate-700 mt-1">
-    Data: ACAPS API (api.acaps.org) • Methodology: ACAPS Risk Analysis (May 2019) • Partido Bangon Bangsamoro • 2026
-  </p>
-</footer>
+        <footer className="mt-12 pt-8 border-t border-slate-800 text-center">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <span className="text-lg">🌿</span>
+            <span className="text-slate-500">|</span>
+            <span className="text-sm font-bold text-slate-300">INFORM</span>
+          </div>
+          <p className="text-xs text-slate-600">
+            INFORM — BARMM Conflict Intelligence Dashboard • Partido Bangon Bangsamoro (PBB)
+          </p>
+          <p className="text-xs text-slate-700 mt-1">
+            Data: ACAPS API (api.acaps.org) • Methodology: INFORM Risk Index • Partido Bangon Bangsamoro • 2026
+          </p>
+        </footer>
       </main>
     </div>
   )
