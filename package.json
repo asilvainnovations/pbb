@@ -1,8 +1,6 @@
 {
   "name": "pbb",
-  "private": true,
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -29,4 +27,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   }
+  "overrides": {
+    "esbuild": "^0.25.0"
 }
