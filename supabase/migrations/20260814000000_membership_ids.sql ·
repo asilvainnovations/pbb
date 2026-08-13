@@ -1,0 +1,397 @@
+-- ============================================================================
+-- MEMBERSHIP IDS — members, precincts, signatures, photos, and verification
+-- ----------------------------------------------------------------------------
+-- Adds the backend for join.html's membership form and the PBB Membership ID:
+--
+--   1. `members` — the membership register proper. Distinct from
+--      volunteer_leads: a lead is someone who raised a hand, a member is
+--      someone who signed. Different lifecycle, different retention, and a
+--      different legal footing (the signature is an RA 8792 e-signature).
+--
+--   2. Server-issued membership numbers. The number MUST come from the
+--      database, not the browser. A client-generated number would let anyone
+--      fabricate a convincing PBB ID during an election period — and a party
+--      ID that cannot be told apart from a forgery is worse than no ID.
+--
+--   3. A narrow, public verification path. `verify_member()` returns only
+--      what a person checking an ID legitimately needs: is it real, which
+--      chapter, is it still valid. It never returns the phone number, the
+--      address, the photo, or the full name — membership in a political party
+--      is sensitive personal information under RA 10173, and a public lookup
+--      that echoed it back would be a directory of political affiliation.
+--
+-- Idempotent. Target: PostgreSQL 15+ on Supabase.
+-- ============================================================================
+
+-- ============================================================================
+-- 1. ENUMS
+-- ============================================================================
+
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'member_status') then
+    create type public.member_status as enum (
+      'pending',    -- submitted, not yet checked by a coordinator
+      'active',     -- verified member in good standing
+      'suspended',  -- temporarily not in good standing
+      'resigned',   -- left the party
+      'revoked'     -- membership withdrawn
+    );
+  end if;
+end
+$$;
+
+-- ============================================================================
+-- 2. MEMBERSHIP NUMBER ISSUANCE
+-- ============================================================================
+-- Format:  PBB-2026-MDN-004821
+--          |   |    |   └── zero-padded per-province sequence
+--          |   |    └────── province abbreviation
+--          |   └─────────── membership year
+--          └─────────────── party prefix
+--
+-- Per-province sequences (rather than one global counter) so a chapter's
+-- numbers stay contiguous and a coordinator can eyeball where an ID came from.
+
+create table if not exists public.province_abbrev (
+  province_code text primary key references public.provinces(code),
+  abbrev        text not null unique
+);
+
+insert into public.province_abbrev (province_code, abbrev) values
+  ('maguindanao_norte', 'MDN'),
+  ('maguindanao_sur',   'MDS'),
+  ('lanao_del_sur',     'LDS'),
+  ('basilan',           'BAS'),
+  ('tawi_tawi',         'TAW'),
+  ('cotabato_city',     'COT'),
+  ('lamitan_city',      'LAM'),
+  ('marawi_city',       'MAR'),
+  ('sga_cotabato',      'SGA'),
+  ('outside_barmm',     'OUT')
+on conflict (province_code) do update set abbrev = excluded.abbrev;
+
+create table if not exists public.membership_counters (
+  province_code text not null references public.provinces(code),
+  year          integer not null,
+  last_value    bigint not null default 0,
+  primary key (province_code, year)
+);
+
+alter table public.membership_counters enable row level security;
+-- No policies: service role only. The browser must never touch the counter.
+
+/**
+ * Allocate the next membership number for a province.
+ *
+ * Concurrency: the INSERT ... ON CONFLICT DO UPDATE ... RETURNING takes a row
+ * lock on the counter, so two simultaneous sign-ups in the same province
+ * serialise on that one row rather than racing. This is deliberately NOT a
+ * sequence: sequences are not transactional, so a rolled-back submission
+ * would burn a number and leave a permanent gap in a chapter's register.
+ */
+create or replace function public.next_membership_no(p_province text)
+returns text
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  v_year   integer := extract(year from now())::integer;
+  v_abbrev text;
+  v_next   bigint;
+begin
+  select abbrev into v_abbrev from public.province_abbrev where province_code = p_province;
+  if v_abbrev is null then v_abbrev := 'GEN'; end if;
+
+  insert into public.membership_counters (province_code, year, last_value)
+  values (coalesce(p_province, 'outside_barmm'), v_year, 1)
+  on conflict (province_code, year)
+  do update set last_value = public.membership_counters.last_value + 1
+  returning last_value into v_next;
+
+  return 'PBB-' || v_year || '-' || v_abbrev || '-' || lpad(v_next::text, 6, '0');
+end;
+$$;
+
+-- ============================================================================
+-- 3. MEMBERS
+-- ============================================================================
+
+create table if not exists public.members (
+  id                uuid primary key default uuid_generate_v4(),
+  member_no         text not null unique,
+
+  -- Identity
+  full_name         text not null,
+  date_of_birth     date,
+  phone             text not null,
+  email             text,
+
+  -- Address, down to the precinct. Precinct number is what makes a member
+  -- actionable on election day: it is how a chapter builds a poll-watcher
+  -- roster and a get-out-the-vote list.
+  province_code     text references public.provinces(code),
+  municipality      text not null,
+  barangay          text not null,
+  precinct_no       text,
+
+  -- Chapter + lifecycle
+  chapter_id        uuid references public.chapters(id) on delete set null,
+  status            public.member_status not null default 'pending',
+  issued_at         date not null default current_date,
+  valid_until       date not null default (current_date + interval '3 years')::date,
+  verified_at       timestamptz,
+  verified_by       uuid references public.staff_profiles(id),
+
+  -- Biometric-ish artifacts. Stored as data URLs in a restricted table rather
+  -- than in Storage, so exactly one RLS policy governs access to them and
+  -- there is no bucket to misconfigure. Photos are capped client-side to a
+  -- 600x800 JPEG (~50 KB); signatures to a trimmed PNG (~10 KB).
+  photo_data        text,
+  signature_data    text,
+
+  -- Preferences + provenance
+  preferred_lang    text not null default 'tl' check (preferred_lang in ('tl','en','mdh','mrw','tsg')),
+  preferred_channel text not null default 'sms' check (preferred_channel in ('sms','messenger','email','call')),
+  guardian_consent  boolean,
+  consent_id        uuid references public.consent_log(id) on delete set null,
+  lead_id           uuid references public.volunteer_leads(id) on delete set null,
+  source            text not null default 'bangonbangsamoro.com/join.html',
+
+  notes             text,
+  created_at        timestamptz not null default now(),
+  updated_at        timestamptz not null default now()
+);
+
+drop trigger if exists trg_members_updated_at on public.members;
+create trigger trg_members_updated_at
+  before update on public.members
+  for each row execute function public.set_updated_at();
+
+-- One person, one membership — matched on the normalised phone number so
+-- "0917 123 4567" and "+639171234567" collide as they should.
+create unique index if not exists uq_members_phone
+  on public.members (regexp_replace(phone, '\D', '', 'g'));
+
+create index if not exists idx_members_chapter   on public.members(chapter_id);
+create index if not exists idx_members_status    on public.members(status);
+create index if not exists idx_members_province  on public.members(province_code);
+create index if not exists idx_members_precinct  on public.members(province_code, municipality, barangay, precinct_no);
+create index if not exists idx_members_issued    on public.members(issued_at desc);
+
+comment on column public.members.photo_data is
+  'Data URL (JPEG). Biometric-adjacent personal data — never expose through a public policy or a view reachable by anon.';
+comment on column public.members.signature_data is
+  'Data URL (PNG). Constitutes an electronic signature under RA 8792 once submitted; treat as evidentiary and do not overwrite.';
+
+-- ---- RLS -------------------------------------------------------------------
+
+alter table public.members enable row level security;
+
+-- No anon policy at all. Every membership write goes through the submit-lead
+-- Edge Function, which holds the service-role key.
+drop policy if exists "coordinators read members" on public.members;
+create policy "coordinators read members"
+  on public.members for select
+  to authenticated
+  using (public.current_role() in ('admin', 'coordinator'));
+
+drop policy if exists "coordinators update members" on public.members;
+create policy "coordinators update members"
+  on public.members for update
+  to authenticated
+  using (public.current_role() in ('admin', 'coordinator'))
+  with check (public.current_role() in ('admin', 'coordinator'));
+
+drop policy if exists "admins delete members" on public.members;
+create policy "admins delete members"
+  on public.members for delete
+  to authenticated
+  using (public.is_admin());
+
+grant select, update, delete on public.members to authenticated;
+-- Deliberately no grant to anon.
+
+-- ============================================================================
+-- 4. PUBLIC VERIFICATION
+-- ============================================================================
+-- The QR code on every ID points at /verify.html?m=<member_no>, which calls
+-- the verify-member Edge Function, which calls this function.
+--
+-- What it returns is deliberately thin. A person checking an ID at a rally
+-- needs to know the ID is genuine and which chapter issued it. They do not
+-- need — and must not be given — the member's phone number, address, precinct,
+-- photo, or full name. The name is masked to first name plus surname initial,
+-- which is enough to match against the printed card while not turning this
+-- endpoint into a queryable directory of who belongs to which party.
+
+create or replace function public.verify_member(p_member_no text)
+returns table (
+  status      text,
+  member_no   text,
+  masked_name text,
+  chapter     text,
+  issued_at   date,
+  valid_until date
+)
+language plpgsql
+stable
+security definer
+set search_path = public
+as $$
+declare
+  r record;
+begin
+  select m.member_no, m.full_name, m.status, m.issued_at, m.valid_until, c.name as chapter_name
+    into r
+  from public.members m
+  left join public.chapters c on c.id = m.chapter_id
+  where upper(m.member_no) = upper(trim(p_member_no));
+
+  if not found then
+    return query select 'not_found'::text, null::text, null::text, null::text, null::date, null::date;
+    return;
+  end if;
+
+  return query select
+    case
+      when r.status = 'active' and r.valid_until >= current_date then 'valid'
+      when r.status = 'active' and r.valid_until <  current_date then 'expired'
+      when r.status = 'pending' then 'pending'
+      else 'inactive'
+    end::text,
+    r.member_no,
+    -- "Aminah T. Macapagal" -> "Aminah M."
+    (split_part(r.full_name, ' ', 1) || ' ' ||
+     left(split_part(r.full_name, ' ', greatest(array_length(string_to_array(r.full_name, ' '), 1), 1)), 1) || '.')::text,
+    coalesce(r.chapter_name, 'PBB National')::text,
+    r.issued_at,
+    r.valid_until;
+end;
+$$;
+
+revoke all on function public.verify_member(text) from public, anon, authenticated;
+-- Only the service role (i.e. the verify-member Edge Function) may call this,
+-- so the rate limit and CAPTCHA in front of it cannot be bypassed by hitting
+-- PostgREST directly and enumerating member numbers.
+
+-- ============================================================================
+-- 5. COORDINATOR VIEWS
+-- ============================================================================
+
+-- Working view. Excludes photo_data and signature_data on purpose: a
+-- coordinator triaging a list does not need to load a hundred base64 photos,
+-- and it keeps that data out of casual exports.
+create or replace view public.member_roster as
+select
+  m.id,
+  m.member_no,
+  m.full_name,
+  m.phone,
+  m.email,
+  m.province_code,
+  p.label as province_label,
+  m.municipality,
+  m.barangay,
+  m.precinct_no,
+  c.name  as chapter_name,
+  c.coordinator_id,
+  m.status,
+  m.issued_at,
+  m.valid_until,
+  m.verified_at,
+  (m.photo_data is not null)     as has_photo,
+  (m.signature_data is not null) as has_signature,
+  m.created_at
+from public.members m
+left join public.provinces p on p.code = m.province_code
+left join public.chapters  c on c.id   = m.chapter_id;
+
+-- Precinct coverage: the number that actually matters on 14 September. A
+-- precinct with members is a precinct that can be watched.
+create or replace view public.precinct_coverage as
+select
+  coalesce(c.name, 'Unassigned') as chapter,
+  m.province_code,
+  m.municipality,
+  m.barangay,
+  m.precinct_no,
+  count(*)                                                as members,
+  count(*) filter (where m.status = 'active')             as active_members,
+  count(*) filter (where m.precinct_no is null)           as missing_precinct
+from public.members m
+left join public.chapters c on c.id = m.chapter_id
+group by coalesce(c.name, 'Unassigned'), m.province_code, m.municipality, m.barangay, m.precinct_no
+order by members desc;
+
+grant select on public.member_roster      to authenticated;
+grant select on public.precinct_coverage  to authenticated;
+
+-- ============================================================================
+-- 6. AUDIT — issuing and revoking an ID is a consequential act
+-- ============================================================================
+
+create or replace function public.log_member_status_change()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op = 'INSERT' then
+    insert into public.audit_log (actor_id, action, target_table, target_id, detail)
+    values (auth.uid(), 'member.issued', 'members', new.id,
+            jsonb_build_object('member_no', new.member_no, 'chapter_id', new.chapter_id));
+  elsif new.status is distinct from old.status then
+    insert into public.audit_log (actor_id, action, target_table, target_id, detail)
+    values (auth.uid(), 'member.status_change', 'members', new.id,
+            jsonb_build_object('member_no', new.member_no, 'from', old.status, 'to', new.status));
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_members_audit_insert on public.members;
+create trigger trg_members_audit_insert
+  after insert on public.members
+  for each row execute function public.log_member_status_change();
+
+drop trigger if exists trg_members_audit_update on public.members;
+create trigger trg_members_audit_update
+  after update on public.members
+  for each row execute function public.log_member_status_change();
+
+-- ============================================================================
+-- 7. RETENTION
+-- ============================================================================
+-- Photographs and signatures are the most sensitive fields in this schema and
+-- have the shortest useful life: they exist to print an ID. Once a membership
+-- is resigned or revoked, keep the register entry (the party needs a record of
+-- who was a member and when) but drop the biometrics.
+
+create or replace function public.purge_inactive_member_biometrics()
+returns integer language plpgsql security definer set search_path = public as $$
+declare
+  affected integer;
+begin
+  with cleared as (
+    update public.members
+       set photo_data = null, signature_data = null
+     where status in ('resigned', 'revoked')
+       and updated_at < now() - interval '90 days'
+       and (photo_data is not null or signature_data is not null)
+    returning 1
+  )
+  select count(*) into affected from cleared;
+
+  insert into public.audit_log (actor_id, action, target_table, detail)
+  values (null, 'members.purge_biometrics', 'members',
+          jsonb_build_object('cleared', affected, 'run_at', now()));
+
+  return affected;
+end;
+$$;
+
+--   select cron.schedule('purge-member-biometrics','0 4 * * 0',
+--                        $$select public.purge_inactive_member_biometrics()$$);
+
+-- ============================================================================
+-- END OF MIGRATION
+-- ============================================================================
