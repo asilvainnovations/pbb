@@ -1,0 +1,114 @@
+name: CI
+
+# Why this exists (audit findings C-3 and C-6):
+#   * `main` shipped with an undeclared identifier in App.tsx, so `npm run
+#     build` failed. Nothing caught it because nothing ran the build.
+#   * The deployed site had drifted from the repo, because edits were made in
+#     the Bolt host and never pushed back. A green build on every push makes
+#     the divergence visible instead of silent.
+#
+# Keep this fast. A slow pipeline during a campaign gets bypassed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Typecheck, lint, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  static-site:
+    name: Validate public campaign site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate HTML structure
+        run: npx --yes html-validate public/*.html --rule no-inline-style:off --rule no-implicit-button-type:off
+
+      - name: Assert no internal documents are published
+        # Audit finding H-7: internal targeting strategy and comms scripts were
+        # being served from the public campaign domain. Fail the build if any
+        # markdown reappears under public/.
+        run: |
+          if find public -name '*.md' | grep -q .; then
+            echo "::error::Markdown found under public/ — internal documents must live in docs/, not on the public site."
+            find public -name '*.md'
+            exit 1
+          fi
+          echo "No internal documents under public/ — OK"
+
+  secrets-scan:
+    name: Check for committed secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fail on service-role keys or .env files
+        run: |
+          set -e
+          if git ls-files | grep -E '^\.env$|^\.env\.(local|production)$'; then
+            echo "::error::An .env file is committed. Remove it and rotate every key it contained."
+            exit 1
+          fi
+          if grep -rIn --exclude-dir=node_modules --exclude-dir=.git \
+               -e 'service_role' -e 'sb_secret_' -e 'SUPABASE_SERVICE_ROLE_KEY=' . \
+               | grep -v 'supabase/functions/' \
+               | grep -v '\.env\.example' \
+               | grep -v '\.github/workflows/'; then
+            echo "::error::Possible service-role key outside the Edge Function. Review the matches above."
+            exit 1
+          fi
+          echo "No committed secrets detected — OK"
