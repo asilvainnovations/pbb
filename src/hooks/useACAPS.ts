@@ -6,6 +6,9 @@ import { isBarmmRelevant } from '../utils/methodology'
 const BASE_URL = import.meta.env.VITE_ACAPS_API_URL || '/api/acaps'
 const REQUEST_DELAY = 1000
 
+/** Hard ceiling on paginated fetches. See the note in fetchAllPages(). */
+const MAX_PAGES = 200
+
 function sleep(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
@@ -46,7 +49,21 @@ export function useACAPS() {
     let url: string | null = `${BASE_URL}${endpoint}`
     let page = 1
 
+    /*
+     * `page` was previously incremented but never read — dead code that also
+     * hid a real hazard: this loop was unbounded. If the upstream `next`
+     * pointer ever cycles (a paginator bug, a proxy rewriting URLs), the
+     * browser spins forever and `allResults` grows until the tab dies.
+     * MAX_PAGES turns that into a loud, bounded failure.
+     */
     while (url) {
+      if (page > MAX_PAGES) {
+        throw new Error(
+          `Pagination exceeded ${MAX_PAGES} pages for ${endpoint} — refusing to continue. ` +
+          `This usually means the upstream "next" link is cycling.`
+        )
+      }
+
       const queryParams = params ? new URLSearchParams(params).toString() : ''
       const fullUrl = queryParams ? `${url}?${queryParams}` : url
       
