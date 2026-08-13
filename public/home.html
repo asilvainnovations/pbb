@@ -1,561 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tl" class="no-js">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Partido Bangon Bangsamoro (PBB) | Ang BANGON Platform para sa 2026</title>
-<meta name="description" content="Partido Bangon Bangsamoro (PBB) — anim na simpleng pangako para sa bawat Bangsamoro: Batayang Serbisyo, Alyansa, Kalikasan, Green Economy, Bukas na Pamahalaan, at Kapayapaan. Alamin kung para saan ang BANGON platform, para kanino, at paano ka sasali.">
-<meta name="keywords" content="Partido Bangon Bangsamoro, PBB, BANGON, BARMM, Bangsamoro, 2026 Parliamentary Elections, Bangsamoro parliament, Mindanao politics, Bangsamoro platform of government">
-<meta name="author" content="Partido Bangon Bangsamoro">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#0A6E2E">
+<meta name="description" content="Partido Bangon Bangsamoro (PBB) — anim na simpleng pangako para sa bawat Bangsamoro: Batayang Serbisyo, Alyansa, Kalikasan, Green Economy, Bukas na Pamahalaan, at Kapayapaan. Alamin kung ano ang para sa'yo, at paano ka sasali.">
+<meta name="keywords" content="Partido Bangon Bangsamoro, PBB, BANGON, BARMM, Bangsamoro, 2026 Parliamentary Elections, Bangsamoro parliament, Mindanao politics">
+<meta name="theme-color" content="#063D1B">
 <link rel="canonical" href="https://www.bangonbangsamoro.com/">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Partido Bangon Bangsamoro">
 <meta property="og:title" content="Partido Bangon Bangsamoro | Ang BANGON Platform para sa 2026">
-<meta property="og:description" content="Babangon tayo. Anim na simpleng pangako, para sa bawat Bangsamoro — magsasaka, propesyonal, negosyante, nanay, beterano ng kapayapaan, at nakatatanda.">
+<meta property="og:description" content="Anim na simpleng pangako para sa bawat Bangsamoro. Alamin kung alin ang para sa'yo.">
 <meta property="og:url" content="https://www.bangonbangsamoro.com/">
 <meta property="og:image" content="https://www.bangonbangsamoro.com/assets/images/professionalizing-patrimony.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="893">
-<meta property="og:locale" content="en_PH">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Partido Bangon Bangsamoro | Ang BANGON Platform para sa 2026">
-<meta name="twitter:description" content="Anim na simpleng pangako, para sa bawat Bangsamoro. Alamin kung para saan ang BANGON at paano ka sasali.">
-<meta name="twitter:image" content="https://www.bangonbangsamoro.com/assets/images/professionalizing-patrimony.jpg">
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/pbb-logo-256.png">
 
+<!-- Fonts: preconnect then a single stylesheet link. Deliberately NOT an
+     @import inside CSS — that serialises an extra round trip, which is
+     expensive on the connections most of BARMM actually has. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@500;600;700;800&family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/site-widgets.css">
+<link rel="stylesheet" href="assets/pbb-tokens.css">
+<link rel="stylesheet" href="assets/pbb-site.css">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "PoliticalParty",
   "name": "Partido Bangon Bangsamoro",
   "alternateName": "PBB",
   "url": "https://www.bangonbangsamoro.com/",
   "logo": "https://www.bangonbangsamoro.com/assets/pbb-logo-256.png",
-  "slogan": "Babangon tungo sa Kaunlaran",
   "description": "A regional political party in the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) contesting the 2026 Bangsamoro Parliamentary Elections on the BANGON platform of government.",
-  "areaServed": { "@type": "AdministrativeArea", "name": "Bangsamoro Autonomous Region in Muslim Mindanao" },
-  "sameAs": []
+  "areaServed": "Bangsamoro Autonomous Region in Muslim Mindanao",
+  "telephone": "+63-966-301-8777",
+  "email": "info@bangonbangsamoro.com"
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Ano ang ibig sabihin ng BANGON?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Ang BANGON ay ang platform of government ng Partido Bangon Bangsamoro: Basic Services Enhancement, Alliance Building & Partnerships, Natural Resources Protection, Green Economy Acceleration, Open & Inclusive Governance, at Non-violent Conflict Resolution." }
-    },
-    {
-      "@type": "Question",
-      "name": "Kailan ang BARMM Parliamentary Elections?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Ang Bangsamoro Parliamentary Elections ay sa September 14, 2026." }
-    }
-  ]
-}
-</script>
-
-<style>
-/* ============ TOKENS — Green / Navy / Metallic Gold / White (from the official BANGON blueprint graphic) ============ */
-:root{
-  --ink:#15241A;
-  --ink-soft:#43584B;
-  --forest:#0A6E2E;
-  --forest-deep:#063D1B;
-  --forest-mid:#0E5C27;
-  --forest-tint:#E8F3EA;
-  --navy:#152A52;
-  --navy-deep:#0C1B38;
-  --navy-tint:#EEF1F8;
-  --gold:#C9A227;
-  --gold-bright:#F2C94C;
-  --gold-deep:#8B6914;
-  --gold-metal:linear-gradient(135deg,#F7DE8E 0%,#D9AF33 45%,#8B6914 100%);
-  --white:#FFFFFF;
-  --paper:#FBFBF8;
-  --paper-line:#0A6E2E12;
-  --shadow:0 14px 32px -16px rgba(6,61,27,.4);
-  --radius:2px;
-  --maxw:1180px;
-  --ease-out:cubic-bezier(.16,1,.3,1);
-  --font-display:"Poppins", sans-serif;
-  --font-label:"Montserrat", sans-serif;
-  --font-body:"Roboto Condensed", sans-serif;
-}
-
-*,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:.001ms!important;transition-duration:.001ms!important}}
-
-body{
-  margin:0;
-  font-family:var(--font-body);
-  color:var(--ink);
-  background:
-    linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/38px 38px,
-    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px) 0 0/38px 38px,
-    var(--paper);
-  line-height:1.6;
-  font-size:17px;
-  -webkit-font-smoothing:antialiased;
-}
-
-img{max-width:100%;display:block}
-a{color:inherit}
-h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;color:var(--forest-deep);line-height:1.16;margin:0 0 .5em}
-p{margin:0 0 1em;font-size:1rem}
-ul{margin:0;padding:0;list-style:none}
-button{font:inherit;cursor:pointer}
-
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
-.eyebrow{
-  font-family:var(--font-label);
-  font-size:.72rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--gold-deep);
-  font-weight:700;
-  display:inline-flex;align-items:center;gap:.5em;
-  margin-bottom:.9em;
-}
-.eyebrow::before{content:"";width:22px;height:2px;background:var(--gold)}
-
-.skip-link{
-  position:absolute;left:-999px;top:0;background:var(--forest-deep);color:var(--white);
-  padding:.8em 1.2em;z-index:200;font-family:var(--font-label);font-weight:600;
-}
-.skip-link:focus{left:12px;top:12px}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-
-/* ============ TOOLTIPS ============ */
-[data-tooltip]{position:relative}
-[data-tooltip]::after{
-  content:attr(data-tooltip);
-  position:absolute;left:50%;bottom:calc(100% + 9px);transform:translateX(-50%) translateY(4px);
-  background:var(--forest-deep);color:var(--white);
-  font-family:var(--font-label);font-size:.72rem;font-weight:600;letter-spacing:.01em;
-  padding:7px 11px;border-radius:var(--radius);white-space:nowrap;
-  box-shadow:var(--shadow);
-  opacity:0;pointer-events:none;
-  transition:opacity .18s var(--ease-out), transform .18s var(--ease-out);
-  z-index:60;
-}
-[data-tooltip]::before{
-  content:"";position:absolute;left:50%;bottom:calc(100% + 3px);transform:translateX(-50%);
-  border:6px solid transparent;border-top-color:var(--forest-deep);
-  opacity:0;pointer-events:none;transition:opacity .18s var(--ease-out);
-}
-[data-tooltip]:hover::after,[data-tooltip]:hover::before,
-[data-tooltip]:focus-visible::after,[data-tooltip]:focus-visible::before{
-  opacity:1;transform:translateX(-50%) translateY(0);
-}
-
-/* ============ SHOWCASE IMAGES ============ */
-.showcase{margin:0 0 34px}
-.showcase-frame{
-  position:relative;padding:7px;background:var(--white);
-  border:1px solid var(--gold);border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  transition:transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
-}
-.showcase-frame:hover{transform:translateY(-3px);box-shadow:0 20px 40px -16px rgba(6,61,27,.5)}
-.showcase-frame::before,.showcase-frame::after{
-  content:"";position:absolute;width:18px;height:18px;border:2px solid var(--forest);
-}
-.showcase-frame::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
-.showcase-frame::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
-.showcase-frame img{width:100%;height:auto;display:block;transition:transform .5s var(--ease-out)}
-.showcase-frame:hover img{transform:scale(1.015)}
-.showcase figcaption{
-  margin-top:12px;font-family:var(--font-label);font-size:.8rem;letter-spacing:.02em;
-  color:var(--ink-soft);text-align:center;font-weight:500;
-}
-
-/* ============ HEADER ============ */
-header.site{position:sticky;top:0;z-index:100;background:var(--forest-deep);border-bottom:1px solid #ffffff1a}
-.nav-row{display:flex;align-items:center;justify-content:space-between;min-height:66px;gap:12px;padding:10px 0;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:.65em;color:var(--white);text-decoration:none;min-width:0}
-.brand img{width:38px;height:38px;flex:none;border-radius:50%;transition:transform .3s var(--ease-out)}
-.brand:hover img{transform:rotate(-6deg) scale(1.05)}
-.brand-text{font-family:var(--font-display);font-weight:700;font-size:1rem;line-height:1.08}
-.brand-text small{display:block;font-family:var(--font-label);font-weight:600;font-size:.6rem;letter-spacing:.08em;color:var(--gold-bright);text-transform:uppercase}
-
-.nav-toggle{
-  display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
-  width:42px;height:42px;background:transparent;border:1px solid #ffffff33;border-radius:var(--radius);flex:none;
-  transition:border-color .2s ease, background .2s ease;
-}
-.nav-toggle:hover{border-color:var(--gold);background:#ffffff0d}
-.nav-toggle span{display:block;width:18px;height:2px;background:var(--white);margin:0 auto;transition:transform .25s var(--ease-out), opacity .25s var(--ease-out)}
-.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-nav#primary-nav{
-  position:fixed;inset:66px 0 0 0;background:var(--forest-deep);
-  transform:translateX(100%);transition:transform .32s var(--ease-out);
-  overflow-y:auto;
-}
-nav#primary-nav.open{transform:translateX(0)}
-nav#primary-nav ul{padding:8px 20px 28px;display:flex;flex-direction:column}
-nav#primary-nav a{
-  display:flex;align-items:center;gap:.55em;padding:14px 4px;color:var(--white);text-decoration:none;
-  font-family:var(--font-label);font-weight:600;border-bottom:1px solid #ffffff14;font-size:.96rem;
-  transition:color .2s ease, padding-left .2s ease;
-}
-nav#primary-nav a:hover{color:var(--gold-bright);padding-left:8px}
-.nav-letter{
-  flex:none;width:22px;height:22px;border-radius:50%;background:#ffffff14;color:var(--gold-bright);
-  font-family:var(--font-display);font-weight:800;font-size:.68rem;display:flex;align-items:center;justify-content:center;
-}
-
-.nav-cta{margin-top:14px}
-.nav-cta a{
-  display:block;text-align:center;background:var(--gold-metal);color:var(--forest-deep)!important;
-  border-radius:var(--radius);padding:14px;font-weight:800!important;border:none!important;
-  transition:filter .2s ease, transform .2s ease;
-}
-.nav-cta a:hover{filter:brightness(1.06);transform:translateY(-1px)}
-
-.nav-auth{margin-top:10px;display:flex;gap:8px}
-.nav-auth a{
-  flex:1;display:flex;align-items:center;justify-content:center;text-align:center;
-  border:1px solid #ffffff40!important;border-radius:var(--radius);
-  padding:11px 10px!important;font-family:var(--font-label);font-weight:700!important;font-size:.8rem!important;
-  color:#C7D1CA!important;min-height:44px;
-}
-.nav-auth a:hover{border-color:var(--gold-bright)!important;color:var(--gold-bright)!important;padding-left:10px!important}
-.nav-auth a.intelligence{color:var(--gold-bright)!important;border-color:#C9A22766!important}
-
-/* FIX: Desktop Navigation Overflow — nav-row now uses min-height + flex-wrap
-   instead of a fixed 66px height, so if the nav wraps to a second line at
-   in-between widths (~1080-1180px), the header grows to fit it instead of
-   clipping items off-screen. */
-@media(min-width:1080px){
-  .nav-toggle{display:none}
-  nav#primary-nav{position:static;inset:auto;transform:none;background:transparent;overflow:visible;flex:1;min-width:0}
-  nav#primary-nav ul{flex-direction:row;align-items:center;justify-content:flex-end;padding:0;gap:4px;flex-wrap:wrap;row-gap:6px}
-  nav#primary-nav a{border-bottom:none;padding:6px 8px;font-size:.72rem;white-space:nowrap}
-  nav#primary-nav a:hover{padding-left:8px}
-  .nav-letter{width:18px;height:18px;font-size:.6rem}
-  .nav-cta{margin:0}
-  .nav-cta a{padding:8px 14px}
-  .nav-auth{margin:0;padding-left:8px;border-left:1px solid #ffffff22}
-  .nav-auth a{padding:6px 10px!important;font-size:.68rem!important;min-height:30px}
-}
-@media(min-width:1240px){
-  nav#primary-nav ul{flex-wrap:nowrap;gap:2px}
-  nav#primary-nav a{font-size:.78rem;padding:8px 12px}
-  .nav-letter{width:20px;height:20px;font-size:.65rem}
-  .nav-cta a{padding:9px 16px;font-size:.78rem}
-  .nav-auth a{padding:7px 12px!important;font-size:.72rem!important;min-height:32px}
-}
-@media(min-width:1440px){nav#primary-nav a{font-size:.8rem;padding:8px 12px}}
-
-/* ============ HERO ============ */
-.hero{
-  background:radial-gradient(1200px 500px at 85% -10%, #ffffff12, transparent), linear-gradient(160deg, var(--forest-deep), var(--forest) 78%);
-  color:var(--white);padding:52px 0 60px;position:relative;overflow:hidden;border-bottom:5px solid var(--gold);
-}
-.hero::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(#ffffff10 1px,transparent 1px),linear-gradient(90deg,#ffffff10 1px,transparent 1px);
-  background-size:44px 44px;
-  mask-image:linear-gradient(180deg,transparent, #000 30%, #000 70%, transparent);
-}
-.hero-watermark{position:absolute;right:-90px;top:50%;transform:translateY(-50%);width:520px;height:520px;opacity:.12;pointer-events:none;z-index:0;animation:slow-spin 90s linear infinite}
-@keyframes slow-spin{to{transform:translateY(-50%) rotate(360deg)}}
-@media (prefers-reduced-motion:reduce){.hero-watermark{animation:none}}
-.hero-inner{position:relative;z-index:1}
-.hero .eyebrow{color:var(--gold-bright)}
-.hero .eyebrow::before{background:var(--gold-bright)}
-.hero h1{color:var(--white);font-size:clamp(2rem,7vw,3.3rem);letter-spacing:-.01em;max-width:16ch}
-.hero .lede{font-family:var(--font-body);font-size:1.14rem;max-width:54ch;color:#EDEFE6}
-.hero .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
-.btn{
-  display:inline-flex;align-items:center;gap:.5em;padding:14px 22px;border-radius:var(--radius);font-weight:700;text-decoration:none;
-  border:1px solid transparent;font-family:var(--font-label);font-size:.88rem;letter-spacing:.01em;
-  transition:filter .2s ease, transform .2s ease, background .2s ease;
-}
-.btn-gold{background:var(--gold-metal);color:var(--forest-deep)}
-.btn-gold:hover{filter:brightness(1.06);transform:translateY(-2px)}
-.btn-ghost{border-color:#ffffff55;color:var(--white)}
-.btn-ghost:hover{border-color:var(--white);background:#ffffff12;transform:translateY(-2px)}
-
-.hero-stats{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:#ffffff22;border:1px solid #ffffff22;border-radius:var(--radius);overflow:hidden}
-.hero-stats div{background:var(--forest-deep);padding:16px 18px;transition:background .25s ease}
-.hero-stats div:hover{background:#0a4d22}
-.hero-stats strong{display:block;font-family:var(--font-display);font-weight:700;font-size:1.5rem;color:var(--gold-bright)}
-.hero-stats span{font-family:var(--font-label);font-size:.72rem;color:#D9DED2;font-weight:500}
-@media(min-width:720px){.hero-stats{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:640px){.hero-watermark{width:340px;height:340px;right:-140px}}
-
-/* ============ MASTHEAD ============ */
-.masthead{background:var(--forest-deep);border-bottom:5px solid var(--gold);line-height:0}
-.masthead img{width:100%;height:auto;display:block}
-
-/* ============ SECTION GENERICS ============ */
-section{padding:58px 0}
-.section-head{max-width:64ch;margin-bottom:30px}
-.section-head h2{font-size:clamp(1.55rem,4.2vw,2.3rem)}
-.section-head p{color:var(--ink-soft);font-size:1.06rem}
-.band-forest{background:var(--forest-tint)}
-.band-navy{background:var(--navy-tint)}
-.band-dark{background:var(--forest-deep);color:var(--white)}
-.band-dark h2,.band-dark h3,.band-dark h4{color:var(--white)}
-.band-dark .section-head p{color:#D9DED2}
-.band-dark .showcase-frame{border-color:var(--gold-bright)}
-
-.bracket{position:relative;padding:22px;background:var(--white);border-radius:var(--radius)}
-.bracket::before,.bracket::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--forest);opacity:.9}
-.bracket::before{top:-1px;left:-1px;border-right:none;border-bottom:none}
-.bracket::after{bottom:-1px;right:-1px;border-left:none;border-top:none}
-
-/* ============ PERSONA CHIPS (who PBB serves) ============ */
-.persona-grid{display:grid;gap:16px;grid-template-columns:1fr}
-@media(min-width:700px){.persona-grid{grid-template-columns:1fr 1fr}}
-@media(min-width:1040px){.persona-grid{grid-template-columns:repeat(3,1fr)}}
-.persona-card{
-  background:var(--white);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:20px;
-  display:flex;gap:14px;transition:transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
-  text-decoration:none;color:var(--ink);
-}
-.persona-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--gold)}
-.persona-icon{
-  flex:none;width:46px;height:46px;border-radius:50%;background:var(--forest-tint);
-  display:flex;align-items:center;justify-content:center;color:var(--forest-deep);
-}
-.persona-card h3{font-size:1rem;margin-bottom:.25em}
-.persona-card p{font-size:.9rem;color:var(--ink-soft);margin-bottom:.6em}
-.persona-tag{
-  display:inline-flex;align-items:center;gap:.4em;font-family:var(--font-label);font-size:.68rem;font-weight:700;
-  letter-spacing:.03em;color:var(--gold-deep);text-transform:uppercase;
-}
-.persona-tag .dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
-
-/* ============ PILLAR SECTIONS (BANGON = the site's navigation) ============ */
-.pillar-section{border-top:1px solid #0A6E2E1a;scroll-margin-top:78px}
-.pillar-head{display:flex;align-items:center;gap:18px;margin-bottom:8px}
-.pillar-badge{
-  flex:none;width:64px;height:64px;border-radius:50%;
-  background:var(--gold-metal);color:var(--forest-deep);
-  font-family:var(--font-display);font-weight:800;font-size:1.9rem;
-  display:flex;align-items:center;justify-content:center;border:3px solid var(--navy);
-}
-.pillar-kicker{font-family:var(--font-label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);font-weight:700}
-.pillar-head h2{margin:.15em 0 0;font-size:clamp(1.5rem,3.6vw,2.1rem)}
-.pillar-lede{max-width:66ch;font-size:1.05rem;color:var(--ink-soft)}
-
-.pillar-body{display:grid;gap:26px;margin-top:22px}
-@media(min-width:900px){.pillar-body{grid-template-columns:1.05fr .95fr;align-items:start}}
-
-.pillar-icons{
-  display:flex;gap:10px;margin-bottom:18px;padding:14px;background:var(--white);
-  border:2px solid var(--navy);border-radius:var(--radius);position:relative;width:fit-content;
-}
-.pillar-icons::before,.pillar-icons::after{content:"";position:absolute;width:12px;height:12px;border:2px solid var(--forest)}
-.pillar-icons::before{top:-2px;left:-2px;border-right:none;border-bottom:none}
-.pillar-icons::after{bottom:-2px;right:-2px;border-left:none;border-top:none}
-.pillar-icons svg{width:26px;height:26px}
-
-.commit-list{display:flex;flex-direction:column;gap:12px;margin-bottom:18px}
-.commit-list li{
-  position:relative;padding:12px 16px 12px 40px;background:var(--white);border:1px solid #0A6E2E1f;border-radius:var(--radius);
-  font-size:.98rem;color:var(--ink);
-}
-.commit-list li::before{
-  content:"✓";position:absolute;left:14px;top:12px;color:var(--forest);font-weight:800;font-family:var(--font-label);
-}
-
-.persona-fit{
-  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;
-}
-.persona-fit span{
-  display:inline-flex;align-items:center;gap:.4em;background:var(--navy-tint);color:var(--navy);
-  font-family:var(--font-label);font-size:.72rem;font-weight:700;padding:7px 12px;border-radius:100px;border:1px solid #15264d22;
-}
-
-.law-note{font-size:.84rem;color:var(--ink-soft);font-style:italic;border-left:2px solid var(--gold);padding-left:12px;margin-bottom:0}
-
-.pillar-quote{
-  background:var(--forest-deep);color:var(--white);padding:24px 24px 22px;border-radius:var(--radius);position:relative;
-}
-.pillar-quote::before{content:"\201C";position:absolute;top:-6px;left:16px;font-family:var(--font-display);font-size:3.4rem;color:var(--gold-bright);opacity:.5;line-height:1}
-.pillar-quote p{color:#EDEFE6;font-size:1.02rem;margin-bottom:.5em;position:relative;z-index:1}
-.pillar-quote .quote-en{font-size:.82rem;color:#B9C4B4;margin:0}
-
-/* ============ ROADMAP ============ */
-.horizons{display:grid;gap:16px;position:relative}
-@media(min-width:860px){.horizons{grid-template-columns:repeat(3,1fr)}}
-.horizon{background:var(--white);padding:24px;border-radius:var(--radius);border:1px solid #0A6E2E1f;position:relative;transition:transform .25s var(--ease-out), box-shadow .25s var(--ease-out)}
-.horizon:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-.horizon .h-num{font-family:var(--font-label);color:var(--gold-deep);font-weight:700;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
-.horizon h3{font-size:1.15rem;margin-top:.3em}
-.horizon p{color:var(--ink-soft);font-size:.97rem;margin:0}
-.horizon.is-current{outline:2px solid var(--gold);outline-offset:-2px}
-.horizon.is-win{background:var(--forest-deep);color:#fff}
-.horizon.is-win h3,.horizon.is-win .h-num{color:var(--gold-bright)}
-.horizon.is-win p{color:#DCE2D4}
-
-/* ============ APPROACH ============ */
-.approach-grid{display:grid;gap:18px}
-@media(min-width:780px){.approach-grid{grid-template-columns:1fr 1fr}}
-.approach-card{padding:24px;border-radius:var(--radius);transition:transform .25s var(--ease-out)}
-.approach-card:hover{transform:translateY(-3px)}
-.approach-card.no{background:#F4F1E4;border:1px dashed var(--ink-soft)}
-.approach-card.yes{background:var(--forest-tint);border:1px solid #0A6E2E33}
-.approach-tag{font-family:var(--font-label);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700}
-.approach-card.no .approach-tag{color:var(--ink-soft)}
-.approach-card.yes .approach-tag{color:var(--forest)}
-.approach-card h3{font-size:1.2rem;margin-top:.3em}
-.approach-card ul{margin-top:12px;display:flex;flex-direction:column;gap:8px}
-.approach-card li{font-size:.97rem;color:var(--ink-soft)}
-
-/* ============ GET INVOLVED ============ */
-.involve-grid{display:grid;gap:24px}
-@media(min-width:920px){.involve-grid{grid-template-columns:1fr 1fr}}
-.involve-form{background:var(--white);padding:26px;border-radius:var(--radius);box-shadow:var(--shadow)}
-.involve-form h3{font-size:1.15rem}
-.field{margin-bottom:14px}
-.field label{display:block;font-family:var(--font-label);font-size:.8rem;font-weight:600;margin-bottom:6px;color:var(--ink)}
-.field input,.field select,.field textarea{
-  width:100%;padding:12px 13px;border:1px solid #0A6E2E40;border-radius:var(--radius);
-  font-family:var(--font-body);font-size:1rem;background:var(--paper);
-  transition:border-color .2s ease, box-shadow .2s ease;
-}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--forest);box-shadow:0 0 0 3px #0A6E2E1a}
-.form-note{font-size:.8rem;color:var(--ink-soft);margin-top:10px}
-.form-status{font-family:var(--font-label);font-size:.85rem;font-weight:600;margin:12px 0 0;min-height:1.2em}
-.form-status.ok{color:var(--forest)}
-.form-status.err{color:var(--gold-deep)}
-.btn[disabled]{opacity:.6;cursor:not-allowed}
-
-/* ============ ADMIN ============ */
-.admin-overlay{position:fixed;inset:0;z-index:200;background:#06301566;display:none;align-items:flex-start;justify-content:center;padding:24px 16px;overflow-y:auto}
-.admin-overlay.open{display:flex}
-.admin-panel{background:var(--white);border-radius:var(--radius);max-width:920px;width:100%;box-shadow:var(--shadow);border-top:5px solid var(--gold);animation:pop-in .25s var(--ease-out)}
-@keyframes pop-in{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
-.admin-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;border-bottom:1px solid #0A6E2E1f}
-.admin-head h3{margin:0;font-size:1.1rem}
-.admin-head p{margin:.2em 0 0;font-size:.82rem;color:var(--ink-soft)}
-.admin-close{background:none;border:1px solid #0A6E2E33;border-radius:var(--radius);width:34px;height:34px;color:var(--ink)}
-.admin-body{padding:20px 22px}
-.admin-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
-.admin-count{font-family:var(--font-label);font-size:.8rem;color:var(--ink-soft)}
-.admin-table-wrap{overflow-x:auto;border:1px solid #0A6E2E1f;border-radius:var(--radius)}
-table.admin-table{width:100%;border-collapse:collapse;font-family:var(--font-body);font-size:.92rem;min-width:640px}
-table.admin-table th{text-align:left;font-family:var(--font-label);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;background:var(--forest-tint);color:var(--forest-deep);padding:10px 12px;font-weight:700}
-table.admin-table td{padding:10px 12px;border-top:1px solid #0A6E2E14;color:var(--ink)}
-table.admin-table tr:nth-child(even) td{background:#0A6E2E06}
-.admin-empty{padding:26px;text-align:center;color:var(--ink-soft);font-size:.95rem}
-.btn-small{padding:9px 16px;font-size:.8rem}
-.btn-outline{background:transparent;border:1px solid var(--forest);color:var(--forest)}
-.btn-outline:hover{background:var(--forest-tint)}
-.involve-ways{display:flex;flex-direction:column;gap:14px}
-.way{display:flex;gap:14px;background:var(--white);padding:18px;border-radius:var(--radius);transition:transform .2s var(--ease-out)}
-.way:hover{transform:translateX(3px)}
-.way .init-icon{background:var(--forest-tint)}
-.way h4{margin:0 0 .3em;font-size:1rem;color:var(--forest-deep);font-family:var(--font-display);font-weight:700}
-.way p{margin:0;font-size:.92rem;color:var(--ink-soft)}
-.init-icon{width:46px;height:46px;border-radius:50%;background:var(--gold-metal);display:flex;align-items:center;justify-content:center;flex:none}
-
-.connect-cta{display:grid;gap:16px;margin-bottom:36px}
-@media(min-width:780px){.connect-cta{grid-template-columns:1fr 1fr}}
-.connect-card{display:flex;gap:16px;background:var(--white);padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);transition:transform .25s var(--ease-out)}
-.connect-card:hover{transform:translateY(-3px)}
-.connect-card .init-icon{margin-bottom:0}
-.connect-card h3{font-size:1.02rem;margin-bottom:.3em}
-.connect-card p{font-size:.9rem;color:var(--ink-soft);margin:0}
-
-.vision{padding:0;background:var(--forest-deep)}
-.vision .showcase{margin:0}
-.vision .showcase-frame{border:none;border-radius:0;box-shadow:none;padding:0}
-.vision .showcase-frame::before,.vision .showcase-frame::after{display:none}
-.vision-caption{background:var(--forest-deep);padding:30px 0 40px;text-align:center}
-.vision-caption p{font-family:var(--font-display);font-weight:700;color:var(--white);font-size:clamp(1.1rem,3vw,1.5rem);max-width:34ch;margin:0 auto}
-.vision-caption span{display:block;margin-top:10px;font-family:var(--font-label);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright)}
-
-footer.site{background:var(--forest-deep);color:#D9DED2;padding:48px 0 22px}
-.footer-grid{display:grid;gap:28px}
-@media(min-width:780px){.footer-grid{grid-template-columns:1.6fr 1fr 1fr 1fr}}
-.footer-brand{display:flex;align-items:center;gap:.65em;margin-bottom:12px}
-.footer-brand img{width:32px;height:32px;border-radius:50%}
-.footer-brand span{font-family:var(--font-display);font-weight:700;color:#fff;font-size:1.05rem}
-footer.site h5{font-family:var(--font-label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-bright);margin:0 0 14px;font-weight:700}
-footer.site ul{display:flex;flex-direction:column;gap:9px}
-footer.site a{color:#D9DED2;text-decoration:none;font-size:.94rem;transition:color .2s ease}
-footer.site a:hover{color:var(--gold-bright)}
-.footer-bottom{margin-top:38px;padding-top:20px;border-top:1px solid #ffffff1f;display:flex;flex-direction:column;gap:8px;font-size:.8rem;color:#AEB6A6}
-@media(min-width:780px){.footer-bottom{flex-direction:row;justify-content:space-between;flex-wrap:wrap}}
-
-.back-to-top{position:fixed;right:16px;bottom:16px;z-index:90;width:46px;height:46px;border-radius:50%;background:var(--gold-metal);color:var(--forest-deep);border:none;display:none;align-items:center;justify-content:center;box-shadow:var(--shadow);transition:transform .2s var(--ease-out)}
-.back-to-top:hover{transform:translateY(-3px)}
-.back-to-top.show{display:flex}
-
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s var(--ease-out), transform .55s var(--ease-out)}
-.reveal.in{opacity:1;transform:none}
-.reveal-figure{opacity:0;transform:translateY(22px) scale(.98);transition:opacity .7s var(--ease-out), transform .7s var(--ease-out)}
-.reveal-figure.in{opacity:1;transform:none}
-
-.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-
-/* ============ FIX: mobile-first full-bleed images ============
-   Showcase images previously stayed inset inside .wrap padding + a bracketed
-   frame at every breakpoint, so on phones the campaign graphics rendered
-   small and boxed instead of wide/full-view. Below 640px, strip the frame
-   and let images run edge-to-edge; tablet/desktop framed treatment is
-   untouched. */
-@media(max-width:640px){
-  .showcase{margin-left:-20px;margin-right:-20px;margin-bottom:26px}
-  .showcase-frame{padding:0;border:none;box-shadow:none;border-radius:0}
-  .showcase-frame::before,.showcase-frame::after{display:none}
-  .showcase-frame:hover{transform:none}
-  .showcase figcaption{padding:0 20px}
-}
-</style>
 </head>
+
 <body>
 
-<a class="skip-link" href="#main">Diretso sa laman ng pahina</a>
+<a class="skip-link" href="#main">Laktawan papunta sa nilalaman</a>
+
+<div class="outbox-banner no-print" id="outboxBanner" hidden>
+  May naka-queue kang sign-up na hindi pa naipapadala. Awtomatiko itong susubukan ulit pagbalik ng signal.
+</div>
 
 <header class="site">
-  <div class="wrap nav-row">
-    <a class="brand" href="#top" aria-label="Partido Bangon Bangsamoro — home">
-      <img src="assets/pbb-logo-128.png" width="38" height="38" alt="Partido Bangon Bangsamoro seal">
-      <span class="brand-text">Partido Bangon Bangsamoro<small>Babangon tungo sa Kaunlaran</small></span>
+  <div class="wrap header-inner">
+    <a class="brand" href="home.html">
+      <img src="assets/pbb-logo-128.png" width="38" height="38" alt="">
+      <span class="brand-text">
+        <strong>Partido Bangon Bangsamoro</strong>
+        <small>Babangon Tayo · 2026</small>
+      </span>
     </a>
 
-    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Buksan ang menu">
+    <button class="nav-toggle" id="navToggle" type="button"
+            aria-expanded="false" aria-controls="primary-nav" aria-label="Buksan ang menu">
       <span></span><span></span><span></span>
     </button>
-    <nav id="primary-nav" aria-label="Primary">
+
+    <nav id="primary-nav" aria-label="Pangunahing nabigasyon">
       <ul>
-        <li><a href="#hangganan"><span class="nav-letter">✓</span>Scope</a></li>
-        <li><a href="#kanino"><span class="nav-letter">✦</span>Para Kanino</a></li>
-        <li><a href="#basic-services"><span class="nav-letter">B</span>Batayang Serbisyo</a></li>
-        <li><a href="#alliance-building"><span class="nav-letter">A</span>Alyansa</a></li>
-        <li><a href="#natural-resources"><span class="nav-letter">N</span>Kalikasan</a></li>
-        <li><a href="#green-economy"><span class="nav-letter">G</span>Green Economy</a></li>
-        <li><a href="#open-governance"><span class="nav-letter">O</span>Bukas na Pamahalaan</a></li>
-        <li><a href="#non-violent-peace"><span class="nav-letter">N</span>Kapayapaan</a></li>
-        <li class="nav-cta"><a href="#get-involved">Sumali sa Kilusan</a></li>
-        <li class="nav-auth">
-          <a href="https://pbb.bolt.host/login">Sign In</a>
-          <a class="intelligence" href="https://pbb.bolt.host/login?intelligence" target="_blank" rel="noopener" aria-label="Enter Intelligence Dashboard (sample data mode)">Intelligence</a>
-        </li>
+        <li><a href="home.html" aria-current="page">Simula</a></li>
+        <li><a href="#bangon">Ang BANGON Platform</a></li>
+        <li><a href="#lideratura">Lideratura</a></li>
+        <li><a href="bangon-open-governance.html">Bukas na Pamahalaan</a></li>
+        <li><a href="join.html#membership">Membership</a></li>
+        <li class="nav-cta"><a href="join.html">Sumali sa Kilusan</a></li>
       </ul>
     </nav>
   </div>
@@ -563,1068 +87,218 @@ footer.site a:hover{color:var(--gold-bright)}
 
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero" id="top">
-    <img class="hero-watermark" src="assets/pbb-logo-circle.png" alt="" aria-hidden="true">
-    <div class="wrap hero-inner">
-      <p class="eyebrow">2026 BARMM Parliamentary Elections · Set. 14, 2026</p>
-      <h1>Babangon Tayo. Sabay-Sabay Tayong Babangon.</h1>
-      <p class="lede">Ang PBB ay bagong grupo ng mga lider sa BARMM — malinis, may alam, at handang magsilbi. Anim na simpleng pangako ang BANGON platform namin, at bawat isa ay para sa'yo: magsasaka man, propesyonal, negosyante, nanay, beterano ng kapayapaan, o nakatatanda.</p>
-      <div class="cta-row">
-        <a class="btn btn-gold" href="#kanino">Alamin Kung Para Sa'yo</a>
-        <a class="btn btn-ghost" href="#get-involved">Sumali sa Kilusan</a>
-      </div>
-      <div class="hero-stats">
-        <div><strong>6</strong><span>Simpleng pangako ng BANGON</span></div>
-        <div><strong>71K+</strong><span>Miyembro sa buong BARMM</span></div>
-        <div><strong>3</strong><span>Yugto papuntang 2026</span></div>
-        <div><strong>₱8K</strong><span>Tulong-pinansyal kada pamilya</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ MASTHEAD BANNER ============ -->
-  <section class="masthead" aria-label="Campaign banner">
-    <figure class="reveal-figure" style="margin:0">
-      <img src="assets/images/Banner.jpg" width="1456" height="840" loading="eager" alt="Partido Bangon Bangsamoro — vanguard ng repormistang pamamahala para sa 2026 Parliamentary Elections.">
-    </figure>
-  </section>
-
-  <!-- ============ TERRITORIAL SCOPE ============ -->
-  <section id="hangganan" class="band-navy" style="padding:34px 0">
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
     <div class="wrap">
-      <div class="reveal" style="display:flex;flex-wrap:wrap;gap:18px;align-items:flex-start">
-        <span class="pillar-badge" aria-hidden="true" style="width:48px;height:48px;font-size:1.1rem;flex:none">✓</span>
-        <div style="flex:1;min-width:260px">
-          <p class="eyebrow" style="margin-bottom:.4em">Bago ka bumoto: alamin ang tamang hangganan</p>
-          <p style="color:var(--ink-soft);margin-bottom:.7em;max-width:70ch">Sino ang kasama sa 2026 BARMM Parliamentary Elections? <strong>5 probinsya</strong> (Basilan maliban sa Isabela City, Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Tawi-Tawi), <strong>3 komponent na lungsod</strong> (Cotabato City, Lamitan City, Marawi City), at ang <strong>Special Geographic Area</strong> — 8 bagong munisipyo mula sa dating North Cotabato. Ang Sulu ay hindi na bahagi ng BARMM (huling desisyon ng Korte Suprema, 2024; inilipat sa Region IX noong 2025), at ang Isabela City ay hindi kailanman naging bahagi nito.</p>
-        </div>
+      <p class="eyebrow">Setyembre 14, 2026 · Bangsamoro Parliamentary Elections</p>
+      <h1>Babangon tayo — nang magkasama</h1>
+      <p class="lede">
+        Ang PBB ay bagong grupo ng mga lider sa BARMM — malinis, may alam, at handang magsilbi.
+        Anim na simpleng pangako ang BANGON platform namin, at bawat isa ay para sa'yo:
+        magsasaka man, propesyonal, negosyante, nanay, beterano ng kapayapaan, o nakatatanda.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="join.html">Sumali sa Kilusan</a>
+        <a class="btn btn-ghost" href="#bangon">Tingnan ang BANGON platform</a>
       </div>
     </div>
   </section>
 
-  <section id="kanino">
+  <!-- ==================== PERSONA SELECTOR ====================
+       This is the progressive-disclosure spine of the site. Instead of asking
+       every visitor to read 2,000 lines of platform detail, they tell us who
+       they are in one tap and the six pillar cards below REORDER so the two
+       most relevant to them come first.
+
+       Note it reorders, it never hides. Hiding platform content from a voter
+       because we guessed their segment would be both patronising and bad for
+       search indexing. See docs/internal/PBB_User_Personas_2026.md.
+  -->
+  <section class="band-tint" aria-labelledby="persona-h">
     <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Para kanino ang PBB</p>
-        <h2>Anuman ang trabaho mo, may lugar ka sa BANGON</h2>
-        <p>Hindi kami nangangako sa lahat nang pareho. Bawat isa sa inyo ay may kanya-kanyang pangangailangan — at may partikular na bahagi ng BANGON platform na direktang sasagot dito. I-tap ang pinakamalapit sa'yo.</p>
+      <div class="section-head">
+        <p class="eyebrow">Para kanino ka?</p>
+        <h2 id="persona-h">Sino ka sa mga ito?</h2>
+        <p>
+          Hindi kami nangangako sa lahat nang pareho. I-tap ang pinakamalapit sa'yo at
+          aayusin namin ang pahinang ito para sa iyong sitwasyon. Puwede mong palitan
+          anumang oras.
+        </p>
       </div>
 
-      <figure class="showcase reveal-figure">
-        <div class="showcase-frame">
-          <img src="assets/images/engine-of-reform.jpg" width="1600" height="893" loading="lazy" alt="Ang Engine of Reform: kabataan at propesyonal bilang puwersa ng Partido Bangon Bangsamoro.">
-        </div>
-        <figcaption>Kabataan at propesyonal ang nangunguna, pero lahat ng sektor ay may kinatawan sa BANGON.</figcaption>
-      </figure>
-
-      <div class="persona-grid reveal">
-        <a class="persona-card" href="#open-governance">
-          <span class="persona-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3v18M6 8l6-5 6 5M4 21h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <div>
-            <span class="persona-tag"><span class="dot"></span>Batang Propesyonal</span>
-            <h3>Galing ang dapat sukatin, hindi apelyido</h3>
-            <p>Bagong graduate o nagtatrabaho na — gusto mo ng trabahong hindi nakadepende sa koneksyon.</p>
-          </div>
-        </a>
-        <a class="persona-card" href="#basic-services">
-          <span class="persona-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 12l2-7h14l2 7M5 12v8h14v-8M9 20v-5h6v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <div>
-            <span class="persona-tag"><span class="dot"></span>Magsasaka &amp; Mangingisda</span>
-            <h3>Kailangan ng konkretong tulong, hindi pangako lang</h3>
-            <p>Araw-araw na hanapbuhay — gusto mo ng ayudang aabot at serbisyong malapit sa'yo.</p>
-          </div>
-        </a>
-        <a class="persona-card" href="#basic-services">
-          <span class="persona-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.35-9.5-8.5C.9 9 2.3 5.5 6 5c2.2-.3 3.6 1 6 3.5C14.4 6 15.8 4.7 18 5c3.7.5 5.1 4 3.5 7.5C19 16.65 12 21 12 21z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-          </span>
-          <div>
-            <span class="persona-tag"><span class="dot"></span>Nanay &amp; Ate ng Barangay</span>
-            <h3>Proteksyon at oportunidad para sa pamilya</h3>
-            <p>Ikaw ang unang tinatawagan pag may problema — gusto mo ng ligtas na kalusugan at negosyo.</p>
-          </div>
-        </a>
-        <a class="persona-card" href="#non-violent-peace">
-          <span class="persona-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 19s-5-2.7-6-8c-.5-2.5.5-5 3-5 1.8 0 2.9 1 3 2.5C9.1 7 10.2 6 12 6c1.8 0 2.9 1 3 2.5.1-1.5 1.2-2.5 3-2.5 2.5 0 3.5 2.5 3 5-1 5.3-6 8-6 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </span>
-          <div>
-            <span class="persona-tag"><span class="dot"></span>Beterano ng Kapayapaan</span>
-            <h3>Kapayapaang may kasamang kabuhayan</h3>
-            <p>Naghintay ka na masyado — gusto mo ng resulta, hindi limbo.</p>
-          </div>
-        </a>
-        <a class="persona-card" href="#green-economy">
-          <span class="persona-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 21l7-7M14 3l7 7-3 3-7-7 3-3zM7 14l3 3-3 3-3-3 3-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-          </span>
-          <div>
-            <span class="persona-tag"><span class="dot"></span>Negosyanteng Bangsamoro</span>
-            <h3>Pwede palakihin ang negosyo</h3>
-            <p>May maliit ka nang negosyo — gusto mo ng access sa financing at global na merkado.</p>
-          </div>
-        </a>
-        <a class="persona-card" href="#alliance-building">
-          <span class="persona-icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-1.5L12 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-          </span>
-          <div>
-            <span class="persona-tag"><span class="dot"></span>Nakatatanda &amp; Lider ng Pananampalataya</span>
-            <h3>Malinis na pamamahala, magalang na proseso</h3>
-            <p>Respetado ka sa komunidad — gusto mo ng partidong may prinsipyo at may boses ang barangay.</p>
-          </div>
-        </a>
+      <div class="persona-row" role="group" aria-label="Piliin ang pinakamalapit sa'yo">
+        <button class="persona-chip" type="button" data-persona="professional" aria-pressed="false">Propesyonal / Kabataan</button>
+        <button class="persona-chip" type="button" data-persona="provider"     aria-pressed="false">Magsasaka / Mangingisda</button>
+        <button class="persona-chip" type="button" data-persona="matriarch"    aria-pressed="false">Ina / Community Leader</button>
+        <button class="persona-chip" type="button" data-persona="peace"        aria-pressed="false">Peace Advocate</button>
+        <button class="persona-chip" type="button" data-persona="business"     aria-pressed="false">Negosyante / Halal</button>
+        <button class="persona-chip" type="button" data-persona="elder"        aria-pressed="false">Nakatatanda / Lider ng Pananampalataya</button>
       </div>
+
+      <p class="form-note" id="personaNote" role="status" aria-live="polite" hidden></p>
     </div>
   </section>
 
-  <!-- ============ LEADERSHIP ============ -->
-  <section id="leadership" class="band-navy">
+  <!-- ==================== BANGON PLATFORM ==================== -->
+  <section id="bangon" aria-labelledby="bangon-h">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">Ang lideratura ng PBB</p>
-        <h2>Pinamumunuan ng propesyonal, hindi ng padrino</h2>
-        <p>Ang Partido Bangon Bangsamoro ay itinatag ng mga grassroots leader at propesyonal sa Cotabato City noong 2022. Sa ilalim ng lideraturang ito, iniluluwal ang isang bagong uri ng pulitika sa BARMM — malinis, may alam, at handang maglingkod.</p>
+        <p class="eyebrow">Ang platform of government</p>
+        <h2 id="bangon-h">Anim na pangako. Isang salita: BANGON.</h2>
+        <p>
+          Bawat letra ay isang haligi ng pamamahala — may sariling pahina, may konkretong
+          panukalang batas, at may paraan para sumali ka.
+        </p>
       </div>
 
-      <figure class="showcase reveal-figure" style="margin:0 0 28px">
-        <div class="showcase-frame" style="padding:0;border:none;background:transparent;box-shadow:none">
-          <img src="assets/leadership/nashrudin-kusain.jpg" 
-               alt="Nashrudin Piang Kusain, Regional President ng Partido Bangon Bangsamoro, sa isang pagpupulong kasama ang mga lider ng komunidad." 
-               style="width:100%;height:auto;display:block;border-radius:var(--radius)"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div style="display:none;width:100%;aspect-ratio:16/9;background:var(--forest-tint);align-items:center;justify-content:center;border-radius:var(--radius)">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
-          </div>
-        </div>
-        <figcaption style="margin-top:10px">Nashrudin Piang Kusain — Regional President, Partido Bangon Bangsamoro</figcaption>
-      </figure>
+      <div class="grid-auto" data-pillar-grid>
 
-      <div class="reveal">
-        <div class="bracket" style="background:var(--white);display:grid;gap:20px;grid-template-columns:1fr;align-items:start">
-          <div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-              <span style="display:inline-flex;align-items:center;gap:.4em;background:var(--navy-tint);color:var(--navy);font-family:var(--font-label);font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:100px;border:1px solid #15264d22">🎓 Doctoral degree candidate</span>
-              <span style="display:inline-flex;align-items:center;gap:.4em;background:var(--forest-tint);color:var(--forest-deep);font-family:var(--font-label);font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:100px;border:1px solid #0A6E2E22">🏛️ BARMM governance advocate</span>
-              <span style="display:inline-flex;align-items:center;gap:.4em;background:var(--forest-tint);color:var(--forest-deep);font-family:var(--font-label);font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:100px;border:1px solid #0A6E2E22">🕊️ Peace-through-policy architect</span>
-              <span style="display:inline-flex;align-items:center;gap:.4em;background:var(--gold-metal);color:var(--forest-deep);font-family:var(--font-label);font-size:.72rem;font-weight:700;padding:6px 12px;border-radius:100px;border:1px solid #8B691422">⭐ Founding leader, 2022</span>
-            </div>
-            <h3 style="font-size:1.35rem;margin-bottom:.3em;color:var(--forest-deep)">Nashrudin Piang Kusain</h3>
-            <p style="color:var(--ink-soft);margin:0 0 1em;font-weight:600">Regional President · Partido Bangon Bangsamoro</p>
+        <a class="card card-link pillar-card reveal" href="bangon-basic-services.html" data-pillar="basic-services">
+          <span class="persona-flag" data-persona-flag hidden></span>
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">B</span>
+            <h3>Batayang Serbisyo</h3>
+          </span>
+          <p>₱8,000 household subsidy, Super Health Stations na may libreng gamot at lab, at libreng internet sa paaralan.</p>
+          <span class="more">Basahin ang buong plano →</span>
+        </a>
 
-            <p style="margin-bottom:1em"><strong>Si Nashrudin Kusain</strong> ang nagtatag at nagtataguyod ng Partido Bangon Bangsamoro bilang isang <em>professional-led alternative</em> sa tradisyonal na pulitika ng BARMM. Hindi siya galing sa isang political clan, hindi rin siya dating miyembro ng MILF o MNLF. Sa halip, itinatag niya ang PBB bilang isang grassroots movement ng mga propesyonal, kabataan, at civil society leaders na naniniwala na ang Bangsamoro ay kaya ng umunlad sa pamamagitan ng <strong>meritokrasya, transparency, at structural engineering</strong> — hindi sa pamamagitan ng padrino o barilan.</p>
-            <p style="margin-bottom:1em">Kasalukuyan siyang nag-aaral para sa kanyang <strong>doctoral degree</strong>, na nagpapatibay sa kanyang kakayahang magbigay ng mga ebidensya-based na solusyon sa mga problema ng rehiyon. Sa ilalim ng kanyang pamumuno, ang PBB ay nakapagtayo ng <strong>71,000+ na miyembro</strong> sa lahat ng anim na probinsya ng BARMM at sa humigit-kumulang 90% ng mga munisipyo.</p>
-            <p style="margin-bottom:1em">Si Kusain ang nagpanukala ng <strong>BANGON platform</strong> — anim na estratehikong haligi na naglalayong gawing future-ready ang Bangsamoro: mula sa libreng internet at Super Health Stations, hanggang sa Green Skills at Shari'ah-compliant na financing. Ang kanyang pananaw: <em>"Tapos na ang panahon ng paghihintay. Panahon na ng pagtatayo."</em></p>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
-              <a class="btn btn-gold" href="https://www.facebook.com/nashrudin.kusain" target="_blank" rel="noopener" style="font-size:.85rem;padding:10px 18px">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right:6px"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z" fill="#063D1B"/></svg>
-                Sundan si Kusain sa Facebook
-              </a>
-              <a class="btn btn-outline" href="#get-involved" style="font-size:.85rem;padding:10px 18px;border-color:var(--forest);color:var(--forest)">Makipag-ugnayan sa Kanya</a>
-            </div>
-          </div>
-        </div>
+        <a class="card card-link pillar-card reveal" href="bangon-alliance.html" data-pillar="alliance">
+          <span class="persona-flag" data-persona-flag hidden></span>
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">A</span>
+            <h3>Alyansa at Partnership</h3>
+          </span>
+          <p>Bottom-Up Budgeting: ang barangay ang magsasabi kung saan mapupunta ang pondo, hindi ang Cotabato lang.</p>
+          <span class="more">Basahin ang buong plano →</span>
+        </a>
+
+        <a class="card card-link pillar-card reveal" href="bangon-natural-resources.html" data-pillar="natural-resources">
+          <span class="persona-flag" data-persona-flag hidden></span>
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">N</span>
+            <h3>Kalikasan</h3>
+          </span>
+          <p>Palaw Rangers, reforestation, proteksyon ng karagatan, at climate-smart na sakahan para sa susunod na henerasyon.</p>
+          <span class="more">Basahin ang buong plano →</span>
+        </a>
+
+        <a class="card card-link pillar-card reveal" href="bangon-green-economy.html" data-pillar="green-economy">
+          <span class="persona-flag" data-persona-flag hidden></span>
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">G</span>
+            <h3>Green Economy</h3>
+          </span>
+          <p>Halal bilang pandaigdigang pamantayan, Shari'ah-compliant na financing, at Green Skills na may trabaho sa dulo.</p>
+          <span class="more">Basahin ang buong plano →</span>
+        </a>
+
+        <a class="card card-link pillar-card reveal" href="bangon-open-governance.html" data-pillar="open-governance">
+          <span class="persona-flag" data-persona-flag hidden></span>
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">O</span>
+            <h3>Bukas na Pamahalaan</h3>
+          </span>
+          <p>Meritokrasya sa pagkuha ng empleyado, bukas na badyet, at anti-korapsyon na may ngipin.</p>
+          <span class="more">Basahin ang buong plano →</span>
+        </a>
+
+        <a class="card card-link pillar-card reveal" href="bangon-peace.html" data-pillar="peace">
+          <span class="persona-flag" data-persona-flag hidden></span>
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">N</span>
+            <h3>Kapayapaan</h3>
+          </span>
+          <p>Reintegrasyon ng dating kombatant, rehabilitasyon ng Marawi, at community-based na resolusyon ng alitan.</p>
+          <span class="more">Basahin ang buong plano →</span>
+        </a>
+
       </div>
     </div>
   </section>
 
-
-  <!-- ============================================================ -->
-  <!-- ============ PILLAR B — BASIC SERVICES ENHANCEMENT ========= -->
-  <!-- ============================================================ -->
-  <section id="basic-services" class="pillar-section band-forest">
+  <!-- ==================== PROOF ==================== -->
+  <section class="band-tint" aria-labelledby="numbers-h">
     <div class="wrap">
-      <div class="pillar-head reveal">
-        <span class="pillar-badge" aria-hidden="true">B</span>
-        <div>
-          <p class="pillar-kicker">Panuntunan 1 ng BANGON</p>
-          <h2>Basic Services Enhancement</h2>
-        </div>
+      <h2 id="numbers-h" class="sr-only">Ang PBB sa mga numero</h2>
+      <div class="stat-row reveal">
+        <div class="stat"><b>71,000+</b><span>miyembro sa buong BARMM</span></div>
+        <div class="stat"><b>2022</b><span>itinatag sa Cotabato City</span></div>
+        <div class="stat"><b>6+3</b><span>probinsya at komponent na lungsod</span></div>
+        <div class="stat"><b>Set. 14</b><span>araw ng eleksyon, 2026</span></div>
       </div>
-      <p class="pillar-lede reveal">Malayo man ang barangay mo, dapat may internet, may pantulong pang-kalusugan, at may ayuda ka. Ito ang pinakabatayan — serbisyong dapat abot ng bawat tahanan.</p>
-
-      <div class="pillar-icons reveal" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round"><path d="M2 8.5a16 16 0 0 1 20 0M5.5 12a11 11 0 0 1 13 0M9 15.5a6 6 0 0 1 6 0"/><circle cx="12" cy="19" r="1.4" fill="var(--forest-deep)" stroke="none"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v6M9 6h6M12 11v10M6 15h12M8 15c0 3 1.8 6 4 6s4-3 4-6"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linejoin="round"><path d="M12 3L2 8l10 5 10-5-10-5z"/><path d="M6 10.5V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.5"/></svg>
-      </div>
-
-      <div class="pillar-body">
-        <div class="reveal">
-          <div class="persona-fit">
-            <span>👨‍🌾 Para sa Magsasaka &amp; Mangingisda</span>
-            <span>👩 Para sa Nanay &amp; Ate</span>
-          </div>
-          <ul class="commit-list">
-            <li>Libreng internet sa mga paaralan — para makapag-aral kahit malayo ang barangay</li>
-            <li>Super Health Station sa bawat lugar — libreng gamot at libreng laboratory test</li>
-            <li><strong>₱8,000</strong> na tulong-pinansyal para sa bawat pamilyang Bangsamoro</li>
-            <li>Scholarship at day-care support para sa mga bata (ECCD)</li>
-          </ul>
-          <p class="law-note">Kaugnay na batas na isusulong: BARMM ECCD Inter-Agency Council · Super Health Stations Act · Magna Carta for the Poor · Zakat System Regulation Act</p>
-        </div>
-        <div class="pillar-quote reveal">
-          <p>"Hindi na kailangang hintayin pa ang tulong. Walong libong piso, libreng gamot, libreng lab test — hindi pangako lang, aksyon."</p>
-          <p class="quote-en">Not just promises — real support families can count on.</p>
-        </div>
-      </div>
-      <!-- B-CTA: Basic Services Suggestion & Interest Form -->
-      <div class="reveal" style="margin-top:32px">
-        <div class="bracket" style="background:var(--white);border:1px solid #0A6E2E33">
-          <p class="eyebrow" style="margin-bottom:.6em">✎ Ibahagi ang iyong karanasan</p>
-          <h3 style="font-size:1.2rem;margin-bottom:.4em">Gusto mo bang mas mapabuti ang Basic Services sa inyong lugar?</h3>
-          <p style="color:var(--ink-soft);margin-bottom:18px">I-record namin ang iyong suhestiyon at idadagdag ka sa listahan ng mga interesadong makatanggap ng update tungkol sa Super Health Stations, libreng internet, at ₱8,000 subsidy.</p>
-          <form id="basicServicesForm" novalidate>
-            <div style="display:grid;gap:14px;grid-template-columns:1fr">
-              <div class="field" style="margin-bottom:0">
-                <label for="bsName">Buong pangalan</label>
-                <input id="bsName" name="bsName" type="text" autocomplete="name" required>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="bsEmail">Email o cellphone number</label>
-                <input id="bsEmail" name="bsEmail" type="text" required>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="bsBarangay">Barangay at Munisipyo</label>
-                <input id="bsBarangay" name="bsBarangay" type="text" placeholder="Hal: Barangay Poblacion, Sultan Kudarat" required>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="bsService">Anong serbisyo ang kailangan ng inyong komunidad? (Pumili o maglagay ng iba)</label>
-                <select id="bsService" name="bsService" required>
-                  <option value="" disabled selected>Piliin ang serbisyo</option>
-                  <option>Super Health Station / libreng gamot at lab test</option>
-                  <option>Libreng internet sa paaralan</option>
-                  <option>₱8,000 household subsidy</option>
-                  <option>Scholarship / day-care para sa mga bata</option>
-                  <option>Iba pa — ilagay sa komento sa ibaba</option>
-                </select>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="bsSuggestion">Ilarawan ang iyong suhestiyon o karanasan</label>
-                <textarea id="bsSuggestion" name="bsSuggestion" rows="3" placeholder="Ano ang nangyayari sa inyong lugar? Ano ang solusyon na gusto mo?" required></textarea>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
-                  <input type="checkbox" id="bsConsent" name="bsConsent" required style="width:auto;margin-top:3px">
-                  <span style="color:var(--ink)">Sumasang-ayon akong idagdag ang aking detalye sa listahan ng mga interesadong makatanggap ng update mula sa PBB tungkol sa Basic Services.</span>
-                </label>
-              </div>
-            </div>
-            <button class="btn btn-gold" type="submit" id="bsSubmit" style="margin-top:16px;width:100%;justify-content:center">Ipadala ang Suhestiyon at I-register ang Interes Ko</button>
-            <p class="form-status" id="bsStatus" role="status" aria-live="polite" style="margin-top:10px"></p>
-          </form>
-        </div>
-      </div>
-
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- ====== PILLAR A — ALLIANCE BUILDING & PARTNERSHIPS ========= -->
-  <!-- ============================================================ -->
-  <section id="alliance-building" class="pillar-section">
+  <!-- ==================== LEADERSHIP ==================== -->
+  <section id="lideratura" class="band-navy" aria-labelledby="lead-h">
     <div class="wrap">
-      <div class="pillar-head reveal">
-        <span class="pillar-badge" aria-hidden="true">A</span>
-        <div>
-          <p class="pillar-kicker">Panuntunan 2 ng BANGON</p>
-          <h2>Alliance Building &amp; Partnerships</h2>
-        </div>
-      </div>
-      <p class="pillar-lede reveal">Hindi dapat isang tao lang ang nagpapasya para sa lahat. Sa PBB, ang bawat barangay chapter ay may boses sa plano at badyet — patungo sa Regional/Central Committee, at pabalik.</p>
-
-      <div class="pillar-body">
-        <figure class="showcase reveal-figure">
-          <div class="showcase-frame">
-            <img src="assets/images/governance-architecture.jpg" width="1600" height="893" loading="lazy" alt="Happy Ka Bangsamoro Governance Architecture — feedback mula sa miyembro hanggang Regional Committee, at pabalik.">
-          </div>
-          <figcaption>Umaakyat ang boses mula sa miyembro; bumababa ang badyet at suporta.</figcaption>
-        </figure>
-        <div class="reveal">
-          <div class="persona-fit">
-            <span>🕌 Para sa Nakatatanda &amp; Lider</span>
-            <span>🤝 Para sa Ground Volunteer</span>
-          </div>
-          <ul class="commit-list">
-            <li>Bottom-Up Budgeting — ang barangay mismo ang magpaplano ng gagastusin, hindi opisina lang</li>
-            <li>Regular na kumustahan sa pagitan ng miyembro at pamunuan</li>
-            <li>Partnership sa negosyo, simbahan/moske, at civil society groups</li>
-          </ul>
-          <p class="law-note">Kaugnay na batas na isusulong: Bottom-Up Budgeting Institutionalization Act</p>
-        </div>
+      <div class="section-head reveal">
+        <p class="eyebrow">Lideratura</p>
+        <h2 id="lead-h">Propesyonal ang pinuno, hindi padrino</h2>
       </div>
 
-      <div class="pillar-quote reveal" style="margin-top:22px;max-width:64ch">
-        <p>"Ang PBB ay hindi nagdidikta — nakikinig kami, at sabay-sabay naming binubuo ang plano kasama ang bawat komunidad."</p>
-        <p class="quote-en">We don't dictate — we listen, and build the plan together with every community.</p>
-      </div>
-      <!-- A-CTA: Alliance & Partnership Agreement Form -->
-      <div class="reveal" style="margin-top:32px">
-        <div class="bracket" style="background:var(--white);border:1px solid #152A5233">
-          <p class="eyebrow" style="margin-bottom:.6em">🤝 Maging Kaalyado ng PBB</p>
-          <h3 style="font-size:1.2rem;margin-bottom:.4em">Mag-sign ng Partnership Agreement kasama ang Partido Bangon Bangsamoro</h3>
-          <p style="color:var(--ink-soft);margin-bottom:18px">Kung kayo ay isang organisasyon, asosasyon, simbahan, moske, negosyo, o civil society group na nais makipagtulungan sa PBB para sa Bottom-Up Budgeting, sectoral organizing, at grassroots network building — basahin ang Partnership Agreement sa ibaba, pumirma nang elektroniko, at makakatanggap kayo agad ng kopya.</p>
-
-          <div style="background:var(--paper);border:1px solid #0A6E2E30;border-radius:var(--radius);padding:16px;max-height:220px;overflow-y:auto;margin-bottom:18px;font-size:.86rem;color:var(--ink-soft)">
-            <p style="margin-bottom:.8em"><strong>Alliance &amp; Partnership Agreement — v1, Ago. 2026</strong></p>
-            <p style="margin-bottom:.8em">1. Sumasang-ayon ang Partner na suportahan ang mga inisyatiba ng PBB sa ilalim ng Alliance Building &amp; Partnerships pillar ng BANGON platform — Bottom-Up Budgeting, sectoral organizing, at grassroots network building — sa pamamagitan ng partisipasyon sa civil-society engagement, community dialogue, o in-kind na suporta ayon sa magkasunduan.</p>
-            <p style="margin-bottom:.8em">2. Ang kasunduang ito ay <strong>hindi</strong> nangangahulugan ng financial contribution, campaign donation, o obligasyon sa pag-endorso. Maaaring umatras ang alinmang partido sa kasunduang ito sa pamamagitan ng nakasulat na abiso anumang oras.</p>
-            <p style="margin-bottom:.8em">3. Gagamitin lang ng PBB ang detalye ng Partner para i-coordinate ang mga partnership activities, alinsunod sa <a href="privacy.html" target="_blank" rel="noopener" style="text-decoration:underline">Privacy Policy</a> ng PBB, at sakop ng mga alituntunin ng COMELEC sa campaign finance at fair-election disclosure kung naaangkop.</p>
-            <p style="margin:0">4. Ang pag-type ng buong legal na pangalan sa ibaba at pag-submit ng form na ito ay bumubuo ng <strong>electronic signature</strong> sa ilalim ng Republic Act 8792 (Electronic Commerce Act), na nagpapatunay ng pagsang-ayon sa mga tuntuning nakasaad sa itaas.</p>
-          </div>
-
-          <form id="allianceForm" novalidate>
-            <div style="display:grid;gap:14px;grid-template-columns:1fr">
-              <div class="field" style="margin-bottom:0">
-                <label for="apOrgName">Pangalan ng organisasyon / grupo</label>
-                <input id="apOrgName" name="apOrgName" type="text" required>
-              </div>
-              <div style="display:grid;gap:14px;grid-template-columns:1fr 1fr">
-                <div class="field" style="margin-bottom:0">
-                  <label for="apContactName">Pangalan ng contact person</label>
-                  <input id="apContactName" name="apContactName" type="text" autocomplete="name" required>
-                </div>
-                <div class="field" style="margin-bottom:0">
-                  <label for="apContactEmail">Email address</label>
-                  <input id="apContactEmail" name="apContactEmail" type="email" autocomplete="email" required>
-                </div>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="apOrgType">Uri ng organisasyon</label>
-                <select id="apOrgType" name="apOrgType" required>
-                  <option value="" disabled selected>Piliin ang uri</option>
-                  <option>Civil Society Organization (CSO)</option>
-                  <option>Professional Association</option>
-                  <option>Religious Institution (Simbahan / Moske)</option>
-                  <option>Business / SME</option>
-                  <option>Cooperative</option>
-                  <option>Youth Organization</option>
-                  <option>Women's Group</option>
-                  <option>Barangay Council / LGU</option>
-                  <option>Iba pa</option>
-                </select>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="apProvince">Lokasyon ng organisasyon</label>
-                <select id="apProvince" name="apProvince" required>
-                  <option value="" disabled selected>Piliin ang lugar</option>
-                  <option>Maguindanao del Norte</option>
-                  <option>Maguindanao del Sur</option>
-                  <option>Lanao del Sur</option>
-                  <option>Basilan (maliban sa Isabela City)</option>
-                  <option>Tawi-Tawi</option>
-                  <option>Cotabato City</option>
-                  <option>Lamitan City</option>
-                  <option>Marawi City</option>
-                  <option>Special Geographic Area</option>
-                </select>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="apProposal">Ano ang inyong maaaring iaambag sa partnership? (Short proposal)</label>
-                <textarea id="apProposal" name="apProposal" rows="3" placeholder="Hal: Maaari kaming mag-organisa ng 500 miyembro para sa town hall; mayroon kaming training facility; etc." required></textarea>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="apSignature">I-type ang buong legal na pangalan bilang e-signature</label>
-                <input id="apSignature" name="apSignature" type="text" style="font-style:italic" placeholder="Hal: Juan D. Dela Cruz" required>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
-                  <input type="checkbox" id="apAgreementConsent" name="apAgreementConsent" required style="width:auto;margin-top:3px">
-                  <span style="color:var(--ink)">Nabasa ko ang Partnership Agreement sa itaas at sumasang-ayon akong sumailalim dito.</span>
-                </label>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
-                  <input type="checkbox" id="apConsent" name="apConsent" required style="width:auto;margin-top:3px">
-                  <span style="color:var(--ink)">Sumasang-ayon kaming makipag-ugnayan sa PBB tungkol sa partnership na ito.</span>
-                </label>
-              </div>
-            </div>
-            <button class="btn btn-gold" type="submit" id="apSubmit" style="margin-top:16px;width:100%;justify-content:center">Pumirma at Mag-submit ng Partnership Agreement</button>
-            <p class="form-status" id="apStatus" role="status" aria-live="polite" style="margin-top:10px"></p>
-          </form>
-
-          <div id="apConfirm" style="display:none;text-align:center;padding:20px;background:var(--forest-tint);border-radius:var(--radius);margin-top:16px">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;display:block"><circle cx="12" cy="12" r="10" fill="#0A6E2E"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <p style="font-weight:700;color:var(--forest-deep);margin-bottom:.3em">Napirmahan na ang Partnership Agreement!</p>
-            <p style="color:var(--ink-soft);font-size:.9rem;margin-bottom:8px">Salamat sa pakikipagtulungan. Puwede ninyong i-download ang inyong nilagdaang kopya, o i-email ito sa inyong sarili.</p>
-            <!-- Populated by showConfirmation(). Says plainly whether PBB has
-                 the agreement on record yet, or whether it is still queued. -->
-            <p id="apReference" style="font-family:var(--font-label);font-size:.8rem;letter-spacing:.04em;color:var(--forest-deep);margin-bottom:14px"></p>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
-              <button type="button" class="btn btn-outline btn-small" id="apDownload">⬇ I-download ang nilagdaang kopya</button>
-              <button type="button" class="btn btn-outline btn-small" id="apEmailCopy">✉ I-email sa akin ang kopya</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================ -->
-  <!-- ========= PILLAR N — NATURAL RESOURCES PROTECTION =========== -->
-  <!-- ============================================================ -->
-  <section id="natural-resources" class="pillar-section band-forest">
-    <div class="wrap">
-      <div class="pillar-head reveal">
-        <span class="pillar-badge" aria-hidden="true">N</span>
-        <div>
-          <p class="pillar-kicker">Panuntunan 3 ng BANGON</p>
-          <h2>Natural Resources Protection</h2>
-        </div>
-      </div>
-      <p class="pillar-lede reveal">Ang lupa, dagat, at kagubatan ng Bangsamoro ay hindi lang para ubusin ngayon — mana ito na dapat maiwan pa rin sa susunod na henerasyon.</p>
-
-      <div class="pillar-icons reveal" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 2 4 4 4 6.5A4 4 0 0 1 8 9.5C8 7 9 5 12 3z"/><path d="M12 12v9M8 21h8"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 8-7 9-4-1-7-4-7-9V6l7-3z"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M4 12c2-3.5 5-5.5 8-5.5s6 2 8 5.5c-2 3.5-5 5.5-8 5.5s-6-2-8-5.5z"/></svg>
-      </div>
-
-      <div class="pillar-body">
-        <div class="reveal">
-          <div class="persona-fit">
-            <span>👨‍🌾 Para sa Magsasaka &amp; Mangingisda</span>
-            <span>💼 Para sa Negosyanteng Bangsamoro</span>
-          </div>
-          <ul class="commit-list">
-            <li>"Palaw Rangers" na magbabantay sa kagubatan at karagatan laban sa illegal na aktibidad</li>
-            <li>Malinaw na batas laban sa illegal logging, illegal fishing, at pagsira sa kalikasan</li>
-            <li>Suporta sa climate-smart agriculture para hindi basta maapektuhan ng bagyo o tagtuyot</li>
-          </ul>
-          <p class="law-note">Kaugnay na batas na isusulong: Environment &amp; Natural Resources Code · Climate Change Commission Act · Ligawasan Development Authority Act</p>
-        </div>
-        <div class="pillar-quote reveal">
-          <p>"Ang kalikasan ay hindi negosyo lang na sasamantalahin — ito ang mana natin sa mga anak."</p>
-          <p class="quote-en">Nature isn't just business to exploit — it's our children's inheritance.</p>
-        </div>
-      </div>
-      <!-- N-CTA: Natural Resources Volunteer Sign-up -->
-      <div class="reveal" style="margin-top:32px">
-        <div class="bracket" style="background:var(--white);border:1px solid #0A6E2E33">
-          <p class="eyebrow" style="margin-bottom:.6em">🌿 Maging Palaw Ranger Volunteer</p>
-          <h3 style="font-size:1.2rem;margin-bottom:.4em">Mag-volunteer para sa kalikasan ng Bangsamoro</h3>
-          <p style="color:var(--ink-soft);margin-bottom:18px">Kung nais mong maging bahagi ng "Palaw Rangers" — ang grupo ng mga boluntaryong magbabantay sa ating kagubatan at karagatan laban sa illegal logging at illegal fishing — mag-sign up sa ibaba. Ite-train namin kayo at kakabit namin sa inyong lokal na munisipyo.</p>
-          <form id="nrForm" novalidate>
-            <div style="display:grid;gap:14px;grid-template-columns:1fr">
-              <div style="display:grid;gap:14px;grid-template-columns:1fr 1fr">
-                <div class="field" style="margin-bottom:0">
-                  <label for="nrName">Buong pangalan</label>
-                  <input id="nrName" name="nrName" type="text" autocomplete="name" required>
-                </div>
-                <div class="field" style="margin-bottom:0">
-                  <label for="nrAge">Edad</label>
-                  <!--
-                    Was min="18", which locked out 15-17 year olds — a direct
-                    contradiction of the party's youth-leadership platform and
-                    its youth first nominee (audit, Part 4). Minors are now
-                    welcome on a youth_supporter track; RA 10173 requires
-                    guardian consent, collected by the block below, which the
-                    submit-lead Edge Function re-checks server-side.
-                  -->
-                  <input id="nrAge" name="nrAge" type="number" min="15" max="80" required>
-                </div>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="nrContact">Cellphone number o email</label>
-                <input id="nrContact" name="nrContact" type="text" required>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="nrMunicipality">Munisipyo at Probinsya</label>
-                <input id="nrMunicipality" name="nrMunicipality" type="text" placeholder="Hal: Lamitan City, Basilan" required>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="nrFocus">Saang aspeto ng kalikasan ka interesadong mag-volunteer?</label>
-                <select id="nrFocus" name="nrFocus" required>
-                  <option value="" disabled selected>Piliin ang focus area</option>
-                  <option>Reforestation / Tree planting</option>
-                  <option>Coastal / marine protection (anti-illegal fishing)</option>
-                  <option>Forest patrol / anti-illegal logging</option>
-                  <option>Climate-smart agriculture education</option>
-                  <option>Waste management at community clean-up</option>
-                  <option>Lahat ng nabanggit</option>
-                </select>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label for="nrExperience">May karanasan ka ba sa environmental work? (Optional)</label>
-                <textarea id="nrExperience" name="nrExperience" rows="2" placeholder="Hal: dating miyembro ng baranggay environmental council, naging volunteer sa tree planting, etc."></textarea>
-              </div>
-              <div class="field" style="margin-bottom:0">
-                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
-                  <input type="checkbox" id="nrConsent" name="nrConsent" required style="width:auto;margin-top:3px">
-                  <span style="color:var(--ink)">Sumasang-ayon akong maging volunteer ng PBB para sa Natural Resources Protection at tumanggap ng training at assignment.</span>
-                </label>
-              </div>
-
-              <!-- Shown by JS only when nrAge < 18. Required in that case. -->
-              <div class="field" id="nrGuardianWrap" hidden>
-                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
-                  <input type="checkbox" id="nrGuardianConsent" name="nrGuardianConsent" style="width:auto;margin-top:3px">
-                  <span style="color:var(--ink)">Wala pang 18 anyos ako. Kasama ko ang aking magulang o guardian, at sumasang-ayon sila sa aking paglahok sa <strong>PBB Youth Circle</strong> — mga event, training, at volunteer work na angkop sa edad ko.</span>
-                </label>
-              </div>
-            </div>
-            <button class="btn btn-gold" type="submit" id="nrSubmit" style="margin-top:16px;width:100%;justify-content:center">Mag-sign up bilang Environment Volunteer</button>
-            <p class="form-status" id="nrStatus" role="status" aria-live="polite" style="margin-top:10px"></p>
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- ========== PILLAR G — GREEN ECONOMY ACCELERATION ============ -->
-  <!-- ============================================================ -->
-  <section id="green-economy" class="pillar-section">
-    <div class="wrap">
-      <div class="pillar-head reveal">
-        <span class="pillar-badge" aria-hidden="true">G</span>
-        <div>
-          <p class="pillar-kicker">Panuntunan 4 ng BANGON</p>
-          <h2>Green Economy Acceleration</h2>
-        </div>
-      </div>
-      <p class="pillar-lede reveal">Bagong kasanayan, bagong industriya. Malinis na enerhiya, sustainable na sakahan, at Halal export — kaya nating tumaas ang kita nang hindi sinisira ang kalikasan.</p>
-
-      <div class="pillar-body">
-        <div class="reveal">
-          <div class="persona-fit">
-            <span>🎓 Para sa Batang Propesyonal</span>
-            <span>💼 Para sa Negosyanteng Bangsamoro</span>
-          </div>
-          <ul class="commit-list">
-            <li>"Green Skills" training para sa kabataan — trabaho sa renewable energy at climate-resilient na industriya</li>
-            <li>Insentibo para sa malinis na enerhiya at climate-resilient na imprastraktura</li>
-            <li>Shari'ah-compliant na financing at research lab para sa Halal certification</li>
-            <li>Tulong sa maliliit na negosyo para umabot sa export market</li>
-          </ul>
-          <p class="law-note">Kaugnay na batas na isusulong: Bangsamoro Investments and Incentives Code</p>
-        </div>
+      <div class="grid-auto">
         <figure class="showcase reveal-figure" style="margin:0">
           <div class="showcase-frame">
-            <img src="assets/images/green-skills.jpg" width="1600" height="893" loading="lazy" alt="Green Skills: renewable energy engineering, sustainable agriculture, at climate-resilient infrastructure.">
+            <img src="assets/leadership/nashrudin-kusain.jpg" width="1200" height="900" loading="lazy"
+                 alt="Si Nashrudin Piang Kusain, Regional President ng Partido Bangon Bangsamoro.">
           </div>
-          <figcaption>Renewable Energy · Sustainable Agriculture · Halal Export-Ready</figcaption>
         </figure>
-      </div>
 
-      <div class="init-imgs two-up reveal" style="display:grid;gap:16px;margin-top:16px" >
-        <figure class="showcase reveal-figure">
-          <div class="showcase-frame">
-            <img src="assets/images/modernity-bridge.jpg" width="1600" height="893" loading="lazy" alt="Modernity Bridge: pag-a-align ng TESDA-BARMM sa bagong industriya at pagkakaroon ng regional scholarships.">
-          </div>
-          <figcaption>Bagong kasanayan para sa bagong trabaho.</figcaption>
-        </figure>
-      </div>
-
-      <div class="pillar-quote reveal" style="margin-top:6px;max-width:64ch">
-        <p>"Hindi lang tayo mamimili sa merkado — tayo mismo ang mag-e-export."</p>
-        <p class="quote-en">We won't just be consumers — we'll be exporters.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================ -->
-  <!-- ======== PILLAR O — OPEN & INCLUSIVE GOVERNANCE ============= -->
-  <!-- ============================================================ -->
-  <section id="open-governance" class="pillar-section band-forest">
-    <div class="wrap">
-      <div class="pillar-head reveal">
-        <span class="pillar-badge" aria-hidden="true">O</span>
-        <div>
-          <p class="pillar-kicker">Panuntunan 5 ng BANGON</p>
-          <h2>Open &amp; Inclusive Governance</h2>
-        </div>
-      </div>
-      <p class="pillar-lede reveal">Ang trabaho mo dapat nakabatay sa galing mo, hindi sa apelyido. At ang badyet ng gobyerno, dapat kitang-kita mo mula umpisa hanggang katapusan.</p>
-
-      <div class="pillar-icons reveal" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="1.5"/><path d="M8 10V7a4 4 0 0 1 8 0"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.3 15.3L21 21"/></svg>
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--forest-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 6h5l-3 6h5l-3-6M14 6h5l-3 6h5l-3-6"/></svg>
-      </div>
-
-      <div class="pillar-body">
         <div class="reveal">
-          <div class="persona-fit">
-            <span>🎓 Para sa Batang Propesyonal</span>
-            <span>👩 Para sa Nanay &amp; Ate</span>
-            <span>🕌 Para sa Nakatatanda</span>
-          </div>
-          <ul class="commit-list">
-            <li>Merit-based na pagkuha ng empleyado — wala nang "padrino system"</li>
-            <li>Bukas na badyet na puwedeng suriin ng sinumang mamamayan</li>
-            <li>Digital na serbisyo at permit — bawal na ang mahabang pila at "lagay"</li>
-            <li>Mas maraming babaeng kalahok sa desisyon at pamumuno</li>
-          </ul>
-          <p class="law-note">Kaugnay na batas na isusulong: Bangsamoro Gender and Development Code</p>
-        </div>
-        <div class="pillar-quote reveal">
-          <p>"Ang trabaho mo, dapat nakabase sa galing mo — hindi sa apelyido. Ang kababaihan ay hindi dekorasyon sa pulitika."</p>
-          <p class="quote-en">Merit over surname. Women belong at the decision table, not as decoration.</p>
+          <h3 style="color:var(--pbb-white)">Nashrudin Piang Kusain</h3>
+          <p style="color:var(--pbb-gold-bright);font-family:var(--pbb-font-label);font-weight:600">Regional President · Founding leader, 2022</p>
+          <p>
+            Itinatag ni Kusain ang PBB bilang <em>professional-led alternative</em> sa tradisyunal
+            na pulitika ng BARMM. Hindi siya galing sa political clan, at hindi rin siya dating
+            miyembro ng MILF o MNLF. Ang paniniwala niya: kaya umunlad ang Bangsamoro sa
+            meritokrasya, transparency, at maayos na pagpaplano — hindi sa padrino o barilan.
+          </p>
+          <p style="color:var(--pbb-ink)"><strong>“Tapos na ang panahon ng paghihintay. Panahon na ng pagtatayo.”</strong></p>
+          <a class="btn btn-gold btn-responsive" href="join.html">Makipag-ugnayan</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- ======= PILLAR N — NON-VIOLENT CONFLICT RESOLUTION ========== -->
-  <!-- ============================================================ -->
-  <section id="non-violent-peace" class="pillar-section band-dark">
-    <div class="wrap">
-      <div class="pillar-head reveal">
-        <span class="pillar-badge" aria-hidden="true">N</span>
-        <div>
-          <p class="pillar-kicker" style="color:var(--gold-bright)">Panuntunan 6 ng BANGON</p>
-          <h2>Non-violent Conflict Resolution</h2>
-        </div>
-      </div>
-      <p class="pillar-lede reveal" style="color:#D9DED2">Tapos na ang giyera, pero hindi pa tapos ang trabaho. Ang tunay na kapayapaan ay nakikita sa hapag-kainan ng bawat pamilya — hindi lang sa katahimikan.</p>
-
-      <div class="pillar-body">
-        <div class="reveal">
-          <div class="persona-fit">
-            <span>🕊️ Para sa Beterano ng Kapayapaan</span>
-            <span>🕌 Para sa Nakatatanda</span>
-          </div>
-          <ul class="commit-list" style="">
-            <li style="background:#ffffff10;border-color:#ffffff22;color:#EDEFE6">Community dialogue at mediation para sa rido at hidwaan sa pamilya</li>
-            <li style="background:#ffffff10;border-color:#ffffff22;color:#EDEFE6">Tunay na suporta sa mga dating kombatant — trabaho at kabuhayan, hindi limbo</li>
-            <li style="background:#ffffff10;border-color:#ffffff22;color:#EDEFE6">Tulong para sa mga apektado ng Marawi siege — kabayaran at rebuild</li>
-            <li style="background:#ffffff10;border-color:#ffffff22;color:#EDEFE6">Interfaith na programa para sa pagkakaisa ng Bangsamoro, IP, at settler na komunidad</li>
-          </ul>
-          <p class="law-note" style="color:#B9C4B4;border-color:var(--gold-bright)">Kaugnay na batas na isusulong: Marawi Siege Victims Compensation Act</p>
-        </div>
-        <figure class="showcase reveal-figure" style="margin:0">
-          <div class="showcase-frame">
-            <img src="assets/images/professionalizing-patrimony.jpg" width="1600" height="893" loading="lazy" alt="Mula sa transisyon patungo sa pagtatayo: kapayapaan bilang batayan ng pag-unlad ng Bangsamoro.">
-          </div>
-          <figcaption>Mula sa transisyon, patungo sa pagtatayo.</figcaption>
-        </figure>
-      </div>
-
-      <div class="pillar-quote reveal" style="margin-top:22px;max-width:64ch;background:#ffffff10;border:1px solid #ffffff22">
-        <p>"Ang kapayapaan ay hindi lang katahimikan ng baril — ito ay may disenteng kabuhayan sa hapag-kainan ng bawat pamilya."</p>
-        <p class="quote-en">Peace isn't just the absence of gunfire — it's a decent living on every family's table.</p>
-      </div>
-      <!-- N-CTA: BARMM Peace & Stability Intelligence Dashboard -->
-      <div class="reveal" style="margin-top:32px">
-        <div class="bracket" style="background:var(--forest-deep);border:1px solid var(--gold);color:#EDEFE6">
-          <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center">
-            <div style="flex:none;width:64px;height:64px;border-radius:50%;background:var(--gold-metal);display:flex;align-items:center;justify-content:center">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#063D1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <div style="flex:1;min-width:260px">
-              <p style="font-family:var(--font-label);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);font-weight:700;margin-bottom:.4em">🔒 Restricted Access</p>
-              <h3 style="font-size:1.2rem;margin-bottom:.3em;color:var(--white)">BARMM Peace &amp; Stability Intelligence Dashboard</h3>
-              <p style="color:#B9C4B4;margin:0 0 .8em">Real-time monitoring ng election security risk, COMELEC municipal classification (Red / Orange / Yellow / Green), at peace process indicators para sa mga accredited na PBB analyst at partner.</p>
-              <div style="display:flex;flex-wrap:wrap;gap:10px">
-                <a class="btn btn-gold" href="https://pbb.bolt.host/login?intelligence" target="_blank" rel="noopener" style="font-size:.85rem;padding:10px 18px">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="margin-right:6px"><path d="M15 7h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3M12 14V4m-4 4l4-4 4 4" stroke="#063D1B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Access Intelligence Dashboard
-                </a>
-                <span style="display:inline-flex;align-items:center;gap:.4em;font-family:var(--font-label);font-size:.72rem;font-weight:600;padding:8px 14px;border-radius:var(--radius);border:1px solid #ffffff33;color:#D9DED2">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  PBB Staff &amp; Verified Partners Only
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============ ROADMAP ============ -->
-  <section id="roadmap">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Ang daan papuntang 2026</p>
-        <h2>Tatlong yugto, isang layunin</h2>
-        <p>Mula sa pag-oorganisa ngayon, hanggang sa blueprint bago ang eleksyon, hanggang sa upuan sa parliamento sa Setyembre.</p>
-      </div>
-
-      <figure class="showcase reveal-figure">
-        <div class="showcase-frame">
-          <img src="assets/images/roadmap-2026.jpg" width="1600" height="893" loading="lazy" alt="Ang 2026 Roadmap: Horizon 1 The Foundation, Horizon 2 The Blueprint, Horizon 3 The Victory.">
-        </div>
-        <figcaption>Foundation, Blueprint, Victory — tatlong yugto papuntang 2026.</figcaption>
-      </figure>
-
-      <div class="horizons">
-        <article class="horizon is-current reveal">
-          <p class="h-num">Phase 1 · Ngayon</p>
-          <h3>Ang Pundasyon</h3>
-          <p>Pag-oorganisa sa grassroots at bawat sektor. Ina-activate namin ang mga kabataan at propesyonal, at nagtatayo ng chapters sa buong BARMM.</p>
-        </article>
-        <article class="horizon reveal">
-          <p class="h-num">Phase 2 · Bago ang Eleksyon</p>
-          <h3>Ang Blueprint</h3>
-          <p>Binubuo namin ang mga panukalang batas base sa Bangsamoro Organic Law — mula sa skills training hanggang Halal standardization.</p>
-        </article>
-        <article class="horizon is-win reveal">
-          <p class="h-num">Phase 3 · Setyembre 2026</p>
-          <h3>Ang Tagumpay</h3>
-          <p>Panalo sa upuan sa parliamento — District at Party representatives — para maisabatas ang BANGON agenda mula sa loob ng Bangsamoro Parliament.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ APPROACH ============ -->
-  <section id="approach" class="band-forest">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Paraan ng kampanya</p>
-        <h2>Participatory democracy, hindi patronage</h2>
-        <p>Hindi kami umaasa sa isang tao na magsasabi kung sino ang iboboto. Ibinibigay namin ang tunay na kapangyarihan sa desisyon sa susunod na henerasyon.</p>
-      </div>
-
-      <figure class="showcase reveal-figure">
-        <div class="showcase-frame">
-          <img src="assets/images/campaign-tactics.jpg" width="1600" height="893" loading="lazy" alt="Campaign Tactics: mula sa top-down patron machinery patungo sa grassroots network.">
-        </div>
-        <figcaption>Mula sa isang taong nagdidikta, patungo sa network ng magkakapantay.</figcaption>
-      </figure>
-
-      <div class="approach-grid">
-        <div class="approach-card no reveal">
-          <p class="approach-tag">Ang gusto naming palitan</p>
-          <h3>Top-down na sistema</h3>
-          <ul>
-            <li>Isang tao lang ang nagsasabi kung sino ang iboboto</li>
-            <li>Ralyong dahil sa utang na loob, hindi dahil sa paniniwala</li>
-            <li>Desisyong ginagawa PARA sa komunidad, hindi KASAMA ang komunidad</li>
-          </ul>
-        </div>
-        <div class="approach-card yes reveal">
-          <p class="approach-tag">Ang binubuo namin</p>
-          <h3>Grassroots na network</h3>
-          <ul>
-            <li>Sectoral na pag-oorganisa — forum, town hall, at feedback session, hindi ralyong pinipilit</li>
-            <li>Kabataan sa kapangyarihan — mga batang propesyonal na tumatakbo sa District at Party seats</li>
-            <li>Tunay na desisyon ang ibinibigay, hindi pangako lang</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ VOTERS EDUCATION ============ -->
-  <section id="voters-education" class="band-navy">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">🗳️ Karapatan mong bumoto</p>
-        <h2>Alamin kung paano bumoto para sa PBB</h2>
-        <p>Hindi lang ito eleksyon — ito ang unang pagkakataon na pipili tayo ng multi-party parliament para sa BARMM. Dapat alam ng bawat botante kung paano gumagana ang sistema. Walang iwanan.</p>
-      </div>
-      <div class="reveal" style="margin-bottom:24px">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-          <button type="button" class="lang-btn active" data-lang="fil" style="padding:8px 16px;border:1px solid var(--forest);background:var(--forest);color:#fff;border-radius:100px;font-family:var(--font-label);font-size:.78rem;font-weight:700;cursor:pointer">Filipino</button>
-          <button type="button" class="lang-btn" data-lang="en" style="padding:8px 16px;border:1px solid var(--forest);background:transparent;color:var(--forest);border-radius:100px;font-family:var(--font-label);font-size:.78rem;font-weight:700;cursor:pointer">English</button>
-          <button type="button" class="lang-btn" data-lang="mag" style="padding:8px 16px;border:1px solid var(--forest);background:transparent;color:var(--forest);border-radius:100px;font-family:var(--font-label);font-size:.78rem;font-weight:700;cursor:pointer">Maguindanaon</button>
-          <button type="button" class="lang-btn" data-lang="mar" style="padding:8px 16px;border:1px solid var(--forest);background:transparent;color:var(--forest);border-radius:100px;font-family:var(--font-label);font-size:.78rem;font-weight:700;cursor:pointer">Maranao</button>
-          <button type="button" class="lang-btn" data-lang="tau" style="padding:8px 16px;border:1px solid var(--forest);background:transparent;color:var(--forest);border-radius:100px;font-family:var(--font-label);font-size:.78rem;font-weight:700;cursor:pointer">Tausug</button>
-        </div>
-        <p style="text-align:center;font-size:.8rem;color:var(--gold-deep);margin-top:8px">⚠️ Maguindanaon, Maranao, at Tausug translations — content owner to supply final text.</p>
-      </div>
-
-      <!-- Step-by-step visual explainer -->
-      <div class="reveal" style="margin-bottom:40px">
-        <div class="bracket" style="background:var(--white)">
-          <h3 style="font-size:1.25rem;margin-bottom:16px">📋 Step-by-step: Paano Bumoto sa Set. 14, 2026</h3>
-          <div style="display:grid;gap:16px;grid-template-columns:1fr">
-            <div style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:var(--forest-tint);border-radius:var(--radius);border-left:4px solid var(--forest)">
-              <span style="flex:none;width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);font-family:var(--font-display);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center">1</span>
-              <div>
-                <p style="margin:0;font-weight:700;color:var(--forest-deep)">Hanapin ang iyong precinto</p>
-                <p style="margin:4px 0 0;font-size:.95rem;color:var(--ink-soft)">Tiyakin na nakarehistro ka sa COMELEC. Dalhin ang valid ID. Ang eleksyon ay sa Set. 14, 2026.</p>
-                <p style="margin:4px 0 0;font-size:.85rem;color:var(--gold-deep);font-style:italic">Maguindanaon: "Pangita so precinto nu." · Maranao: "Kadapatan a mapia so precint a ka." · Tausug: "Kitaun in precinct mu."</p>
-              </div>
-            </div>
-            <div style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:var(--forest-tint);border-radius:var(--radius);border-left:4px solid var(--forest)">
-              <span style="flex:none;width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);font-family:var(--font-display);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center">2</span>
-              <div>
-                <p style="margin:0;font-weight:700;color:var(--forest-deep)">Dalawang balota, dalawang boto</p>
-                <p style="margin:4px 0 0;font-size:.95rem;color:var(--ink-soft)">Makakatanggap ka ng <strong>dalawang balota</strong>: isa para sa <strong>Party Representative</strong> (proportional) at isa para sa <strong>District Representative</strong> (direct).</p>
-                <p style="margin:4px 0 0;font-size:.85rem;color:var(--gold-deep);font-style:italic">Maguindanaon: "Duwa a balota, duwa a boto." · Maranao: "Dowa a balota, dowa a boto." · Tausug: "Duh a balota, duh a bota."</p>
-              </div>
-            </div>
-            <div style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:var(--forest-tint);border-radius:var(--radius);border-left:4px solid var(--gold)">
-              <span style="flex:none;width:32px;height:32px;border-radius:50%;background:var(--gold);color:var(--forest-deep);font-family:var(--font-display);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center">3</span>
-              <div>
-                <p style="margin:0;font-weight:700;color:var(--forest-deep)">Bumoto para sa PBB sa Party Ballot</p>
-                <p style="margin:4px 0 0;font-size:.95rem;color:var(--ink-soft)">Sa <strong>Party Representative ballot</strong>, hanapin ang <strong>Partido Bangon Bangsamoro (PBB)</strong>. Markahan ang logo namin. Ito ang proportional representation vote — dito nakasalalay kung ilang upuan ang makukuha ng PBB sa parliamento.</p>
-                <p style="margin:4px 0 0;font-size:.85rem;color:var(--gold-deep);font-style:italic">Maguindanaon: "Boto ko sa PBB sa Party Ballot." · Maranao: "Boto aken ko PBB sa Party Ballot." · Tausug: "Bota ku ha PBB ha Party Ballot."</p>
-              </div>
-            </div>
-            <div style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:var(--forest-tint);border-radius:var(--radius);border-left:4px solid var(--forest)">
-              <span style="flex:none;width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);font-family:var(--font-display);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center">4</span>
-              <div>
-                <p style="margin:0;font-weight:700;color:var(--forest-deep)">Bumoto para sa District Representative</p>
-                <p style="margin:4px 0 0;font-size:.95rem;color:var(--ink-soft)">Sa <strong>District Representative ballot</strong>, piliin ang kandidatong gusto mo para sa inyong parliamentary district. Ang PBB ay maaaring may field na rin ng District nominees — tanungin ang local chapter ninyo.</p>
-              </div>
-            </div>
-            <div style="display:flex;gap:14px;align-items:flex-start;padding:14px;background:var(--forest-tint);border-radius:var(--radius);border-left:4px solid var(--forest)">
-              <span style="flex:none;width:32px;height:32px;border-radius:50%;background:var(--forest);color:var(--white);font-family:var(--font-display);font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center">5</span>
-              <div>
-                <p style="margin:0;font-weight:700;color:var(--forest-deep)">I-feed sa VCM at kumuha ng resibo</p>
-                <p style="margin:4px 0 0;font-size:.95rem;color:var(--ink-soft)">Isubo ang balota sa Vote Counting Machine (VCM). Tiyakin na lumabas ang resibo at nasa iyo ito. Huwag iwanan ang resibo sa loob ng polling place.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Proportional Representation Tutorial -->
-      <div class="reveal" style="margin-bottom:40px">
-        <div class="bracket" style="background:var(--white)">
-          <h3 style="font-size:1.25rem;margin-bottom:16px">📊 Proportional Representation: Paano Namin Kinukuha ang Upuan?</h3>
-          <div style="display:grid;gap:20px;grid-template-columns:1fr">
-            <div>
-              <p style="margin-bottom:1em">Sa <strong>Party Representative ballot</strong>, hindi tao ang binoboto mo — <strong>partido</strong> ang binoboto mo. Ang PBB ay may 40 nominees. Kung makakuha ang PBB ng, halimbawa, 15% ng lahat ng party votes sa buong BARMM, makukuha namin ang 15% ng 40 upuan = <strong>6 upuan</strong> sa parliamento. Ang unang 6 na nominees sa listahan namin ang uupo.</p>
-              <div style="background:var(--navy-tint);padding:16px;border-radius:var(--radius);border-left:4px solid var(--navy)">
-                <p style="margin:0;font-family:var(--font-label);font-size:.85rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.04em">Simpleng formula</p>
-                <p style="margin:8px 0 0;font-size:1.1rem;color:var(--ink)"><strong>% ng party votes × 40 upuan = bilang ng upuang makukuha ng PBB</strong></p>
-                <p style="margin:6px 0 0;font-size:.9rem;color:var(--ink-soft)">Kaya mas maraming bumoto para sa PBB, mas maraming upuan. Bawat boto ay mahalaga.</p>
-              </div>
-            </div>
-            <figure class="showcase" style="margin:0">
-              <div class="showcase-frame">
-                <img src="assets/images/proportional-representation.jpg" width="1200" height="675" loading="lazy" alt="Proportional Representation visual explainer: kung paano ang party votes ay nagt-translate sa upuan sa parliamento." onerror="this.closest('figure').style.display='none'">
-              </div>
-              <figcaption>Mas maraming party votes = mas maraming upuan para sa PBB.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-
-      <!-- Two-Ballot System FAQ -->
-      <div class="reveal">
-        <div class="bracket" style="background:var(--white)">
-          <h3 style="font-size:1.25rem;margin-bottom:20px">❓ Madalas Itanong (FAQ): Ang Two-Ballot System</h3>
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <details style="background:var(--paper);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:14px 16px">
-              <summary style="font-weight:700;color:var(--forest-deep);cursor:pointer;font-family:var(--font-display);font-size:1rem">Bakit dalawang balota ang ibinibigay?</summary>
-              <p style="margin:10px 0 0;color:var(--ink-soft);font-size:.95rem">Ang BARMM Parliamentary Elections ay may <strong>dalawang uri ng representasyon</strong>: (1) <strong>Party Representatives</strong> — 40 upuan na hinahati sa mga partido base sa proportional votes; at (2) <strong>District Representatives</strong> — direktang halal mula sa bawat parliamentary district. Kaya dalawang balota: isa para sa partido, isa para sa distrito.</p>
-            </details>
-            <details style="background:var(--paper);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:14px 16px">
-              <summary style="font-weight:700;color:var(--forest-deep);cursor:pointer;font-family:var(--font-display);font-size:1rem">Puwede bang iba ang iboto ko sa Party at sa District?</summary>
-              <p style="margin:10px 0 0;color:var(--ink-soft);font-size:.95rem"><strong>Oo.</strong> Ang Party vote at District vote ay magkahiwalay. Puwede mong iboto ang PBB sa Party ballot, at puwede mong iboto ang ibang kandidato sa District ballot. Walang conflict.</p>
-            </details>
-            <details style="background:var(--paper);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:14px 16px">
-              <summary style="font-weight:700;color:var(--forest-deep);cursor:pointer;font-family:var(--font-display);font-size:1rem">Ano ang proportional representation? Hindi ba tao ang binoboto?</summary>
-              <p style="margin:10px 0 0;color:var(--ink-soft);font-size:.95rem">Sa Party ballot, <strong>partido ang binoboto mo</strong> — hindi individual na tao. Ang partido ay may listahan ng 40 nominees. Kung ang PBB ay makakuha ng, halimbawa, 10% ng party votes, ang unang 4 nominees sa listahan namin ang uupo. Ito ang proportional representation — ang lakas ng partido sa buong rehiyon ang nagdidikta kung ilang upuan ang makukuha.</p>
-            </details>
-            <details style="background:var(--paper);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:14px 16px">
-              <summary style="font-weight:700;color:var(--forest-deep);cursor:pointer;font-family:var(--font-display);font-size:1rem">Saan ko makikita ang listahan ng 40 nominees ng PBB?</summary>
-              <p style="margin:10px 0 0;color:var(--ink-soft);font-size:.95rem">Ilalathala ng PBB ang opisyal na listahan ng 40 nominees pagkatapos ng filing period ng COMELEC. Sundan ang aming <a href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--forest)">Facebook Page</a> para sa update, o bisitahin ang <a href="#kanino" style="text-decoration:underline;color:var(--forest)">"Para Kanino"</a> section ng site na ito.</p>
-            </details>
-            <details style="background:var(--paper);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:14px 16px">
-              <summary style="font-weight:700;color:var(--forest-deep);cursor:pointer;font-family:var(--font-display);font-size:1rem">Kasama ba ang Sulu at Isabela City sa eleksyon?</summary>
-              <p style="margin:10px 0 0;color:var(--ink-soft);font-size:.95rem"><strong>Hindi.</strong> Ang Sulu ay hindi na bahagi ng BARMM (desisyon ng Korte Suprema, 2024; inilipat sa Region IX noong 2025). Ang Isabela City ay hindi kailanman naging bahagi ng BARMM. Ang eleksyon ay para sa: 5 probinsya (Basilan maliban sa Isabela City, Lanao del Sur, Maguindanao del Norte, Maguindanao del Sur, Tawi-Tawi), 3 komponent na lungsod (Cotabato City, Lamitan City, Marawi City), at ang Special Geographic Area (8 bagong munisipyo).</p>
-            </details>
-            <details style="background:var(--paper);border:1px solid #0A6E2E1f;border-radius:var(--radius);padding:14px 16px">
-              <summary style="font-weight:700;color:var(--forest-deep);cursor:pointer;font-family:var(--font-display);font-size:1rem">Paano kung ang aking munisipyo ay "Red" zone (high security risk)?</summary>
-              <p style="margin:10px 0 0;color:var(--ink-soft);font-size:.95rem">May 27 munisipyo sa BARMM ang classified na "Red" ng COMELEC. Kung isa ka sa mga ito (lalo na sa Lanao del Sur at Maguindanao del Sur), manatiling alerto, sumunod sa gabay ng mga otoridad, at huwag pumunta sa polling place nang walang kasama. Ang PBB ay naglulunsad ng mga community safety program — makipag-ugnayan sa aming <a href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener" style="text-decoration:underline;color:var(--forest)">local chapter</a> para sa escort at suporta.</p>
-            </details>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============ CLOSING VISION BANNER ============ -->
-  <section class="vision">
-    <figure class="showcase reveal-figure">
-      <div class="showcase-frame">
-        <img src="assets/images/professionalizing-patrimony.jpg" width="1600" height="893" loading="lazy" alt="Building a Future-Ready Bangsamoro — mula sa kapayapaan patungo sa produktibidad.">
-      </div>
-    </figure>
-    <div class="vision-caption wrap reveal">
-      <p>Tapos na ang panahon ng paghihintay. Panahon na ng pagtatayo.</p>
-      <span>Professionalizing Our Patrimony</span>
-    </div>
-  </section>
-
-  <!-- ============ GET INVOLVED ============ -->
-  <section id="get-involved">
+  <!-- ==================== CTA ==================== -->
+  <section id="sumali" aria-labelledby="cta-h">
     <div class="wrap">
       <div class="section-head reveal">
         <p class="eyebrow">Sumali sa amin</p>
-        <h2>Babangon tayo — pero kailangan ka namin</h2>
-        <p>Kaya mo bang mangampanya sa bahay-bahay, mag-organisa sa sektor mo, o basta i-share lang ang aming mensahe? May lugar ka sa kilusang ito.</p>
+        <h2 id="cta-h">Kailangan ka namin</h2>
+        <p>
+          Kaya mo bang mangampanya sa bahay-bahay, mag-organisa sa sektor mo, o basta
+          i-share lang ang aming mensahe? May lugar ka sa kilusang ito.
+        </p>
       </div>
 
-      <figure class="showcase reveal-figure">
-        <div class="showcase-frame">
-          <img src="assets/images/hotline.jpg" width="1600" height="600" loading="lazy" alt="Tawagan ang PBB hotline o mag-message sa Facebook.">
-        </div>
-      </figure>
-
-      <div class="connect-cta reveal">
-        <div class="connect-card">
-          <div class="init-icon" aria-hidden="true" style="background:var(--gold-metal)">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .6a2 2 0 0 1 1.7 2z" stroke="#063D1B" stroke-width="2"/></svg>
-          </div>
-          <div>
-            <h3>Tawagan ang aming hotline</h3>
-            <p> 09663018777 — bukas para sa katanungan ng volunteer at tulong sa araw ng eleksyon.</p>
-          </div>
-        </div>
-        <div class="connect-card">
-          <div class="init-icon" aria-hidden="true" style="background:#1877F2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z" fill="#fff"/></svg>
-          </div>
-          <div>
-            <h3>Sundan kami sa Facebook</h3>
-            <p>Verified updates, event schedule, live coverage — plus instant reply sa Messenger.</p>
-            <a class="btn btn-gold btn-small" style="margin-top:10px" href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener">Bisitahin ang Facebook Page</a>
-          </div>
-        </div>
+      <div class="grid-auto">
+        <a class="card card-link pillar-card reveal" href="join.html#membership">
+          <span class="pillar-card-head"><span class="pillar-letter" aria-hidden="true">1</span><h3>Maging miyembro</h3></span>
+          <p>Sagutan ang membership form, kumuha ng PBB Membership ID na may lagda at litrato mo.</p>
+          <span class="more">Pumunta sa form →</span>
+        </a>
+        <a class="card card-link pillar-card reveal" href="join.html#volunteer">
+          <span class="pillar-card-head"><span class="pillar-letter" aria-hidden="true">2</span><h3>Mag-volunteer</h3></span>
+          <p>Ground at precinct work, digital campaign, sectoral organizing — piliin ang bagay sa'yo.</p>
+          <span class="more">Mag-sign up →</span>
+        </a>
+        <a class="card card-link pillar-card reveal" href="join.html#partnership">
+          <span class="pillar-card-head"><span class="pillar-letter" aria-hidden="true">3</span><h3>Makipag-partner</h3></span>
+          <p>Para sa organisasyon, kooperatiba, at civil society — may e-signature na kasunduan.</p>
+          <span class="more">Pumirma ng partnership →</span>
+        </a>
       </div>
 
-      <div class="involve-grid">
-        <!--
-          VOLUNTEER / MEMBER SIGN-UP
-          ---------------------------------------------------------------
-          Changes in this revision, all from the 13 Aug 2026 systems audit:
-            * Phone is now required and email is optional. SMS and Messenger
-              reach far more of BARMM than email does; requiring an inbox was
-              excluding the exact constituencies the party targets.
-            * <option value> now carries the DATABASE CODE, not the display
-              label, so inserts satisfy the provinces / volunteer_interests
-              foreign keys (finding H-1). Never change a value here without
-              changing the matching row in migration 20260813000000.
-            * Adds member-vs-volunteer affiliation, language preference, and
-              an affirmative consent checkbox — political affiliation is
-              sensitive personal information under RA 10173.
-            * Adds a Cloudflare Turnstile widget; the token is verified
-              server-side by the submit-lead Edge Function.
-        -->
-        <form class="involve-form reveal" id="joinForm" novalidate>
-          <h3>Sumali sa PBB</h3>
-          <p class="form-note" style="margin:-6px 0 16px">Mag-sign up bilang volunteer o miyembro. Ikaw ang magpapasya kung gaano kalaki ang maiaambag mo.</p>
-
-          <div class="field">
-            <label for="fullName">Buong pangalan</label>
-            <input id="fullName" name="fullName" type="text" autocomplete="name" required maxlength="120">
-          </div>
-
-          <div class="field">
-            <label for="phone">Cellphone number</label>
-            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                   placeholder="0917 123 4567" required maxlength="20">
-            <p class="form-note" style="margin-top:6px">Dito ka namin kokontakin. Magpapadala kami ng text para kumpirmahin.</p>
-          </div>
-
-          <div class="field">
-            <label for="email">Email address <span style="font-weight:400;color:var(--ink-soft)">(opsyonal)</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" maxlength="254">
-          </div>
-
-          <div class="field">
-            <label for="province">Probinsya / lugar</label>
-            <select id="province" name="province" required>
-              <option value="" disabled selected>Piliin ang iyong lugar</option>
-              <option value="maguindanao_norte">Maguindanao del Norte</option>
-              <option value="maguindanao_sur">Maguindanao del Sur</option>
-              <option value="lanao_del_sur">Lanao del Sur</option>
-              <option value="basilan">Basilan (maliban sa Isabela City)</option>
-              <option value="tawi_tawi">Tawi-Tawi</option>
-              <option value="cotabato_city">Cotabato City</option>
-              <option value="lamitan_city">Lamitan City</option>
-              <option value="marawi_city">Marawi City</option>
-              <option value="sga_cotabato">Special Geographic Area (8 bagong munisipyo)</option>
-              <option value="outside_barmm">Labas ng BARMM</option>
-            </select>
-            <p class="form-note" style="margin-top:6px">Base sa opisyal na saklaw ng BARMM para sa Set. 14 eleksyon: 5 probinsya, 3 komponent na lungsod, at ang SGA. Hindi kasama ang Sulu at Isabela City.</p>
-          </div>
-
-          <div class="field">
-            <label for="interest">Alin sa BANGON ang pinakamalapit sa'yo?</label>
-            <select id="interest" name="interest">
-              <option value="basic_services">B — Batayang Serbisyo (subsidy, kalusugan)</option>
-              <option value="alliance_building">A — Alyansa (bottom-up budgeting)</option>
-              <option value="natural_resources">N — Kalikasan (Palaw Rangers, sakahan)</option>
-              <option value="green_economy">G — Green Economy (green skills, Halal)</option>
-              <option value="open_governance">O — Bukas na Pamahalaan (meritokrasya)</option>
-              <option value="nonviolent_peace">N — Kapayapaan (reintegration, Marawi)</option>
-              <option value="ground_volunteer">Ground / precinct volunteer</option>
-              <option value="sectoral_organizing">Sectoral organizing (kabataan, propesyonal)</option>
-              <option value="digital_comms">Digital at komunikasyon</option>
-              <option value="donate_resources">Mag-donate ng resources</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="affiliation">Paano ka gustong sumali?</label>
-            <select id="affiliation" name="affiliation">
-              <option value="volunteer">Volunteer — tutulong sa kampanya</option>
-              <option value="member">Miyembro — gusto kong maging bahagi ng partido</option>
-              <option value="supporter">Supporter — updates lang muna</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="preferredLang">Anong wika ang gusto mong gamitin namin?</label>
-            <select id="preferredLang" name="preferredLang">
-              <option value="tl">Tagalog / Filipino</option>
-              <option value="mdh">Maguindanaon</option>
-              <option value="mrw">Maranao</option>
-              <option value="tsg">Tausug</option>
-              <option value="en">English</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
-              <input type="checkbox" id="joinConsent" name="joinConsent" required style="width:auto;margin-top:3px">
-              <span style="color:var(--ink)">Sumasang-ayon ako na gamitin ng PBB ang aking detalye para sa volunteer coordination, at makatanggap ng update sa text o tawag. Alam kong maaari akong tumigil anumang oras sa pag-text ng STOP.</span>
-            </label>
-          </div>
-
-          <!-- Turnstile mounts here. If PBB_TURNSTILE_SITE_KEY is unset the
-               widget stays hidden and the Edge Function logs a warning. -->
-          <div class="field pbb-captcha" id="joinCaptcha" hidden>
-            <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
-          </div>
-
-          <button class="btn btn-gold" type="submit" id="joinSubmit" style="width:100%;justify-content:center">Sumali sa PBB</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          <p class="form-note">Sa pag-submit, sumasang-ayon ka sa aming <a href="privacy.html" style="text-decoration:underline">Privacy Policy</a>. Ang impormasyon tungkol sa political affiliation ay <em>sensitive personal information</em> sa ilalim ng RA 10173 — iniingatan namin ito nang naaayon.</p>
-        </form>
-        <div class="involve-ways">
-          <div class="way reveal">
-            <div class="init-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z" stroke="#063D1B" stroke-width="2"/><path d="M4 6l8 7 8-7" stroke="#063D1B" stroke-width="2"/></svg>
-            </div>
-            <div><h4>Email</h4><p><a href="mailto:info@bangonbangsamoro.com">info@bangonbangsamoro.com</a></p></div>
-          </div>
-          <div class="way reveal">
-            <div class="init-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 3a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .5 3 .6a2 2 0 0 1 1.7 2z" stroke="#063D1B" stroke-width="2"/></svg>
-            </div>
-            <div><h4>Party headquarters</h4><p>Cotabato City, BARMM — visiting hours by appointment.</p></div>
-          </div>
-          <div class="way reveal">
-            <div class="init-icon" aria-hidden="true" style="background:#E7F0FD">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z" fill="#1877F2"/></svg>
-            </div>
-            <div><h4>Messenger auto-replies</h4><p>I-message ang aming <a href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener">Facebook Page</a> kahit kailan — instant reply muna, personal na follow-up sa susunod.</p></div>
-          </div>
-        </div>
+      <div class="callout reveal" style="margin-top:var(--pbb-space-5)">
+        <p style="margin-bottom:.4em"><strong>Walang internet? Tumawag o mag-text.</strong></p>
+        <p style="margin:0">
+          Hotline: <a href="tel:+639663018777"><strong>0966 301 8777</strong></a> — bukas para sa
+          katanungan ng volunteer at tulong sa araw ng eleksyon. Puwede ring i-text ang
+          <strong>SUMALI</strong> sa parehong numero.
+        </p>
       </div>
     </div>
   </section>
@@ -1632,783 +306,100 @@ footer.site a:hover{color:var(--gold-bright)}
 </main>
 
 <footer class="site">
-  <div class="wrap footer-grid">
-    <div>
-      <div class="footer-brand">
-        <img src="assets/pbb-logo-128.png" width="32" height="32" alt="Partido Bangon Bangsamoro seal">
-        <span>Partido Bangon Bangsamoro</span>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>Ang BANGON Platform</h5>
+        <ul>
+          <li><a href="bangon-basic-services.html">B — Batayang Serbisyo</a></li>
+          <li><a href="bangon-alliance.html">A — Alyansa</a></li>
+          <li><a href="bangon-natural-resources.html">N — Kalikasan</a></li>
+          <li><a href="bangon-green-economy.html">G — Green Economy</a></li>
+          <li><a href="bangon-open-governance.html">O — Bukas na Pamahalaan</a></li>
+          <li><a href="bangon-peace.html">N — Kapayapaan</a></li>
+        </ul>
       </div>
-      <p style="max-width:38ch;font-size:.92rem">Isang regional party ng BARMM, tumatakbo sa 2026 Parliamentary Elections sa plataporma ng meritokrasya, transparency, at inclusive na pag-unlad. Babangon tungo sa kaunlaran.</p>
+      <div>
+        <h5>Sumali</h5>
+        <ul>
+          <li><a href="join.html#membership">Membership Form</a></li>
+          <li><a href="join.html#volunteer">Volunteer Sign-up</a></li>
+          <li><a href="join.html#partnership">Partnership Agreement</a></li>
+          <li><a href="verify.html">I-verify ang Membership ID</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Makipag-ugnayan</h5>
+        <ul>
+          <li><a href="tel:+639663018777">0966 301 8777</a></li>
+          <li><a href="mailto:info@bangonbangsamoro.com">info@bangonbangsamoro.com</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener">Facebook Page</a></li>
+          <li>Cotabato City, BARMM</li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Use</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h5>Tignan</h5>
-      <ul>
-        <li><a href="#kanino">Para Kanino</a></li>
-        <li><a href="#basic-services">Ang BANGON Platform</a></li>
-        <li><a href="#leadership">Lideratura</a></li>
-        <li><a href="#roadmap">2026 Roadmap</a></li>
-        <li><a href="#voters-education">Voters Education</a></li>
-        <li><a href="#get-involved">Volunteer</a></li>
-      </ul>
+
+    <div class="footer-legal">
+      <p style="margin-bottom:.5em">
+        © <span id="year">2026</span> Partido Bangon Bangsamoro. Lahat ng karapatan ay nakalaan.
+      </p>
+      <!--
+        SECURITY: an unauthenticated "Lead admin" link used to sit here. It
+        opened a panel listing every captured lead, with CSV export, to anyone
+        who clicked it. Volunteer records reveal political affiliation —
+        sensitive personal information under RA 10173 — so it was removed
+        outright in the August 2026 audit. Coordinators read leads from the
+        authenticated coordinator queue. Do not add a client-side admin
+        surface to a public page.
+      -->
+      <p style="margin:0">
+        Paid for by Partido Bangon Bangsamoro · Subject to COMELEC campaign finance and
+        fair-election disclosure rules. ·
+        <button type="button" data-cookie-prefs
+                style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit">Cookie Preferences</button>
+      </p>
     </div>
-    <div>
-      <h5>Partido</h5>
-      <ul>
-        <li><a href="#kanino">Tungkol sa PBB</a></li>
-        <li><a href="mailto:info@bangonbangsamoro.com">Contact</a></li>
-        <li><a href="https://www.facebook.com/profile.php?id=61588593370087" target="_blank" rel="noopener">Facebook</a></li>
-        <li><a href="/login">Staff Sign In</a></li>
-      </ul>
-    </div>
-    <div>
-      <h5>Legal</h5>
-      <ul>
-        <li><a href="terms.html">Terms of Service</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="cookies.html">Cookie Policy</a></li>
-        <li><a href="accessibility.html">Accessibility</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="wrap footer-bottom">
-    <p>© <span id="year"></span> Partido Bangon Bangsamoro. All rights reserved.</p>
-    <!--
-      SECURITY (audit C-4): the "Lead admin" link that used to sit here opened
-      an unauthenticated panel listing every captured lead, with a CSV export,
-      to anyone who clicked it. Volunteer records reveal political affiliation
-      — sensitive personal information under RA 10173 — so the panel has been
-      removed entirely from the public site. Coordinators now read leads from
-      the authenticated coordinator queue (public.coordinator_queue), which is
-      gated by Supabase RLS on staff role and logs every export to audit_log.
-      Do not re-add a client-side admin surface to this page.
-    -->
-    <p>Paid for by Partido Bangon Bangsamoro · Subject to COMELEC campaign finance and fair-election disclosure rules. · <button type="button" data-cookie-prefs style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit">Cookie Preferences</button></p>
   </div>
 </footer>
 
-<!-- ============ ADMIN: CAPTURED LEADS PANEL ============ -->
-<!--
-  The unauthenticated lead-admin overlay that lived here has been removed.
-  See the note in the footer above (audit finding C-4). Coordinators use the
-  authenticated queue instead; nothing on this public page should ever be able
-  to enumerate submitted personal data.
--->
-
-<button class="back-to-top" id="backToTop" aria-label="Back to top" data-tooltip="Back to top">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<button class="back-to-top no-print" id="backToTop" type="button" aria-label="Bumalik sa itaas">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
 <!--
   ============================================================================
   RUNTIME CONFIGURATION
   ----------------------------------------------------------------------------
-  These three values are PUBLIC by design and safe to ship in the page source:
+  All three values are PUBLIC by design and safe to ship in page source:
     * the Supabase project URL is just an API host;
-    * the anon/publishable key is scoped by Row Level Security, and since
-      migration 20260813000000 it can no longer INSERT into any table — every
-      public write goes through the submit-lead Edge Function;
-    * the Turnstile SITE key is meant to be rendered client-side. Its matching
-      SECRET key lives only in Supabase Edge Function secrets.
+    * the anon key is scoped by Row Level Security and, since migration
+      20260813000000, cannot INSERT into any table — every public write goes
+      through the submit-lead Edge Function;
+    * the Turnstile SITE key is meant to be rendered client-side; its SECRET
+      key lives only in Supabase Edge Function secrets.
 
-  NEVER put a service_role key here. If a key starts with `sb_secret_` or its
-  JWT payload says "service_role", it does not belong in a browser.
+  NEVER put a service_role key here.
 
-  Replace the placeholders below at deploy time (Bolt: edit in place; CI:
-  substitute during the build step). If they are left empty, every form
-  degrades honestly — submissions queue locally and the user is told to call
-  the hotline, rather than being shown a false success message.
+  Left empty, the forms degrade honestly: submissions queue locally and the
+  user is pointed at the hotline, rather than shown a false success message.
   ============================================================================
 -->
 <script>
-  window.PBB_SUPABASE_URL       = ""; // e.g. https://xxxxxxxxxxxx.supabase.co
-  window.PBB_SUPABASE_ANON_KEY  = ""; // publishable anon key
-  window.PBB_TURNSTILE_SITE_KEY = ""; // Cloudflare Turnstile site key (optional)
+  window.PBB_SUPABASE_URL       = "";
+  window.PBB_SUPABASE_ANON_KEY  = "";
+  window.PBB_TURNSTILE_SITE_KEY = "";
 </script>
 
-<script>
-(function(){
-  "use strict";
-
-  /* ============================================================
-     LEAD SUBMISSION TRANSPORT
-     ------------------------------------------------------------
-     WHAT WAS WRONG (audit findings C-1 and C-2, 13 Aug 2026)
-
-     The previous revision correctly diagnosed that window.storage
-     only exists inside the Claude.ai artifact preview, and fixed
-     the silent-discard bug by falling back to localStorage. But
-     localStorage lives on the VISITOR'S OWN DEVICE. There was no
-     network call anywhere in this file, so no submission ever
-     reached PBB - while the success message told every volunteer
-     "Nakuha na namin ang detalye mo." The party had no list.
-
-     WHAT THIS DOES NOW
-
-     submitLead() POSTs to the `submit-lead` Supabase Edge Function,
-     which holds the service-role key and applies CAPTCHA
-     verification, per-IP rate limiting, validation, phone
-     normalisation, de-duplication, consent logging, and chapter
-     auto-assignment before it writes. The browser never talks to
-     the database directly and the anon INSERT grants have been
-     revoked (migration 20260813000000).
-
-     localStorage is still used - but only as an OUTBOX. If the
-     POST fails, the payload is queued and retried on the next
-     'online' event or page load, and the user is told plainly that
-     it is queued rather than received. The success message is now
-     only ever shown after a confirmed 2xx.
-
-     CONFIGURATION
-
-     Set these before this script runs - see the configuration
-     block immediately above this one:
-       window.PBB_SUPABASE_URL      = 'https://<project>.supabase.co';
-       window.PBB_SUPABASE_ANON_KEY = '<publishable anon key>';
-       window.PBB_TURNSTILE_SITE_KEY = '<turnstile site key>';   // optional
-     If the URL or key is missing, every form degrades gracefully to
-     the queue + hotline path and says so honestly.
-  ============================================================ */
-
-  var SUPABASE_URL   = window.PBB_SUPABASE_URL || '';
-  var SUPABASE_KEY   = window.PBB_SUPABASE_ANON_KEY || '';
-  var TURNSTILE_KEY  = window.PBB_TURNSTILE_SITE_KEY || '';
-  var ENDPOINT       = SUPABASE_URL ? SUPABASE_URL.replace(/\/+$/, '') + '/functions/v1/submit-lead' : '';
-  var OUTBOX_KEY     = 'pbb_outbox_v2';
-  var SESSION_KEY    = 'pbb_session_ref';
-  var HOTLINE        = '0966 301 8777';
-  var REQUEST_TIMEOUT_MS = 15000;
-
-  /* A stable, random, non-identifying reference so a consent record can be
-     correlated with a submission without storing anything about the person. */
-  function sessionRef(){
-    try {
-      var existing = localStorage.getItem(SESSION_KEY);
-      if (existing) return existing;
-      var ref = (window.crypto && window.crypto.randomUUID)
-        ? window.crypto.randomUUID()
-        : 'sr-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
-      localStorage.setItem(SESSION_KEY, ref);
-      return ref;
-    } catch(e){
-      return 'sr-nostorage-' + Date.now();
-    }
-  }
-
-  /* ---------- Outbox: survives a lost connection, never a lost lead ---------- */
-
-  function readOutbox(){
-    try {
-      var raw = localStorage.getItem(OUTBOX_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch(e){ return []; }
-  }
-
-  function queueForRetry(envelope){
-    try {
-      var all = readOutbox();
-      // Cap the outbox so a pathological loop cannot fill the user's storage.
-      if (all.length >= 25) all.shift();
-      all.push({ envelope: envelope, queuedAt: new Date().toISOString(), attempts: 0 });
-      localStorage.setItem(OUTBOX_KEY, JSON.stringify(all));
-      return true;
-    } catch(e){ return false; }
-  }
-
-  function writeOutbox(items){
-    try { localStorage.setItem(OUTBOX_KEY, JSON.stringify(items)); } catch(e){}
-  }
-
-  /* ---------- Transport ---------- */
-
-  function postEnvelope(envelope){
-    if (!ENDPOINT || !SUPABASE_KEY){
-      return Promise.reject({ kind: 'unconfigured' });
-    }
-
-    var controller = ('AbortController' in window) ? new AbortController() : null;
-    var timer = controller ? setTimeout(function(){ controller.abort(); }, REQUEST_TIMEOUT_MS) : null;
-
-    return fetch(ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + SUPABASE_KEY,
-        'apikey': SUPABASE_KEY
-      },
-      body: JSON.stringify(envelope),
-      signal: controller ? controller.signal : undefined
-    }).then(function(res){
-      if (timer) clearTimeout(timer);
-      return res.json().catch(function(){ return {}; }).then(function(body){
-        if (res.ok) return body;
-        // 4xx = the submission itself is wrong; retrying will not help.
-        // 5xx / 429 = transient; worth queueing.
-        throw {
-          kind: (res.status >= 500 || res.status === 429) ? 'transient' : 'rejected',
-          status: res.status,
-          body: body
-        };
-      });
-    }).catch(function(err){
-      if (timer) clearTimeout(timer);
-      if (err && err.kind) throw err;
-      throw { kind: 'network', error: err }; // offline, DNS, abort, CORS
-    });
-  }
-
-  /**
-   * The single entry point every form uses.
-   * Resolves { state: 'sent' | 'duplicate', data } on success.
-   * Rejects   { state: 'queued' | 'rejected' | 'failed', ... } otherwise.
-   * It never resolves successfully without a confirmed server write.
-   */
-  function submitLead(formType, payload, turnstileToken){
-    var envelope = {
-      formType: formType,
-      payload: payload,
-      sessionRef: sessionRef(),
-      turnstileToken: turnstileToken || '',
-      submittedAt: new Date().toISOString()
-    };
-
-    return postEnvelope(envelope).then(function(body){
-      return { state: body.duplicate ? 'duplicate' : 'sent', data: body };
-    }).catch(function(err){
-      if (err.kind === 'rejected'){
-        return Promise.reject({ state: 'rejected', body: err.body || {}, status: err.status });
-      }
-      // network / transient / unconfigured -> queue and retry later
-      var queued = queueForRetry(envelope);
-      return Promise.reject({ state: queued ? 'queued' : 'failed', reason: err.kind });
-    });
-  }
-
-  /* Drain the outbox on load and whenever connectivity returns. */
-  function flushOutbox(){
-    var items = readOutbox();
-    if (!items.length || !ENDPOINT) return;
-
-    var remaining = [];
-    var chain = Promise.resolve();
-
-    items.forEach(function(item){
-      chain = chain.then(function(){
-        if (item.attempts >= 5) return; // give up quietly; do not loop forever
-        return postEnvelope(item.envelope).catch(function(err){
-          if (err.kind === 'rejected') return; // permanently invalid, drop it
-          item.attempts += 1;
-          remaining.push(item);
-        });
-      });
-    });
-
-    chain.then(function(){
-      writeOutbox(remaining);
-      if (!remaining.length){
-        var banner = document.getElementById('outboxBanner');
-        if (banner) banner.hidden = true;
-      }
-    });
-  }
-
-  window.addEventListener('online', flushOutbox);
-  flushOutbox();
-
-  /* ---------- Turnstile ---------- */
-
-  function mountTurnstile(){
-    if (!TURNSTILE_KEY) return; // widget stays hidden; server logs a warning
-    document.querySelectorAll('.pbb-captcha').forEach(function(wrap){
-      var widget = wrap.querySelector('.cf-turnstile');
-      if (widget) widget.setAttribute('data-sitekey', TURNSTILE_KEY);
-      wrap.hidden = false;
-    });
-    var s = document.createElement('script');
-    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
-  }
-  mountTurnstile();
-
-  /** Read the Turnstile token belonging to a specific form, if present. */
-  function tokenFor(formEl){
-    var input = formEl.querySelector('input[name="cf-turnstile-response"]');
-    return input ? input.value : '';
-  }
-
-  /* ---------- Shared status rendering ---------- */
-
-  /**
-   * Every form reports through this one function so the copy stays
-   * consistent and, above all, honest. `queued` is the message that did not
-   * exist before and is the only truthful thing to say on a weak connection.
-   */
-  function renderResult(statusEl, outcome, ctx){
-    ctx = ctx || {};
-    var first = (ctx.firstName || '').trim();
-
-    switch (outcome){
-      case 'sent':
-        statusEl.className = 'form-status ok';
-        statusEl.textContent = 'Salamat' + (first ? ', ' + first : '') + '! Nai-save na namin ang iyong detalye.'
-          + (ctx.maskedPhone ? ' Magpapadala kami ng text sa ' + ctx.maskedPhone + ' sa loob ng ilang minuto.' : '')
-          + (ctx.chapter ? ' Kokontakin ka ng coordinator ng ' + ctx.chapter + ' sa loob ng 2 araw.' : '');
-        return true;
-
-      case 'duplicate':
-        statusEl.className = 'form-status ok';
-        statusEl.textContent = 'Nakarehistro ka na sa numerong ito'
-          + (ctx.submittedAt ? ' noong ' + new Date(ctx.submittedAt).toLocaleDateString('fil-PH') : '')
-          + '. Kung may gusto kang baguhin, i-text ang UPDATE sa ' + HOTLINE + '.';
-        return true;
-
-      case 'queued':
-        statusEl.className = 'form-status';
-        statusEl.textContent = 'Naka-queue ang iyong sign-up. Mahina ang koneksyon ngayon, pero hindi mawawala '
-          + 'ang detalye mo — awtomatiko itong ipapadala pagbalik ng signal. Huwag isara ang browser na ito.';
-        return false;
-
-      case 'rejected':
-        statusEl.className = 'form-status err';
-        statusEl.textContent = fieldErrorMessage(ctx.body || {});
-        return false;
-
-      default:
-        statusEl.className = 'form-status err';
-        statusEl.textContent = 'Hindi namin naipadala ang iyong detalye. Subukan ulit, o mag-text ng SUMALI sa '
-          + HOTLINE + ' at kami na ang bahala.';
-        return false;
-    }
-  }
-
-  /** Turn a server error code into something a person can act on. */
-  function fieldErrorMessage(body){
-    switch (body.error){
-      case 'invalid_phone':
-        return 'Mukhang mali ang cellphone number. Gamitin ang format na 0917 123 4567.';
-      case 'invalid_email':
-        return 'Mukhang mali ang email address. Suriin ang baybay o iwanan itong blangko.';
-      case 'invalid_name':
-        return 'Pakilagay ang iyong buong pangalan.';
-      case 'invalid_contact':
-        return 'Kailangan namin ng cellphone number o email para makontak ka.';
-      case 'guardian_consent_required':
-        return 'Wala pang 18 anyos — kailangan ng pahintulot ng magulang o guardian.';
-      case 'signature_name_mismatch':
-        return 'Dapat tugma ang nilagdaang pangalan sa pangalan ng contact person.';
-      case 'captcha_failed':
-        return 'Hindi na-verify na tao ka. I-refresh ang page at subukan ulit.';
-      case 'rate_limited':
-        return 'Masyadong maraming pagsubok mula sa koneksyon na ito. Maghintay ng 10 minuto, o tumawag sa ' + HOTLINE + '.';
-      default:
-        return 'May problema sa pagpapadala. Subukan ulit, o tumawag sa ' + HOTLINE + '.';
-    }
-  }
-
-  /** Disable a button and show a sending state; returns a restore function. */
-  function beginSubmit(btn, statusEl){
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.setAttribute('aria-busy', 'true');
-    statusEl.className = 'form-status';
-    statusEl.textContent = 'Ipinapadala…';
-    return function restore(){
-      btn.disabled = false;
-      btn.removeAttribute('aria-busy');
-      btn.textContent = original;
-    };
-  }
-
-  var toggle = document.getElementById('navToggle');
-  var nav = document.getElementById('primary-nav');
-  toggle.addEventListener('click', function(){
-    var open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    nav.classList.toggle('open', !open);
-    document.body.style.overflow = !open ? 'hidden' : '';
-  });
-  nav.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      if (window.innerWidth < 1080){
-        toggle.setAttribute('aria-expanded','false');
-        nav.classList.remove('open');
-        document.body.style.overflow = '';
-      }
-    });
-  });
-
-  var revealEls = document.querySelectorAll('.reveal, .reveal-figure');
-  if ('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry, i){
-        if (entry.isIntersecting){
-          var el = entry.target;
-          var extra = el.classList.contains('reveal-figure') ? 60 : 0;
-          var delay = Math.min(i * 40 + extra, 240);
-          el.style.transitionDelay = delay + 'ms';
-          el.classList.add('in');
-          io.unobserve(el);
-        }
-      });
-    }, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
-    revealEls.forEach(function(el){ io.observe(el); });
-  } else {
-    revealEls.forEach(function(el){ el.classList.add('in'); });
-  }
-
-  var backBtn = document.getElementById('backToTop');
-  window.addEventListener('scroll', function(){
-    backBtn.classList.toggle('show', window.scrollY > 600);
-  }, {passive:true});
-  backBtn.addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // ============ LANGUAGE TOGGLE (Voter Education) ============
-  document.querySelectorAll('.lang-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var lang = btn.dataset.lang;
-      document.querySelectorAll('.lang-btn').forEach(function(b){
-        var active = b === btn;
-        b.style.background = active ? 'var(--forest)' : 'transparent';
-        b.style.color = active ? '#fff' : 'var(--forest)';
-      });
-      document.querySelectorAll('[data-lang-content] > [data-lang]').forEach(function(div){
-        div.style.display = div.dataset.lang === lang ? 'block' : 'none';
-      });
-      try { localStorage.setItem('pbb-lang', lang); } catch(e){}
-    });
-  });
-  try {
-    var savedLang = localStorage.getItem('pbb-lang');
-    if(savedLang){
-      var btn = document.querySelector('.lang-btn[data-lang="'+savedLang+'"]');
-      if(btn) btn.click();
-    }
-  } catch(e){}
-
-  // ============ B - BASIC SERVICES FORM ============
-  var bsForm = document.getElementById('basicServicesForm');
-  if(bsForm){
-    bsForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      if(!bsForm.bsName.value.trim() || !bsForm.bsEmail.value.trim() || !bsForm.bsBarangay.value.trim() || !bsForm.bsService.value || !bsForm.bsSuggestion.value.trim() || !bsForm.bsConsent.checked){
-        bsForm.reportValidity(); return;
-      }
-      var lead = {
-        fullName: bsForm.bsName.value.trim(),
-        email: bsForm.bsEmail.value.trim(),
-        barangay: bsForm.bsBarangay.value.trim(),
-        service: bsForm.bsService.value,
-        suggestion: bsForm.bsSuggestion.value.trim(),
-        type: 'basic-services',
-        submittedAt: new Date().toISOString(),
-        source: 'bangonbangsamoro.com/#basic-services'
-      };
-      var btn = document.getElementById('bsSubmit');
-      var status = document.getElementById('bsStatus');
-      var restore = beginSubmit(btn, status);
-
-      submitLead('basic_services', {
-        fullName:   lead.fullName,
-        contact:    lead.email,        // may be a phone OR an email, by design
-        barangay:   lead.barangay,
-        service:    lead.service,
-        suggestion: lead.suggestion,
-        mode:       'suggest',
-        preferredLang: (function(){ try { return localStorage.getItem('pbb-lang') || 'tl'; } catch(e){ return 'tl'; } })()
-      }, tokenFor(bsForm)).then(function(result){
-        restore();
-        renderResult(status, result.state, result.data);
-        if (result.state === 'sent') bsForm.reset();
-      }).catch(function(err){
-        restore();
-        renderResult(status, err.state, err);
-      });
-    });
-  }
-
-  // ============ A - ALLIANCE & PARTNERSHIP FORM (with e-signature) ============
-  var apForm = document.getElementById('allianceForm');
-  var apConfirm = document.getElementById('apConfirm');
-  var AGREEMENT_TEXT =
-    "PARTIDO BANGON BANGSAMORO - ALLIANCE & PARTNERSHIP AGREEMENT\n" +
-    "Version: v1, Ago. 2026\n\n" +
-    "1. Sumasang-ayon ang Partner na suportahan ang mga inisyatiba ng PBB sa ilalim ng\n" +
-    "   Alliance Building & Partnerships pillar ng BANGON platform - Bottom-Up Budgeting,\n" +
-    "   sectoral organizing, at grassroots network building.\n" +
-    "2. Ang kasunduang ito ay HINDI nangangahulugan ng financial contribution, campaign\n" +
-    "   donation, o obligasyon sa pag-endorso. Maaaring umatras anumang oras.\n" +
-    "3. Gagamitin lang ng PBB ang detalye ng Partner para i-coordinate ang partnership\n" +
-    "   activities, alinsunod sa Privacy Policy at COMELEC disclosure rules.\n" +
-    "4. Ang pag-type ng buong legal na pangalan at pag-submit ng form na ito ay bumubuo\n" +
-    "   ng electronic signature sa ilalim ng Republic Act 8792 (Electronic Commerce Act).";
-
-  function buildSignedAgreementText(lead){
-    return AGREEMENT_TEXT + "\n\n" +
-      "---\n" +
-      "Organisasyon/Grupo: " + lead.orgName + "\n" +
-      "Uri ng organisasyon: " + lead.orgType + "\n" +
-      "Contact person: " + lead.contactName + " <" + lead.email + ">\n" +
-      "Lokasyon: " + lead.province + "\n" +
-      "Iaambag sa partnership: " + lead.proposal + "\n\n" +
-      "Nilagdaan (e-signature): " + lead.signature + "\n" +
-      "Petsa ng paglagda: " + lead.submittedAt + "\n";
-  }
-
-  if(apForm){
-    apForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      if(!apForm.apOrgName.value.trim() || !apForm.apContactName.value.trim() || !apForm.apContactEmail.value.trim() ||
-         !apForm.apOrgType.value || !apForm.apProvince.value || !apForm.apProposal.value.trim() ||
-         !apForm.apSignature.value.trim() || !apForm.apAgreementConsent.checked || !apForm.apConsent.checked){
-        apForm.reportValidity(); return;
-      }
-      var lead = {
-        orgName: apForm.apOrgName.value.trim(),
-        contactName: apForm.apContactName.value.trim(),
-        email: apForm.apContactEmail.value.trim(),
-        orgType: apForm.apOrgType.value,
-        province: apForm.apProvince.value,
-        proposal: apForm.apProposal.value.trim(),
-        signature: apForm.apSignature.value.trim(),
-        agreementVersion: 'v1-2026-08',
-        type: 'alliance-partnership',
-        submittedAt: new Date().toISOString(),
-        source: 'bangonbangsamoro.com/#alliance-building'
-      };
-      var btn = document.getElementById('apSubmit');
-      var status = document.getElementById('apStatus');
-      var restore = beginSubmit(btn, status);
-
-      /*
-        A signed agreement is a legally-relevant artifact under RA 8792, so
-        the confirmation panel must only claim the agreement is ON RECORD
-        WITH PBB once the server has confirmed it. If the POST fails we still
-        show the download so the partner keeps their copy, but the wording
-        says explicitly that PBB does not have it yet.
-      */
-      function showConfirmation(referenceLine){
-        apForm.style.display = 'none';
-        apConfirm.style.display = 'block';
-
-        var refEl = document.getElementById('apReference');
-        if (refEl) refEl.textContent = referenceLine;
-
-        var downloadBtn = document.getElementById('apDownload');
-        downloadBtn.onclick = function(){
-          var text = buildSignedAgreementText(lead);
-          var blob = new Blob([text], {type:'text/plain;charset=utf-8;'});
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = 'PBB-Partnership-Agreement-' + lead.orgName.replace(/[^a-z0-9]+/gi,'-') + '.txt';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-        };
-
-        var emailBtn = document.getElementById('apEmailCopy');
-        emailBtn.onclick = function(){
-          var subject = encodeURIComponent('Signed Partnership Agreement - ' + lead.orgName);
-          var body = encodeURIComponent(buildSignedAgreementText(lead));
-          window.open('mailto:info@bangonbangsamoro.com?subject=' + subject + '&body=' + body, '_blank');
-        };
-      }
-
-      submitLead('partnership', {
-        orgName:          lead.orgName,
-        contactName:      lead.contactName,
-        email:            lead.email,
-        phone:            (apForm.apContactPhone ? apForm.apContactPhone.value.trim() : ''),
-        orgType:          lead.orgType,
-        provinceCode:     lead.province,
-        proposal:         lead.proposal,
-        signature:        lead.signature,
-        agreementVersion: lead.agreementVersion,
-        agreementText:    buildSignedAgreementText(lead)
-      }, tokenFor(apForm)).then(function(result){
-        restore();
-        status.className = 'form-status ok';
-        status.textContent = 'Salamat! Naitala na namin ang inyong nilagdaang kasunduan.';
-        showConfirmation('Reference: ' + (result.data.reference || '—'));
-      }).catch(function(err){
-        restore();
-        if (err.state === 'queued'){
-          status.className = 'form-status';
-          status.textContent = 'Naka-queue ang inyong kasunduan — ipapadala pagbalik ng signal. '
-            + 'I-download muna ang kopya sa ibaba bilang patunay ng paglagda.';
-          showConfirmation('Naka-queue — wala pang reference number.');
-        } else {
-          status.className = 'form-status err';
-          status.textContent = renderRejectionText(err);
-          if (err.state !== 'rejected'){
-            showConfirmation('Hindi pa naitatala sa PBB — i-email ang kopya sa info@bangonbangsamoro.com.');
-          }
-        }
-      });
-    });
-  }
-
-  /* Partnership form needs the raw text rather than the shared renderer,
-     because its failure path also has to explain the download. */
-  function renderRejectionText(err){
-    if (err.state === 'rejected') return fieldErrorMessage(err.body || {});
-    return 'Hindi namin naipadala ang kasunduan. I-download ang kopya sa ibaba at i-email ito sa '
-      + 'info@bangonbangsamoro.com, o tumawag sa ' + HOTLINE + '.';
-  }
-
-  // ============ N - NATURAL RESOURCES / ENVIRONMENT VOLUNTEER FORM ============
-  var nrForm = document.getElementById('nrForm');
-  if(nrForm){
-    nrForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      if(!nrForm.nrName.value.trim() || !nrForm.nrAge.value || !nrForm.nrContact.value.trim() || !nrForm.nrMunicipality.value.trim() || !nrForm.nrFocus.value || !nrForm.nrConsent.checked){
-        nrForm.reportValidity(); return;
-      }
-      var lead = {
-        fullName: nrForm.nrName.value.trim(),
-        age: nrForm.nrAge.value,
-        contact: nrForm.nrContact.value.trim(),
-        municipality: nrForm.nrMunicipality.value.trim(),
-        focus: nrForm.nrFocus.value,
-        experience: nrForm.nrExperience.value.trim(),
-        type: 'nr-volunteer',
-        submittedAt: new Date().toISOString(),
-        source: 'bangonbangsamoro.com/#natural-resources'
-      };
-      var btn = document.getElementById('nrSubmit');
-      var status = document.getElementById('nrStatus');
-      var restore = beginSubmit(btn, status);
-
-      submitLead('environment_volunteer', {
-        fullName:        lead.fullName,
-        age:             Number(lead.age),
-        contact:         lead.contact,
-        municipality:    lead.municipality,
-        focus:           lead.focus,
-        experience:      lead.experience,
-        guardianConsent: guardianBox ? guardianBox.checked : false,
-        preferredLang:   (function(){ try { return localStorage.getItem('pbb-lang') || 'tl'; } catch(e){ return 'tl'; } })()
-      }, tokenFor(nrForm)).then(function(result){
-        restore();
-        renderResult(status, result.state, result.data);
-        if (result.state === 'sent'){
-          nrForm.reset();
-          if (guardianWrap) guardianWrap.hidden = true;
-        }
-      }).catch(function(err){
-        restore();
-        renderResult(status, err.state, err);
-      });
-    });
-  }
-
-  /* ---- Youth track: reveal guardian consent when the volunteer is a minor ----
-     RA 10173 requires a guardian to consent on behalf of anyone under 18.
-     The Edge Function re-checks this server-side; this is only the UI half. */
-  var nrAgeInput  = document.getElementById('nrAge');
-  var guardianWrap = document.getElementById('nrGuardianWrap');
-  var guardianBox  = document.getElementById('nrGuardianConsent');
-
-  if (nrAgeInput && guardianWrap && guardianBox){
-    nrAgeInput.addEventListener('input', function(){
-      var age = Number(nrAgeInput.value);
-      var isMinor = Number.isFinite(age) && age > 0 && age < 18;
-      guardianWrap.hidden = !isMinor;
-      guardianBox.required = isMinor;
-      if (!isMinor) guardianBox.checked = false;
-    });
-  }
-
-  // ============ VOLUNTEER LEAD CAPTURE (main "Sign up to volunteer" form) ============
-  var form = document.getElementById('joinForm');
-  var submitBtn = document.getElementById('joinSubmit');
-  var statusEl = document.getElementById('formStatus');
-
-  if(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-
-      var name     = form.fullName.value.trim();
-      var phone    = form.phone.value.trim();
-      var email    = form.email.value.trim();
-      var province = form.province.value;
-      var interest = form.interest.value;
-
-      /* Phone is now the required channel; email is optional (audit Part 4). */
-      if (!name || !phone || !province || !form.joinConsent.checked){
-        form.reportValidity();
-        return;
-      }
-
-      /* Client-side shape check only — the Edge Function normalises to E.164
-         and is the authority. This exists to give instant feedback, not to
-         be trusted. */
-      if (!/^(\+?63|0)9\d{9}$/.test(phone.replace(/\D/g, '').replace(/^63/, '63'))
-          && !/^0?9\d{9}$/.test(phone.replace(/\D/g, ''))){
-        statusEl.className = 'form-status err';
-        statusEl.textContent = 'Mukhang mali ang cellphone number. Gamitin ang format na 0917 123 4567.';
-        form.phone.focus();
-        return;
-      }
-
-      var restore = beginSubmit(submitBtn, statusEl);
-
-      submitLead('volunteer', {
-        fullName:         name,
-        phone:            phone,
-        email:            email,
-        provinceCode:     province,
-        interestCode:     interest,
-        affiliation:      form.affiliation ? form.affiliation.value : 'volunteer',
-        preferredLang:    form.preferredLang ? form.preferredLang.value : 'tl',
-        preferredChannel: 'sms'
-      }, tokenFor(form)).then(function(result){
-        restore();
-        renderResult(statusEl, result.state, {
-          firstName:   result.data.firstName || name.split(' ')[0],
-          chapter:     result.data.chapter,
-          maskedPhone: result.data.maskedPhone,
-          submittedAt: result.data.submittedAt
-        });
-        if (result.state === 'sent') form.reset();
-      }).catch(function(err){
-        restore();
-        renderResult(statusEl, err.state, err);
-      });
-    });
-  }
-
-  /* ============================================================
-     ADMIN LEAD PANEL — REMOVED (audit finding C-4)
-     ------------------------------------------------------------
-     This block previously rendered a table of every captured lead,
-     with a CSV export, to ANYONE who clicked the footer link or
-     loaded the page with #leads-admin. There was no authentication
-     of any kind. Volunteer records reveal political affiliation,
-     which is sensitive personal information under RA 10173, so a
-     public, unauthenticated enumeration endpoint for them is not
-     acceptable on a campaign site.
-
-     It also could not have worked as intended: it read the same
-     localStorage the forms wrote to, which lives on the visitor's
-     own device — so a coordinator opening it always saw zero rows
-     and never learned that submissions were being lost.
-
-     Coordinators now read leads from public.coordinator_queue in
-     Supabase, gated by RLS on staff role, with every CSV export
-     recorded in public.audit_log. Do not reintroduce a client-side
-     admin surface on this page.
-  ============================================================ */
-
-})();
-</script>
-
+<script src="assets/pbb-app.js" defer></script>
 <script src="assets/site-widgets.js" defer></script>
 </body>
 </html>
