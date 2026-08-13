@@ -952,7 +952,10 @@ footer.site a:hover{color:var(--gold-bright)}
           <div id="apConfirm" style="display:none;text-align:center;padding:20px;background:var(--forest-tint);border-radius:var(--radius);margin-top:16px">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;display:block"><circle cx="12" cy="12" r="10" fill="#0A6E2E"/><path d="M8 12l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <p style="font-weight:700;color:var(--forest-deep);margin-bottom:.3em">Napirmahan na ang Partnership Agreement!</p>
-            <p style="color:var(--ink-soft);font-size:.9rem;margin-bottom:14px">Salamat sa pakikipagtulungan. Puwede ninyong i-download ang inyong nilagdaang kopya, o i-email ito sa inyong sarili.</p>
+            <p style="color:var(--ink-soft);font-size:.9rem;margin-bottom:8px">Salamat sa pakikipagtulungan. Puwede ninyong i-download ang inyong nilagdaang kopya, o i-email ito sa inyong sarili.</p>
+            <!-- Populated by showConfirmation(). Says plainly whether PBB has
+                 the agreement on record yet, or whether it is still queued. -->
+            <p id="apReference" style="font-family:var(--font-label);font-size:.8rem;letter-spacing:.04em;color:var(--forest-deep);margin-bottom:14px"></p>
             <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center">
               <button type="button" class="btn btn-outline btn-small" id="apDownload">⬇ I-download ang nilagdaang kopya</button>
               <button type="button" class="btn btn-outline btn-small" id="apEmailCopy">✉ I-email sa akin ang kopya</button>
@@ -1018,7 +1021,15 @@ footer.site a:hover{color:var(--gold-bright)}
                 </div>
                 <div class="field" style="margin-bottom:0">
                   <label for="nrAge">Edad</label>
-                  <input id="nrAge" name="nrAge" type="number" min="18" max="70" required>
+                  <!--
+                    Was min="18", which locked out 15-17 year olds — a direct
+                    contradiction of the party's youth-leadership platform and
+                    its youth first nominee (audit, Part 4). Minors are now
+                    welcome on a youth_supporter track; RA 10173 requires
+                    guardian consent, collected by the block below, which the
+                    submit-lead Edge Function re-checks server-side.
+                  -->
+                  <input id="nrAge" name="nrAge" type="number" min="15" max="80" required>
                 </div>
               </div>
               <div class="field" style="margin-bottom:0">
@@ -1049,6 +1060,14 @@ footer.site a:hover{color:var(--gold-bright)}
                 <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
                   <input type="checkbox" id="nrConsent" name="nrConsent" required style="width:auto;margin-top:3px">
                   <span style="color:var(--ink)">Sumasang-ayon akong maging volunteer ng PBB para sa Natural Resources Protection at tumanggap ng training at assignment.</span>
+                </label>
+              </div>
+
+              <!-- Shown by JS only when nrAge < 18. Required in that case. -->
+              <div class="field" id="nrGuardianWrap" hidden>
+                <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
+                  <input type="checkbox" id="nrGuardianConsent" name="nrGuardianConsent" style="width:auto;margin-top:3px">
+                  <span style="color:var(--ink)">Wala pang 18 anyos ako. Kasama ko ang aking magulang o guardian, at sumasang-ayon sila sa aking paglahok sa <strong>PBB Youth Circle</strong> — mga event, training, at volunteer work na angkop sa edad ko.</span>
                 </label>
               </div>
             </div>
@@ -1477,49 +1496,114 @@ footer.site a:hover{color:var(--gold-bright)}
       </div>
 
       <div class="involve-grid">
+        <!--
+          VOLUNTEER / MEMBER SIGN-UP
+          ---------------------------------------------------------------
+          Changes in this revision, all from the 13 Aug 2026 systems audit:
+            * Phone is now required and email is optional. SMS and Messenger
+              reach far more of BARMM than email does; requiring an inbox was
+              excluding the exact constituencies the party targets.
+            * <option value> now carries the DATABASE CODE, not the display
+              label, so inserts satisfy the provinces / volunteer_interests
+              foreign keys (finding H-1). Never change a value here without
+              changing the matching row in migration 20260813000000.
+            * Adds member-vs-volunteer affiliation, language preference, and
+              an affirmative consent checkbox — political affiliation is
+              sensitive personal information under RA 10173.
+            * Adds a Cloudflare Turnstile widget; the token is verified
+              server-side by the submit-lead Edge Function.
+        -->
         <form class="involve-form reveal" id="joinForm" novalidate>
-          <h3>Mag-sign up bilang volunteer</h3>
+          <h3>Sumali sa PBB</h3>
+          <p class="form-note" style="margin:-6px 0 16px">Mag-sign up bilang volunteer o miyembro. Ikaw ang magpapasya kung gaano kalaki ang maiaambag mo.</p>
+
           <div class="field">
             <label for="fullName">Buong pangalan</label>
-            <input id="fullName" name="fullName" type="text" autocomplete="name" required>
+            <input id="fullName" name="fullName" type="text" autocomplete="name" required maxlength="120">
           </div>
+
           <div class="field">
-            <label for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+            <label for="phone">Cellphone number</label>
+            <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                   placeholder="0917 123 4567" required maxlength="20">
+            <p class="form-note" style="margin-top:6px">Dito ka namin kokontakin. Magpapadala kami ng text para kumpirmahin.</p>
           </div>
+
+          <div class="field">
+            <label for="email">Email address <span style="font-weight:400;color:var(--ink-soft)">(opsyonal)</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" maxlength="254">
+          </div>
+
           <div class="field">
             <label for="province">Probinsya / lugar</label>
             <select id="province" name="province" required>
               <option value="" disabled selected>Piliin ang iyong lugar</option>
-              <option>Maguindanao del Norte</option>
-              <option>Maguindanao del Sur</option>
-              <option>Lanao del Sur</option>
-              <option>Basilan (maliban sa Isabela City)</option>
-              <option>Tawi-Tawi</option>
-              <option>Cotabato City</option>
-              <option>Lamitan City</option>
-              <option>Marawi City</option>
-              <option>Special Geographic Area (8 bagong munisipyo)</option>
-              <option>Labas ng BARMM</option>
+              <option value="maguindanao_norte">Maguindanao del Norte</option>
+              <option value="maguindanao_sur">Maguindanao del Sur</option>
+              <option value="lanao_del_sur">Lanao del Sur</option>
+              <option value="basilan">Basilan (maliban sa Isabela City)</option>
+              <option value="tawi_tawi">Tawi-Tawi</option>
+              <option value="cotabato_city">Cotabato City</option>
+              <option value="lamitan_city">Lamitan City</option>
+              <option value="marawi_city">Marawi City</option>
+              <option value="sga_cotabato">Special Geographic Area (8 bagong munisipyo)</option>
+              <option value="outside_barmm">Labas ng BARMM</option>
             </select>
             <p class="form-note" style="margin-top:6px">Base sa opisyal na saklaw ng BARMM para sa Set. 14 eleksyon: 5 probinsya, 3 komponent na lungsod, at ang SGA. Hindi kasama ang Sulu at Isabela City.</p>
           </div>
+
           <div class="field">
             <label for="interest">Alin sa BANGON ang pinakamalapit sa'yo?</label>
             <select id="interest" name="interest">
-              <option value="Basic Services">B — Batayang Serbisyo (subsidy, kalusugan)</option>
-              <option value="Alliance Building">A — Alyansa (bottom-up budgeting)</option>
-              <option value="Natural Resources">N — Kalikasan (Palaw Rangers, sakahan)</option>
-              <option value="Green Economy">G — Green Economy (green skills, Halal)</option>
-              <option value="Open Governance">O — Bukas na Pamahalaan (meritokrasya)</option>
-              <option value="Non-violent Peace">N — Kapayapaan (reintegration, Marawi)</option>
-              <option value="Digital & comms">Digital at komunikasyon</option>
-              <option value="Donate resources">Mag-donate ng resources</option>
+              <option value="basic_services">B — Batayang Serbisyo (subsidy, kalusugan)</option>
+              <option value="alliance_building">A — Alyansa (bottom-up budgeting)</option>
+              <option value="natural_resources">N — Kalikasan (Palaw Rangers, sakahan)</option>
+              <option value="green_economy">G — Green Economy (green skills, Halal)</option>
+              <option value="open_governance">O — Bukas na Pamahalaan (meritokrasya)</option>
+              <option value="nonviolent_peace">N — Kapayapaan (reintegration, Marawi)</option>
+              <option value="ground_volunteer">Ground / precinct volunteer</option>
+              <option value="sectoral_organizing">Sectoral organizing (kabataan, propesyonal)</option>
+              <option value="digital_comms">Digital at komunikasyon</option>
+              <option value="donate_resources">Mag-donate ng resources</option>
             </select>
           </div>
-          <button class="btn btn-gold" type="submit" id="joinSubmit" style="width:100%;justify-content:center">Ipadala ang aking detalye</button>
+
+          <div class="field">
+            <label for="affiliation">Paano ka gustong sumali?</label>
+            <select id="affiliation" name="affiliation">
+              <option value="volunteer">Volunteer — tutulong sa kampanya</option>
+              <option value="member">Miyembro — gusto kong maging bahagi ng partido</option>
+              <option value="supporter">Supporter — updates lang muna</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="preferredLang">Anong wika ang gusto mong gamitin namin?</label>
+            <select id="preferredLang" name="preferredLang">
+              <option value="tl">Tagalog / Filipino</option>
+              <option value="mdh">Maguindanaon</option>
+              <option value="mrw">Maranao</option>
+              <option value="tsg">Tausug</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label style="display:flex;align-items:flex-start;gap:10px;font-weight:500;font-size:.92rem;cursor:pointer">
+              <input type="checkbox" id="joinConsent" name="joinConsent" required style="width:auto;margin-top:3px">
+              <span style="color:var(--ink)">Sumasang-ayon ako na gamitin ng PBB ang aking detalye para sa volunteer coordination, at makatanggap ng update sa text o tawag. Alam kong maaari akong tumigil anumang oras sa pag-text ng STOP.</span>
+            </label>
+          </div>
+
+          <!-- Turnstile mounts here. If PBB_TURNSTILE_SITE_KEY is unset the
+               widget stays hidden and the Edge Function logs a warning. -->
+          <div class="field pbb-captcha" id="joinCaptcha" hidden>
+            <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
+          </div>
+
+          <button class="btn btn-gold" type="submit" id="joinSubmit" style="width:100%;justify-content:center">Sumali sa PBB</button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          <p class="form-note">Naka-save nang ligtas ang iyong detalye bilang volunteer lead. Kung walang storage, magbubukas na lang ito ng email client mo. Sa pag-submit, sumasang-ayon ka sa aming <a href="privacy.html" style="text-decoration:underline">Privacy Policy</a>.</p>
+          <p class="form-note">Sa pag-submit, sumasang-ayon ka sa aming <a href="privacy.html" style="text-decoration:underline">Privacy Policy</a>. Ang impormasyon tungkol sa political affiliation ay <em>sensitive personal information</em> sa ilalim ng RA 10173 — iniingatan namin ito nang naaayon.</p>
         </form>
         <div class="involve-ways">
           <div class="way reveal">
@@ -1588,95 +1672,352 @@ footer.site a:hover{color:var(--gold-bright)}
   </div>
   <div class="wrap footer-bottom">
     <p>© <span id="year"></span> Partido Bangon Bangsamoro. All rights reserved.</p>
-    <p>Paid for by Partido Bangon Bangsamoro · Subject to COMELEC campaign finance and fair-election disclosure rules. · <a href="#leads-admin" id="adminTrigger" style="text-decoration:underline">Lead admin</a> · <button type="button" data-cookie-prefs style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit">Cookie Preferences</button></p>
+    <!--
+      SECURITY (audit C-4): the "Lead admin" link that used to sit here opened
+      an unauthenticated panel listing every captured lead, with a CSV export,
+      to anyone who clicked it. Volunteer records reveal political affiliation
+      — sensitive personal information under RA 10173 — so the panel has been
+      removed entirely from the public site. Coordinators now read leads from
+      the authenticated coordinator queue (public.coordinator_queue), which is
+      gated by Supabase RLS on staff role and logs every export to audit_log.
+      Do not re-add a client-side admin surface to this page.
+    -->
+    <p>Paid for by Partido Bangon Bangsamoro · Subject to COMELEC campaign finance and fair-election disclosure rules. · <button type="button" data-cookie-prefs style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit">Cookie Preferences</button></p>
   </div>
 </footer>
 
 <!-- ============ ADMIN: CAPTURED LEADS PANEL ============ -->
-<div class="admin-overlay" id="adminOverlay" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
-  <div class="admin-panel">
-    <div class="admin-head">
-      <div>
-        <h3 id="adminTitle">Captured volunteer leads</h3>
-        <p>Visible only to you in this session. Not linked from anywhere on the public site.</p>
-      </div>
-      <button class="admin-close" id="adminClose" aria-label="Close">✕</button>
-    </div>
-    <div class="admin-body">
-      <div class="admin-toolbar">
-        <button class="btn btn-outline btn-small" id="adminRefresh" type="button">Refresh</button>
-        <button class="btn btn-outline btn-small" id="adminExport" type="button">Export CSV</button>
-        <span class="admin-count" id="adminCount"></span>
-      </div>
-      <div class="admin-table-wrap" id="adminTableWrap">
-        <div class="admin-empty">Loading…</div>
-      </div>
-    </div>
-  </div>
-</div>
+<!--
+  The unauthenticated lead-admin overlay that lived here has been removed.
+  See the note in the footer above (audit finding C-4). Coordinators use the
+  authenticated queue instead; nothing on this public page should ever be able
+  to enumerate submitted personal data.
+-->
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top" data-tooltip="Back to top">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
+
+<!--
+  ============================================================================
+  RUNTIME CONFIGURATION
+  ----------------------------------------------------------------------------
+  These three values are PUBLIC by design and safe to ship in the page source:
+    * the Supabase project URL is just an API host;
+    * the anon/publishable key is scoped by Row Level Security, and since
+      migration 20260813000000 it can no longer INSERT into any table — every
+      public write goes through the submit-lead Edge Function;
+    * the Turnstile SITE key is meant to be rendered client-side. Its matching
+      SECRET key lives only in Supabase Edge Function secrets.
+
+  NEVER put a service_role key here. If a key starts with `sb_secret_` or its
+  JWT payload says "service_role", it does not belong in a browser.
+
+  Replace the placeholders below at deploy time (Bolt: edit in place; CI:
+  substitute during the build step). If they are left empty, every form
+  degrades honestly — submissions queue locally and the user is told to call
+  the hotline, rather than being shown a false success message.
+  ============================================================================
+-->
+<script>
+  window.PBB_SUPABASE_URL       = ""; // e.g. https://xxxxxxxxxxxx.supabase.co
+  window.PBB_SUPABASE_ANON_KEY  = ""; // publishable anon key
+  window.PBB_TURNSTILE_SITE_KEY = ""; // Cloudflare Turnstile site key (optional)
+</script>
 
 <script>
 (function(){
   "use strict";
 
   /* ============================================================
-     UNIVERSAL LEAD PERSISTENCE - FIX for "cannot submit"
+     LEAD SUBMISSION TRANSPORT
      ------------------------------------------------------------
-     The previous version gated every save on window.storage, an
-     API that only exists inside the Claude.ai artifact preview.
-     On a real deployment (Bolt, bangonbangsamoro.com, etc.)
-     window.storage is always undefined, so hasStorage was always
-     false - and three of the four forms (Basic Services, Alliance,
-     Natural Resources) had NO fallback at all: they just showed a
-     fake "Salamat! (Offline mode)" message and silently discarded
-     the data. That is the root cause of "I cannot submit."
-     saveLeadUniversal() below tries window.storage first (so the
-     Claude preview keeps working), then always falls back to
-     localStorage - which is available in every real browser,
-     including inside Bolt's preview iframe - so a submission
-     always actually persists somewhere and the success message is
-     never a lie. The admin panel below reads from both sources.
-  ============================================================ */
-  var hasStorage = typeof window.storage !== 'undefined' && window.storage !== null;
-  var LOCAL_KEY = 'pbb_leads_v1';
+     WHAT WAS WRONG (audit findings C-1 and C-2, 13 Aug 2026)
 
-  function readLocalLeads(){
+     The previous revision correctly diagnosed that window.storage
+     only exists inside the Claude.ai artifact preview, and fixed
+     the silent-discard bug by falling back to localStorage. But
+     localStorage lives on the VISITOR'S OWN DEVICE. There was no
+     network call anywhere in this file, so no submission ever
+     reached PBB - while the success message told every volunteer
+     "Nakuha na namin ang detalye mo." The party had no list.
+
+     WHAT THIS DOES NOW
+
+     submitLead() POSTs to the `submit-lead` Supabase Edge Function,
+     which holds the service-role key and applies CAPTCHA
+     verification, per-IP rate limiting, validation, phone
+     normalisation, de-duplication, consent logging, and chapter
+     auto-assignment before it writes. The browser never talks to
+     the database directly and the anon INSERT grants have been
+     revoked (migration 20260813000000).
+
+     localStorage is still used - but only as an OUTBOX. If the
+     POST fails, the payload is queued and retried on the next
+     'online' event or page load, and the user is told plainly that
+     it is queued rather than received. The success message is now
+     only ever shown after a confirmed 2xx.
+
+     CONFIGURATION
+
+     Set these before this script runs - see the configuration
+     block immediately above this one:
+       window.PBB_SUPABASE_URL      = 'https://<project>.supabase.co';
+       window.PBB_SUPABASE_ANON_KEY = '<publishable anon key>';
+       window.PBB_TURNSTILE_SITE_KEY = '<turnstile site key>';   // optional
+     If the URL or key is missing, every form degrades gracefully to
+     the queue + hotline path and says so honestly.
+  ============================================================ */
+
+  var SUPABASE_URL   = window.PBB_SUPABASE_URL || '';
+  var SUPABASE_KEY   = window.PBB_SUPABASE_ANON_KEY || '';
+  var TURNSTILE_KEY  = window.PBB_TURNSTILE_SITE_KEY || '';
+  var ENDPOINT       = SUPABASE_URL ? SUPABASE_URL.replace(/\/+$/, '') + '/functions/v1/submit-lead' : '';
+  var OUTBOX_KEY     = 'pbb_outbox_v2';
+  var SESSION_KEY    = 'pbb_session_ref';
+  var HOTLINE        = '0966 301 8777';
+  var REQUEST_TIMEOUT_MS = 15000;
+
+  /* A stable, random, non-identifying reference so a consent record can be
+     correlated with a submission without storing anything about the person. */
+  function sessionRef(){
     try {
-      var raw = localStorage.getItem(LOCAL_KEY);
+      var existing = localStorage.getItem(SESSION_KEY);
+      if (existing) return existing;
+      var ref = (window.crypto && window.crypto.randomUUID)
+        ? window.crypto.randomUUID()
+        : 'sr-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem(SESSION_KEY, ref);
+      return ref;
+    } catch(e){
+      return 'sr-nostorage-' + Date.now();
+    }
+  }
+
+  /* ---------- Outbox: survives a lost connection, never a lost lead ---------- */
+
+  function readOutbox(){
+    try {
+      var raw = localStorage.getItem(OUTBOX_KEY);
       return raw ? JSON.parse(raw) : [];
     } catch(e){ return []; }
   }
-  function writeLocalLead(lead){
+
+  function queueForRetry(envelope){
     try {
-      var all = readLocalLeads();
-      all.push(lead);
-      localStorage.setItem(LOCAL_KEY, JSON.stringify(all));
+      var all = readOutbox();
+      // Cap the outbox so a pathological loop cannot fill the user's storage.
+      if (all.length >= 25) all.shift();
+      all.push({ envelope: envelope, queuedAt: new Date().toISOString(), attempts: 0 });
+      localStorage.setItem(OUTBOX_KEY, JSON.stringify(all));
       return true;
     } catch(e){ return false; }
   }
 
-  // Always resolves true/false - never silently "succeeds" without saving.
-  function saveLeadUniversal(lead){
-    if (hasStorage){
-      var key = 'leads:' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-      return window.storage.set(key, JSON.stringify(lead), true).then(function(result){
-        return !!result;
-      }).catch(function(){
-        return writeLocalLead(lead);
-      });
-    }
-    return Promise.resolve(writeLocalLead(lead));
+  function writeOutbox(items){
+    try { localStorage.setItem(OUTBOX_KEY, JSON.stringify(items)); } catch(e){}
   }
 
-  function mailtoFallback(subjectPrefix, lead, extraLines){
-    var subject = encodeURIComponent(subjectPrefix + ': ' + (lead.fullName || lead.orgName || lead.contactName || ''));
-    var lines = Object.keys(lead).map(function(k){ return k + ': ' + lead[k]; });
-    if (extraLines) lines = lines.concat(extraLines);
-    window.open('mailto:info@bangonbangsamoro.com?subject=' + subject + '&body=' + encodeURIComponent(lines.join('\n')), '_blank');
+  /* ---------- Transport ---------- */
+
+  function postEnvelope(envelope){
+    if (!ENDPOINT || !SUPABASE_KEY){
+      return Promise.reject({ kind: 'unconfigured' });
+    }
+
+    var controller = ('AbortController' in window) ? new AbortController() : null;
+    var timer = controller ? setTimeout(function(){ controller.abort(); }, REQUEST_TIMEOUT_MS) : null;
+
+    return fetch(ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + SUPABASE_KEY,
+        'apikey': SUPABASE_KEY
+      },
+      body: JSON.stringify(envelope),
+      signal: controller ? controller.signal : undefined
+    }).then(function(res){
+      if (timer) clearTimeout(timer);
+      return res.json().catch(function(){ return {}; }).then(function(body){
+        if (res.ok) return body;
+        // 4xx = the submission itself is wrong; retrying will not help.
+        // 5xx / 429 = transient; worth queueing.
+        throw {
+          kind: (res.status >= 500 || res.status === 429) ? 'transient' : 'rejected',
+          status: res.status,
+          body: body
+        };
+      });
+    }).catch(function(err){
+      if (timer) clearTimeout(timer);
+      if (err && err.kind) throw err;
+      throw { kind: 'network', error: err }; // offline, DNS, abort, CORS
+    });
+  }
+
+  /**
+   * The single entry point every form uses.
+   * Resolves { state: 'sent' | 'duplicate', data } on success.
+   * Rejects   { state: 'queued' | 'rejected' | 'failed', ... } otherwise.
+   * It never resolves successfully without a confirmed server write.
+   */
+  function submitLead(formType, payload, turnstileToken){
+    var envelope = {
+      formType: formType,
+      payload: payload,
+      sessionRef: sessionRef(),
+      turnstileToken: turnstileToken || '',
+      submittedAt: new Date().toISOString()
+    };
+
+    return postEnvelope(envelope).then(function(body){
+      return { state: body.duplicate ? 'duplicate' : 'sent', data: body };
+    }).catch(function(err){
+      if (err.kind === 'rejected'){
+        return Promise.reject({ state: 'rejected', body: err.body || {}, status: err.status });
+      }
+      // network / transient / unconfigured -> queue and retry later
+      var queued = queueForRetry(envelope);
+      return Promise.reject({ state: queued ? 'queued' : 'failed', reason: err.kind });
+    });
+  }
+
+  /* Drain the outbox on load and whenever connectivity returns. */
+  function flushOutbox(){
+    var items = readOutbox();
+    if (!items.length || !ENDPOINT) return;
+
+    var remaining = [];
+    var chain = Promise.resolve();
+
+    items.forEach(function(item){
+      chain = chain.then(function(){
+        if (item.attempts >= 5) return; // give up quietly; do not loop forever
+        return postEnvelope(item.envelope).catch(function(err){
+          if (err.kind === 'rejected') return; // permanently invalid, drop it
+          item.attempts += 1;
+          remaining.push(item);
+        });
+      });
+    });
+
+    chain.then(function(){
+      writeOutbox(remaining);
+      if (!remaining.length){
+        var banner = document.getElementById('outboxBanner');
+        if (banner) banner.hidden = true;
+      }
+    });
+  }
+
+  window.addEventListener('online', flushOutbox);
+  flushOutbox();
+
+  /* ---------- Turnstile ---------- */
+
+  function mountTurnstile(){
+    if (!TURNSTILE_KEY) return; // widget stays hidden; server logs a warning
+    document.querySelectorAll('.pbb-captcha').forEach(function(wrap){
+      var widget = wrap.querySelector('.cf-turnstile');
+      if (widget) widget.setAttribute('data-sitekey', TURNSTILE_KEY);
+      wrap.hidden = false;
+    });
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+  mountTurnstile();
+
+  /** Read the Turnstile token belonging to a specific form, if present. */
+  function tokenFor(formEl){
+    var input = formEl.querySelector('input[name="cf-turnstile-response"]');
+    return input ? input.value : '';
+  }
+
+  /* ---------- Shared status rendering ---------- */
+
+  /**
+   * Every form reports through this one function so the copy stays
+   * consistent and, above all, honest. `queued` is the message that did not
+   * exist before and is the only truthful thing to say on a weak connection.
+   */
+  function renderResult(statusEl, outcome, ctx){
+    ctx = ctx || {};
+    var first = (ctx.firstName || '').trim();
+
+    switch (outcome){
+      case 'sent':
+        statusEl.className = 'form-status ok';
+        statusEl.textContent = 'Salamat' + (first ? ', ' + first : '') + '! Nai-save na namin ang iyong detalye.'
+          + (ctx.maskedPhone ? ' Magpapadala kami ng text sa ' + ctx.maskedPhone + ' sa loob ng ilang minuto.' : '')
+          + (ctx.chapter ? ' Kokontakin ka ng coordinator ng ' + ctx.chapter + ' sa loob ng 2 araw.' : '');
+        return true;
+
+      case 'duplicate':
+        statusEl.className = 'form-status ok';
+        statusEl.textContent = 'Nakarehistro ka na sa numerong ito'
+          + (ctx.submittedAt ? ' noong ' + new Date(ctx.submittedAt).toLocaleDateString('fil-PH') : '')
+          + '. Kung may gusto kang baguhin, i-text ang UPDATE sa ' + HOTLINE + '.';
+        return true;
+
+      case 'queued':
+        statusEl.className = 'form-status';
+        statusEl.textContent = 'Naka-queue ang iyong sign-up. Mahina ang koneksyon ngayon, pero hindi mawawala '
+          + 'ang detalye mo — awtomatiko itong ipapadala pagbalik ng signal. Huwag isara ang browser na ito.';
+        return false;
+
+      case 'rejected':
+        statusEl.className = 'form-status err';
+        statusEl.textContent = fieldErrorMessage(ctx.body || {});
+        return false;
+
+      default:
+        statusEl.className = 'form-status err';
+        statusEl.textContent = 'Hindi namin naipadala ang iyong detalye. Subukan ulit, o mag-text ng SUMALI sa '
+          + HOTLINE + ' at kami na ang bahala.';
+        return false;
+    }
+  }
+
+  /** Turn a server error code into something a person can act on. */
+  function fieldErrorMessage(body){
+    switch (body.error){
+      case 'invalid_phone':
+        return 'Mukhang mali ang cellphone number. Gamitin ang format na 0917 123 4567.';
+      case 'invalid_email':
+        return 'Mukhang mali ang email address. Suriin ang baybay o iwanan itong blangko.';
+      case 'invalid_name':
+        return 'Pakilagay ang iyong buong pangalan.';
+      case 'invalid_contact':
+        return 'Kailangan namin ng cellphone number o email para makontak ka.';
+      case 'guardian_consent_required':
+        return 'Wala pang 18 anyos — kailangan ng pahintulot ng magulang o guardian.';
+      case 'signature_name_mismatch':
+        return 'Dapat tugma ang nilagdaang pangalan sa pangalan ng contact person.';
+      case 'captcha_failed':
+        return 'Hindi na-verify na tao ka. I-refresh ang page at subukan ulit.';
+      case 'rate_limited':
+        return 'Masyadong maraming pagsubok mula sa koneksyon na ito. Maghintay ng 10 minuto, o tumawag sa ' + HOTLINE + '.';
+      default:
+        return 'May problema sa pagpapadala. Subukan ulit, o tumawag sa ' + HOTLINE + '.';
+    }
+  }
+
+  /** Disable a button and show a sending state; returns a restore function. */
+  function beginSubmit(btn, statusEl){
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    statusEl.className = 'form-status';
+    statusEl.textContent = 'Ipinapadala…';
+    return function restore(){
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      btn.textContent = original;
+    };
   }
 
   var toggle = document.getElementById('navToggle');
@@ -1769,21 +2110,23 @@ footer.site a:hover{color:var(--gold-bright)}
       };
       var btn = document.getElementById('bsSubmit');
       var status = document.getElementById('bsStatus');
-      btn.disabled = true;
-      status.className = 'form-status';
-      status.textContent = 'Ipinapadala...';
+      var restore = beginSubmit(btn, status);
 
-      saveLeadUniversal(lead).then(function(ok){
-        btn.disabled = false;
-        if (ok){
-          status.className = 'form-status ok';
-          status.textContent = 'Salamat! Nakuha namin ang iyong suhestiyon at interes.';
-          bsForm.reset();
-        } else {
-          status.className = 'form-status err';
-          status.textContent = 'Hindi na-save automatically - bubuksan na ang email app mo para ipadala ito.';
-          mailtoFallback('Basic Services suhestiyon', lead);
-        }
+      submitLead('basic_services', {
+        fullName:   lead.fullName,
+        contact:    lead.email,        // may be a phone OR an email, by design
+        barangay:   lead.barangay,
+        service:    lead.service,
+        suggestion: lead.suggestion,
+        mode:       'suggest',
+        preferredLang: (function(){ try { return localStorage.getItem('pbb-lang') || 'tl'; } catch(e){ return 'tl'; } })()
+      }, tokenFor(bsForm)).then(function(result){
+        restore();
+        renderResult(status, result.state, result.data);
+        if (result.state === 'sent') bsForm.reset();
+      }).catch(function(err){
+        restore();
+        renderResult(status, err.state, err);
       });
     });
   }
@@ -1839,21 +2182,21 @@ footer.site a:hover{color:var(--gold-bright)}
       };
       var btn = document.getElementById('apSubmit');
       var status = document.getElementById('apStatus');
-      btn.disabled = true;
-      status.className = 'form-status';
-      status.textContent = 'Ipinapadala...';
+      var restore = beginSubmit(btn, status);
 
-      saveLeadUniversal(lead).then(function(ok){
-        btn.disabled = false;
-        if (!ok){
-          status.className = 'form-status err';
-          status.textContent = 'Hindi na-save automatically, pero narito pa rin ang inyong nilagdaang kopya sa ibaba.';
-        } else {
-          status.className = 'form-status ok';
-          status.textContent = 'Salamat! Narito ang inyong nilagdaang kopya.';
-        }
+      /*
+        A signed agreement is a legally-relevant artifact under RA 8792, so
+        the confirmation panel must only claim the agreement is ON RECORD
+        WITH PBB once the server has confirmed it. If the POST fails we still
+        show the download so the partner keeps their copy, but the wording
+        says explicitly that PBB does not have it yet.
+      */
+      function showConfirmation(referenceLine){
         apForm.style.display = 'none';
         apConfirm.style.display = 'block';
+
+        var refEl = document.getElementById('apReference');
+        if (refEl) refEl.textContent = referenceLine;
 
         var downloadBtn = document.getElementById('apDownload');
         downloadBtn.onclick = function(){
@@ -1871,10 +2214,52 @@ footer.site a:hover{color:var(--gold-bright)}
 
         var emailBtn = document.getElementById('apEmailCopy');
         emailBtn.onclick = function(){
-          mailtoFallback('Signed Partnership Agreement - ' + lead.orgName, {}, buildSignedAgreementText(lead).split('\n'));
+          var subject = encodeURIComponent('Signed Partnership Agreement - ' + lead.orgName);
+          var body = encodeURIComponent(buildSignedAgreementText(lead));
+          window.open('mailto:info@bangonbangsamoro.com?subject=' + subject + '&body=' + body, '_blank');
         };
+      }
+
+      submitLead('partnership', {
+        orgName:          lead.orgName,
+        contactName:      lead.contactName,
+        email:            lead.email,
+        phone:            (apForm.apContactPhone ? apForm.apContactPhone.value.trim() : ''),
+        orgType:          lead.orgType,
+        provinceCode:     lead.province,
+        proposal:         lead.proposal,
+        signature:        lead.signature,
+        agreementVersion: lead.agreementVersion,
+        agreementText:    buildSignedAgreementText(lead)
+      }, tokenFor(apForm)).then(function(result){
+        restore();
+        status.className = 'form-status ok';
+        status.textContent = 'Salamat! Naitala na namin ang inyong nilagdaang kasunduan.';
+        showConfirmation('Reference: ' + (result.data.reference || '—'));
+      }).catch(function(err){
+        restore();
+        if (err.state === 'queued'){
+          status.className = 'form-status';
+          status.textContent = 'Naka-queue ang inyong kasunduan — ipapadala pagbalik ng signal. '
+            + 'I-download muna ang kopya sa ibaba bilang patunay ng paglagda.';
+          showConfirmation('Naka-queue — wala pang reference number.');
+        } else {
+          status.className = 'form-status err';
+          status.textContent = renderRejectionText(err);
+          if (err.state !== 'rejected'){
+            showConfirmation('Hindi pa naitatala sa PBB — i-email ang kopya sa info@bangonbangsamoro.com.');
+          }
+        }
       });
     });
+  }
+
+  /* Partnership form needs the raw text rather than the shared renderer,
+     because its failure path also has to explain the download. */
+  function renderRejectionText(err){
+    if (err.state === 'rejected') return fieldErrorMessage(err.body || {});
+    return 'Hindi namin naipadala ang kasunduan. I-download ang kopya sa ibaba at i-email ito sa '
+      + 'info@bangonbangsamoro.com, o tumawag sa ' + HOTLINE + '.';
   }
 
   // ============ N - NATURAL RESOURCES / ENVIRONMENT VOLUNTEER FORM ============
@@ -1898,22 +2283,45 @@ footer.site a:hover{color:var(--gold-bright)}
       };
       var btn = document.getElementById('nrSubmit');
       var status = document.getElementById('nrStatus');
-      btn.disabled = true;
-      status.className = 'form-status';
-      status.textContent = 'Ipinapadala...';
+      var restore = beginSubmit(btn, status);
 
-      saveLeadUniversal(lead).then(function(ok){
-        btn.disabled = false;
-        if (ok){
-          status.className = 'form-status ok';
-          status.textContent = 'Salamat, ' + lead.fullName.split(' ')[0] + '! Kokontakin ka namin para sa training.';
+      submitLead('environment_volunteer', {
+        fullName:        lead.fullName,
+        age:             Number(lead.age),
+        contact:         lead.contact,
+        municipality:    lead.municipality,
+        focus:           lead.focus,
+        experience:      lead.experience,
+        guardianConsent: guardianBox ? guardianBox.checked : false,
+        preferredLang:   (function(){ try { return localStorage.getItem('pbb-lang') || 'tl'; } catch(e){ return 'tl'; } })()
+      }, tokenFor(nrForm)).then(function(result){
+        restore();
+        renderResult(status, result.state, result.data);
+        if (result.state === 'sent'){
           nrForm.reset();
-        } else {
-          status.className = 'form-status err';
-          status.textContent = 'Hindi na-save automatically - bubuksan na ang email app mo para ipadala ito.';
-          mailtoFallback('Environment Volunteer sign-up', lead);
+          if (guardianWrap) guardianWrap.hidden = true;
         }
+      }).catch(function(err){
+        restore();
+        renderResult(status, err.state, err);
       });
+    });
+  }
+
+  /* ---- Youth track: reveal guardian consent when the volunteer is a minor ----
+     RA 10173 requires a guardian to consent on behalf of anyone under 18.
+     The Edge Function re-checks this server-side; this is only the UI half. */
+  var nrAgeInput  = document.getElementById('nrAge');
+  var guardianWrap = document.getElementById('nrGuardianWrap');
+  var guardianBox  = document.getElementById('nrGuardianConsent');
+
+  if (nrAgeInput && guardianWrap && guardianBox){
+    nrAgeInput.addEventListener('input', function(){
+      var age = Number(nrAgeInput.value);
+      var isMinor = Number.isFinite(age) && age > 0 && age < 18;
+      guardianWrap.hidden = !isMinor;
+      guardianBox.required = isMinor;
+      if (!isMinor) guardianBox.checked = false;
     });
   }
 
@@ -1925,151 +2333,79 @@ footer.site a:hover{color:var(--gold-bright)}
   if(form){
     form.addEventListener('submit', function(e){
       e.preventDefault();
-      var name = form.fullName.value.trim();
-      var email = form.email.value.trim();
+
+      var name     = form.fullName.value.trim();
+      var phone    = form.phone.value.trim();
+      var email    = form.email.value.trim();
       var province = form.province.value;
       var interest = form.interest.value;
-      if (!name || !email || !province){
+
+      /* Phone is now the required channel; email is optional (audit Part 4). */
+      if (!name || !phone || !province || !form.joinConsent.checked){
         form.reportValidity();
         return;
       }
-      var lead = {
-        fullName: name,
-        email: email,
-        province: province,
-        interest: interest,
-        type: 'volunteer-signup',
-        submittedAt: new Date().toISOString(),
-        source: 'bangonbangsamoro.com/#get-involved'
-      };
-      submitBtn.disabled = true;
-      statusEl.className = 'form-status';
-      statusEl.textContent = 'Sending…';
 
-      saveLeadUniversal(lead).then(function(ok){
-        submitBtn.disabled = false;
-        if (ok){
-          statusEl.className = 'form-status ok';
-          statusEl.textContent = 'Salamat, ' + name.split(' ')[0] + '! Nakuha na namin ang detalye mo, kokontakin ka namin.';
-          form.reset();
-        } else {
-          statusEl.className = 'form-status err';
-          statusEl.textContent = 'Hindi na-save automatically - bubuksan na lang ang email app mo.';
-          mailtoFallback('Volunteer sign-up', lead);
-        }
-      });
-    });
-  }
-
-  // ============ ADMIN: CAPTURED LEADS PANEL ============
-  var adminOverlay = document.getElementById('adminOverlay');
-  var adminTrigger = document.getElementById('adminTrigger');
-  var adminClose = document.getElementById('adminClose');
-  var adminRefresh = document.getElementById('adminRefresh');
-  var adminExport = document.getElementById('adminExport');
-  var adminTableWrap = document.getElementById('adminTableWrap');
-  var adminCount = document.getElementById('adminCount');
-  var currentLeads = [];
-
-  function renderLeadsTable(leads){
-    currentLeads = leads;
-    adminCount.textContent = leads.length + (leads.length === 1 ? ' lead' : ' leads');
-    if (!leads.length){
-      adminTableWrap.innerHTML = '<div class="admin-empty">No leads captured yet.</div>';
-      return;
-    }
-    leads.sort(function(a,b){ return (b.submittedAt||'').localeCompare(a.submittedAt||''); });
-    var rows = leads.map(function(l){
-      var when = l.submittedAt ? new Date(l.submittedAt).toLocaleString() : '—';
-      return '<tr><td>' + when + '</td><td>' + escapeHtml(l.fullName||l.orgName||l.contactName||'') + '</td><td>' +
-        escapeHtml(l.email||l.contact||'') + '</td><td>' + escapeHtml(l.province||l.barangay||l.municipality||'') + '</td><td>' +
-        escapeHtml(l.type||l.interest||'') + '</td></tr>';
-    }).join('');
-    adminTableWrap.innerHTML =
-      '<table class="admin-table"><thead><tr><th>Submitted</th><th>Name</th><th>Contact</th><th>Location</th><th>Type</th></tr></thead><tbody>' +
-      rows + '</tbody></table>';
-  }
-
-  function escapeHtml(s){
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
-      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
-    });
-  }
-
-  function loadLeads(){
-    adminTableWrap.innerHTML = '<div class="admin-empty">Loading…</div>';
-    var localLeads = readLocalLeads();
-    if (!hasStorage){
-      renderLeadsTable(localLeads);
-      return;
-    }
-    window.storage.list('leads:', true).then(function(res){
-      var keys = (res && res.keys) ? res.keys : [];
-      if (!keys.length){
-        renderLeadsTable(localLeads);
+      /* Client-side shape check only — the Edge Function normalises to E.164
+         and is the authority. This exists to give instant feedback, not to
+         be trusted. */
+      if (!/^(\+?63|0)9\d{9}$/.test(phone.replace(/\D/g, '').replace(/^63/, '63'))
+          && !/^0?9\d{9}$/.test(phone.replace(/\D/g, ''))){
+        statusEl.className = 'form-status err';
+        statusEl.textContent = 'Mukhang mali ang cellphone number. Gamitin ang format na 0917 123 4567.';
+        form.phone.focus();
         return;
       }
-      Promise.all(keys.map(function(k){
-        return window.storage.get(k, true).then(function(r){
-          try { return JSON.parse(r.value); } catch(e){ return null; }
-        }).catch(function(){ return null; });
-      })).then(function(results){
-        renderLeadsTable(localLeads.concat(results.filter(Boolean)));
+
+      var restore = beginSubmit(submitBtn, statusEl);
+
+      submitLead('volunteer', {
+        fullName:         name,
+        phone:            phone,
+        email:            email,
+        provinceCode:     province,
+        interestCode:     interest,
+        affiliation:      form.affiliation ? form.affiliation.value : 'volunteer',
+        preferredLang:    form.preferredLang ? form.preferredLang.value : 'tl',
+        preferredChannel: 'sms'
+      }, tokenFor(form)).then(function(result){
+        restore();
+        renderResult(statusEl, result.state, {
+          firstName:   result.data.firstName || name.split(' ')[0],
+          chapter:     result.data.chapter,
+          maskedPhone: result.data.maskedPhone,
+          submittedAt: result.data.submittedAt
+        });
+        if (result.state === 'sent') form.reset();
+      }).catch(function(err){
+        restore();
+        renderResult(statusEl, err.state, err);
       });
-    }).catch(function(){
-      renderLeadsTable(localLeads);
     });
   }
 
-  function openAdmin(){
-    adminOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    loadLeads();
-  }
-  function closeAdmin(){
-    adminOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-    if (window.location.hash === '#leads-admin'){
-      history.replaceState(null, '', window.location.pathname + window.location.search);
-    }
-  }
+  /* ============================================================
+     ADMIN LEAD PANEL — REMOVED (audit finding C-4)
+     ------------------------------------------------------------
+     This block previously rendered a table of every captured lead,
+     with a CSV export, to ANYONE who clicked the footer link or
+     loaded the page with #leads-admin. There was no authentication
+     of any kind. Volunteer records reveal political affiliation,
+     which is sensitive personal information under RA 10173, so a
+     public, unauthenticated enumeration endpoint for them is not
+     acceptable on a campaign site.
 
-  if(adminTrigger){
-    adminTrigger.addEventListener('click', function(e){ e.preventDefault(); openAdmin(); });
-  }
-  if(adminClose){
-    adminClose.addEventListener('click', closeAdmin);
-  }
-  if(adminRefresh){
-    adminRefresh.addEventListener('click', loadLeads);
-  }
-  if(adminOverlay){
-    adminOverlay.addEventListener('click', function(e){ if (e.target === adminOverlay) closeAdmin(); });
-  }
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && adminOverlay && adminOverlay.classList.contains('open')) closeAdmin();
-  });
-  if (window.location.hash === '#leads-admin') openAdmin();
+     It also could not have worked as intended: it read the same
+     localStorage the forms wrote to, which lives on the visitor's
+     own device — so a coordinator opening it always saw zero rows
+     and never learned that submissions were being lost.
 
-  if(adminExport){
-    adminExport.addEventListener('click', function(){
-      if (!currentLeads.length) return;
-      var header = ['Submitted','Name','Email','Province','Type'];
-      var lines = [header.join(',')].concat(currentLeads.map(function(l){
-        return [l.submittedAt || '', l.fullName||l.orgName||l.contactName||'', l.email||l.contact||'', l.province||l.barangay||l.municipality||'', l.type||l.interest||'']
-          .map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; }).join(',');
-      }));
-      var blob = new Blob([lines.join('\n')], {type:'text/csv;charset=utf-8;'});
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'pbb-volunteer-leads-' + new Date().toISOString().slice(0,10) + '.csv';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
-  }
+     Coordinators now read leads from public.coordinator_queue in
+     Supabase, gated by RLS on staff role, with every CSV export
+     recorded in public.audit_log. Do not reintroduce a client-side
+     admin surface on this page.
+  ============================================================ */
+
 })();
 </script>
 
