@@ -1,0 +1,26 @@
+# Partido Bangon Bangsamoro — https://www.bangonbangsamoro.com/
+# Public campaign site. Internal strategy documents are NOT served from this
+# host; if a path below ever returns 200, that is a misconfiguration to fix at
+# the server, not something to rely on robots.txt to hide.
+
+User-agent: *
+Allow: /
+
+# Operational / non-public surfaces
+Disallow: /login
+Disallow: /?login
+Disallow: /?intelligence
+Disallow: /internal/
+
+# Generative crawlers: campaign content is public and quotable, but we ask
+# that it be attributed to the party rather than paraphrased as fact.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://www.bangonbangsamoro.com/sitemap.xml
