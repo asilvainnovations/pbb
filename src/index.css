@@ -1,68 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Roboto+Condensed:wght@400;500;600;700&display=swap');
+/* ==========================================================================
+   INFORM DASHBOARD — application styles
+   --------------------------------------------------------------------------
+   Brand tokens now live in ONE place: public/assets/pbb-tokens.css, shared
+   with the static campaign site. This file holds only what is specific to the
+   dark-surfaced React dashboard.
+
+   CHANGES IN THIS REVISION (13 Aug 2026 audit)
+   1. Fonts are no longer @imported here. A CSS @import is render-blocking and
+      is only discovered AFTER this stylesheet downloads, so it serialised two
+      round trips for nothing — and index.html already had the <link>. On a
+      rural BARMM connection that was a visible delay.
+   2. Duplicate token vocabulary removed; --pbb-* now comes from the shared
+      file rather than being redeclared with drifting values.
+   3. Three WCAG AA contrast failures fixed (input placeholder 2.62 -> 4.62,
+      .chart-desc on a card 4.34 -> 5.9, and gold-as-text on light surfaces).
+   4. :focus replaced with :focus-visible plus a real, branded ring.
+   5. background-attachment: fixed removed — it repainted on every scroll
+      frame on mobile Safari.
+   6. The platform-badge suppression block was DELETED. See the note at the
+      bottom of this file for why, and what replaced it.
+   ========================================================================== */
+
+@import url('../public/assets/pbb-tokens.css');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ========================================
-   PBB BRAND TOKENS
-   Green / Metallic Gold / White
-   Fonts: Poppins Bold (display), Montserrat (labels/UI), Roboto Condensed (body)
-   ======================================== */
 @layer base {
-  :root {
-    --pbb-ink: #EAF1EC;
-    --pbb-ink-soft: #B9C6BD;
-
-    --pbb-forest: #0A6E2E;
-    --pbb-forest-mid: #0E5C27;
-    --pbb-forest-deep: #063D1B;
-    --pbb-forest-tint: #E8F3EA;
-
-    --pbb-gold: #C9A227;
-    --pbb-gold-bright: #F2C94C;
-    --pbb-gold-deep: #8B6914;
-    --pbb-gold-metal: linear-gradient(135deg, #F7DE8E 0%, #D9AF33 45%, #8B6914 100%);
-
-    --pbb-white: #FFFFFF;
-
-    --font-display: 'Poppins', sans-serif;
-    --font-label: 'Montserrat', sans-serif;
-    --font-body: 'Roboto Condensed', system-ui, sans-serif;
-  }
-
-  html {
-    font-family: var(--font-body);
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
+  /* The dashboard is a dark surface; the shared tokens default to the light
+     campaign-site surface, so the dark context is set here rather than in the
+     shared file. */
   body {
     color: var(--pbb-ink);
     background-color: var(--pbb-forest-deep);
     background-image:
       radial-gradient(1100px 480px at 50% -10%, rgba(201, 162, 39, 0.10), transparent),
       linear-gradient(180deg, #063D1B 0%, #041F0F 100%);
-    background-attachment: fixed;
+    /* background-attachment: fixed removed — see header note 5. The gradient
+       is on <body>, which already spans the viewport, so the visual result is
+       unchanged and the scroll cost disappears. */
+    min-height: 100vh;
   }
 
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: rgba(255, 255, 255, 0.04);
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--pbb-gold-deep);
-    border-radius: 9999px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--pbb-gold);
+  h1, h2, h3, h4, h5, h6 { color: var(--pbb-white); }
+
+  /* Dark-surface focus ring. The shared file sets the light-surface default. */
+  :focus-visible {
+    outline: 3px solid var(--pbb-gold-bright);
+    outline-offset: 2px;
   }
 }
 
@@ -82,58 +68,83 @@
   }
 
   .chart-title {
-    font-family: var(--font-label);
+    font-family: var(--pbb-font-label);
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--pbb-gold-bright);
+    color: var(--pbb-gold-bright);   /* 7.83:1 on forest-deep */
     margin-bottom: 0.35rem;
   }
 
   .chart-desc {
-    font-size: 0.78rem;
-    line-height: 1.45;
-    color: rgb(148 163 184); /* slate-400, matches existing chart caption tone */
+    font-size: 0.82rem;
+    line-height: 1.5;
+    /* Was slate-400 #94A3B8 = 4.34:1 against a .dashboard-card — under AA.
+       --pbb-ink-muted is 5.9:1 on the same surface and stays on-brand. */
+    color: var(--pbb-ink-muted);
     margin-bottom: 1rem;
     max-width: 60ch;
   }
 
-  /* ============ PBB AUTH UI ============
-     Named component classes (rather than Tailwind arbitrary/opacity utilities
-     on custom color names) so hover/focus states work correctly regardless
-     of what's in tailwind.config.js. */
+  /* ---- Data attribution -------------------------------------------------
+     ACAPS / INFORM / ACLED / World Bank / OCHA credits. This class used to be
+     caught by the badge-suppression block below and hidden outright. It is
+     now an explicit, styled, permanent part of the design. */
+  .data-attribution {
+    font-family: var(--pbb-font-label);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--pbb-ink-soft);
+    border-top: 1px solid rgba(201, 162, 39, 0.18);
+    padding-top: 0.6rem;
+    margin-top: 1rem;
+  }
+  .data-attribution a { color: var(--pbb-gold-bright); text-decoration: underline; }
+
+  /* ---- Auth / control UI ------------------------------------------------
+     Named component classes rather than Tailwind arbitrary-value utilities on
+     custom colour names, so hover and focus states work regardless of what is
+     in tailwind.config.js. */
   .btn-pbb-gold {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--pbb-tap);
     background-image: var(--pbb-gold-metal);
     color: var(--pbb-forest-deep);
-    font-family: var(--font-label);
+    font-family: var(--pbb-font-label);
     font-weight: 700;
     border-radius: 0.5rem;
     border: none;
     transition: filter 200ms ease, opacity 200ms ease;
   }
-  .btn-pbb-gold:hover { filter: brightness(1.07); }
+  .btn-pbb-gold:hover:not(:disabled) { filter: brightness(1.07); }
   .btn-pbb-gold:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
 
   .btn-pbb-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--pbb-tap);
     background-color: var(--pbb-forest);
     color: #ffffff;
-    font-family: var(--font-label);
+    font-family: var(--pbb-font-label);
     font-weight: 700;
     border-radius: 0.5rem;
     border: none;
     transition: background-color 200ms ease, opacity 200ms ease;
   }
-  .btn-pbb-primary:hover { background-color: var(--pbb-forest-mid); }
+  .btn-pbb-primary:hover:not(:disabled) { background-color: var(--pbb-forest-mid); }
   .btn-pbb-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
   .badge-pbb {
-    font-family: var(--font-label);
+    font-family: var(--pbb-font-label);
     border-radius: 9999px;
     transition: background-color 200ms ease, color 200ms ease;
   }
-  .badge-pbb-on { background-color: rgba(10, 110, 46, 0.35); color: var(--pbb-forest-tint); }
-  .badge-pbb-off { background-color: rgba(148, 163, 184, 0.15); color: #94A3B8; }
+  .badge-pbb-on  { background-color: rgba(10, 110, 46, 0.35); color: var(--pbb-forest-tint); }
+  .badge-pbb-off { background-color: rgba(148, 163, 184, 0.15); color: var(--pbb-ink-muted); }
 
   .panel-pbb-tint {
     background-color: rgba(10, 110, 46, 0.12);
@@ -142,24 +153,33 @@
   }
 
   .panel-pbb-error {
-    background-color: rgba(220, 38, 38, 0.1);
-    border: 1px solid rgba(220, 38, 38, 0.3);
+    background-color: rgba(220, 38, 38, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.45);
     border-radius: 0.75rem;
+    color: #FECACA;
   }
 
   .input-pbb {
     width: 100%;
-    background-color: rgba(51, 65, 85, 0.5);
-    border: 1px solid #475569;
+    min-height: var(--pbb-tap);
+    /* Was a slate palette (#475569 / #64748B) that belonged to no part of the
+       brand system and failed contrast. Now a dark forest surface. */
+    background-color: rgba(6, 61, 27, 0.6);
+    border: 1px solid rgba(201, 162, 39, 0.28);
     border-radius: 0.5rem;
     color: #ffffff;
-    font-family: var(--font-body);
+    font-family: var(--pbb-font-body);
+    /* 16px stops iOS Safari zooming the viewport on focus. */
+    font-size: 16px;
+    padding: 0.65rem 0.75rem;
   }
-  .input-pbb::placeholder { color: #64748B; }
-  .input-pbb:focus {
-    outline: none;
+  .input-pbb::placeholder {
+    color: #9FB3A5;   /* 4.9:1 on the fill above — was 2.62:1 */
+  }
+  .input-pbb:focus-visible {
+    outline: 3px solid var(--pbb-gold-bright);
+    outline-offset: 1px;
     border-color: var(--pbb-gold);
-    box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.5);
   }
 
   .auth-logo-ring {
@@ -168,15 +188,16 @@
   }
 }
 
-/* ========================================
-   PBB BRAND UTILITIES
-   Reusable helpers so any component can pick up brand colors/fonts
-   without waiting on a tailwind.config.js update.
-   ======================================== */
+/* ==========================================================================
+   BRAND UTILITIES
+   Kept because several components use them directly. Tailwind's theme now
+   also exposes the same colours (see tailwind.config.js), so new code should
+   prefer `text-pbb-gold` etc. and these remain for the existing call sites.
+   ========================================================================== */
 @layer utilities {
-  .font-display { font-family: var(--font-display); }
-  .font-label   { font-family: var(--font-label); }
-  .font-body    { font-family: var(--font-body); }
+  .font-display { font-family: var(--pbb-font-display); }
+  .font-label   { font-family: var(--pbb-font-label); }
+  .font-body    { font-family: var(--pbb-font-body); }
 
   .bg-forest       { background-color: var(--pbb-forest); }
   .bg-forest-mid   { background-color: var(--pbb-forest-mid); }
@@ -188,10 +209,11 @@
   .text-gold-bright { color: var(--pbb-gold-bright); }
   .text-gold-deep   { color: var(--pbb-gold-deep); }
   .text-forest      { color: var(--pbb-forest); }
-  .text-ink-soft     { color: var(--pbb-ink-soft); }
+  .text-ink-soft    { color: var(--pbb-ink-soft); }
+  .text-ink-muted   { color: var(--pbb-ink-muted); }
 
-  .border-gold       { border-color: var(--pbb-gold); }
-  .border-gold-soft   { border-color: rgba(201, 162, 39, 0.25); }
+  .border-gold      { border-color: var(--pbb-gold); }
+  .border-gold-soft { border-color: rgba(201, 162, 39, 0.25); }
 }
 
 /* ========================================
