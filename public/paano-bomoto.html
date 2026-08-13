@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paano Bumoto - Partido Bangon Bangsamoro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pbb-green-dark': '#0f5132',
+                        'pbb-green-main': '#198754',
+                        'pbb-green-light': '#d1e7dd',
+                        'pbb-gold': '#ffc107',
+                        'pbb-red': '#dc3545',
+                        'pbb-blue': '#0d6efd',
+                    },
+                    fontFamily: {
+                        'sans': ['Montserrat', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            background-image: url('Banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Overlay to make text readable over the background image */
+        .bg-overlay {
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .step-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #198754;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #0f5132, #198754);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pbb-gradient-bg {
+            background: linear-gradient(135deg, #0f5132, #198754);
+        }
+
+        /* Custom animation for icons */
+        @keyframes pulse-soft {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-icon:hover {
+            animation: pulse-soft 1s infinite;
+        }
+    </style>
+</head>
+<body class="font-body text-gray-800 antialiased min-h-screen">
+
+    <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8 bg-overlay min-h-screen shadow-2xl">
+        
+        <!-- Header -->
+        <header class="text-center mb-12 pt-6">
+            <div class="flex justify-center mb-4">
+                <img src="Screenshot 2026-08-06 at 21.25.36.jpg" alt="Partido Bangon Bangsamoro Logo" class="h-32 md:h-40 object-contain drop-shadow-md">
+            </div>
+            <h1 class="text-3xl md:text-5xl font-sans font-extrabold text-pbb-green-dark uppercase tracking-tight mb-2">
+                Hakbang-hakbang sa Pagboto
+            </h1>
+            <p class="text-lg md:text-xl font-bold text-pbb-red">Babangon tungo sa Kaunlaran!</p>
+            <div class="mt-4 inline-block bg-pbb-gold text-pbb-green-dark font-bold px-6 py-2 rounded-full shadow-sm">
+                Eleksyon: Set. 14, 2026
+            </div>
+        </header>
+
+        <div class="space-y-6">
+
+            <!-- Step 1 -->
+            <div class="step-card bg-white rounded-lg shadow-md p-6 sm:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-search-location text-8xl text-pbb-green-main"></i>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-6">
+                        <div class="w-14 h-14 rounded-full pbb-gradient-bg text-white flex items-center justify-center text-2xl font-bold shadow-lg animate-icon">
+                            1
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-sans font-bold text-pbb-green-dark mb-3">Hanapin ang iyong presinto</h2>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Tiyakin na nakarehistro ka sa COMELEC. Dalhin ang iyong valid ID. Huwag kalimutan, ang eleksyon ay sa Set. 14, 2026.
+                        </p>
+                        
+                        <div class="bg-pbb-green-light rounded p-4 text-sm font-medium text-pbb-green-dark space-y-2 border border-green-200">
+                            <p><strong class="text-pbb-green-main">Maguindanaon:</strong> "Pangita so precinto nu."</p>
+                            <p><strong class="text-pbb-green-main">Maranao:</strong> "Kadapatan a mapia so precint a ka."</p>
+                            <p><strong class="text-pbb-green-main">Tausug:</strong> "Kitaun in precinct mu."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card bg-white rounded-lg shadow-md p-6 sm:p-8 relative overflow-hidden border-l-pbb-blue">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-copy text-8xl text-pbb-blue"></i>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-6">
+                        <div class="w-14 h-14 rounded-full bg-pbb-blue text-white flex items-center justify-center text-2xl font-bold shadow-lg animate-icon">
+                            2
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-sans font-bold text-pbb-blue mb-3">Dalawang balota, dalawang boto</h2>
+                        <p class="text-gray-700 mb-4 leading-relaxed">
+                            Makakatanggap ka ng dalawang balota: isa para sa <strong class="text-gray-900">Party Representative</strong> (proportional) at isa para sa <strong class="text-gray-900">District Representative</strong> (direct).
+                        </p>
+                        
+                        <div class="bg-blue-50 rounded p-4 text-sm font-medium text-blue-900 space-y-2 border border-blue-200">
+                            <p><strong class="text-pbb-blue">Maguindanaon:</strong> "Duwa a balota, duwa a boto."</p>
+                            <p><strong class="text-pbb-blue">Maranao:</strong> "Dowa a balota, dowa a boto."</p>
+                            <p><strong class="text-pbb-blue">Tausug:</strong> "Duh a balota, duh a bota."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card bg-white rounded-lg shadow-xl p-6 sm:p-8 relative overflow-hidden border-l-pbb-gold border-l-8 transform scale-105 z-10 my-8">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-check-circle text-8xl text-pbb-gold"></i>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-6">
+                        <div class="w-16 h-16 rounded-full bg-pbb-gold text-pbb-green-dark flex items-center justify-center text-3xl font-extrabold shadow-lg animate-icon ring-4 ring-yellow-200">
+                            3
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-sans font-extrabold text-gray-900 mb-3">Bumoto para sa PBB sa <span class="text-pbb-green-main">Party Ballot</span></h2>
+                        <p class="text-gray-800 mb-4 text-lg leading-relaxed font-medium">
+                            Sa Party Representative ballot, hanapin ang <strong class="text-pbb-green-dark text-xl">Partido Bangon Bangsamoro (PBB)</strong>. Markahan ang logo namin. 
+                        </p>
+                        <p class="text-gray-600 mb-4 italic">
+                            Ito ang proportional representation vote — dito nakasalalay kung ilang upuan ang makukuha ng PBB sa parliamento.
+                        </p>
+                        
+                        <div class="bg-yellow-50 rounded p-4 text-sm font-semibold text-yellow-900 space-y-2 border border-pbb-gold shadow-sm">
+                            <p><strong class="text-yellow-700">Maguindanaon:</strong> "Boto ko sa PBB sa Party Ballot."</p>
+                            <p><strong class="text-yellow-700">Maranao:</strong> "Boto aken ko PBB sa Party Ballot."</p>
+                            <p><strong class="text-yellow-700">Tausug:</strong> "Bota ku ha PBB ha Party Ballot."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card bg-white rounded-lg shadow-md p-6 sm:p-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-user-check text-8xl text-pbb-green-main"></i>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-6">
+                        <div class="w-14 h-14 rounded-full pbb-gradient-bg text-white flex items-center justify-center text-2xl font-bold shadow-lg animate-icon">
+                            4
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-sans font-bold text-pbb-green-dark mb-3">Bumoto para sa District Representative</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            Sa District Representative ballot, piliin ang kandidatong gusto mo para sa inyong parliamentary district. Ang PBB ay maaaring may field na rin ng District nominees — <strong class="text-pbb-green-main">tanungin ang local chapter ninyo</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card bg-white rounded-lg shadow-md p-6 sm:p-8 relative overflow-hidden border-l-pbb-red">
+                <div class="absolute top-0 right-0 p-4 opacity-10">
+                    <i class="fas fa-receipt text-8xl text-pbb-red"></i>
+                </div>
+                <div class="flex items-start">
+                    <div class="flex-shrink-0 mr-6">
+                        <div class="w-14 h-14 rounded-full bg-pbb-red text-white flex items-center justify-center text-2xl font-bold shadow-lg animate-icon">
+                            5
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-sans font-bold text-pbb-red mb-3">I-feed sa VCM at kumuha ng resibo</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            Isubo ang balota sa Vote Counting Machine (VCM). Tiyakin na lumabas ang resibo at nasa iyo ito. 
+                            <span class="block mt-2 font-bold text-red-600 bg-red-50 p-2 rounded inline-block">Huwag iwanan ang resibo sa loob ng polling place.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-12 text-center border-t border-gray-200 pt-8 pb-4">
+            <h3 class="font-sans font-bold text-xl text-pbb-green-dark mb-4 uppercase">Para sa isang Progresibo, Malusog at Luntiang Bangsamoro</h3>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                <div class="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full border border-blue-200">
+                    <i class="fas fa-graduation-cap text-pbb-blue"></i>
+                    <span class="font-bold text-sm text-blue-900">Edukasyon</span>
+                </div>
+                <div class="flex items-center gap-2 bg-red-50 px-4 py-2 rounded-full border border-red-200">
+                    <i class="fas fa-heart text-pbb-red"></i>
+                    <span class="font-bold text-sm text-red-900">Kalusugan</span>
+                </div>
+                <div class="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full border border-green-200">
+                    <i class="fas fa-leaf text-pbb-green-main"></i>
+                    <span class="font-bold text-sm text-green-900">Kalikasan</span>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 text-sm font-bold text-gray-600">
+                <span class="flex items-center gap-1"><i class="fab fa-facebook text-blue-600"></i> Partido Bangon Bangsamoro</span>
+                <span class="hidden sm:inline">|</span>
+                <span class="flex items-center gap-1"><i class="fas fa-globe"></i> www.bangonbangsamoro.ph</span>
+                <span class="hidden sm:inline">|</span>
+                <span class="text-pbb-green-main">#BangonBangsamoro</span>
+            </div>
+            
+            <div class="mt-6 bg-pbb-green-dark text-white p-3 rounded text-lg font-sans font-bold tracking-widest inline-block shadow-md">
+                BOSES MO. BUKAS NAMIN.
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
