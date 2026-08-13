@@ -4,7 +4,7 @@ Platform repository for the 2026 BARMM Parliamentary Elections (14 September 202
 
 Three things live here:
 
-1. **Public campaign site** (`public/home.html`) — the BANGON platform, 2026 election content, and every public sign-up form. Static HTML/CSS/JS, no build step.
+1. **Public campaign site** (`public/`) — a slim persona-routing hub, one page per BANGON pillar, a forms page with membership-ID generation, and a public ID verification page. Static HTML/CSS/JS, no build step.
 2. **Onboarding backend** (`supabase/`) — Postgres schema, RLS policies, and the `submit-lead` Edge Function that every public form writes through.
 3. **INFORM dashboard** (`src/`) — React + TypeScript + Vite SPA showing BARMM conflict/risk intelligence built on the ACAPS INFORM Risk Index methodology. Gated behind sign-in, with a credential-free sample-data preview.
 
@@ -40,7 +40,7 @@ npm run verify            # typecheck + lint + build — the same gates CI runs
 The forms on the public site do nothing until the database and Edge Function exist. Order matters.
 
 ```bash
-# 1. Apply the schema (three migrations, in timestamp order)
+# 1. Apply the schema (four migrations, in timestamp order)
 supabase db push
 
 # 2. Set the Edge Function secrets — these are server-side only and must
@@ -50,14 +50,17 @@ supabase secrets set SEMAPHORE_API_KEY=...
 supabase secrets set SEMAPHORE_SENDER_NAME=PBB
 supabase secrets set IP_HASH_SALT="$(openssl rand -hex 32)"
 
-# 3. Deploy the write path
+# 3. Deploy the write path and the ID verification path
 supabase functions deploy submit-lead
+supabase functions deploy verify-member
 
 # 4. Point the public site at the project — edit the configuration block
 #    near the bottom of public/home.html:
 #      window.PBB_SUPABASE_URL       = "https://<project>.supabase.co";
 #      window.PBB_SUPABASE_ANON_KEY  = "<publishable anon key>";
 #      window.PBB_TURNSTILE_SITE_KEY = "<turnstile site key>";
+#    The same block appears in every public/*.html page — update all of them,
+#    or inject the values at deploy time.
 
 # 5. Seed the chapter coordinators, so leads have an owner on arrival
 #    (migration 20260813000000 creates one chapter per province with a null
@@ -129,43 +132,120 @@ The browser never writes to the database directly. Anonymous `INSERT` grants wer
 
 ---
 
+## Site structure
+
+The campaign site was one 2,078-line, 144 KB `home.html`. It is now a slim hub
+plus one page per BANGON pillar, a forms page, and a verification page.
+
+| Page | Size | Purpose |
+|---|---|---|
+| `home.html` | 19 KB | Persona selector + six pillar cards + leadership + CTA |
+| `bangon-*.html` (x6) | ~13 KB each | One BANGON domain each, detail behind `<details>` |
+| `join.html` | 30 KB | Membership + ID, volunteer, partnership |
+| `verify.html` | 9 KB | Public membership-ID lookup (noindex) |
+
+### Persona routing
+
+`docs/internal/PBB_User_Personas_2026.md` defines six voter personas. The chip
+row on `home.html` lets a visitor pick the closest one; `PBB.persona` then
+**reorders** the pillar cards so the two most relevant come first and flags
+them.
+
+It reorders, it never hides. Hiding platform content from a voter because we
+guessed their segment would be both patronising and bad for search indexing.
+
+### Progressive disclosure
+
+Every BANGON page leads with the concrete commitment and folds the legislative
+and technical detail into `<details class="disclose">`. `<details>` was chosen
+over a JS accordion deliberately: it works with JavaScript disabled, screen
+readers announce its state natively, and Chrome's Ctrl+F finds text inside a
+closed one.
+
+### Design system
+
+`public/assets/pbb-tokens.css` is the single source of truth for colour, type,
+space, and component styling. Both the static site and `src/index.css` import
+it. Before it existed there were two token vocabularies for one brand
+(`--forest` vs `--pbb-forest`) with values already drifting.
+
+Every text/background pair in the system is verified at WCAG 2.1 AA. Four
+pairs previously failed and are corrected: input placeholders (2.62 -> 5.63),
+`.chart-desc` on a dashboard card (4.34 -> 5.36), the persona flag chip
+(4.42 -> 5.16), and gold-as-text on light surfaces (2.42 — gold is now
+documented as a surface colour; `--pbb-gold-deep` is the text token).
+
+Mobile-first throughout: 48px minimum touch targets, 16px minimum input font
+size (anything smaller makes iOS Safari zoom on focus), fluid `clamp()` type
+with no horizontal overflow at 320px, and `prefers-reduced-motion` /
+`prefers-contrast` support.
+
+---
+
+## Membership IDs
+
+`join.html#membership` is a four-step form — details, photo, signature, ID —
+that ends with a downloadable PBB Membership ID.
+
+- **Card size** CR80, the ISO/IEC 7810 credit-card format (85.6 x 54 mm),
+  rendered at 300 DPI (1011 x 638 px).
+- **Export** PNG for sharing, PDF at exact CR80 page size so it prints 1:1
+  with no scaling dialog.
+- **Photo** `getUserMedia` live capture with a file-picker fallback, centre-
+  cropped to 3:4 and compressed to a ~50 KB JPEG.
+- **Signature** finger, stylus, or mouse on a canvas via Pointer Events, then
+  whitespace-trimmed.
+- **Number** issued by `next_membership_no()` in Postgres, never by the
+  browser. Format `PBB-2026-MDN-004821`. A client-generated number would let
+  anyone fabricate a convincing party ID during an election period.
+- **QR** points at `verify.html?m=<member_no>`.
+- **Offline** the card still renders if the submission is queued, but is
+  watermarked **PENDING** and carries no QR — an ID that has not reached PBB
+  is not verifiable and must not look as though it is.
+
+`verify.html` returns only: is it real, which chapter, is it still valid, and
+the name masked to first name plus surname initial. It never returns the phone
+number, address, precinct, or photo. Membership in a political party is
+sensitive personal information under RA 10173; an endpoint that echoed those
+fields back would be a queryable directory of who supports whom.
+
+---
+
 ## Project structure
 
 ```
 public/
-  home.html          ← public campaign site; forms + runtime config near the bottom
+  home.html               Slim persona-routing hub
+  bangon-*.html           One page per BANGON pillar (6)
+  join.html               Membership + ID, volunteer, partnership
+  verify.html             Public membership-ID lookup
   privacy.html, terms.html, cookies.html, accessibility.html
   robots.txt, sitemap.xml
-  assets/            images, legal.css, site-widgets.js (cookie + a11y widget)
+  assets/
+    pbb-tokens.css        Design system — single source of truth
+    pbb-site.css          Page chrome (header, nav, hero, footer)
+    pbb-app.js            window.PBB: transport, persona, lang, chrome
+    pbb-id.js             Photo capture, signature pad, ID card renderer
+    join.js               join.html form controllers
+    site-widgets.js       Cookie + accessibility widget
 docs/
-  internal/          personas, Messenger scripts — NOT served publicly
-index.html           ← Vite entry point for the dashboard (mounts src/main.tsx)
-src/
-  App.tsx            Routing: login form vs dashboard vs redirect to the campaign site
-  main.tsx           React root
-  index.css          PBB brand tokens (Poppins/Montserrat/Roboto Condensed,
-                       forest green / metallic gold / white) + Tailwind layers
-  contexts/
-    ACAPSContext.tsx   ACAPS data-source config (credentials, base URL,
-                       sample-data toggle) — NOT user auth
-    Auth.tsx           User authentication state — separate from the above
-  hooks/
-    useAuth.ts         Thin wrapper over contexts/Auth.tsx
-    useACAPS.ts        ACAPS API client (token auth, bounded paginated fetches)
-  components/        Dashboard, Header, LoginForm, and the chart components
-  data/realData.ts   Compiled reference dataset (INFORM Severity, ACLED,
-                       World Bank, OCHA) used in sample-data mode
-  types/, utils/     Shared TS types and INFORM risk methodology helpers
+  internal/               Personas, Messenger scripts — NOT served publicly
+scripts/
+  build-bangon-pages.mjs  One-shot scaffold for the six pillar pages
+index.html                Vite entry for the dashboard
+src/                      INFORM dashboard (React + TS)
+  index.css               Imports pbb-tokens.css; dashboard-only styles
 supabase/
   migrations/
-    20260811123735_comprehensive_schema.sql   roles, leads, content, risk data, audit
-    20260812000000_pillar_cta_forms.sql       BANGON pillar CTA forms + grants
-    20260813000000_onboarding_pipeline.sql    chapters, onboarding stages, lockdown
-  functions/submit-lead/index.ts              the only public write path
-.github/workflows/ci.yml                      typecheck, lint, build, secret scan
+    20260811123735_comprehensive_schema.sql   roles, leads, content, risk data
+    20260812000000_pillar_cta_forms.sql       pillar CTA forms + grants
+    20260813000000_onboarding_pipeline.sql    chapters, stages, lockdown
+    20260814000000_membership_ids.sql         members, ID issuance, verification
+  functions/
+    submit-lead/          Public write path for every form
+    verify-member/        Public ID verification
+.github/workflows/ci.yml  typecheck, lint, build, HTML, JS, secret scan
 ```
-
----
 
 ## Data protection
 
