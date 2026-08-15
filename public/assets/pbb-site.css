@@ -337,3 +337,104 @@ footer.site a:hover { color: var(--pbb-gold-bright); text-decoration: underline;
   cursor: pointer;
 }
 .back-to-top.show { display: flex; }
+
+/* --------------------------------------------------------------------------
+   MESSENGER
+   Floating action button + inline Messenger cards. Rendered by
+   assets/pbb-messenger.js; styles live here so they sit with the rest of the
+   page chrome and are cached with it.
+   -------------------------------------------------------------------------- */
+
+.msgr-fab {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 55;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.msgr-fab[hidden] { display: none; }
+
+.msgr-fab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pbb-space-2);
+  min-height: var(--pbb-tap);
+  padding: 0 var(--pbb-space-4);
+  border-radius: var(--pbb-radius-pill);
+  /* Messenger brand gradient. Using it here is honest signposting — the link
+     really does open Messenger — rather than decoration. */
+  background: linear-gradient(135deg, #00B2FF 0%, #006AFF 50%, #A033FF 100%);
+  color: #fff;
+  font-family: var(--pbb-font-label);
+  font-weight: 700;
+  font-size: var(--pbb-text-sm);
+  text-decoration: none;
+  box-shadow: var(--pbb-shadow-lg);
+}
+.msgr-fab-btn:hover { filter: brightness(1.06); color: #fff; }
+
+.msgr-fab-close {
+  width: 30px;
+  height: 30px;
+  align-self: flex-start;
+  border-radius: 50%;
+  border: 1px solid #ffffff59;
+  background: var(--pbb-forest-deep);
+  color: var(--pbb-white);
+  font-size: 0.7rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Keep the Messenger button and the back-to-top button off each other on the
+   narrowest phones — they occupy opposite corners, but the label makes the
+   Messenger one wide. */
+@media (max-width: 380px) {
+  .msgr-fab-btn span { display: none; }
+  .msgr-fab-btn { padding: 0; width: var(--pbb-tap); justify-content: center; }
+}
+
+.msgr-card {
+  display: flex;
+  gap: var(--pbb-space-4);
+  align-items: flex-start;
+  background: var(--pbb-white);
+  border: 1px solid var(--pbb-forest-line);
+  border-left: 4px solid #006AFF;
+  border-radius: var(--pbb-radius);
+  padding: var(--pbb-space-5);
+  box-shadow: var(--pbb-shadow);
+}
+.msgr-card .msgr-icon {
+  flex: none;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: grid;
+  place-content: center;
+  background: linear-gradient(135deg, #00B2FF 0%, #006AFF 50%, #A033FF 100%);
+  color: #fff;
+}
+.msgr-card h3 { margin-bottom: var(--pbb-space-2); }
+.msgr-card > div:last-child > :last-child { margin-bottom: 0; }
+
+/* Quick-reply chips that mirror the Messenger Persistent Menu, so the site
+   and the bot offer the same four doors. */
+.msgr-chips { display: flex; flex-wrap: wrap; gap: var(--pbb-space-2); margin-top: var(--pbb-space-3); }
+.msgr-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: var(--pbb-space-2) var(--pbb-space-4);
+  border-radius: var(--pbb-radius-pill);
+  border: 1.5px solid #006AFF;
+  color: #0B4C9E;
+  background: #F2F7FF;
+  font-family: var(--pbb-font-label);
+  font-weight: 600;
+  font-size: var(--pbb-text-sm);
+  text-decoration: none;
+}
+.msgr-chip:hover { background: #E4EFFF; color: #0B4C9E; }
