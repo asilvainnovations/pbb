@@ -3,17 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Sumali sa PBB — Membership, Volunteer, at Partnership</title>
-<meta name="description" content="Sagutan ang membership form at kumuha ng PBB Membership ID na may lagda at litrato. Mag-sign up bilang volunteer, o pumirma ng partnership agreement sa Partido Bangon Bangsamoro.">
+
+<!-- ============================================================================
+     This page used to carry all three forms behind #anchors. They now live on
+     their own pages so each can rank for its own query. join.html survives as
+     a HUB — it keeps every inbound link and QR code pointing at
+     /join.html working, and it answers the one question the three separate
+     pages cannot: "which of these do I actually want?"
+
+     It carries no form markup, so there is no duplicate content to compete
+     with membership.html, volunteer.html or partnership.html.
+     ============================================================================ -->
+
+<title>Sumali sa PBB — Membership, Volunteer, o Partnership</title>
+<meta name="description" content="Tatlong paraan para sumali sa PBB: maging miyembro at kumuha ng ID, mag-volunteer sa kampanya, o pumirma ng partnership para sa organisasyon.">
 <meta name="theme-color" content="#063D1B">
 <link rel="canonical" href="https://www.bangonbangsamoro.com/join.html">
 <meta name="robots" content="index, follow">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Partido Bangon Bangsamoro">
-<meta property="og:title" content="Sumali sa PBB">
-<meta property="og:description" content="Maging miyembro, mag-volunteer, o makipag-partner. Kumuha ng iyong PBB Membership ID.">
+<meta property="og:locale" content="tl_PH">
+<meta property="og:title" content="Sumali sa PBB — Membership, Volunteer, o Partnership">
+<meta property="og:description" content="Tatlong paraan para maging bahagi ng kilusan. Piliin ang bagay sa'yo.">
 <meta property="og:url" content="https://www.bangonbangsamoro.com/join.html">
+<meta property="og:image" content="https://www.bangonbangsamoro.com/assets/images/engine-of-reform.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/pbb-logo-256.png">
@@ -24,69 +39,31 @@
 
 <link rel="stylesheet" href="assets/pbb-tokens.css">
 <link rel="stylesheet" href="assets/pbb-site.css">
+<link rel="stylesheet" href="assets/pbb-forms.css">
 
-<style>
-  /* Page-specific: capture surfaces and the ID preview. Everything else
-     comes from the shared token + site stylesheets. */
-  .form-tabs { display: flex; flex-wrap: wrap; gap: var(--pbb-space-2); margin-bottom: var(--pbb-space-5); }
-  .form-tab {
-    min-height: var(--pbb-tap);
-    padding: var(--pbb-space-2) var(--pbb-space-4);
-    border: 1.5px solid var(--pbb-forest-line);
-    border-radius: var(--pbb-radius-pill);
-    background: var(--pbb-white);
-    font-family: var(--pbb-font-label);
-    font-weight: 700;
-    font-size: var(--pbb-text-sm);
-    color: var(--pbb-ink-dark);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-  }
-  .form-tab[aria-current="true"] { background: var(--pbb-forest); border-color: var(--pbb-forest); color: var(--pbb-white); }
-
-  .capture-box {
-    border: 2px dashed #B8CCBE;
-    border-radius: var(--pbb-radius);
-    background: #F7FAF8;
-    padding: var(--pbb-space-4);
-    text-align: center;
-  }
-  .capture-box video,
-  .capture-box img.preview {
-    width: 100%;
-    max-width: 260px;
-    margin: 0 auto var(--pbb-space-3);
-    border-radius: var(--pbb-radius-sm);
-    background: #0B2E19;
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-  }
-  .capture-actions { display: flex; flex-wrap: wrap; gap: var(--pbb-space-2); justify-content: center; }
-
-  #signaturePad {
-    width: 100%;
-    height: 180px;
-    background: var(--pbb-white);
-    border: 1px solid #C4D3C8;
-    border-radius: var(--pbb-radius-sm);
-    display: block;
-    cursor: crosshair;
-  }
-  .sign-hint { display: flex; justify-content: space-between; align-items: center; gap: var(--pbb-space-3); margin-top: var(--pbb-space-2); }
-
-  .id-preview { display: grid; gap: var(--pbb-space-4); }
-  .id-preview canvas {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-    box-shadow: var(--pbb-shadow-lg);
-    background: var(--pbb-forest-deep);
-  }
-  @media (min-width: 860px) { .id-preview { grid-template-columns: 1fr 1fr; } }
-
-  .step-panel[hidden] { display: none; }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Simula", "item": "https://www.bangonbangsamoro.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Sumali", "item": "https://www.bangonbangsamoro.com/join.html" }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Mga paraan para sumali sa Partido Bangon Bangsamoro",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Membership Form at PBB ID", "url": "https://www.bangonbangsamoro.com/membership.html" },
+        { "@type": "ListItem", "position": 2, "name": "Volunteer Sign-up", "url": "https://www.bangonbangsamoro.com/volunteer.html" },
+        { "@type": "ListItem", "position": 3, "name": "Alliance & Partnership Agreement", "url": "https://www.bangonbangsamoro.com/partnership.html" }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -114,9 +91,11 @@
       <ul>
         <li><a href="home.html">Simula</a></li>
         <li><a href="home.html#bangon">Ang BANGON Platform</a></li>
-        <li><a href="join.html" aria-current="page">Sumali</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="volunteer.html">Volunteer</a></li>
+        <li><a href="partnership.html">Partnership</a></li>
         <li><a href="verify.html">I-verify ang ID</a></li>
-        <li class="nav-cta"><a href="#membership">Maging Miyembro</a></li>
+        <li class="nav-cta"><a href="membership.html">Maging Miyembro</a></li>
       </ul>
     </nav>
   </div>
@@ -132,431 +111,70 @@
       </ol>
       <h1>Sumali sa PBB</h1>
       <p class="lede">
-        Tatlong paraan para maging bahagi ng kilusan. Piliin ang bagay sa'yo — puwede mo ring
-        gawin ang lahat. Ang bawat form ay ligtas na naipapadala sa PBB; kung mahina ang
-        signal, naka-queue ito at ipapadala pagbalik.
+        Tatlong paraan para maging bahagi ng kilusan. Magkakaiba sila — at puwede mong gawin
+        ang lahat. Piliin lang kung saan ka magsisimula.
       </p>
     </div>
   </section>
 
   <section>
     <div class="wrap">
-      <nav class="form-tabs" aria-label="Mga form">
-        <a class="form-tab" href="#membership" id="tab-membership">Membership + ID</a>
-        <a class="form-tab" href="#volunteer"  id="tab-volunteer">Volunteer</a>
-        <a class="form-tab" href="#partnership" id="tab-partnership">Partnership</a>
-      </nav>
 
-      <!-- ================================================================
-           MEMBERSHIP + ID
-           Four steps, one at a time. Progressive disclosure matters more here
-           than anywhere else on the site: this is the longest form, it asks
-           for a photo and a signature, and it is most often filled in on a
-           phone at a barangay sign-up table with someone waiting behind you.
-           ================================================================ -->
-      <div id="membership" tabindex="-1">
-        <div class="section-head">
-          <p class="eyebrow">Form 1 sa 3</p>
-          <h2>Membership Form at PBB ID</h2>
-          <p>
-            Apat na hakbang, mga 3 minuto. Sa dulo, may PBB Membership ID ka na puwedeng
-            i-download at i-print — may lagda at litrato mo, at may QR code na puwedeng i-verify.
-          </p>
-        </div>
+      <div class="grid-auto">
 
-        <ol class="steps" id="memberSteps">
-          <li aria-current="step" data-step="1">1. Detalye</li>
-          <li data-step="2">2. Litrato</li>
-          <li data-step="3">3. Lagda</li>
-          <li data-step="4">4. Iyong ID</li>
-        </ol>
+        <a class="card card-link pillar-card" href="membership.html">
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">1</span>
+            <h2 style="font-size:var(--pbb-text-lg);margin:0">Maging miyembro</h2>
+          </span>
+          <p><strong>Para sa indibidwal.</strong> Sagutan ang membership form at kumuha ng PBB
+             Membership ID na may litrato at lagda mo — puwedeng i-print at i-verify.</p>
+          <p style="margin:0"><em>Mga 3 minuto · Libre · Kailangan: numero at litrato</em></p>
+          <span class="more">Pumunta sa membership form →</span>
+        </a>
 
-        <form class="card" id="memberForm" novalidate>
+        <a class="card card-link pillar-card" href="volunteer.html">
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">2</span>
+            <h2 style="font-size:var(--pbb-text-lg);margin:0">Mag-volunteer</h2>
+          </span>
+          <p><strong>Para sa gustong tumulong sa kampanya.</strong> Ground at precinct work, poll
+             watching, digital campaign, o sectoral organizing.</p>
+          <p style="margin:0"><em>Mga 1 minuto · Walang quota · Ikaw ang magpapasya ng oras</em></p>
+          <span class="more">Pumunta sa volunteer form →</span>
+        </a>
 
-          <!-- ---------- STEP 1: DETAILS ---------- -->
-          <div class="step-panel" data-panel="1">
-            <h3>Ang iyong detalye</h3>
+        <a class="card card-link pillar-card" href="partnership.html">
+          <span class="pillar-card-head">
+            <span class="pillar-letter" aria-hidden="true">3</span>
+            <h2 style="font-size:var(--pbb-text-lg);margin:0">Makipag-partner</h2>
+          </span>
+          <p><strong>Para sa organisasyon.</strong> Kooperatiba, NGO, samahan ng kababaihan o
+             kabataan, at propesyonal na asosasyon. May e-signature sa ilalim ng RA 8792.</p>
+          <p style="margin:0"><em>Walang bayad · Walang obligasyon sa pag-endorso</em></p>
+          <span class="more">Pumunta sa partnership agreement →</span>
+        </a>
 
-            <div class="field">
-              <label for="mFullName">Buong pangalan</label>
-              <input id="mFullName" name="mFullName" type="text" autocomplete="name" required maxlength="120"
-                     placeholder="Hal: Aminah T. Macapagal">
-            </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="mPhone">Cellphone number</label>
-                <input id="mPhone" name="mPhone" type="tel" inputmode="tel" autocomplete="tel"
-                       required maxlength="20" placeholder="0917 123 4567">
-              </div>
-              <div class="field">
-                <label for="mBirth">Petsa ng kapanganakan</label>
-                <input id="mBirth" name="mBirth" type="date" required>
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="mEmail">Email address <span style="font-weight:400;color:var(--pbb-ink-dark-soft)">(opsyonal)</span></label>
-              <input id="mEmail" name="mEmail" type="email" autocomplete="email" maxlength="254">
-            </div>
-
-            <div class="field">
-              <label for="mProvince">Probinsya</label>
-              <select id="mProvince" name="mProvince" required>
-                <option value="" disabled selected>Piliin ang probinsya</option>
-                <option value="maguindanao_norte">Maguindanao del Norte</option>
-                <option value="maguindanao_sur">Maguindanao del Sur</option>
-                <option value="lanao_del_sur">Lanao del Sur</option>
-                <option value="basilan">Basilan (maliban sa Isabela City)</option>
-                <option value="tawi_tawi">Tawi-Tawi</option>
-                <option value="cotabato_city">Cotabato City</option>
-                <option value="lamitan_city">Lamitan City</option>
-                <option value="marawi_city">Marawi City</option>
-                <option value="sga_cotabato">Special Geographic Area (8 bagong munisipyo)</option>
-                <option value="outside_barmm">Labas ng BARMM</option>
-              </select>
-            </div>
-
-            <div class="field-row">
-              <div class="field">
-                <label for="mMunicipality">Munisipyo / Lungsod</label>
-                <input id="mMunicipality" name="mMunicipality" type="text" required maxlength="120"
-                       autocomplete="address-level2" placeholder="Hal: Sultan Kudarat">
-              </div>
-              <div class="field">
-                <label for="mBarangay">Barangay</label>
-                <input id="mBarangay" name="mBarangay" type="text" required maxlength="120"
-                       autocomplete="address-level3" placeholder="Hal: Poblacion">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="mPrecinct">Precinct No.</label>
-              <input id="mPrecinct" name="mPrecinct" type="text" inputmode="numeric" maxlength="20"
-                     placeholder="Hal: 0123A">
-              <p class="form-note">
-                Nasa voter's ID mo ito, o sa precinct finder ng COMELEC. Kung hindi mo alam ngayon,
-                puwede mong laktawan — matutulungan ka ng coordinator.
-              </p>
-            </div>
-
-            <div class="field">
-              <label for="mLang">Anong wika ang gusto mong gamitin namin?</label>
-              <select id="mLang" name="mLang">
-                <option value="tl">Tagalog / Filipino</option>
-                <option value="mdh">Maguindanaon</option>
-                <option value="mrw">Maranao</option>
-                <option value="tsg">Tausug</option>
-                <option value="en">English</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label class="field-check">
-                <input type="checkbox" id="mConsent" name="mConsent" required>
-                <span>
-                  Sumasang-ayon ako na maging miyembro ng Partido Bangon Bangsamoro at gamitin ang
-                  aking detalye para sa membership at coordination. Naiintindihan kong ang
-                  impormasyon tungkol sa political affiliation ay <em>sensitive personal information</em>
-                  sa ilalim ng RA 10173, at maaari akong tumigil anumang oras sa pag-text ng STOP.
-                </span>
-              </label>
-            </div>
-
-            <div class="field pbb-captcha" hidden>
-              <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
-            </div>
-
-            <button class="btn btn-primary btn-block" type="button" data-next="2">Susunod: Litrato →</button>
-          </div>
-
-          <!-- ---------- STEP 2: PHOTO ---------- -->
-          <div class="step-panel" data-panel="2" hidden>
-            <h3>Iyong litrato</h3>
-            <p class="form-note" style="margin-bottom:var(--pbb-space-4)">
-              Para sa iyong ID. Harap ang mukha, maliwanag na lugar, walang salamin sa mata kung kaya.
-              Hindi ito lalabas sa publiko — sa iyong ID lang ito gagamitin.
-            </p>
-
-            <div class="capture-box">
-              <video id="photoVideo" playsinline muted hidden></video>
-              <img class="preview" id="photoPreview" alt="Preview ng iyong litrato" hidden>
-              <canvas id="photoCanvas" hidden></canvas>
-
-              <div class="capture-actions">
-                <button class="btn btn-outline" type="button" id="photoStart">Buksan ang camera</button>
-                <button class="btn btn-primary" type="button" id="photoShoot" hidden>Kunan ng litrato</button>
-                <button class="btn btn-outline" type="button" id="photoUploadBtn">Mag-upload ng litrato</button>
-                <button class="btn btn-outline" type="button" id="photoClear" hidden>Ulitin</button>
-              </div>
-              <input type="file" id="photoFile" accept="image/*" capture="user" hidden>
-              <p class="form-status" id="photoStatus" role="status" aria-live="polite"></p>
-            </div>
-
-            <div style="display:flex;gap:var(--pbb-space-3);margin-top:var(--pbb-space-4);flex-wrap:wrap">
-              <button class="btn btn-outline" type="button" data-prev="1">← Bumalik</button>
-              <button class="btn btn-primary" type="button" data-next="3" style="flex:1">Susunod: Lagda →</button>
-            </div>
-          </div>
-
-          <!-- ---------- STEP 3: SIGNATURE ---------- -->
-          <div class="step-panel" data-panel="3" hidden>
-            <h3>Iyong lagda</h3>
-            <p class="form-note" style="margin-bottom:var(--pbb-space-4)">
-              Gamitin ang daliri mo sa cellphone, o ang mouse sa computer. Ito ang lalabas sa iyong ID.
-            </p>
-
-            <canvas id="signaturePad" aria-label="Lagdaan dito gamit ang daliri o mouse"></canvas>
-            <div class="sign-hint">
-              <span class="form-note" style="margin:0">Lagdaan sa loob ng kahon sa itaas.</span>
-              <button class="btn btn-outline" type="button" id="signClear">Burahin</button>
-            </div>
-            <p class="form-status" id="signStatus" role="status" aria-live="polite"></p>
-
-            <div style="display:flex;gap:var(--pbb-space-3);margin-top:var(--pbb-space-4);flex-wrap:wrap">
-              <button class="btn btn-outline" type="button" data-prev="2">← Bumalik</button>
-              <button class="btn btn-gold" type="submit" id="memberSubmit" style="flex:1">Isumite at gawin ang ID</button>
-            </div>
-            <p class="form-status" id="memberStatus" role="status" aria-live="polite"></p>
-          </div>
-
-          <!-- ---------- STEP 4: THE ID ---------- -->
-          <div class="step-panel" data-panel="4" hidden>
-            <h3>Handa na ang iyong PBB Membership ID</h3>
-            <p class="form-note" id="idSummary" style="margin-bottom:var(--pbb-space-4)"></p>
-
-            <div class="id-preview">
-              <figure style="margin:0">
-                <canvas id="idFront" width="1011" height="638" role="img"
-                        aria-label="Harap ng iyong PBB Membership ID"></canvas>
-                <figcaption class="form-note">Harap</figcaption>
-              </figure>
-              <figure style="margin:0">
-                <canvas id="idBack" width="1011" height="638" role="img"
-                        aria-label="Likod ng iyong PBB Membership ID"></canvas>
-                <figcaption class="form-note">Likod</figcaption>
-              </figure>
-            </div>
-
-            <div style="display:flex;flex-wrap:wrap;gap:var(--pbb-space-3);margin-top:var(--pbb-space-5)">
-              <button class="btn btn-gold" type="button" id="idDownloadPdf">⬇ I-download bilang PDF (para i-print)</button>
-              <button class="btn btn-outline" type="button" id="idDownloadPng">⬇ I-download bilang larawan</button>
-              <a class="btn btn-outline" href="verify.html" id="idVerifyLink">I-verify ang ID na ito</a>
-            </div>
-
-            <div class="callout" style="margin-top:var(--pbb-space-5)">
-              <p style="margin:0">
-                <strong>Paano i-print:</strong> piliin ang PDF, i-print sa <em>actual size</em> o 100% scale
-                (huwag "fit to page"), sa PVC card o makapal na papel. Ang sukat ay CR80 — kapareho ng ATM card.
-              </p>
-            </div>
-          </div>
-
-        </form>
       </div>
 
-      <!-- ================================================================
-           VOLUNTEER
-           ================================================================ -->
-      <div id="volunteer" tabindex="-1" style="margin-top:var(--pbb-space-8)">
-        <div class="section-head">
-          <p class="eyebrow">Form 2 sa 3</p>
-          <h2>Mag-volunteer</h2>
-          <p>Mas maikli ito — pangalan, numero, lugar, at kung saan ka gustong tumulong.</p>
-        </div>
-
-        <form class="card" id="joinForm" novalidate>
-          <div class="field">
-            <label for="fullName">Buong pangalan</label>
-            <input id="fullName" name="fullName" type="text" autocomplete="name" required maxlength="120">
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="phone">Cellphone number</label>
-              <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                     placeholder="0917 123 4567" required maxlength="20">
-            </div>
-            <div class="field">
-              <label for="email">Email <span style="font-weight:400;color:var(--pbb-ink-dark-soft)">(opsyonal)</span></label>
-              <input id="email" name="email" type="email" autocomplete="email" maxlength="254">
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="province">Probinsya / lugar</label>
-            <select id="province" name="province" required>
-              <option value="" disabled selected>Piliin ang iyong lugar</option>
-              <option value="maguindanao_norte">Maguindanao del Norte</option>
-              <option value="maguindanao_sur">Maguindanao del Sur</option>
-              <option value="lanao_del_sur">Lanao del Sur</option>
-              <option value="basilan">Basilan (maliban sa Isabela City)</option>
-              <option value="tawi_tawi">Tawi-Tawi</option>
-              <option value="cotabato_city">Cotabato City</option>
-              <option value="lamitan_city">Lamitan City</option>
-              <option value="marawi_city">Marawi City</option>
-              <option value="sga_cotabato">Special Geographic Area (8 bagong munisipyo)</option>
-              <option value="outside_barmm">Labas ng BARMM</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="interest">Saan ka gustong tumulong?</label>
-            <select id="interest" name="interest">
-              <option value="basic_services">B — Batayang Serbisyo (subsidy, kalusugan)</option>
-              <option value="alliance_building">A — Alyansa (bottom-up budgeting)</option>
-              <option value="natural_resources">N — Kalikasan (Palaw Rangers, sakahan)</option>
-              <option value="green_economy">G — Green Economy (green skills, Halal)</option>
-              <option value="open_governance">O — Bukas na Pamahalaan (meritokrasya)</option>
-              <option value="nonviolent_peace">N — Kapayapaan (reintegration, Marawi)</option>
-              <option value="ground_volunteer">Ground / precinct volunteer</option>
-              <option value="sectoral_organizing">Sectoral organizing (kabataan, propesyonal)</option>
-              <option value="digital_comms">Digital at komunikasyon</option>
-              <option value="donate_resources">Mag-donate ng resources</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label class="field-check">
-              <input type="checkbox" id="joinConsent" name="joinConsent" required>
-              <span>Sumasang-ayon ako na gamitin ng PBB ang aking detalye para sa volunteer coordination,
-                    at makatanggap ng update sa text o tawag. Puwede akong tumigil anumang oras sa pag-text ng STOP.</span>
-            </label>
-          </div>
-
-          <div class="field pbb-captcha" hidden>
-            <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
-          </div>
-
-          <button class="btn btn-gold btn-block" type="submit" id="joinSubmit">Mag-sign up bilang volunteer</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-          <p class="form-note">
-            Sa pag-submit, sumasang-ayon ka sa aming <a href="privacy.html">Privacy Policy</a>.
-          </p>
-        </form>
+      <!-- The distinction people actually get wrong. Worth stating plainly on
+           the hub rather than leaving each form page to explain it alone. -->
+      <div class="callout" style="margin-top:var(--pbb-space-6)">
+        <p style="margin-bottom:.4em"><strong>Ano ang pagkakaiba ng miyembro at volunteer?</strong></p>
+        <p style="margin:0">
+          Ang <strong>miyembro</strong> ay opisyal na kasapi ng partido — may Membership ID, at
+          kabilang sa 71,000+ na kasapi sa buong BARMM. Ang <strong>volunteer</strong> ay tumutulong
+          sa kampanya, miyembro man o hindi. Hindi mo kailangang maging miyembro bago mag-volunteer,
+          at hindi ka obligadong mag-volunteer kapag naging miyembro ka. Marami ang gumagawa ng pareho.
+        </p>
       </div>
 
-      <!-- ================================================================
-           PARTNERSHIP
-           ================================================================ -->
-      <div id="partnership" tabindex="-1" style="margin-top:var(--pbb-space-8)">
-        <div class="section-head">
-          <p class="eyebrow">Form 3 sa 3</p>
-          <h2>Alliance &amp; Partnership Agreement</h2>
-          <p>Para sa organisasyon, kooperatiba, at civil society. May e-signature sa ilalim ng RA 8792.</p>
-        </div>
-
-        <details class="disclose" id="apTerms">
-          <summary>Basahin muna ang buong kasunduan</summary>
-          <div class="disclose-body">
-            <p>1. Sumasang-ayon ang Partner na suportahan ang mga inisyatiba ng PBB sa ilalim ng Alliance Building &amp;
-               Partnerships pillar ng BANGON platform — Bottom-Up Budgeting, sectoral organizing, at grassroots
-               network building — sa pamamagitan ng partisipasyon sa civil-society engagement, community dialogue,
-               o in-kind na suporta ayon sa magkasunduan.</p>
-            <p>2. Ang kasunduang ito ay <strong>HINDI</strong> nangangahulugan ng financial contribution, campaign
-               donation, o obligasyon sa pag-endorso. Maaaring umatras anumang oras.</p>
-            <p>3. Gagamitin lang ng PBB ang detalye ng Partner para i-coordinate ang partnership activities,
-               alinsunod sa Privacy Policy at COMELEC disclosure rules.</p>
-            <p style="margin:0">4. Ang pag-type ng buong legal na pangalan sa ibaba at pag-submit ng form na ito ay bumubuo ng
-               <strong>electronic signature</strong> sa ilalim ng Republic Act 8792 (Electronic Commerce Act).</p>
-          </div>
-        </details>
-
-        <form class="card" id="allianceForm" novalidate>
-          <div class="field">
-            <label for="apOrgName">Pangalan ng organisasyon o grupo</label>
-            <input id="apOrgName" name="apOrgName" type="text" required maxlength="200">
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="apContactName">Contact person (buong legal na pangalan)</label>
-              <input id="apContactName" name="apContactName" type="text" required maxlength="120">
-            </div>
-            <div class="field">
-              <label for="apContactEmail">Email</label>
-              <input id="apContactEmail" name="apContactEmail" type="email" required maxlength="254">
-            </div>
-          </div>
-
-          <div class="field-row">
-            <div class="field">
-              <label for="apContactPhone">Cellphone number</label>
-              <input id="apContactPhone" name="apContactPhone" type="tel" inputmode="tel" maxlength="20"
-                     placeholder="0917 123 4567">
-            </div>
-            <div class="field">
-              <label for="apOrgType">Uri ng organisasyon</label>
-              <select id="apOrgType" name="apOrgType" required>
-                <option value="" disabled selected>Piliin</option>
-                <option>Kooperatiba</option>
-                <option>Civil society organization / NGO</option>
-                <option>Samahan ng kababaihan</option>
-                <option>Samahan ng kabataan</option>
-                <option>Propesyonal na asosasyon</option>
-                <option>Negosyo / SME</option>
-                <option>Relihiyoso o tradisyunal na institusyon</option>
-                <option>Iba pa</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="field">
-            <label for="apProvince">Probinsya / lugar</label>
-            <select id="apProvince" name="apProvince" required>
-              <option value="" disabled selected>Piliin ang lugar</option>
-              <option value="maguindanao_norte">Maguindanao del Norte</option>
-              <option value="maguindanao_sur">Maguindanao del Sur</option>
-              <option value="lanao_del_sur">Lanao del Sur</option>
-              <option value="basilan">Basilan (maliban sa Isabela City)</option>
-              <option value="tawi_tawi">Tawi-Tawi</option>
-              <option value="cotabato_city">Cotabato City</option>
-              <option value="lamitan_city">Lamitan City</option>
-              <option value="marawi_city">Marawi City</option>
-              <option value="sga_cotabato">Special Geographic Area (8 bagong munisipyo)</option>
-              <option value="outside_barmm">Labas ng BARMM</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="apProposal">Ano ang maiaambag ninyo sa partnership?</label>
-            <textarea id="apProposal" name="apProposal" rows="3" required maxlength="2000"
-                      placeholder="Hal: makakatulong kami sa community dialogue sa 12 barangay"></textarea>
-          </div>
-
-          <div class="field">
-            <label class="field-check">
-              <input type="checkbox" id="apAgreementConsent" name="apAgreementConsent" required>
-              <span>Nabasa at sinasang-ayunan ko ang buong kasunduan sa itaas.</span>
-            </label>
-            <label class="field-check">
-              <input type="checkbox" id="apConsent" name="apConsent" required>
-              <span>Sumasang-ayon ako sa <a href="privacy.html">Privacy Policy</a> ng PBB.</span>
-            </label>
-          </div>
-
-          <div class="field">
-            <label for="apSignature">E-signature — i-type ang buong legal na pangalan ng contact person</label>
-            <input id="apSignature" name="apSignature" type="text" required maxlength="120"
-                   placeholder="Dapat tugma sa contact person sa itaas">
-          </div>
-
-          <div class="field pbb-captcha" hidden>
-            <div class="cf-turnstile" data-sitekey="" data-theme="light" data-size="flexible"></div>
-          </div>
-
-          <button class="btn btn-gold btn-block" type="submit" id="apSubmit">Pumirma at isumite</button>
-          <p class="form-status" id="apStatus" role="status" aria-live="polite"></p>
-        </form>
-
-        <div class="card" id="apConfirm" hidden style="margin-top:var(--pbb-space-4);text-align:center">
-          <p style="font-weight:700;color:var(--pbb-forest);margin-bottom:.3em">Napirmahan na ang Partnership Agreement</p>
-          <p class="form-note" id="apReference" style="margin-bottom:var(--pbb-space-4)"></p>
-          <div style="display:flex;flex-wrap:wrap;gap:var(--pbb-space-3);justify-content:center">
-            <button class="btn btn-outline" type="button" id="apDownload">⬇ I-download ang nilagdaang kopya</button>
-            <button class="btn btn-outline" type="button" id="apEmailCopy">✉ I-email sa akin ang kopya</button>
-          </div>
-        </div>
+      <div class="callout">
+        <p style="margin-bottom:.4em"><strong>Walang internet? Tumawag o mag-text.</strong></p>
+        <p style="margin:0">
+          Hotline: <a href="tel:+639663018777"><strong>0966 301 8777</strong></a>. I-text ang
+          <strong>SUMALI</strong> sa parehong numero at kami na ang bahala.
+        </p>
       </div>
 
     </div>
@@ -581,9 +199,9 @@
       <div>
         <h5>Sumali</h5>
         <ul>
-          <li><a href="join.html#membership">Membership Form</a></li>
-          <li><a href="join.html#volunteer">Volunteer Sign-up</a></li>
-          <li><a href="join.html#partnership">Partnership Agreement</a></li>
+          <li><a href="membership.html">Membership Form</a></li>
+          <li><a href="volunteer.html">Volunteer Sign-up</a></li>
+          <li><a href="partnership.html">Partnership Agreement</a></li>
           <li><a href="verify.html">I-verify ang Membership ID</a></li>
         </ul>
       </div>
@@ -616,13 +234,30 @@
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
 </button>
 
+<!--
+  Legacy anchors: posts and printed QR codes from before the split point at
+  /join.html#membership, #volunteer and #partnership. Forward them to the
+  page that now owns each form so no inbound link dead-ends on this hub.
+  A server-side 301 would be better; this is the static-hosting equivalent.
+-->
+<script>
+  (function () {
+    var map = {
+      '#membership': 'membership.html',
+      '#volunteer': 'volunteer.html',
+      '#partnership': 'partnership.html'
+    };
+    var target = map[window.location.hash];
+    if (target) window.location.replace(target);
+  })();
+</script>
+
 <script>
   window.PBB_SUPABASE_URL       = "";
   window.PBB_SUPABASE_ANON_KEY  = "";
   window.PBB_TURNSTILE_SITE_KEY = "";
 </script>
-<script src="assets/pbb-app.js"></script>
-<script src="assets/pbb-id.js"></script>
-<script src="assets/join.js"></script>
+<script src="assets/pbb-app.js" defer></script>
+<script src="assets/site-widgets.js" defer></script>
 </body>
 </html>
