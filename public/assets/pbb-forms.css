@@ -1,0 +1,117 @@
+/* ==========================================================================
+   PBB — form-page styles
+   --------------------------------------------------------------------------
+   Shared by membership.html, volunteer.html, partnership.html and join.html.
+   Was inline in join.html; extracted when the forms became separate pages so
+   the same rules are not maintained in four places (and so browsers cache it
+   once across the whole set).
+
+   Depends on pbb-tokens.css and pbb-site.css.
+   ========================================================================== */
+
+/* ---- Cross-links between the three form pages -------------------------- */
+
+.form-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pbb-space-2);
+  margin-bottom: var(--pbb-space-5);
+}
+.form-tab {
+  min-height: var(--pbb-tap);
+  padding: var(--pbb-space-2) var(--pbb-space-4);
+  border: 1.5px solid var(--pbb-forest-line);
+  border-radius: var(--pbb-radius-pill);
+  background: var(--pbb-white);
+  font-family: var(--pbb-font-label);
+  font-weight: 700;
+  font-size: var(--pbb-text-sm);
+  color: var(--pbb-ink-dark);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.form-tab:hover { border-color: var(--pbb-gold); color: var(--pbb-ink-dark); }
+.form-tab[aria-current="page"] {
+  background: var(--pbb-forest);
+  border-color: var(--pbb-forest);
+  color: var(--pbb-white);
+}
+
+/* ---- Photo capture ------------------------------------------------------ */
+
+.capture-box {
+  border: 2px dashed #B8CCBE;
+  border-radius: var(--pbb-radius);
+  background: #F7FAF8;
+  padding: var(--pbb-space-4);
+  text-align: center;
+}
+.capture-box video,
+.capture-box img.preview {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto var(--pbb-space-3);
+  border-radius: var(--pbb-radius-sm);
+  background: #0B2E19;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+.capture-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--pbb-space-2);
+  justify-content: center;
+}
+
+/* ---- Signature pad ------------------------------------------------------ */
+
+#signaturePad {
+  width: 100%;
+  height: 180px;
+  background: var(--pbb-white);
+  border: 1px solid #C4D3C8;
+  border-radius: var(--pbb-radius-sm);
+  display: block;
+  cursor: crosshair;
+  /* Stops the page scrolling while a finger is drawing. Also set in JS, but
+     declared here so it holds even before the script runs. */
+  touch-action: none;
+}
+.sign-hint {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--pbb-space-3);
+  margin-top: var(--pbb-space-2);
+  flex-wrap: wrap;
+}
+
+/* ---- ID preview --------------------------------------------------------- */
+
+.id-preview { display: grid; gap: var(--pbb-space-4); }
+.id-preview canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: var(--pbb-shadow-lg);
+  background: var(--pbb-forest-deep);
+}
+@media (min-width: 860px) { .id-preview { grid-template-columns: 1fr 1fr; } }
+
+/* ---- Multi-step panels -------------------------------------------------- */
+
+.step-panel[hidden] { display: none; }
+
+.step-actions {
+  display: flex;
+  gap: var(--pbb-space-3);
+  margin-top: var(--pbb-space-4);
+  flex-wrap: wrap;
+}
+.step-actions .btn { flex: 1 1 auto; }
+
+/* ---- FAQ block (matches the FAQPage schema on each form page) ---------- */
+
+.faq-list { margin-top: var(--pbb-space-4); }
+.faq-list .disclose > summary { font-size: var(--pbb-text-base); }
