@@ -1,0 +1,241 @@
+name: CI
+
+# Why this exists (audit findings C-3 and C-6):
+#   * `main` shipped with an undeclared identifier in App.tsx, so `npm run
+#     build` failed. Nothing caught it because nothing ran the build.
+#   * The deployed site had drifted from the repo, because edits were made in
+#     the Bolt host and never pushed back. A green build on every push makes
+#     the divergence visible instead of silent.
+#
+# Keep this fast. A slow pipeline during a campaign gets bypassed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Typecheck, lint, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload build output
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  static-site:
+    name: Validate public campaign site
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate HTML structure
+        run: npx --yes html-validate public/*.html --rule no-inline-style:off --rule no-implicit-button-type:off
+
+      - name: Assert no internal documents are published
+        # Audit finding H-7: internal targeting strategy and comms scripts were
+        # being served from the public campaign domain. Fail the build if any
+        # markdown reappears under public/.
+        run: |
+          if find public -name '*.md' | grep -q .; then
+            echo "::error::Markdown found under public/ — internal documents must live in docs/, not on the public site."
+            find public -name '*.md'
+            exit 1
+          fi
+          echo "No internal documents under public/ — OK"
+
+  secrets-scan:
+    name: Check for committed secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fail on service-role keys or .env files
+        run: |
+          set -e
+          if git ls-files | grep -E '^\.env$|^\.env\.(local|production)$'; then
+            echo "::error::An .env file is committed. Remove it and rotate every key it contained."
+            exit 1
+          fi
+          if grep -rIn --exclude-dir=node_modules --exclude-dir=.git \
+               -e 'service_role' -e 'sb_secret_' -e 'SUPABASE_SERVICE_ROLE_KEY=' . \
+               | grep -v 'supabase/functions/' \
+               | grep -v '\.env\.example' \
+               | grep -v '\.github/workflows/'; then
+            echo "::error::Possible service-role key outside the Edge Function. Review the matches above."
+            exit 1
+          fi
+          echo "No committed secrets detected — OK"
+
+  static-js:
+    name: Syntax-check static site JavaScript
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check standalone scripts parse
+        run: |
+          set -e
+          for f in public/assets/*.js; do
+            node --check "$f"
+            echo "OK $f"
+          done
+
+      - name: Check inline scripts parse
+        run: |
+          node --input-type=module -e "
+          import fs from 'fs';
+          let bad = 0, n = 0;
+          for (const f of fs.readdirSync('public').filter(x => x.endsWith('.html'))) {
+            const s = fs.readFileSync('public/' + f, 'utf8');
+            for (const m of s.matchAll(/<script([^>]*)>([\s\S]*?)<\/script>/g)) {
+              const attrs = m[1], code = m[2];
+              if (/\bsrc=/.test(attrs) || !code.trim()) continue;
+              if (/json/i.test(attrs)) { try { JSON.parse(code) } catch (e) { bad++; console.log('JSON ERR', f, e.message) } continue }
+              n++;
+              try { new Function(code) } catch (e) { bad++; console.log('JS ERR', f, e.message) }
+            }
+          }
+          console.log(n + ' inline scripts checked');
+          if (bad) process.exit(1);
+          "
+
+      - name: Chrome is in sync across all pages
+        run: node scripts/sync-chrome.mjs --check
+
+      - name: Internal links resolve
+        run: |
+          node --input-type=module -e "
+          import fs from 'fs';
+          let broken = 0, checked = 0;
+          for (const f of fs.readdirSync('public').filter(x => x.endsWith('.html'))) {
+            const s = fs.readFileSync('public/' + f, 'utf8');
+            for (const m of s.matchAll(/(?:href|src)=\"([^\"]+)\"/g)) {
+              const u = m[1];
+              if (/^(https?:|mailto:|tel:|data:|#)/.test(u)) continue;
+              const path = u.split('#')[0].split('?')[0];
+              if (!path) continue;
+              checked++;
+              if (!fs.existsSync('public/' + path)) { broken++; console.log('BROKEN', f, '->', u); }
+            }
+          }
+          console.log(checked + ' internal refs checked');
+          if (broken) process.exit(1);
+          "
+
+      - name: FAQ structured data matches visible copy
+        # Schema describing content a visitor cannot see is a manual-action
+        # risk. Every FAQPage question must exist as a <summary> on the page.
+        run: |
+          node --input-type=module -e "
+          import fs from 'fs';
+          let issues = 0;
+          for (const f of fs.readdirSync('public').filter(x => x.endsWith('.html'))) {
+            const s = fs.readFileSync('public/' + f, 'utf8');
+            const m = s.match(/<script type=\"application\/ld\+json\">([\s\S]*?)<\/script>/);
+            if (!m) continue;
+            let g; try { g = JSON.parse(m[1]) } catch (e) { continue }
+            const faq = (g['@graph'] || [g]).find(x => x['@type'] === 'FAQPage');
+            if (!faq) continue;
+            const sums = [...s.matchAll(/<summary>([\s\S]*?)<\/summary>/g)].map(x => x[1].replace(/<[^>]*>/g, '').trim());
+            for (const q of faq.mainEntity.map(q => q.name.replace(/<[^>]*>/g, ''))) {
+              if (!sums.includes(q)) { issues++; console.log('NOT VISIBLE', f, '::', q) }
+            }
+          }
+          if (issues) process.exit(1);
+          console.log('FAQ schema matches visible copy');
+          "
+
+      - name: Widget CSS and JS are paired on every page
+        # site-widgets.js builds the cookie banner and accessibility toolbar;
+        # site-widgets.css styles them. A page with one and not the other
+        # renders an unstyled consent banner, or none at all on a page that
+        # collects personal data. Both failures are silent in a browser.
+        run: |
+          node --input-type=module -e "
+          import fs from 'fs';
+          let bad = 0;
+          for (const f of fs.readdirSync('public').filter(x => x.endsWith('.html'))) {
+            const s = fs.readFileSync('public/' + f, 'utf8');
+            const css = s.includes('site-widgets.css');
+            const js = s.includes('site-widgets.js');
+            if (css !== js) { bad++; console.log(f, css ? 'has CSS but no JS' : 'has JS but no CSS'); }
+            if (!js) { bad++; console.log(f, 'is missing the cookie-consent widget entirely'); }
+          }
+          if (bad) process.exit(1);
+          console.log('every page pairs site-widgets.css with site-widgets.js');
+          "
+
+      - name: Widget class names in CSS match those built by the JS
+        # The JS creates elements by class name and toggles html.pbb-* modes.
+        # Renaming either side silently unstyles a widget rather than throwing.
+        run: |
+          node --input-type=module -e "
+          import fs from 'fs';
+          const css = fs.readFileSync('public/assets/site-widgets.css', 'utf8');
+          const required = [
+            'a11y-toolbar', 'a11y-toolbar-toggle', 'a11y-toolbar-panel', 'a11y-btn',
+            'cookie-banner', 'cookie-banner-inner', 'cookie-actions', 'cookie-btn',
+            'cookie-btn-primary', 'cookie-btn-secondary', 'cookie-btn-text',
+            'cookie-modal-overlay', 'cookie-modal', 'cookie-modal-head',
+            'cookie-modal-body', 'cookie-modal-foot', 'cookie-pref-row', 'cookie-toggle',
+            'pbb-high-contrast', 'pbb-grayscale', 'pbb-dyslexia', 'pbb-reduce-motion',
+          ];
+          const missing = required.filter(c => !css.includes(c));
+          if (missing.length) { console.log('Not styled in site-widgets.css:', missing.join(', ')); process.exit(1); }
+          console.log(required.length + ' widget class names styled');
+          "
