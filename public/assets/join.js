@@ -1,9 +1,18 @@
 /* ==========================================================================
-   join.html — form controllers
+   Form controllers — membership.html, volunteer.html, partnership.html
    --------------------------------------------------------------------------
-   Depends on pbb-app.js (window.PBB transport) and pbb-id.js (capture +
-   card rendering). Kept out of the HTML so the markup stays readable and the
-   file can be cached separately from content edits.
+   One file, three controllers. Each is guarded by the presence of its form,
+   so the same script can be loaded by all three pages (and by any future page
+   that embeds one of the forms) without a per-page bundle.
+
+   The three forms used to share a single join.html with #anchors. They were
+   split into separate pages for SEO: one title and one canonical cannot rank
+   for "paano maging miyembro ng PBB", "mag-volunteer BARMM 2026", and
+   "partnership agreement kooperatiba" at the same time. join.html survives as
+   a hub that links to all three.
+
+   Depends on pbb-app.js (window.PBB transport) and, on membership.html,
+   pbb-id.js (capture + card rendering).
    ========================================================================== */
 
 (function (window, document) {
@@ -14,27 +23,19 @@
 
   var $ = function (id) { return document.getElementById(id); };
 
-  /* ======================================================================
-     TABS — reflect the current hash in the tab strip
-     ====================================================================== */
-
-  function syncTabs() {
-    var hash = window.location.hash || '#membership';
-    ['membership', 'volunteer', 'partnership'].forEach(function (id) {
-      var tab = $('tab-' + id);
-      if (tab) tab.setAttribute('aria-current', String('#' + id === hash));
-    });
-  }
-  window.addEventListener('hashchange', syncTabs);
-  syncTabs();
-
-  /* Deep link from a BANGON page: join.html?interest=green_economy */
+  /* Deep link from a BANGON page: volunteer.html?interest=green_economy
+     The BANGON pages link here with the pillar preselected, so someone who
+     arrived caring about one thing does not have to find it again in a
+     ten-option list. */
   (function preselectInterest() {
     var interest = new URLSearchParams(window.location.search).get('interest');
     if (!interest) return;
     var sel = $('interest');
-    if (sel && sel.querySelector('option[value="' + CSS.escape(interest) + '"]')) {
-      sel.value = interest;
+    if (!sel) return;
+    // CSS.escape is not in every Android WebView still in use in BARMM.
+    var options = sel.options;
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value === interest) { sel.selectedIndex = i; return; }
     }
   })();
 
@@ -72,9 +73,13 @@
         if (step === n) li.setAttribute('aria-current', 'step');
         else li.removeAttribute('aria-current');
       });
-      var anchor = $('membership');
+      /* Scroll back to the top of the form on each step change, and move
+         focus there so a screen-reader user is told the panel changed —
+         otherwise focus stays on a button that no longer exists. */
+      var anchor = $('form') || $('membership') || memberForm;
       if (anchor) {
         anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!anchor.hasAttribute('tabindex')) anchor.setAttribute('tabindex', '-1');
         anchor.focus({ preventScroll: true });
       }
     }
